@@ -1,15 +1,12 @@
 import {describe, expect, test} from 'vitest';
-import {VASTSTELLING} from '../src/examples/modelc/vaststelling';
+import {VASTSTELLING} from '../src/examples/modelc/vaststelling.modelc';
 import {getAxios} from './axios';
-import {VASTSTELLING_ERROR_CODELIJST} from '../src/examples/modelc/vaststelling-error-codelijst';
-import {VASTSTELLING_ERROR_VERPLICHT_VELD} from "../src/examples/modelc/vaststelling-error-verplicht-veld";
-
-const TARGET = 'http://localhost:8090';
-// const TARGET = 'https://dao.api.test-athumi.eu';
+import {VASTSTELLING_ERROR_CODELIJST} from '../src/examples/modelc/vaststelling-error-codelijst.modelc';
+import {VASTSTELLING_ERROR_VERPLICHT_VELD} from "../src/examples/modelc/vaststelling-error-verplicht-veld.modelc";
 
 async function createVaststellingOuderDan1Jaar(vaststelling: any): Promise<any> {
     return getAxios()
-        .post(TARGET + '/vaststelling/ouder-dan-1-jaar', vaststelling)
+        .post('/vaststelling/ouder-dan-1-jaar', vaststelling)
         .then((r) => r.data)
         .catch((e) => e.response.data);
 }
