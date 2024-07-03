@@ -1,2 +1,2 @@
-# Digitale Aangifte Overlijden demo
-
+# digitale-aangifte-overlijden-demo
+Demo DAO API concepten.
