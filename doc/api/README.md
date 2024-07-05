@@ -6,7 +6,7 @@ Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een o
 
 ## Endpoints
 
-## Json-ld context
+### Json-ld context
 
 Alle requests moeten voldoen aan het JSON-ld formaat met behulp van het contextbestand:
 - **Contextbestand**: `/context/AangifteOverlijden.jsonld`
