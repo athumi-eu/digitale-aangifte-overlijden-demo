@@ -105,14 +105,14 @@ export const VASTSTELLING = {
                 "@type": "Bevalling",
                 "bevallingToestand": {
                     "@type": "BevallingToestand",
-                    "indicatiesBevallingTypeDoorKind": [
+                    "indicatiesBevallingTypeBijKind": [
                         "Andere"
                     ],
-                    "andereIndicatiesBevallingTypeDoorKind": "Een andere indicatie voor kind",
-                    "indicatiesBevallingTypeDoorMoeder": [
+                    "andereIndicatiesBevallingTypeBijKind": "Een andere indicatie voor kind",
+                    "indicatiesBevallingTypeBijMoeder": [
                         "Dystocie"
                     ],
-                    "andereIndicatiesBevallingTypeDoorMoeder": "Een andere indicatie voor moeder",
+                    "andereIndicatiesBevallingTypeBijMoeder": "Een andere indicatie voor moeder",
                     "assistentieWijze": [
                         "Forceps"
                     ],
