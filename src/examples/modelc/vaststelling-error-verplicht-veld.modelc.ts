@@ -35,15 +35,20 @@ export const VASTSTELLING_ERROR_VERPLICHT_VELD = {
             "datum": "2023-06-21T23:34",
             "beschrijvingTijdstip": "Vorige week"
         },
-        "plaats": {
-            "@type": "Adresvoorstelling",
-            "straat": "Grote straat",
-            "huisnummer": "20",
-            "bus": "1b",
-            "postcode": "3500",
-            "niscode": "71022",
-            "locatie": "Andere",
-            "andereLocatie": "binnen in huis"
-        }
+        "plaats": [
+            {
+                "@type": "Adresvoorstelling",
+                "straat": "Grote straat",
+                "huisnummer": "20",
+                "bus": "1b",
+                "postcode": "3500",
+                "niscode": "71022"
+            },
+            {
+                "@type": "Adresvoorstelling",
+                "locatie": "Andere",
+                "andereLocatie": "op straat"
+            }
+        ]
     }
 };
