@@ -17,7 +17,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van het contextb
 
 ### Registreren van een overlijden van een persoon tot 1 jaar
 - **Endpoint**: `/vaststelling/jonger-dan-1-jaar`
-- **Beschrijving**: Gebruik dit endpoint om een overlijden te registreren van een persoon die 1 jaar oud is of jonger, of voor een doodgeboorte.
+- **Beschrijving**: Gebruik dit endpoint om een overlijden te registreren van een kind jonger dan 1 jaar, of voor een doodgeboorte.
 
 ## Swagger
 
