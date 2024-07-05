@@ -1,4 +1,4 @@
-export const VASTSTELLING = {
+export const VASTSTELLING_DOODGEBOORTE = {
     "naam": "Vermeulen",
     "voornaam": "Jeanne",
     "geslacht": "FEMALE",
@@ -239,27 +239,7 @@ export const VASTSTELLING = {
         ]
     },
     "overlijden": {
-        "@type": "Overlijden",
-        "tijdstip": {
-            "@type": "TijdIndicatie",
-            "bekend": true,
-            "datum": "2023-06-21T23:34",
-            "beschrijvingTijdstip": "Vorige week"
-        },
-        "plaats": [
-            {
-                "@type": "Adresvoorstelling",
-                "straat": "Grote straat",
-                "huisnummer": "20",
-                "bus": "1b",
-                "postcode": "3500",
-                "niscode": "71022"
-            },
-            {
-                "@type": "Adresvoorstelling",
-                "locatie": "Andere",
-                "andereLocatie": "op straat"
-            }
-        ]
+        "@type": "Doodgeboorte",
+        "foetaalOverlijdenTijdstip": "VoorDeArbeid"
     }
 };
