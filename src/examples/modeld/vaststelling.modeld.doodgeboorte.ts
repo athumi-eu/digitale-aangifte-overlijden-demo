@@ -226,6 +226,7 @@ export const VASTSTELLING_DOODGEBOORTE = {
                 "datum": "2023-06-21T23:34",
                 "arts": {
                     "@type": "Arts",
+                    "registratie": "123456",
                     "type": [
                         "ArtsVanVaststelling"
                     ]
