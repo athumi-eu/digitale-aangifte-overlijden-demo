@@ -6,7 +6,8 @@ export const VASTSTELLING_DOODGEBOORTE = {
         "@type": "Geboorte",
         "datum": "1988-02-02T10:10:00",
         "plaats": {
-            "locatieType": "Ziekenhuis",
+            "@type": "Adresvoorstelling",
+            "locatie": "Ziekenhuis",
             "andereLocatie": "Hasselt"
         },
         "geboorteToestand": {
