@@ -56,4 +56,4 @@ export const VERSLAG_BEEDIGD_ARTS = {
             "niscode": "71022"
         }]
     }
-}
+};
