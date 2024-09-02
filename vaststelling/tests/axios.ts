@@ -1,5 +1,5 @@
 import axios from "axios";
-import https from "node:https";
+import * as https from "node:https";
 
 const TARGET = 'http://localhost:8090';
 // const TARGET = 'https://dao.api.test-athumi.eu';
