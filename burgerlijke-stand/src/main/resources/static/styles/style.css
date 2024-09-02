@@ -1,0 +1,64 @@
+
+.light-grey {
+    background: lightgrey;
+    padding: 1rem;
+
+}
+
+.light-grey h2 {
+    font-family: sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.disclaimer {
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: lightpink;
+}
+
+.disclaimer h2 {
+    text-align: center;
+}
+
+.ml-3 {
+    margin-left: 2rem;
+}
+
+.mr-3 {
+    margin-right: 2rem;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 16px;
+    border: 1px solid #ddd;
+}
+
+.grey-border {
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.outer {
+    overflow-y: auto;
+}
+
+.outer th {
+    text-align: left;
+    top: 0;
+    position: sticky;
+    background-color: white;
+}
