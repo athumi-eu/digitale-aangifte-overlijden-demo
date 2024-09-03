@@ -21,158 +21,23 @@
 <div th:if="${ not#lists.isEmpty(dossiers)}" class="grey-border ml-3 mr-3 outer">
 
     <table>
-        <colgroup span="1"></colgroup>
-        <colgroup span="9"></colgroup>
-        <colgroup span="9"></colgroup>
-        <colgroup span="9"></colgroup>
-        <colgroup span="1"></colgroup>
-        <colgroup span="2"></colgroup>
 
         <tr>
-            <th colspan="1" scope="colgroup"></th>
-            <th colspan="9" scope="colgroup">overledene</th>
-            <th colspan="9" scope="colgroup">huwelijkspartner</th>
-            <th colspan="9" scope="colgroup">moeder</th>
-            <th colspan="9" scope="colgroup">overlijden</th>
-            <th colspan="18" scope="colgroup">geboorte</th>
-            <th colspan="1" scope="colgroup">bezwarenEnRisicos</th>
-            <th colspan="2" scope="colgroup">vaststelling</th>
-        </tr>
-        <tr>
-            <th scope="col">Dossier nummer</th>
-            <th scope="col">voornaam</th>
-            <th scope="col">naam</th>
-            <th scope="col">geslacht</th>
-            <th scope="col">straat</th>
-            <th scope="col">huisnummer</th>
-            <th scope="col">bus</th>
-            <th scope="col">postcode</th>
-            <th scope="col">niscode</th>
-            <th scope="col">rijksregisternummer</th>
-            <th scope="col">voornaam</th>
-            <th scope="col">naam</th>
-            <th scope="col">geslacht</th>
-            <th scope="col">straat</th>
-            <th scope="col">huisnummer</th>
-            <th scope="col">bus</th>
-            <th scope="col">postcode</th>
-            <th scope="col">niscode</th>
-            <th scope="col">rijksregisternummer</th>
-            <th scope="col">voornaam</th>
-            <th scope="col">naam</th>
-            <th scope="col">geslacht</th>
-            <th scope="col">straat</th>
-            <th scope="col">huisnummer</th>
-            <th scope="col">bus</th>
-            <th scope="col">postcode</th>
-            <th scope="col">niscode</th>
-            <th scope="col">rijksregisternummer</th>
-            <th scope="col">tijdstip</th>
-            <th scope="col">beschrijvingTijdstip</th>
-            <th scope="col">straat</th>
-            <th scope="col">huisnummer</th>
-            <th scope="col">bus</th>
-            <th scope="col">postcode</th>
-            <th scope="col">niscode</th>
-            <th scope="col">type</th>
-            <th scope="col">beschrijving</th>
-
-            <th scope="col">tijdstip</th>
-            <th scope="col">doodgeboorte</th>
-            <th scope="col">straat</th>
-            <th scope="col">huisnummer</th>
-            <th scope="col">bus</th>
-            <th scope="col">postcode</th>
-            <th scope="col">niscode</th>
-            <th scope="col">type</th>
-            <th scope="col">beschrijving</th>
-            <th scope="col">uitMeervoudigeZwangerschap</th>
-            <th scope="col">totaalAantalKinderen</th>
-            <th scope="col">rangOverledene</th>
-            <th scope="col">aantalLevendGeborenMannelijk</th>
-            <th scope="col">aantalLevendGeborenVrouwelijk</th>
-            <th scope="col">aantalLevendGeborenOnbepaald</th>
-            <th scope="col">aantalDoodGeborenMannelijk</th>
-            <th scope="col">aantalDoodGeborenVrouwelijk</th>
-            <th scope="col">aantalDoodGeborenOnbepaald</th>
-
-            <th scope="col">bezwaren en risicos</th>
-
-            <th scope="col">tijdstip</th>
-            <th scope="col">arts</th>
+            <th >Dossiernummer</th>
+            <th >naam</th>
+            <th >rijksregisternummer</th>
+            <th >datum overlijden</th>
+            <th >status</th>
+            <th ></th>
         </tr>
 
         <tr th:each="dossier : ${dossiers}">
-            <td th:text="${dossier.id}"></td>
-            <td th:text="${dossier.overledene().voornaam()}"></td>
-            <td th:text="${dossier.overledene().naam()}"></td>
-            <td th:text="${dossier.overledene().geslacht()}"></td>
-            <td th:text="${dossier.overledene().verblijfplaats().straat()}"></td>
-            <td th:text="${dossier.overledene().verblijfplaats().huisnummer()}"></td>
-            <td th:text="${dossier.overledene().verblijfplaats().bus()}"></td>
-            <td th:text="${dossier.overledene().verblijfplaats().postcode()}"></td>
-            <td th:text="${dossier.overledene().verblijfplaats().niscode()}"></td>
-            <td th:text="${dossier.overledene().rijksregisternummer()}"></td>
-            <td th:text="${dossier.huwelijkspartner().voornaam()}"></td>
-            <td th:text="${dossier.huwelijkspartner().naam()}"></td>
-            <td th:text="${dossier.huwelijkspartner().geslacht()}"></td>
-            <td th:text="${dossier.huwelijkspartner().verblijfplaats().straat()}"></td>
-            <td th:text="${dossier.huwelijkspartner().verblijfplaats().huisnummer()}"></td>
-            <td th:text="${dossier.huwelijkspartner().verblijfplaats().bus()}"></td>
-            <td th:text="${dossier.huwelijkspartner().verblijfplaats().postcode()}"></td>
-            <td th:text="${dossier.huwelijkspartner().verblijfplaats().niscode()}"></td>
-            <td th:text="${dossier.huwelijkspartner().rijksregisternummer()}"></td>
-            <td th:text="${dossier.moeder().voornaam()}"></td>
-            <td th:text="${dossier.moeder().naam()}"></td>
-            <td th:text="${dossier.moeder().geslacht()}"></td>
-            <td th:text="${dossier.moeder().verblijfplaats().straat()}"></td>
-            <td th:text="${dossier.moeder().verblijfplaats().huisnummer()}"></td>
-            <td th:text="${dossier.moeder().verblijfplaats().bus()}"></td>
-            <td th:text="${dossier.moeder().verblijfplaats().postcode()}"></td>
-            <td th:text="${dossier.moeder().verblijfplaats().niscode()}"></td>
-            <td th:text="${dossier.moeder().rijksregisternummer()}"></td>
-
-            <td th:text="${dossier.overlijden().tijdstip()}"></td>
-            <td th:text="${dossier.overlijden().beschrijvingTijdstip()}"></td>
-            <td th:text="${dossier.overlijden().plaats().adres().straat()}"></td>
-            <td th:text="${dossier.overlijden().plaats().adres().huisnummer()}"></td>
-            <td th:text="${dossier.overlijden().plaats().adres().bus()}"></td>
-            <td th:text="${dossier.overlijden().plaats().adres().postcode()}"></td>
-            <td th:text="${dossier.overlijden().plaats().adres().niscode()}"></td>
-            <td th:text="${dossier.overlijden().plaats().type()}"></td>
-            <td th:text="${dossier.overlijden().plaats().beschrijving()}"></td>
-
-            <td th:text="${dossier.geboorte().tijdstip()}"></td>
-            <td th:text="${dossier.geboorte().doodgeboorte()}"></td>
-            <td th:text="${dossier.geboorte().plaats().adres().straat()}"></td>
-            <td th:text="${dossier.geboorte().plaats().adres().huisnummer()}"></td>
-            <td th:text="${dossier.geboorte().plaats().adres().bus()}"></td>
-            <td th:text="${dossier.geboorte().plaats().adres().postcode()}"></td>
-            <td th:text="${dossier.geboorte().plaats().adres().niscode()}"></td>
-            <td th:text="${dossier.geboorte().plaats().type()}"></td>
-            <td th:text="${dossier.geboorte().plaats().beschrijving()}"></td>
-            <td th:text="${dossier.geboorte().uitMeervoudigeZwangerschap()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().totaalAantalKinderen()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().rangOverledene()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().aantalLevendGeboren().mannelijk()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().aantalLevendGeboren().vrouwelijk()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().aantalLevendGeboren().onbepaald()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().aantalDoodGeboren().mannelijk()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().aantalDoodGeboren().vrouwelijk()}"></td>
-            <td th:text="${dossier.geboorte().meervoudigeZwangerschap().aantalDoodGeboren().onbepaald()}"></td>
-
-            <td>
-                <ul th:each="bezwaar : ${dossier.bezwarenEnRisicos().bezwaren()}">
-                    <li th:text="${bezwaar}"></li>
-                </ul>
-                <ul th:each="risico : ${dossier.bezwarenEnRisicos().risicos()}">
-                    <li th:text="${risico}"></li>
-                </ul>
-
-            </td>
-
-            <td th:text="${dossier.vaststelling().tijdstip()}"></td>
-            <td th:text="${dossier.vaststelling().arts()}"></td>
+            <td th:text="${dossier.id()}"></td>
+            <td th:text="${dossier.voornaam()} + ' ' + ${dossier.naam()}"></td>
+            <td th:text="${dossier.rijksregisternummer()}"></td>
+            <td th:text="${dossier.overlijden().tijdstip().datum()}"></td>
+            <td th:text="${dossier.dossierStatus()}"></td>
+            <td></td>
         </tr>
     </table>
 </div>
