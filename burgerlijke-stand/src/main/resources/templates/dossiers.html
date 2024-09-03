@@ -35,7 +35,7 @@
             <td th:text="${dossier.id()}"></td>
             <td th:text="${dossier.voornaam()} + ' ' + ${dossier.naam()}"></td>
             <td th:text="${dossier.rijksregisternummer()}"></td>
-            <td th:text="${dossier.overlijden().tijdstip().datum()}"></td>
+            <td th:text="${#temporals.format(dossier.overlijden().tijdstip().datum(), 'dd/MM/yyyy')}"></td>
             <td th:text="${dossier.dossierStatus()}"></td>
             <td></td>
         </tr>
