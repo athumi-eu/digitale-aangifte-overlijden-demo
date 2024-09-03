@@ -62,3 +62,24 @@ tr:nth-child(even) {
     position: sticky;
     background-color: white;
 }
+
+.grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.grid-column {
+    /*background: #ccc;*/
+    /*color: #ggg;*/
+    text-align: left;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.label {
+    color: darkgray;
+}
+
+.data {
+
+}

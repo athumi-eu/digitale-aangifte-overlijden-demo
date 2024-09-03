@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Toepassing burgerlijke stand</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/htmx.org/2.0.2/dist/htmx.min.js}" defer></script>
+</head>
+<body>
+<div class="disclaimer">
+    <h2>Disclaimer: Dit is een demo applicatie</h2>
+</div>
+<div class="light-grey">
+    <h2>Toepassing burgerlijke stand</h2>
+</div>
+
+<a th:href="@{/dossiers(kbonummer=${kbonummer})}">Terug naar overzicht overlijdensdossiers</a>
+<div class="ml-3">
+    <h3>Detail niet gevonden</h3>
+</div>
+
+</body>
+</html>
