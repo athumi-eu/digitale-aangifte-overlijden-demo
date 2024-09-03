@@ -3,6 +3,8 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.VaststellingOverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -56,21 +58,29 @@ public class DossierDao {
         if (detail.isPresent()) {
             var dossier = detail.get();
             model.addAttribute("detail", dossier);
-            model.addAttribute("verblijfplaats", formattedAdress(dossier));
-//            model.addAttribute("adressOverlijden", formattedAdress(dossier.overlijden().));
+            model.addAttribute("verblijfplaats", formattedAdress(dossier.inwonerschap().verblijfplaats().adres()));
+            model.addAttribute("adresOverlijden", formattedAdress(dossier.overlijden().getAdresOverlijden()));
+            model.addAttribute("plaatsOverlijden", formattedPlaatsOverlijden(dossier.overlijden().getLocatieOverlijden()));
             model.addAttribute("tijdstipOverlijden", formattedTijdstipOverlijden(dossier.overlijden()));
             model.addAttribute("medischVerslag", medischVerslag(dossier));
-            return "detail";
+            return Objects.isNull(dossier.moeder()) ? "detail-ouder-dan-1-jaar" : "detail-jonger-dan-1-jaar";
         }
         return "detail-does-not-exist";
     }
 
-    private String formattedAdress(DossierBurgerlijkeStandJSON json) {
-        var adres = json.inwonerschap().verblijfplaats().adres();
+
+    private String formattedAdress(AdresJSON adres) {
         if (Objects.isNull(adres)) {
             return "";
         }
         return adres.straat() + " " + adres.huisnummer() + ", " + adres.postcode();
+    }
+
+    private String formattedPlaatsOverlijden(LocatieJSON locatieJSON) {
+        if (Objects.isNull(locatieJSON.locatie())) {
+            return locatieJSON.andereLocatie();
+        }
+        return locatieJSON.locatie();
     }
 
     private VaststellingOverlijdenJSON medischVerslag(DossierBurgerlijkeStandJSON json) {

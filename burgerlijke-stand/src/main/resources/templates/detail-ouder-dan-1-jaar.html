@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Toepassing burgerlijke stand</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/htmx.org/2.0.2/dist/htmx.min.js}" defer></script>
+</head>
+<body>
+<div class="disclaimer">
+    <h2>Disclaimer: Dit is een demo applicatie</h2>
+</div>
+<div class="light-grey">
+    <h2>Toepassing burgerlijke stand</h2>
+</div>
+
+<a th:href="@{/dossiers(kbonummer=${kbonummer})}">Terug naar overzicht overlijdensdossiers</a>
+<div class="ml-3">
+    <h3>Detail</h3>
+
+    <h2 th:text="'Overlijdensdossier ' + ${detail.id()} + '(' + ${detail.voornaam()} + ' ' + ${detail.naam()} +')'"></h2>
+
+    <div class="grid-container">
+        <div class="grid-column">
+            <h3>Overledene</h3>
+            <p>
+            <div class="label">Overledene</div>
+            <div class="data" th:text="${detail.voornaam()} + ' ' + ${detail.naam()}"/>
+            </p>
+            <p>
+            <div class="label">Rijksregisternummer</div>
+            <div class="data" th:text="${detail.rijksregisternummer()}"/>
+            </p>
+            <p>
+            <div class="label">Geslacht</div>
+            <div class="data" th:text="${detail.geslacht()}"/>
+            </p>
+            <p>
+            <div class="label">Verblijfplaats</div>
+            <div class="data" th:text="${verblijfplaats}"/>
+            </p>
+            <p>
+            <div class="label">Echtgeno(o)t(te) of weduw(e)(naar) van</div>
+            <div th:text="${detail.huwelijk()?.persoonsGegevens() != null} ? ${detail.huwelijk()?.persoonsGegevens()?.voornaam()} + ' ' + ${detail.huwelijk()?.persoonsGegevens()?.naam()} : 'Niet gekend'"/>
+            </p>
+        </div>
+        <div class="grid-column">
+            <h3>Details overlijden</h3>
+            <p>
+            <div class="label">Tijdstip overlijden</div>
+            <div class="data" th:text="${tijdstipOverlijden}"/>
+            </p>
+            <p>
+            <div class="label">Tijdstip vaststelling</div>
+            <div class="data" th:text="${#temporals.format(medischVerslag.datum(), 'dd/MM/yyyy')}"/>
+            </p>
+            <p>
+            <div class="label">Arts die vaststelling heeft gedaan</div>
+            <div class="data"
+                 th:text="${medischVerslag.arts().voornaam()} + ' ' + ${medischVerslag.arts().naam()} + '(' + ${medischVerslag.arts().riziv()}  + ')'"/>
+            </p>
+            <p>
+            <div class="label">Adres van overlijden</div>
+            <div class="data" th:text="${adresOverlijden}"/>
+            </p>
+            <p>
+            <div class="label">Plaats van overlijden</div>
+            <div class="data" th:text="${plaatsOverlijden}"/>
+            </p>
+
+        </div>
+        <div class="grid-column">
+            <h3>Risico's/bezwaren</h3>
+            <ul th:each="bezwaar : ${medischVerslag.bezwaar()}">
+                <li th:text="${bezwaar}"/>
+            </ul>
+            <ul th:each="risico : ${medischVerslag.risico()}">
+                <li th:text="${risico}"/>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
