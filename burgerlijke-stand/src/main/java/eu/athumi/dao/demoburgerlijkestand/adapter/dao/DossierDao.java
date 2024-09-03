@@ -2,6 +2,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.VaststellingOverlijdenJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,8 @@ public class DossierDao {
             var dossier = detail.get();
             model.addAttribute("detail", dossier);
             model.addAttribute("verblijfplaats", formattedAdress(dossier));
+//            model.addAttribute("adressOverlijden", formattedAdress(dossier.overlijden().));
+            model.addAttribute("tijdstipOverlijden", formattedTijdstipOverlijden(dossier.overlijden()));
             model.addAttribute("medischVerslag", medischVerslag(dossier));
             return "detail";
         }
@@ -64,7 +67,7 @@ public class DossierDao {
 
     private String formattedAdress(DossierBurgerlijkeStandJSON json) {
         var adres = json.inwonerschap().verblijfplaats().adres();
-        if(Objects.isNull(adres)) {
+        if (Objects.isNull(adres)) {
             return "";
         }
         return adres.straat() + " " + adres.huisnummer() + ", " + adres.postcode();
@@ -72,5 +75,13 @@ public class DossierDao {
 
     private VaststellingOverlijdenJSON medischVerslag(DossierBurgerlijkeStandJSON json) {
         return json.medischeVerslagen().getFirst();
+    }
+
+    private String formattedTijdstipOverlijden(OverlijdenJSON json) {
+        var tijdstip = json.tijdstip();
+        if (Objects.isNull(tijdstip.datum())) {
+            return tijdstip.beschrijvingTijdstip();
+        }
+        return tijdstip.datum().toString();
     }
 }

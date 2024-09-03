@@ -52,11 +52,11 @@
             <h3>Details overlijden</h3>
             <p>
             <div class="label">Tijdstip overlijden</div>
-<!--            <div class="data" th:text="${#temporals.format(dossier.overlijden().tijdstip().datum(), 'dd/MM/yyyy')}"></div>-->
+            <div class="data" th:text="${tijdstipOverlijden}"></div>
             </p>
             <p>
             <div class="label">Tijdstip vaststelling</div>
-<!--            <div class="data" th:text="${#temporals.format(medischVerslag.datum(), 'dd/MM/yyyy')}"></div>-->
+            <div class="data" th:text="${#temporals.format(medischVerslag.datum(), 'dd/MM/yyyy')}"></div>
             </p>
             <p>
             <div class="label">Arts die vaststelling heeft gedaan</div>
@@ -64,7 +64,7 @@
             </p>
             <p>
             <div class="label">Adres van overlijden</div>
-            <!--            <div class="data" th:text="${detail.voornaam()} + ' ' + ${detail.naam()}"></div>-->
+                        <div class="data" th:text="${detail.voornaam()}"></div>
             </p>
             <p>
             <div class="label">Plaats van overlijden</div>
