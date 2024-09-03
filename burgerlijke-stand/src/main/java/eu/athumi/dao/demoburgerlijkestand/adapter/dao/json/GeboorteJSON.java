@@ -6,11 +6,11 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
 import java.time.LocalDateTime;
 
 public record GeboorteJSON(
-    LocalDateTime datum,
-    LocatieJSON plaats,
-    GeboorteToestandJSON geboorteToestandJSON
+        LocalDateTime datum,
+        LocatieJSON plaats,
+        GeboorteToestandJSON geboorteToestand
 )
-    implements Type {
+        implements Type {
 
     @Override
     public String type() {

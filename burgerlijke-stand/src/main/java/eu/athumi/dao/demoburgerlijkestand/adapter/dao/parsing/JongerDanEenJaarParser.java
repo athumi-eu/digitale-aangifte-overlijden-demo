@@ -9,7 +9,9 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
 
     public String naamOverledene() {
-        return dossier.naam() + " " + dossier.voornaam();
+        var naam = Objects.isNull(dossier.naam()) ? "" : dossier.naam();
+        var voornaam = Objects.isNull(dossier.voornaam()) ? "" : dossier.voornaam();
+        return naam + " " + voornaam;
     }
 
     public String verblijfplaatsMoeder() {
@@ -30,7 +32,9 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
             return "/";
         }
 
-        return dossier.naam() + " " + dossier.voornaam();
+        var naam = Objects.isNull(dossier.moeder().persoonsGegevens().naam()) ? "" : dossier.moeder().persoonsGegevens().naam();
+        var voornaam = Objects.isNull(dossier.moeder().persoonsGegevens().voornaam()) ? "" : dossier.moeder().persoonsGegevens().voornaam();
+        return naam + " " + voornaam;
     }
 
     public OverlijdenParser detailsOverlijden() {
@@ -38,13 +42,13 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
     }
 
     public GeboorteParser geboorteDetails() {
-        return  new GeboorteParser(dossier.geboorte(), dossier.overlijden(), dossier.moeder());
+        return new GeboorteParser(dossier.geboorte(), dossier.overlijden(), dossier.moeder());
     }
 
     public List<String> bezwaren() {
         var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeVerslagen());
         if (Objects.isNull(medischVerslag.bezwaar())
-        || medischVerslag.bezwaar().isEmpty()) {
+                || medischVerslag.bezwaar().isEmpty()) {
             return List.of();
         }
         return medischVerslag.bezwaar().stream().map(Enum::toString).toList();

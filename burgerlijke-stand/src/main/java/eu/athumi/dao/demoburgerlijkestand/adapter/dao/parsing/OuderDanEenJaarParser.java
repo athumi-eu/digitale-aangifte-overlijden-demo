@@ -9,7 +9,9 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
 
     public String naamOverledene() {
-        return dossier.naam() + " " + dossier.voornaam();
+        var naam = Objects.isNull(dossier.naam()) ? "" : dossier.naam();
+        var voornaam = Objects.isNull(dossier.voornaam()) ? "" : dossier.voornaam();
+        return naam + " " + voornaam;
     }
 
     public String verblijfplaatsOverledene() {
@@ -27,8 +29,9 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
                 || Objects.isNull(dossier.huwelijk().persoonsGegevens())) {
             return "/";
         }
-
-        return dossier.huwelijk().persoonsGegevens().naam() + " " + dossier.huwelijk().persoonsGegevens().voornaam();
+        var naam = Objects.isNull(dossier.huwelijk().persoonsGegevens().naam()) ? "" : dossier.huwelijk().persoonsGegevens().naam();
+        var voornaam = Objects.isNull(dossier.huwelijk().persoonsGegevens().voornaam()) ? "" : dossier.huwelijk().persoonsGegevens().voornaam();
+        return naam + " " + voornaam;
     }
 
     public OverlijdenParser detailsOverlijden() {
