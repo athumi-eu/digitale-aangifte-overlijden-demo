@@ -1,13 +1,9 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.InwonerschapJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.VaststellingOverlijdenJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -62,22 +58,11 @@ public class DossierDao {
             var dossier = detail.get();
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("detail", dossier);
-                model.addAttribute("verblijfplaats", formattedVerblijfplaats(dossier.inwonerschap()));
-                model.addAttribute("adresOverlijden", formattedAdress(dossier.overlijden().getAdresOverlijden()));
-                model.addAttribute("plaatsOverlijden", formattedLocatie(dossier.overlijden().getLocatieOverlijden()));
-                model.addAttribute("tijdstipOverlijden", formattedTijdstipOverlijden(dossier.overlijden()));
-                model.addAttribute("medischVerslag", medischVerslag(dossier));
+                model.addAttribute("dossier", new OuderDanEenJaarParser(dossier));
                 return "detail-ouder-dan-1-jaar";
             } else {
                 model.addAttribute("detail", dossier);
-                model.addAttribute("plaatsGeboorte", formattedLocatie(dossier.geboorte().plaats()));
-                model.addAttribute("verblijfplaats", formattedVerblijfplaats(dossier.inwonerschap()));
-                model.addAttribute("adresOverlijden", formattedAdress(dossier.overlijden().getAdresOverlijden()));
-                model.addAttribute("plaatsOverlijden", formattedLocatie(dossier.overlijden().getLocatieOverlijden()));
-                model.addAttribute("tijdstipOverlijden", formattedTijdstipOverlijden(dossier.overlijden()));
-                model.addAttribute("medischVerslag", medischVerslag(dossier));
-                model.addAttribute("doodGeboren", formattedDoodgeboren(dossier.overlijden()));
-                model.addAttribute("meervoudigeZwangerschap", formattedMeervoudigeZwangerschap(dossier.moeder()));
+                model.addAttribute("dossier", new JongerDanEenJaarParser(dossier));
                 return "detail-jonger-dan-1-jaar";
             }
 
@@ -85,58 +70,4 @@ public class DossierDao {
         return "detail-does-not-exist";
     }
 
-    private String formattedDoodgeboren(OverlijdenJSON overlijdenJSON) {
-        if (Objects.isNull(overlijdenJSON) || Objects.isNull(overlijdenJSON.doodgeboorte())) {
-            return "";
-        }
-        return overlijdenJSON.doodgeboorte() ? "Dood geboren" : "Levend geboren";
-    }
-
-    private String formattedMeervoudigeZwangerschap(MoederJSON moeder) {
-        if (
-                Objects.isNull(moeder) ||
-                        Objects.isNull(moeder.persoonsGegevens()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevalling()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevalling().toestand()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevalling().toestand().meerling())) {
-            return "";
-        }
-        return moeder.persoonsGegevens().bevalling().toestand().meerling() ? "Ja" : "Neen";
-    }
-
-    private String formattedVerblijfplaats(InwonerschapJSON inwonerschapJSON) {
-        if (Objects.isNull(inwonerschapJSON) || Objects.isNull(inwonerschapJSON.verblijfplaats()) || Objects.isNull(inwonerschapJSON.verblijfplaats().adres())) {
-            return "";
-        }
-        var adres = inwonerschapJSON.verblijfplaats().adres();
-        return adres.straat() + " " + adres.huisnummer() + ", " + adres.postcode();
-    }
-
-    private String formattedAdress(AdresJSON adres) {
-        if (Objects.isNull(adres)) {
-            return "";
-        }
-        return adres.straat() + " " + adres.huisnummer() + ", " + adres.postcode();
-    }
-
-    private String formattedLocatie(LocatieJSON locatieJSON) {
-        if (Objects.isNull(locatieJSON.locatie())) {
-            return locatieJSON.andereLocatie();
-        } else if (Objects.equals(locatieJSON.locatie(), "ANDERE")) {
-            return locatieJSON.locatie() + ": " + locatieJSON.andereLocatie();
-        }
-        return locatieJSON.locatie();
-    }
-
-    private VaststellingOverlijdenJSON medischVerslag(DossierBurgerlijkeStandJSON json) {
-        return json.medischeVerslagen().getFirst();
-    }
-
-    private String formattedTijdstipOverlijden(OverlijdenJSON json) {
-        var tijdstip = json.tijdstip();
-        if (Objects.isNull(tijdstip.datum())) {
-            return tijdstip.beschrijvingTijdstip();
-        }
-        return tijdstip.datum().toString();
-    }
 }
