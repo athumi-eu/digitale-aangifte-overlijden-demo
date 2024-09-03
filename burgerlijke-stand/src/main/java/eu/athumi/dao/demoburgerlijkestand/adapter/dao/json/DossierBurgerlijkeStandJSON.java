@@ -11,6 +11,7 @@ public record DossierBurgerlijkeStandJSON(
         String id,
         DossierStatus dossierStatus,
         String kboNummer,
+        VaststellingType vaststellingType,
         String naam,
         String voornaam,
         Geslacht geslacht,
@@ -22,7 +23,6 @@ public record DossierBurgerlijkeStandJSON(
         GeboorteJSON geboorte,
         List<VaststellingOverlijdenJSON> medischeVerslagen
 ) implements Type {
-
 
 
     @Override

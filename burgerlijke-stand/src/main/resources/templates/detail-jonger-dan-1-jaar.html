@@ -23,7 +23,7 @@
 
     <h2 th:text="'Overlijdensdossier ' + ${detail.id()} + '(' + ${detail.voornaam()} + ' ' + ${detail.naam()} +')'"></h2>
 
-    <div class="grid-container">
+    <div class="grid-container-4">
         <div class="grid-column">
             <h3>Overledene</h3>
             <p>
@@ -44,7 +44,9 @@
             </p>
             <p>
             <div class="label">Echtgeno(o)t(te) of weduw(e)(naar) van</div>
-            <div th:text="${detail.huwelijk()?.persoonsGegevens() != null} ? ${detail.huwelijk()?.persoonsGegevens()?.voornaam()} + 'Niet gekend' + ${detail.huwelijk()?.persoonsGegevens()?.naam()} : ''">someValue</div>
+            <div th:text="${detail.huwelijk()?.persoonsGegevens() != null} ? ${detail.huwelijk()?.persoonsGegevens()?.voornaam()} + 'Niet gekend' + ${detail.huwelijk()?.persoonsGegevens()?.naam()} : ''">
+                someValue
+            </div>
 
             </p>
         </div>
@@ -60,17 +62,70 @@
             </p>
             <p>
             <div class="label">Arts die vaststelling heeft gedaan</div>
-                        <div class="data" th:text="${medischVerslag.arts().voornaam()} + ' ' + ${medischVerslag.arts().naam()} + '(' + ${medischVerslag.arts().riziv()}  + ')'"></div>
+            <div class="data"
+                 th:text="${medischVerslag.arts().voornaam()} + ' ' + ${medischVerslag.arts().naam()} + '(' + ${medischVerslag.arts().riziv()}  + ')'"></div>
             </p>
             <p>
             <div class="label">Adres van overlijden</div>
-                        <div class="data" th:text="${adresOverlijden}"></div>
+            <div class="data" th:text="${adresOverlijden}"></div>
             </p>
             <p>
             <div class="label">Plaats van overlijden</div>
-                        <div class="data" th:text="${plaatsOverlijden}"></div>
+            <div class="data" th:text="${plaatsOverlijden}"></div>
             </p>
 
+        </div>
+        <div class="grid-column">
+            <h3>Details geboorte</h3>
+            <p>
+            <div class="label">Tijdstip geboorte</div>
+            <div class="data" th:text="${detail.geboorte().datum()}"></div>
+            </p>
+            <p>
+            <div class="label">Het kind is</div>
+            <div class="data" th:text="${doodGeboren} "></div>
+            </p>
+            <p>
+            <div class="label">Plaats van de geboorte</div>
+            <div class="data" th:text="${plaatsGeboorte}"></div>
+            </p>
+            <p>
+            <div class="label">meervoudige zwangerschap</div>
+            <div class="data" th:text="${meervoudigeZwangerschap}"></div>
+            </p>
+            <p>
+            <div class="label">totaal aantal geboorten</div>
+            <div class="data"
+                 th:text="${detail.moeder().persoonsGegevens().bevalling().toestand().aantalGeboorten()}"></div>
+            </p>
+            <p>
+            <div class="label">Rang nummer van het kind</div>
+            <div class="data" th:text="${detail.geboorte().geboorteToestandJSON().rang()}"></div>
+            </p>
+            <p>
+            <div class="label">Aantal levend geboren</div>
+            <div>mannelijk: <span class="data"
+                                  th:text="${detail.moeder()?.persoonsGegevens()?.bevalling()?.toestand()?.aantalLevendGeboren()?.mannelijk()}"></span>
+            </div>
+            <div>vrouwelijk: <span class="data"
+                                   th:text="${detail.moeder()?.persoonsGegevens()?.bevalling()?.toestand()?.aantalLevendGeboren()?.vrouwelijk()}"></span>
+            </div>
+            <div>onbepaald: <span class="data"
+                                  th:text="${detail.moeder()?.persoonsGegevens()?.bevalling()?.toestand()?.aantalLevendGeboren()?.onbepaald()}"></span>
+            </div>
+            </p>
+            <p>
+            <div class="label">Aantal dood geboren</div>
+            <div>mannelijk: <span class="data"
+                                  th:text="${detail.moeder()?.persoonsGegevens()?.bevalling()?.toestand()?.aantalDoodgeboren()?.mannelijk()}"></span>
+            </div>
+            <div>vrouwelijk: <span class="data"
+                                   th:text="${detail.moeder()?.persoonsGegevens()?.bevalling()?.toestand()?.aantalDoodgeboren()?.vrouwelijk()}"></span>
+            </div>
+            <div>onbepaald: <span class="data"
+                                  th:text="${detail.moeder()?.persoonsGegevens()?.bevalling()?.toestand()?.aantalDoodgeboren()?.onbepaald()}"></span>
+            </div>
+            </p>
         </div>
         <div class="grid-column">
             <h3>Risico's/bezwaren</h3>
