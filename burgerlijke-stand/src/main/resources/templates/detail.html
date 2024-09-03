@@ -73,7 +73,14 @@
 
         </div>
         <div class="grid-column">
-            <h3>Risico's/bezwaren</h3></div>
+            <h3>Risico's/bezwaren</h3>
+            <ul th:each="bezwaar : ${medischVerslag.bezwaar()}">
+                <li th:text="${bezwaar}"/>
+            </ul>
+            <ul th:each="risico : ${medischVerslag.risico()}">
+                <li th:text="${risico}"/>
+            </ul>
+        </div>
     </div>
 </div>
 
