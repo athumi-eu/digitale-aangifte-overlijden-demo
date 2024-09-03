@@ -1,6 +1,7 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.InwonerschapJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.VaststellingOverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
@@ -43,7 +44,7 @@ public class DossierDao {
         model.addAttribute("dossiers", response.getBody());
         model.addAttribute("kbonummer", kbonummer);
 
-        return "dossiers";
+        return Objects.isNull(response.getBody()) || response.getBody().length == 0 ? "geen-dossiers" : "dossiers";
     }
 
     @GetMapping(value = "/dossier")
@@ -58,7 +59,7 @@ public class DossierDao {
         if (detail.isPresent()) {
             var dossier = detail.get();
             model.addAttribute("detail", dossier);
-            model.addAttribute("verblijfplaats", formattedAdress(dossier.inwonerschap().verblijfplaats().adres()));
+            model.addAttribute("verblijfplaats", formattedVerblijfplaats(dossier.inwonerschap()));
             model.addAttribute("adresOverlijden", formattedAdress(dossier.overlijden().getAdresOverlijden()));
             model.addAttribute("plaatsOverlijden", formattedPlaatsOverlijden(dossier.overlijden().getLocatieOverlijden()));
             model.addAttribute("tijdstipOverlijden", formattedTijdstipOverlijden(dossier.overlijden()));
@@ -68,6 +69,14 @@ public class DossierDao {
         return "detail-does-not-exist";
     }
 
+
+    private String formattedVerblijfplaats(InwonerschapJSON inwonerschapJSON) {
+        if (Objects.isNull(inwonerschapJSON) || Objects.isNull(inwonerschapJSON.verblijfplaats()) || Objects.isNull(inwonerschapJSON.verblijfplaats().adres())) {
+            return "";
+        }
+        var adres = inwonerschapJSON.verblijfplaats().adres();
+        return adres.straat() + " " + adres.huisnummer() + ", " + adres.postcode();
+    }
 
     private String formattedAdress(AdresJSON adres) {
         if (Objects.isNull(adres)) {
