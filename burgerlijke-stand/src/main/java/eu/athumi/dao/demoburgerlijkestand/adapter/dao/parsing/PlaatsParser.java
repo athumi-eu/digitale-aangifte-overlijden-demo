@@ -11,7 +11,10 @@ public class PlaatsParser {
         if (Objects.isNull(adres)) {
             return "/";
         }
-        return adres.straat() + " " + adres.huisnummer() + ", niscode: " + adres.niscode();
+        var straat = Objects.isNull(adres.straat()) ? "" : adres.straat();
+        var huisnummer =  Objects.isNull(adres.huisnummer()) ? "" : adres.huisnummer();
+        var niscode =  Objects.isNull(adres.niscode()) ? "" : adres.niscode();
+        return straat + " " + huisnummer + ", niscode: " + niscode;
     }
 
     public static String parseLocatie(LocatieJSON locatieJSON) {

@@ -61,11 +61,11 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
 
     public String rang() {
         if (Objects.isNull(geboorte)
-                || Objects.isNull(geboorte.geboorteToestandJSON())
-                || Objects.isNull(geboorte.geboorteToestandJSON().rang())) {
+                || Objects.isNull(geboorte.geboorteToestand())
+                || Objects.isNull(geboorte.geboorteToestand().rang())) {
             return "/";
         }
-        return geboorte.geboorteToestandJSON().rang().toString();
+        return geboorte.geboorteToestand().rang().toString();
     }
 
     public VerdelingVolgensGeslachtParser.VerdelingVolgensGeslacht aantalLevendGeboren() {
