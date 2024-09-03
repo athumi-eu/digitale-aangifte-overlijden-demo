@@ -63,11 +63,18 @@ tr:nth-child(even) {
     background-color: white;
 }
 
-.grid-container {
+.grid-container-3 {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
+.grid-container-4 {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .grid-column {
     /*background: #ccc;*/
     /*color: #ggg;*/
