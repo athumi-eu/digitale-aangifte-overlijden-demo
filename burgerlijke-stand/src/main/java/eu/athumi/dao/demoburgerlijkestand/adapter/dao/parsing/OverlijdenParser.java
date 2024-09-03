@@ -9,7 +9,7 @@ public record OverlijdenParser(OverlijdenJSON overlijden, VaststellingOverlijden
 
     public String tijdstipOverlijden() {
         if (Objects.isNull(overlijden)
-        || Objects.isNull(overlijden.tijdstip())){
+                || Objects.isNull(overlijden.tijdstip())) {
             return "/";
         }
         return TijdstipParser.parseTijdstip(overlijden.tijdstip());
@@ -28,12 +28,15 @@ public record OverlijdenParser(OverlijdenJSON overlijden, VaststellingOverlijden
         } else if (Objects.isNull(vaststellingOverlijdenJSON.arts())) {
             return "/";
         }
-        return vaststellingOverlijdenJSON.arts().naam() + " " + vaststellingOverlijdenJSON.arts().voornaam() + "(" + vaststellingOverlijdenJSON.arts().riziv() + ")";
+        var naam = Objects.isNull(vaststellingOverlijdenJSON.arts().naam()) ? "" : vaststellingOverlijdenJSON.arts().naam();
+        var voornaam = Objects.isNull(vaststellingOverlijdenJSON.arts().voornaam()) ? "" : vaststellingOverlijdenJSON.arts().voornaam();
+        var riziv = Objects.isNull(vaststellingOverlijdenJSON.arts().riziv()) ? "" : vaststellingOverlijdenJSON.arts().riziv();
+        return naam + " " + voornaam + "(" + riziv + ")";
     }
 
     public String adresOverlijden() {
         if (Objects.isNull(overlijden)
-                || Objects.isNull(overlijden.getAdresOverlijden())){
+                || Objects.isNull(overlijden.getAdresOverlijden())) {
             return "/";
         }
         return PlaatsParser.parseAdres(overlijden.getAdresOverlijden());
@@ -41,7 +44,7 @@ public record OverlijdenParser(OverlijdenJSON overlijden, VaststellingOverlijden
 
     public String plaatsOverlijden() {
         if (Objects.isNull(overlijden)
-                || Objects.isNull(overlijden.getLocatieOverlijden())){
+                || Objects.isNull(overlijden.getLocatieOverlijden())) {
             return "/";
         }
         return PlaatsParser.parseLocatie(overlijden.getLocatieOverlijden());
