@@ -1,14 +1,10 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.TokenManager;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +19,13 @@ import java.util.Objects;
 @Controller
 public class DossierDao {
 
-    private final TokenManager tokenManager;
-
     @Value("${dao.service.connection-url}")
     private String daoServiceUrl;
 
-    private final RestTemplate restTemplate;
+    private final RestTemplate oauth2RestTemplate;
 
-    public DossierDao(RestTemplate restTemplate, TokenManager tokenManager) {
-        this.restTemplate = restTemplate;
-        this.tokenManager = tokenManager;
+    public DossierDao(RestTemplate oauth2RestTemplate) {
+        this.oauth2RestTemplate = oauth2RestTemplate;
     }
 
     @GetMapping()
@@ -44,11 +37,7 @@ public class DossierDao {
     public String dossier(Model model, @RequestParam String kbonummer) {
 
         String url = UriComponentsBuilder.fromHttpUrl(daoServiceUrl + "/dossiers-burgerlijke-stand").queryParam("kbonummer", kbonummer).build().toString();
-
-
-        ResponseEntity<DossierBurgerlijkeStandJSON[]> response = restTemplate.exchange(
-                url, HttpMethod.GET, new HttpEntity<>(getSecurityHeaders()),
-                DossierBurgerlijkeStandJSON[].class);
+        ResponseEntity<DossierBurgerlijkeStandJSON[]> response = oauth2RestTemplate.getForEntity(url, DossierBurgerlijkeStandJSON[].class);
 
         model.addAttribute("dossiers", response.getBody());
         model.addAttribute("kbonummer", kbonummer);
@@ -59,9 +48,7 @@ public class DossierDao {
     @GetMapping(value = "/dossier")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
         String url = UriComponentsBuilder.fromHttpUrl(daoServiceUrl + "/dossiers-burgerlijke-stand").queryParam("kbonummer", kbonummer).build().toString();
-        var detail = Arrays.stream(Objects.requireNonNull(restTemplate.exchange(
-                url, HttpMethod.GET, new HttpEntity<>(getSecurityHeaders()),
-                DossierBurgerlijkeStandJSON[].class).getBody())).filter(dossier -> Objects.equals(dossier.id(), id)).findFirst();
+        var detail = Arrays.stream(Objects.requireNonNull(oauth2RestTemplate.getForEntity(url, DossierBurgerlijkeStandJSON[].class).getBody())).filter(dossier -> Objects.equals(dossier.id(), id)).findFirst();
 
         model.addAttribute("kbonummer", kbonummer);
 
@@ -79,13 +66,6 @@ public class DossierDao {
 
         }
         return "detail-does-not-exist";
-    }
-
-    private HttpHeaders getSecurityHeaders() {
-        var token = tokenManager.getAccessToken();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Bearer " + token);
-        return httpHeaders;
     }
 
 }
