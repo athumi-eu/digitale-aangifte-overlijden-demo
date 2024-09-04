@@ -36,7 +36,7 @@ public class DossierDao {
     @GetMapping(value = "/dossiers")
     public String dossier(Model model, @RequestParam String kbonummer) {
 
-        String url = UriComponentsBuilder.fromHttpUrl(daoServiceUrl + "/dossiers-burgerlijke-stand").queryParam("kbonummer", kbonummer).build().toString();
+        String url = UriComponentsBuilder.fromHttpUrl(daoServiceUrl + "/burgerlijke-stand/dossiers").queryParam("kbonummer", kbonummer).build().toString();
         ResponseEntity<DossierBurgerlijkeStandJSON[]> response = oauth2RestTemplate.getForEntity(url, DossierBurgerlijkeStandJSON[].class);
 
         model.addAttribute("dossiers", response.getBody());
@@ -47,7 +47,7 @@ public class DossierDao {
 
     @GetMapping(value = "/dossier")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
-        String url = UriComponentsBuilder.fromHttpUrl(daoServiceUrl + "/dossiers-burgerlijke-stand").queryParam("kbonummer", kbonummer).build().toString();
+        String url = UriComponentsBuilder.fromHttpUrl(daoServiceUrl + "/burgerlijke-stand/dossiers").queryParam("kbonummer", kbonummer).build().toString();
         var detail = Arrays.stream(Objects.requireNonNull(oauth2RestTemplate.getForEntity(url, DossierBurgerlijkeStandJSON[].class).getBody())).filter(dossier -> Objects.equals(dossier.id(), id)).findFirst();
 
         model.addAttribute("kbonummer", kbonummer);
