@@ -7,12 +7,9 @@
 
 <a th:href="@{/dossiers(kbonummer=${kbonummer})}">Terug naar overzicht overlijdensdossiers</a>
 <div class="ml-3">
-    <h3>Detail</h3>
-
     <h2 th:text="'Overlijdensdossier ' + ${dossier.id()} + '(' + ${parsedDetail.naamOverledene()} +')'"></h2>
-
     <div th:replace="~{fragments/vaststelling-jonger-dan-1-jaar.html :: vaststelling-jonger-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
-
+    <div th:replace="~{fragments/verslag.html :: verslag}"></div>
 </div>
 
 </body>
