@@ -16,7 +16,8 @@ html * {
 }
 
 .disclaimer {
-    width: 100%;
+    margin-left: 2rem;
+    margin-right: 2rem;
     left: 0;
     top: 0;
     background: lightpink;
@@ -24,6 +25,16 @@ html * {
 
 .disclaimer h2 {
     text-align: center;
+}
+
+.mlr-3 {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.mtb-3 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .ml-3 {
