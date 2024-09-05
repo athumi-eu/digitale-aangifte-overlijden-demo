@@ -90,6 +90,7 @@ tr:nth-child(even) {
     color: darkgray;
 }
 
-.data {
-
+/* Solid border */
+hr.solid {
+    border-top: 3px solid #bbb;
 }

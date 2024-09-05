@@ -4,6 +4,8 @@
 <body>
 <div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
 <div th:replace="~{fragments/title :: title}"></div>
+<div th:replace="~{fragments/navigation :: navigation(kbonummer=${kbonummer})}"></div>
+
 
 <a th:href="@{/dossiers(kbonummer=${kbonummer})}">Terug naar overzicht overlijdensdossiers</a>
 <div class="ml-3">

@@ -5,19 +5,19 @@
         <h3>Overledene</h3>
         <p>
         <div class="label">Overledene</div>
-        <div class="data" th:text="${parsedDetail.naamOverledene()}"/>
+        <div th:text="${parsedDetail.naamOverledene()}"/>
         </p>
         <p>
         <div class="label">Rijksregisternummer</div>
-        <div class="data" th:text="${dossier.rijksregisternummer()}"/>
+        <div th:text="${dossier.rijksregisternummer()}"/>
         </p>
         <p>
         <div class="label">Geslacht</div>
-        <div class="data" th:text="${dossier.geslacht()}"/>
+        <div th:text="${dossier.geslacht()}"/>
         </p>
         <p>
         <div class="label">Verblijfplaats</div>
-        <div class="data" th:text="${parsedDetail.verblijfplaatsOverledene()}"/>
+        <div th:text="${parsedDetail.verblijfplaatsOverledene()}"/>
         </p>
         <p>
         <div class="label">Echtgeno(o)t(te) of weduw(e)(naar) van</div>

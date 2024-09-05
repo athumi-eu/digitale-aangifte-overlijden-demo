@@ -42,7 +42,7 @@ public class DossierDao {
         model.addAttribute("dossiers", response.getBody());
         model.addAttribute("kbonummer", kbonummer);
 
-        return Objects.isNull(response.getBody()) || response.getBody().length == 0 ? "geen-dossiers" : "dossiers";
+        return Objects.isNull(response.getBody()) || response.getBody().length == 0 ? "niks-gevonden" : "dossiers";
     }
 
     @GetMapping(value = "/dossier")
