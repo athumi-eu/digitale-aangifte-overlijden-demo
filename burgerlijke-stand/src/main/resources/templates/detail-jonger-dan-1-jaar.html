@@ -5,11 +5,24 @@
 <div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
 <div th:replace="~{fragments/title :: title}"></div>
 
-<a th:href="@{/dossiers(kbonummer=${kbonummer})}">Terug naar overzicht overlijdensdossiers</a>
+<div class="mlr-3 mtb-3">
+    <a th:href="@{/dossiers(kbonummer=${kbonummer})}">Terug naar overzicht overlijdensdossiers</a>
+    <hr class="solid">
+</div>
 <div class="ml-3">
     <h2 th:text="'Overlijdensdossier ' + ${dossier.id()} + '(' + ${parsedDetail.naamOverledene()} +')'"></h2>
     <div th:replace="~{fragments/vaststelling-jonger-dan-1-jaar.html :: vaststelling-jonger-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
-    <div th:replace="~{fragments/verslag-detail.html :: verslag(verslag=${verslag})}"></div>
+
+    <!-- Als er een gekoppeld verslag is -->
+    <div th:if="${verslag}">
+        <div th:replace="~{fragments/verslag-detail.html :: verslag(verslag=${verslag})}"></div>
+    </div>
+    <!-- ELSE -->
+    <div th:unless="${verslag}">
+        <h3>Verslag van de aangestelde beëdigd arts</h3>
+        Nog geen verslag gekoppeld
+    </div>
+
 </div>
 
 </body>
