@@ -20,8 +20,6 @@ repositories {
 }
 
 dependencies {
-
-
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.webjars.npm:htmx.org:2.0.2'
 
