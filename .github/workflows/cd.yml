@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   package-backend:
-    name: package backend
+    name: package demo
     environment: TST
     runs-on: ubuntu-22.04
     steps:
@@ -22,6 +22,7 @@ jobs:
           java-version: "21"
           cache: "gradle"
       - name: build and push image
+        working-directory: burgerlijke-stand
         run: |
           ./gradlew clean build
           docker build --platform linux/amd64 -t dao-demo:latest -f Dockerfile .
