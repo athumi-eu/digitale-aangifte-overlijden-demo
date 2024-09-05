@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+    <div th:fragment="overledene-verslag(verslagDetail)" class="grid-column">
+        <h3>Overledene</h3>
+        <p>
+        <div class="label">Overledene</div>
+        <div th:text="${verslagDetail.naamOverledene()}"/>
+        </p>
+        <p>
+        <div class="label">Rijksregisternummer</div>
+        <div th:text="${verslagDetail.rijksregisternummer()}"/>
+        </p>
+        <p>
+        <div class="label">Geslacht</div>
+        <div th:text="${verslagDetail.geslacht()}"/>
+        </p>
+        <p>
+        <div class="label">Geboorteplaats</div>
+        <div th:text="${verslagDetail.geboortePlaats()}"/>
+        </p>
+        <p>
+        <div class="label">Geboortedatum</div>
+        <div th:text="${verslagDetail.geboorteDatum()}"/>
+        </p>
+        <p>
+        <div class="label">Verblijfplaats</div>
+        <div th:text="${verslagDetail.verblijfplaatsOverledene()}"/>
+        </p>
+
+    </div>
+</html>

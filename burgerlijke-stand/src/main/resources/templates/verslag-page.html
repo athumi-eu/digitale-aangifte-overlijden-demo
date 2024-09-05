@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head}"><title></title></head>
+<body>
+<div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
+<div th:replace="~{fragments/title :: title}"></div>
+
+<a th:href="@{/verslagen(kbonummer=${kbonummer})}" class="ml-3">Terug naar overzicht ongekoppelde verslagen beëdigd arts</a>
+<div class="ml-3">
+    <div th:replace="~{fragments/verslag-detail.html :: verslag(verslag=${verslagDetail})}"></div>
+</div>
+
+</body>
+</html>
