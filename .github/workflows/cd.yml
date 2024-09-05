@@ -30,5 +30,6 @@ jobs:
           docker tag dao-demo:latest "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:latest"
           docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:latest"
         env:
+          SPRING_PROFILES_ACTIVE: dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
