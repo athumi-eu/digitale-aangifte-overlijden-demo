@@ -1,5 +1,6 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.BeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 
 import java.util.Objects;
@@ -12,6 +13,7 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
         var voornaam = Objects.isNull(verslag.voornaam()) ? "" : verslag.voornaam();
         return naam + " " + voornaam;
     }
+
     public String rijksregisternummer() {
         return Objects.isNull(verslag.rijksregisternummer()) ? "-" : verslag.rijksregisternummer();
     }
@@ -24,16 +26,9 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
         return verslag.geslacht().toString();
     }
 
-    public String datumOverlijden() {
-        if(Objects.isNull(verslag.overlijden())) {
-            return "";
-        }
-        return TijdstipParser.parseTijdstip(verslag.overlijden().tijdstip());
-    }
-
     public String geboortePlaats() {
-        if(Objects.isNull(verslag.geboorte())
-        || Objects.isNull(verslag.geboorte().plaats())
+        if (Objects.isNull(verslag.geboorte())
+                || Objects.isNull(verslag.geboorte().plaats())
                 || Objects.isNull(verslag.geboorte().plaats().locatie())) {
             return "";
         }
@@ -41,21 +36,77 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
     }
 
     public String geboorteDatum() {
-        if(Objects.isNull(verslag.geboorte())) {
+        if (Objects.isNull(verslag.geboorte())) {
             return "";
         }
         return TijdstipParser.parseLocalDateTime(verslag.geboorte().datum());
     }
 
     public String verblijfplaatsOverledene() {
-        if(Objects.isNull(verslag.inwonerschap())
-        || Objects.isNull(verslag.inwonerschap().verblijfplaats())
-        || Objects.isNull(verslag.inwonerschap().verblijfplaats().adres())) {
+        if (Objects.isNull(verslag.inwonerschap())
+                || Objects.isNull(verslag.inwonerschap().verblijfplaats())
+                || Objects.isNull(verslag.inwonerschap().verblijfplaats().adres())) {
             return "";
         }
         return PlaatsParser.parseAdres(verslag.inwonerschap().verblijfplaats().adres());
     }
 
+    public String datumOverlijden() {
+        if (Objects.isNull(verslag.overlijden())) {
+            return "";
+        }
+        return TijdstipParser.parseTijdstip(verslag.overlijden().tijdstip());
+    }
+
+    public String gemeenteOverlijden() {
+        if (Objects.isNull(verslag.overlijden())
+        || Objects.isNull(verslag.overlijden().plaats())
+             ||  verslag.overlijden().plaats().isEmpty()) {
+            return "";
+        }
+        return PlaatsParser.parseAdres(verslag.overlijden().plaats().getFirst());
+    }
+
+    public String aardOverlijden() {
+        if (Objects.isNull(verslag.medischeToestand())
+                || Objects.isNull(verslag.medischeToestand().aard())) {
+            return "";
+        }
+        return verslag.medischeToestand().aard().toString();
+    }
+
+    public String controleArts() {
+        var arts = getArts(verslag);
+        if (Objects.isNull(arts)) {
+            return "";
+        }
+        var naam = Objects.isNull(arts.naam()) ? "" : arts.naam();
+        var voornaam = Objects.isNull(arts.voornaam()) ? "" : arts.voornaam();
+        return naam + " " + voornaam;
+    }
+
+    public String gemeenteBeediging() {
+        var arts = getArts(verslag);
+        if (Objects.isNull(arts)
+                || Objects.isNull(arts.plaatsBeediging())
+                || Objects.isNull(arts.plaatsBeediging().niscode())) {
+            return "";
+        }
+        return "niscode: " + arts.plaatsBeediging().niscode();
+    }
+
+    private BeedigdArtsJSON getArts(VerslagBeedigdArtsJSON verslag) {
+        if (Objects.isNull(verslag.medischeToestand())
+                || Objects.isNull(verslag.medischeToestand().medischeVerslagen())) {
+            return null;
+        }
+        var medischVerslag = verslag.medischeToestand().medischeVerslagen().stream().filter(mv -> Objects.equals(mv.type(), "MedischVerslagOverlijden")).findFirst().orElse(null);
+        if (Objects.isNull(medischVerslag)
+                || Objects.isNull(medischVerslag.arts())) {
+            return null;
+        }
+        return medischVerslag.arts();
+    }
 
 
 }
