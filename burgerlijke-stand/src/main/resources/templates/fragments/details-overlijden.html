@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="details-overlijden(parsedDetail)" class="grid-column">
+    <h3>Details overlijden</h3>
+    <p>
+    <div class="label">Tijdstip overlijden</div>
+    <div class="data" th:text="${parsedDetail.tijdstipOverlijden()}"></div>
+    </p>
+    <p>
+    <div class="label">Tijdstip vaststelling</div>
+    <div class="data" th:text="${parsedDetail.tijdstipVaststelling()}"></div>
+    </p>
+    <p>
+    <div class="label">Arts die vaststelling heeft gedaan</div>
+    <div class="data"
+         th:text="${parsedDetail.artsVaststelling()}"></div>
+    </p>
+    <p>
+    <div class="label">Adres van overlijden</div>
+    <div class="data" th:text="${parsedDetail.adresOverlijden()}"></div>
+    </p>
+    <p>
+    <div class="label">Plaats van overlijden</div>
+    <div class="data" th:text="${parsedDetail.plaatsOverlijden()}"></div>
+    </p>
+
+</div>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="risico-en-bezwaren(parsedDetail)" class="grid-column">
+    <h3>Risico's/bezwaren</h3>
+    <ul th:each="bezwaar : ${parsedDetail.bezwaren()}">
+        <li th:text="${bezwaar}"/>
+    </ul>
+    <ul th:each="risico : ${parsedDetail.risicos()}">
+        <li th:text="${risico}"/>
+    </ul>
+</div>
+</html>
