@@ -20,6 +20,9 @@ public class TokenManager {
         OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest.withClientRegistrationId(this.clientRegistrationName).principal(this.clientId).build();
         OAuth2AuthorizedClient authorizedClient = this.authorizedClientManager.authorize(authorizeRequest);
         OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
+        System.out.println("#########");
+        System.out.println(accessToken);
+        System.out.println("#########");
         return accessToken.getTokenValue();
     }
 }
