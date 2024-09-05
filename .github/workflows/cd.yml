@@ -1,0 +1,33 @@
+name: CD
+concurrency:
+  group: ${{ github.workflow }}
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  package-backend:
+    name: package backend
+    environment: TST
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "adopt"
+          java-version: "21"
+          cache: "gradle"
+      - name: build and push image
+        run: |
+          ./gradlew clean build
+          docker build --platform linux/amd64 -t dao-demo:latest -f Dockerfile .
+          docker login -u ${{ vars.AZURE_REPO_USERNAME }} -p ${{ secrets.AZURE_REPO_PASSWORD }} ${{ vars.AZURE_REPO_URL }}
+          docker tag dao-demo:latest "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:latest"
+          docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:latest"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
