@@ -4,6 +4,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeSta
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -56,10 +57,12 @@ public class DossierDao {
             var dossier = detail.get();
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("dossier", dossier);
+                model.addAttribute("verslag", new VerslagParser(null));
                 model.addAttribute("parsedDetail", new OuderDanEenJaarParser(dossier));
                 return "detail-ouder-dan-1-jaar";
             } else {
                 model.addAttribute("dossier", dossier);
+                model.addAttribute("verslag", new VerslagParser(null));
                 model.addAttribute("parsedDetail", new JongerDanEenJaarParser(dossier));
                 return "detail-jonger-dan-1-jaar";
             }
