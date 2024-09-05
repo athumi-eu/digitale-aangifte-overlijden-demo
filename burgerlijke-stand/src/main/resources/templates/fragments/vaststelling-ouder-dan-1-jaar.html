@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="vaststelling-ouder-dan-1-jaar(dossier, parsedDetail)" class="grid-container-3">
+    <div th:replace="~{fragments/overledene-ouder-dan-1-jaar :: overledene-ouder-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
+    <div th:replace="~{fragments/details-overlijden.html :: details-overlijden(parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
+    <div th:replace="~{fragments/risico-en-bezwaren.html :: risico-en-bezwaren(parsedDetail=${parsedDetail})}"></div>
+</div>
+</html>

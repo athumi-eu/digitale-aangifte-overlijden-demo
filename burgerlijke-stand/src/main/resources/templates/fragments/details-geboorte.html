@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<div th:fragment="details-geboorte(parsedDetail)" class="grid-column">
+    <h3>Details geboorte</h3>
+    <p>
+    <div class="label">Tijdstip geboorte</div>
+    <div class="data" th:text="${parsedDetail.tijdstipGeboorte()}"></div>
+    </p>
+    <p>
+    <div class="label">Het kind is</div>
+    <div class="data" th:text="${parsedDetail.levendGeboren} "></div>
+    </p>
+    <p>
+    <div class="label">Plaats van de geboorte</div>
+    <div class="data" th:text="${parsedDetail.plaatsGeboorte()}"></div>
+    </p>
+    <p>
+    <div class="label">meervoudige zwangerschap</div>
+    <div class="data" th:text="${parsedDetail.meervoudigeZwangerschap()}"></div>
+    </p>
+    <p>
+    <div class="label">totaal aantal geboorten</div>
+    <div class="data"
+         th:text="${parsedDetail.totaalAantalGeboorten()}"></div>
+    </p>
+    <p>
+    <div class="label">Rang nummer van het kind</div>
+    <div class="data" th:text="${parsedDetail.rang()}"></div>
+    </p>
+    <p>
+    <div class="label">Aantal levend geboren</div>
+    <div>mannelijk: <span class="data"
+                          th:text="${parsedDetail.aantalLevendGeboren().mannelijk()}"></span>
+    </div>
+    <div>vrouwelijk: <span class="data"
+                           th:text="${parsedDetail.aantalLevendGeboren().vrouwelijk()}"></span>
+    </div>
+    <div>onbepaald: <span class="data"
+                          th:text="${parsedDetail.aantalLevendGeboren().onbepaald()}"></span>
+    </div>
+    </p>
+    <p>
+    <div class="label">Aantal dood geboren</div>
+    <div>mannelijk: <span class="data"
+                          th:text="${parsedDetail.aantalDoodGeboren().mannelijk()}"></span>
+    </div>
+    <div>vrouwelijk: <span class="data"
+                           th:text="${parsedDetail.aantalDoodGeboren().vrouwelijk()}"></span>
+    </div>
+    <div>onbepaald: <span class="data"
+                          th:text="${parsedDetail.aantalDoodGeboren().onbepaald()}"></span>
+    </div>
+    </p>
+</div>
+</html>

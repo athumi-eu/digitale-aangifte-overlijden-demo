@@ -55,12 +55,12 @@ public class DossierDao {
         if (detail.isPresent()) {
             var dossier = detail.get();
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
-                model.addAttribute("detail", dossier);
-                model.addAttribute("dossier", new OuderDanEenJaarParser(dossier));
+                model.addAttribute("dossier", dossier);
+                model.addAttribute("parsedDetail", new OuderDanEenJaarParser(dossier));
                 return "detail-ouder-dan-1-jaar";
             } else {
-                model.addAttribute("detail", dossier);
-                model.addAttribute("dossier", new JongerDanEenJaarParser(dossier));
+                model.addAttribute("dossier", dossier);
+                model.addAttribute("parsedDetail", new JongerDanEenJaarParser(dossier));
                 return "detail-jonger-dan-1-jaar";
             }
 
