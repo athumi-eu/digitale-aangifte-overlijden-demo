@@ -25,10 +25,10 @@ jobs:
         working-directory: burgerlijke-stand
         run: |
           ./gradlew clean build
-          docker build --platform linux/amd64 -t dao-demo:latest -f Dockerfile .
+          docker build --platform linux/amd64 -t dao-demo:0.1.0 -f Dockerfile .
           docker login -u ${{ vars.AZURE_REPO_USERNAME }} -p ${{ secrets.AZURE_REPO_PASSWORD }} ${{ vars.AZURE_REPO_URL }}
-          docker tag dao-demo:latest "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:latest"
-          docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:latest"
+          docker tag dao-demo:0.1.0 "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:0.1.0"
+          docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:0.1.0"
         env:
           SPRING_PROFILES_ACTIVE: dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
