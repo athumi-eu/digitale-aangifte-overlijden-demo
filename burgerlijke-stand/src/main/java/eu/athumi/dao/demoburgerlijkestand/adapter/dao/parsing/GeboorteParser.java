@@ -36,7 +36,7 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
         if (Objects.isNull(toestand)) {
             return "/";
         }
-        return toestand.meerling() ? "Ja" : "Neen";
+        return Objects.equals(toestand.meerling(), BevallingToestandJSON.JaNeen.Ja) ? "Ja" : "Neen";
     }
 
     public String totaalAantalGeboorten() {
@@ -52,11 +52,11 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
         if (
                 Objects.isNull(moeder) ||
                         Objects.isNull(moeder.persoonsGegevens()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevalling()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevalling().toestand())) {
+                        Objects.isNull(moeder.persoonsGegevens().bevallingToestand()) ||
+                        Objects.isNull(moeder.persoonsGegevens().bevallingToestand().toestand())) {
             return null;
         }
-        return moeder.persoonsGegevens().bevalling().toestand();
+        return moeder.persoonsGegevens().bevallingToestand().toestand();
     }
 
     public String rang() {

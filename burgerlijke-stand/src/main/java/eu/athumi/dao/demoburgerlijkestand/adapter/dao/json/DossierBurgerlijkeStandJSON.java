@@ -1,11 +1,8 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json;
 
 
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.VaststellingOverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
-
-import java.util.List;
 
 public record DossierBurgerlijkeStandJSON(
         String id,
@@ -21,7 +18,7 @@ public record DossierBurgerlijkeStandJSON(
         HuwelijkJSON huwelijk,
         MoederJSON moeder,
         GeboorteJSON geboorte,
-        List<VaststellingOverlijdenJSON> medischeVerslagen
+        OverlijdensToestandJSON medischeToestand
 ) implements Type {
 
 

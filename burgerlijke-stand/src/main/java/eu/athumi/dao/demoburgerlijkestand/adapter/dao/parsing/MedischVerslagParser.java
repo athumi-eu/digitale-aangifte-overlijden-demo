@@ -8,7 +8,7 @@ import java.util.Objects;
 public class MedischVerslagParser {
 
     public static VaststellingOverlijdenJSON getVaststellingOverlijden(List<VaststellingOverlijdenJSON> medischeVerslagen) {
-        return medischeVerslagen.stream().filter(verslag -> Objects.equals(verslag.type(), "VaststellingOverlijden")).findFirst().orElse(null);
+        return medischeVerslagen.stream().filter(verslag -> Objects.equals(verslag.type(), "MedischVerslagOverlijden")).findFirst().orElse(null);
     }
 
 }

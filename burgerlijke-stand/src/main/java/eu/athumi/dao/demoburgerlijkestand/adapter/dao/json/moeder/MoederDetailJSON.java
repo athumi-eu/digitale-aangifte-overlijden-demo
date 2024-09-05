@@ -8,7 +8,7 @@ public record MoederDetailJSON(
     String naam,
     String voornaam,
     InwonerschapJSON inwonerschap,
-    BevallingJSON bevalling
+    BevallingJSON bevallingToestand
 )
     implements Type {
 

@@ -38,7 +38,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
     }
 
     public OverlijdenParser detailsOverlijden() {
-        return new OverlijdenParser(dossier.overlijden(), MedischVerslagParser.getVaststellingOverlijden(dossier.medischeVerslagen()));
+        return new OverlijdenParser(dossier.overlijden(), MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen()));
     }
 
     public GeboorteParser geboorteDetails() {
@@ -46,7 +46,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
     }
 
     public List<String> bezwaren() {
-        var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeVerslagen());
+        var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen());
         if (Objects.isNull(medischVerslag.bezwaar())
                 || medischVerslag.bezwaar().isEmpty()) {
             return List.of();
@@ -55,7 +55,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
     }
 
     public List<String> risicos() {
-        var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeVerslagen());
+        var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen());
         if (Objects.isNull(medischVerslag.risico())
                 || medischVerslag.risico().isEmpty()) {
             return List.of();
