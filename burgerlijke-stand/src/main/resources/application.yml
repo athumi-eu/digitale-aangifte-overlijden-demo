@@ -9,11 +9,12 @@ spring:
         registration:
           demo:
             provider: spring
+            client-authentication-method: client_secret_basic
             client-id: demo-client
             client-secret: demo-super-secret
             authorization-grant-type: client_credentials
             scope:
-              - "dao_lbbs"
+              - dao_lbbs
         provider:
           spring:
             token-uri: http://localhost:8090/oauth2/token
