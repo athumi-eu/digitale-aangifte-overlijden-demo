@@ -5,7 +5,11 @@
 <div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
 <div th:replace="~{fragments/title :: title}"></div>
 
-<a th:href="@{/verslagen(kbonummer=${kbonummer})}" class="ml-3">Terug naar overzicht ongekoppelde verslagen beëdigd arts</a>
+<div class="mlr-3 mtb-3">
+    <a th:href="@{/verslagen(kbonummer=${kbonummer})}">Terug naar overzicht ongekoppelde verslagen beëdigd arts</a>
+    <hr class="solid">
+</div>
+
 <div class="ml-3">
     <div th:replace="~{fragments/verslag-detail.html :: verslag(verslag=${verslagDetail})}"></div>
 </div>
