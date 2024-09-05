@@ -45,4 +45,44 @@ public class VerslagBeedigdArtsJSON implements Type {
     public String type() {
         return "VerslagBeedigdArts";
     }
+
+    public String id() {
+        return id;
+    }
+
+    public String kboNummer() {
+        return kboNummer;
+    }
+
+    public String naam() {
+        return naam;
+    }
+
+    public String voornaam() {
+        return voornaam;
+    }
+
+    public Geslacht geslacht() {
+        return geslacht;
+    }
+
+    public String rijksregisternummer() {
+        return rijksregisternummer;
+    }
+
+    public InwonerschapJSON inwonerschap() {
+        return inwonerschap;
+    }
+
+    public OverlijdenJSON overlijden() {
+        return overlijden;
+    }
+
+    public GeboorteJSON geboorte() {
+        return geboorte;
+    }
+
+    public OverlijdensToestandJSON medischeToestand() {
+        return medischeToestand;
+    }
 }

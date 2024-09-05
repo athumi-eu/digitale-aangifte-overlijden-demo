@@ -23,8 +23,9 @@
         </tr>
 
         <tr th:each="verslag : ${verslagen}">
-            <td th:text="${verslag.voornaam()} + ' ' + ${verslag.naam()}"></td>
+            <td th:text="${verslag.naamOverledene()}"></td>
             <td th:text="${verslag.rijksregisternummer()}"></td>
+            <td th:text="${verslag.datumOverlijden}"></td>
             <td>
                 <a th:href="@{/verslag(id=${verslag.id()},kbonummer=${kbonummer})}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
