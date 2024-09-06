@@ -3,12 +3,10 @@ spring:
     name: demo
   security:
     oauth2:
-      registration:
-        name: demo
       client:
         registration:
           demo:
-            provider: spring
+            provider: demo
             client-authentication-method: client_secret_basic
             client-id: demo-client
             client-secret: demo-super-secret
@@ -16,7 +14,7 @@ spring:
             scope:
               - dao_lbbs
         provider:
-          spring:
+          demo:
             token-uri: http://localhost:8090/oauth2/token
 server:
   port: 8082
