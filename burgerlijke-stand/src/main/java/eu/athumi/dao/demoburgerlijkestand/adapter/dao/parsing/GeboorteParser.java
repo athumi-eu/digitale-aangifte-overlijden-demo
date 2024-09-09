@@ -52,11 +52,11 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
         if (
                 Objects.isNull(moeder) ||
                         Objects.isNull(moeder.persoonsGegevens()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevallingToestand()) ||
-                        Objects.isNull(moeder.persoonsGegevens().bevallingToestand().toestand())) {
+                        Objects.isNull(moeder.persoonsGegevens().bevalling()) ||
+                        Objects.isNull(moeder.persoonsGegevens().bevalling().bevallingToestand())) {
             return null;
         }
-        return moeder.persoonsGegevens().bevallingToestand().toestand();
+        return moeder.persoonsGegevens().bevalling().bevallingToestand();
     }
 
     public String rang() {
