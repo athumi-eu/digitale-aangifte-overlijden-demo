@@ -10,6 +10,7 @@ public record VaststellingOverlijdenJSON(
     String type,
     List<BezwarenTypeDTO> bezwaar,
     List<RisicoTypeDTO> risico,
+    List<MaatregelenTypeDTO> maatregel,
     LocalDateTime datum,
     ArtsJSON arts
 )

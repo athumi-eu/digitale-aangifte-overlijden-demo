@@ -8,5 +8,8 @@
     <ul th:each="risico : ${parsedDetail.risicos()}">
         <li th:text="${risico}"/>
     </ul>
+    <ul th:each="maatregel : ${parsedDetail.maatregelen()}">
+        <li th:text="${maatregel}"/>
+    </ul>
 </div>
 </html>
