@@ -4,10 +4,13 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
 
+import java.net.URI;
+
 public record DossierBurgerlijkeStandJSON(
         String id,
         DossierStatus dossierStatus,
         String kboNummer,
+        URI verslagDetailURL,
         VaststellingType vaststellingType,
         String naam,
         String voornaam,

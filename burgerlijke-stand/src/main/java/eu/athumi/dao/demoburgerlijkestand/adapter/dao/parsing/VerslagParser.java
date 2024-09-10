@@ -82,7 +82,8 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
         }
         var naam = Objects.isNull(arts.naam()) ? "" : arts.naam();
         var voornaam = Objects.isNull(arts.voornaam()) ? "" : arts.voornaam();
-        return naam + " " + voornaam;
+        var riziv = Objects.isNull(arts.registratie()) ? "" : arts.registratie();
+        return naam + " " + voornaam + " (" + riziv + ")";
     }
 
     public String gemeenteBeediging() {

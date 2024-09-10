@@ -31,7 +31,7 @@ public record OverlijdenParser(OverlijdenJSON overlijden, VaststellingOverlijden
         var naam = Objects.isNull(vaststellingOverlijdenJSON.arts().naam()) ? "" : vaststellingOverlijdenJSON.arts().naam();
         var voornaam = Objects.isNull(vaststellingOverlijdenJSON.arts().voornaam()) ? "" : vaststellingOverlijdenJSON.arts().voornaam();
         var riziv = Objects.isNull(vaststellingOverlijdenJSON.arts().registratie()) ? "" : vaststellingOverlijdenJSON.arts().registratie();
-        return naam + " " + voornaam + "(" + riziv + ")";
+        return naam + " " + voornaam + " (" + riziv + ")";
     }
 
     public String adresOverlijden() {
