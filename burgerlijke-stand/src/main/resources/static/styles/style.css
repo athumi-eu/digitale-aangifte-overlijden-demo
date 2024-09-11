@@ -111,3 +111,12 @@ tr:nth-child(even) {
 hr.solid {
     border-top: 3px solid #bbb;
 }
+
+.upload-file {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px red;
+    width: 20rem;
+    margin-bottom: 3rem;
+}
