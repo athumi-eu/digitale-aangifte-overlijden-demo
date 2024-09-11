@@ -1,6 +1,7 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.BeedigdArtsJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.MedischVerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 
 import java.util.Objects;
@@ -60,8 +61,8 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
 
     public String gemeenteOverlijden() {
         if (Objects.isNull(verslag.overlijden())
-        || Objects.isNull(verslag.overlijden().plaats())
-             ||  verslag.overlijden().plaats().isEmpty()) {
+                || Objects.isNull(verslag.overlijden().plaats())
+                || verslag.overlijden().plaats().isEmpty()) {
             return "";
         }
         return PlaatsParser.parseAdres(verslag.overlijden().plaats().getFirst());
@@ -96,17 +97,33 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
         return "niscode: " + arts.plaatsBeediging().niscode();
     }
 
+    public String aanmaakDatum() {
+        var medischVerslag = getMedischVerslag(verslag);
+        if (Objects.isNull(medischVerslag)) {
+            return "";
+        }
+        return TijdstipParser.parseLocalDateTime(medischVerslag.datum());
+    }
+
     private BeedigdArtsJSON getArts(VerslagBeedigdArtsJSON verslag) {
         if (Objects.isNull(verslag.medischeToestand())
                 || Objects.isNull(verslag.medischeToestand().medischeVerslagen())) {
             return null;
         }
-        var medischVerslag = verslag.medischeToestand().medischeVerslagen().stream().filter(mv -> Objects.equals(mv.type(), "MedischVerslagOverlijden")).findFirst().orElse(null);
+        var medischVerslag = getMedischVerslag(verslag);
         if (Objects.isNull(medischVerslag)
                 || Objects.isNull(medischVerslag.arts())) {
             return null;
         }
         return medischVerslag.arts();
+    }
+
+    private MedischVerslagBeedigdArtsJSON getMedischVerslag(VerslagBeedigdArtsJSON verslag) {
+        if (Objects.isNull(verslag.medischeToestand())
+                || Objects.isNull(verslag.medischeToestand().medischeVerslagen())) {
+            return null;
+        }
+        return verslag.medischeToestand().medischeVerslagen().stream().filter(mv -> Objects.equals(mv.type(), "MedischVerslagOverlijden")).findFirst().orElse(null);
     }
 
 
