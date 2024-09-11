@@ -63,4 +63,13 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return medischVerslag.risico().stream().map(Enum::toString).toList();
     }
 
+    public List<String> maatregelen() {
+        var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen());
+        if (Objects.isNull(medischVerslag.maatregel())
+                || medischVerslag.maatregel().isEmpty()) {
+            return List.of();
+        }
+        return medischVerslag.maatregel().stream().map(Enum::toString).toList();
+    }
+
 }
