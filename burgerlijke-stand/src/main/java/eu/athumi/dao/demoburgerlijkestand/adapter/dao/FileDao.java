@@ -5,8 +5,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,10 +31,22 @@ public class FileDao {
         body.add("akte", file.getResource());
         securedWebClient
                 .post()
-                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/aktes/{type}", id, type )
+                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/aktes/{type}", id, type)
                 .body(body)
                 .retrieve()
                 .toBodilessEntity();
         return "dossiers";
+    }
+
+    @GetMapping(value = "/files/download", produces = "application/pdf")
+    @ResponseBody
+    public byte[] downloadFile(@RequestParam String type, @RequestParam String id) throws IOException {
+        byte[] result = securedWebClient
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/aktes/{type}", id, type)
+                .retrieve()
+                .toEntity(byte[].class).getBody();
+        System.out.println(result);
+        return result;
     }
 }
