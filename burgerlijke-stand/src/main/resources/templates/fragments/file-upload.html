@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="file-upload(dossier)">
+    <section>
+        <h3>Documenten</h3>
+        <section>
+            <h4>Overlijdensaktes</h4>
+            <form class="upload-file" method="post"
+                  th:action="@{/files/upload(type='nationaal', id=${dossier.id()})}" id="uploadNationaal"
+                  enctype="multipart/form-data">
+                <label for="nationaalOverlijdingsAkte">Nationale overlijdingsakte</label>
+                <input id="nationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form)"/>
+                <span></span>
+            </form>
+            <form class="upload-file" method="post"
+                  th:action="@{/files/upload(type='internationaal', id=${dossier.id()})}" id="uploadInternationaal"
+                  enctype="multipart/form-data">
+                <label for="internationaalOverlijdingsAkte">Internationale overlijdingsakte</label>
+                <input id="internationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form)"/>
+                <span></span>
+            </form>
+        </section>
+        <script>
+            function uploadFile(form) {
+                const formData = new FormData(form);
+                if (!formData.get("akte").size) {
+                    return;
+                }
+                fetch(form.action, {
+                    method: "post",
+                    body: formData
+                }).then(response => {
+                    form.querySelector("span").innerText = `${formData.get("akte").name} uploaded`
+                    form.reset();
+                });
+            }
+
+            const formNationaal = document.getElementById("uploadNationaal");
+            formNationaal.onsubmit = uploadFile(formNationaal)
+            const formInternationaal = document.getElementById("uploadInternationaal");
+            formInternationaal.onsubmit = uploadFile(formInternationaal)
+        </script>
+    </section>
+</div>
+
+</html>
