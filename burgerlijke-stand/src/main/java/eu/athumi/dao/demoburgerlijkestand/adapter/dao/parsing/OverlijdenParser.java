@@ -50,4 +50,11 @@ public record OverlijdenParser(OverlijdenJSON overlijden, VaststellingOverlijden
         return PlaatsParser.parseLocatie(overlijden.getLocatieOverlijden());
     }
 
+    public String bewijzen(String type) {
+        if (Objects.isNull(overlijden)
+                || Objects.isNull(overlijden.getOverlijdenAfhandeling(type))) {
+            return "/";
+        }
+        return OverlijdenAfhandelingParser.parseOverlijdenAfhandeling(overlijden.getOverlijdenAfhandeling(type));
+    }
 }

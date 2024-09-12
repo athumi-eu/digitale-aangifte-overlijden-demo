@@ -24,7 +24,7 @@
         Nog geen verslag gekoppeld
     </div>
 
-    <div th:replace="~{fragments/file-upload :: file-upload(dossier=${dossier})}"></div>
+    <div th:replace="~{fragments/file-upload :: file-upload(dossier=${dossier}, parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
 
 </div>
 

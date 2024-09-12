@@ -41,12 +41,10 @@ public class FileDao {
     @GetMapping(value = "/files/download", produces = "application/pdf")
     @ResponseBody
     public byte[] downloadFile(@RequestParam String type, @RequestParam String id) throws IOException {
-        byte[] result = securedWebClient
+        return securedWebClient
                 .get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/aktes/{type}", id, type)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
-        System.out.println(result);
-        return result;
     }
 }
