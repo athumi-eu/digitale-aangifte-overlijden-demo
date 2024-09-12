@@ -38,9 +38,20 @@
                 fetch(form.action, {
                     method: "post",
                     body: formData
-                }).then(response => {
-                    form.querySelector("span").innerText = `${formData.get("akte").name} geuploadet (refresh om metadata te zien)`
+                }).then(async response => {
                     form.reset();
+
+                    let message;
+                    if(!response.ok) {
+                        if(response.status === 413) {
+                            message = 'Could not upload file maximum upload size exceeded'
+                        } else {
+                            message = `Could not upload file ${(await response.json()).message}`
+                        }
+                    } else {
+                        message = `${formData.get("akte").name} geuploadet (refresh om metadata te zien)`
+                    }
+                    form.querySelector("span").innerText = message;
                 });
             }
         </script>
