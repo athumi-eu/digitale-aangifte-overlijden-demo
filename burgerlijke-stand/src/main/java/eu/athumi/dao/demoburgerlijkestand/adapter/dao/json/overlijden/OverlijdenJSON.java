@@ -9,7 +9,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.Plaats;
 
 import java.util.List;
 
-public record OverlijdenJSON(TijdstipJSON tijdstip, List<Plaats> plaats, boolean doodgeboorte)
+public record OverlijdenJSON(TijdstipJSON tijdstip, List<Plaats> plaats, boolean doodgeboorte, List<OverlijdenAfhandelingOutputJSON> bewijzen)
     implements Type {
     @Override
     public String type() {
@@ -22,5 +22,9 @@ public record OverlijdenJSON(TijdstipJSON tijdstip, List<Plaats> plaats, boolean
 
     public LocatieJSON getLocatieOverlijden() {
         return this.plaats.stream().filter(json -> json instanceof LocatieJSON).map(json -> (LocatieJSON)json).findFirst().orElseGet(() -> new LocatieJSON(null, null));
+    }
+
+    public OverlijdenAfhandelingOutputJSON getOverlijdenAfhandeling(String type) {
+        return bewijzen.stream().filter(t -> t.type().toString().equals(type)).findFirst().orElseGet(() -> new OverlijdenAfhandelingOutputJSON(null, null, null));
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="file-upload(dossier)">
+<div th:fragment="file-upload(dossier, parsedDetail)">
     <section>
         <h3>Documenten</h3>
         <section>
@@ -12,7 +12,10 @@
                 <label for="nationaalOverlijdingsAkte">Nationale overlijdingsakte</label>
                 <input id="nationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form)"/>
                 <span></span>
-                <a th:href="@{/files/download(id=${dossier.id()},type='nationaal')}" target="_blank">Download</a>
+                <div th:if="${parsedDetail.bewijzen('Overlijdensakte')}">
+                    <span th:text="${parsedDetail.bewijzen('Overlijdensakte')}"></span>
+                    <a th:href="@{/files/download(id=${dossier.id()},type='nationaal')}" target="_blank">Download</a>
+                </div>
             </form>
             <form class="upload-file" method="post"
                   th:action="@{/files/upload(id=${dossier.id()},type='internationaal')}" id="uploadInternationaal"
@@ -20,7 +23,10 @@
                 <label for="internationaalOverlijdingsAkte">Internationale overlijdingsakte</label>
                 <input id="internationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form)"/>
                 <span></span>
-                <a th:href="@{/files/download(id=${dossier.id()},type='internationaal')}" target="_blank">Download</a>
+                <div th:if="${parsedDetail.bewijzen('OverlijdensakteInternationaalMeertaligUitreksel')}">
+                    <span th:text="${parsedDetail.bewijzen('OverlijdensakteInternationaalMeertaligUitreksel')}"></span>
+                    <a th:href="@{/files/download(id=${dossier.id()},type='internationaal')}" target="_blank">Download</a>
+                </div>
             </form>
         </section>
         <script>
@@ -33,15 +39,10 @@
                     method: "post",
                     body: formData
                 }).then(response => {
-                    form.querySelector("span").innerText = `${formData.get("akte").name} uploaded`
+                    form.querySelector("span").innerText = `${formData.get("akte").name} geuploadet (refresh om metadata te zien)`
                     form.reset();
                 });
             }
-
-            const formNationaal = document.getElementById("uploadNationaal");
-            formNationaal.onsubmit = uploadFile(formNationaal)
-            const formInternationaal = document.getElementById("uploadInternationaal");
-            formInternationaal.onsubmit = uploadFile(formInternationaal)
         </script>
     </section>
 </div>
