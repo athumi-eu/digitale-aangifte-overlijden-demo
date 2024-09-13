@@ -7,25 +7,25 @@
         <section>
             <h4>Overlijdensaktes</h4>
             <form class="upload-file" method="post"
-                  th:action="@{/files/upload(type='nationaal', id=${dossier.id()})}" id="uploadNationaal"
+                  th:action="@{files/upload(type='nationaal', id=${dossier.id()})}" id="uploadNationaal"
                   enctype="multipart/form-data">
                 <label for="nationaalOverlijdingsAkte">Nationale overlijdingsakte</label>
                 <input id="nationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form)"/>
                 <span></span>
                 <div th:if="${parsedDetail.bewijzen('Overlijdensakte')}">
                     <span th:text="${parsedDetail.bewijzen('Overlijdensakte')}"></span>
-                    <a th:href="@{/files/download(id=${dossier.id()},type='nationaal')}" target="_blank">Download</a>
+                    <a th:href="@{files/download(id=${dossier.id()},type='nationaal')}" target="_blank">Download</a>
                 </div>
             </form>
             <form class="upload-file" method="post"
-                  th:action="@{/files/upload(id=${dossier.id()},type='internationaal')}" id="uploadInternationaal"
+                  th:action="@{files/upload(id=${dossier.id()},type='internationaal')}" id="uploadInternationaal"
                   enctype="multipart/form-data">
                 <label for="internationaalOverlijdingsAkte">Internationale overlijdingsakte</label>
                 <input id="internationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form)"/>
                 <span></span>
                 <div th:if="${parsedDetail.bewijzen('OverlijdensakteInternationaalMeertaligUitreksel')}">
                     <span th:text="${parsedDetail.bewijzen('OverlijdensakteInternationaalMeertaligUitreksel')}"></span>
-                    <a th:href="@{/files/download(id=${dossier.id()},type='internationaal')}" target="_blank">Download</a>
+                    <a th:href="@{files/download(id=${dossier.id()},type='internationaal')}" target="_blank">Download</a>
                 </div>
             </form>
         </section>
