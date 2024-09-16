@@ -13,12 +13,13 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class FileDao {
 
     private final RestClient securedWebClient;
-    private String daoServiceUrl;
+    private final String daoServiceUrl;
 
     public FileDao(RestClient securedWebClient, @Value("${dao.service.connection-url}") String daoServiceUrl) {
         this.securedWebClient = securedWebClient;
@@ -26,7 +27,8 @@ public class FileDao {
     }
 
     @PostMapping("/aktes/upload")
-    public String uploadAkte(@RequestParam("akte") MultipartFile file, @RequestParam String type, @RequestParam String id) {
+    @ResponseBody
+    public void uploadAkte(@RequestParam("akte") MultipartFile file, @RequestParam String type, @RequestParam String id) {
         MultiValueMap<String, Resource> body = new LinkedMultiValueMap<>();
         body.add("akte", file.getResource());
         securedWebClient
@@ -35,7 +37,6 @@ public class FileDao {
                 .body(body)
                 .retrieve()
                 .toBodilessEntity();
-        return "dossiers";
     }
 
     @GetMapping(value = "/aktes/download", produces = "application/pdf")
@@ -49,17 +50,17 @@ public class FileDao {
     }
 
     @PostMapping("/toestemming/upload")
-    public String uploadFile(@RequestParam("toestemming") MultipartFile file, @RequestParam LocalDateTime aanmaakDatumToestemming, @RequestParam String id) {
+    @ResponseBody
+    public void uploadFile(@RequestParam MultipartFile toestemming, @RequestParam LocalDateTime aanmaakDatumToestemming, @RequestParam String id) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("toestemming", file.getResource());
-        body.add("aanmaakDatumToestemming", aanmaakDatumToestemming);
+        body.add("toestemming", toestemming.getResource());
+        body.add("aanmaakDatumToestemming", aanmaakDatumToestemming.format(DateTimeFormatter.ISO_DATE_TIME));
         securedWebClient
                 .post()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .body(body)
                 .retrieve()
                 .toBodilessEntity();
-        return "dossiers";
     }
 
     @GetMapping(value = "/toestemming/download", produces = "application/pdf")

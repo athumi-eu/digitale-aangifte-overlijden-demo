@@ -16,6 +16,7 @@
     <!-- Als er een gekoppeld verslag is -->
     <div th:if="${verslag}">
         <div th:replace="~{fragments/verslag-detail.html :: verslag(verslag=${verslag})}"></div>
+        <div th:replace="~{fragments/ontkoppel.html :: ontkoppel(id=${verslag.id()})}"></div>
     </div>
     <!-- ELSE -->
     <div th:unless="${verslag}">

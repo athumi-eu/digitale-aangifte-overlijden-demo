@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head><title></title></head>
+<body>
+<div th:fragment="ontkoppel(id)">
+    <div>
+        <button th:onclick="ontkoppelDossier([[${id}]]);">Ontkoppel</button>
+    </div>
+
+    <span id="error"></span>
+    <script>
+
+        function ontkoppelDossier(id) {
+            fetch(window.location.origin + '/verslag/' + id + '/ontkoppel', {
+                method: "post"
+            }).then(async response => {
+                if (response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                } else {
+                    window.location.reload();
+                }
+
+            });
+        }
+
+    </script>
+
+</div>
+
+</body>
+</html>
