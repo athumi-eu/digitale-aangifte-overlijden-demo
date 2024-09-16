@@ -15,7 +15,7 @@
 
     <div>
         <button onclick="on()">Koppel aan overlijdensdossier</button>
-        <button>Verwijder verslag</button>
+        <button th:onclick="verwijder([[${id}]], [[${kbonummer}]]);">Verwijder verslag</button>
     </div>
 
     <div id="overlay">
@@ -36,6 +36,19 @@
             document.getElementById("overlay").style.display = "block";
         }
 
+        function verwijder(id, kbonummer) {
+            fetch(window.location.origin+'/verslag/' + id , {
+                method: "delete"
+            }).then(async response => {
+                if(response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                } else {
+                    document.location.href = window.location.origin + '/verslagen?kbonummer=' + kbonummer;
+                }
+            });
+        }
+
         function koppelDossier(id, kboNummer) {
             const dossierNummer = document.getElementById('dossierNummer').value
             fetch(window.location.origin+'/verslag/' + id + '/koppel?kbonummer=' + kboNummer, {
@@ -49,6 +62,7 @@
                 }
                 off()
             });
+
         }
 
         function off() {
