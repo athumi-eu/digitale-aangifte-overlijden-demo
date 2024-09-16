@@ -22,6 +22,7 @@ server:
     session:
       cookie:
         name: DEMO_APP_JSESSIONID
+        same-site: none
 dao:
   service:
     connection-url: http://localhost:8090
