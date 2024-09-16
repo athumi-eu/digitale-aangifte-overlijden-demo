@@ -6,7 +6,7 @@ import {VASTSTELLING_ERROR_VERPLICHT_VELD} from "../src/examples/modelc/vaststel
 
 async function createVaststellingOuderDan1Jaar(vaststelling: any): Promise<any> {
     return getAxios()
-        .post('/vaststelling/ouder-dan-1-jaar', vaststelling)
+        .post('/vaststelling/v1/ouder-dan-1-jaar', vaststelling)
         .then((r) => r.data)
         .catch((e) => e.response.data);
 }
