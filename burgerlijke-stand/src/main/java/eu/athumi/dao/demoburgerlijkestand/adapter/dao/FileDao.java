@@ -31,7 +31,7 @@ public class FileDao {
         body.add("akte", file.getResource());
         securedWebClient
                 .post()
-                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/aktes/{type}", id, type)
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .body(body)
                 .retrieve()
                 .toBodilessEntity();
@@ -43,7 +43,7 @@ public class FileDao {
     public byte[] downloadAkte(@RequestParam String type, @RequestParam String id) {
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/aktes/{type}", id, type)
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
@@ -55,7 +55,7 @@ public class FileDao {
         body.add("aanmaakDatumToestemming", aanmaakDatumToestemming);
         securedWebClient
                 .post()
-                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/toestemming", id)
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .body(body)
                 .retrieve()
                 .toBodilessEntity();
@@ -67,7 +67,7 @@ public class FileDao {
     public byte[] downloadFile(@RequestParam String id) {
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/dossiers/{dossierId}/toestemming", id)
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
