@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head}"><title></title></head>
+<body>
+<div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
+<div th:replace="~{fragments/title :: title}"></div>
+
+<div class="mlr-3 mtb-3">
+    <a th:href="@{verslagen(kbonummer=${kbonummer})}">Terug naar overzicht ongekoppelde verslagen beëdigd arts</a>
+    <hr class="solid">
+</div>
+
+<div class="ml-3">
+    <div th:replace="~{fragments/verslag-detail.html :: verslag(verslag=${verslagDetail})}"></div>
+
+    <div>
+        <button onclick="on()">Koppel aan overlijdensdossier</button>
+        <button th:onclick="verwijder([[${id}]], [[${kbonummer}]]);">Verwijder verslag</button>
+    </div>
+
+    <div id="overlay">
+        <div class="overlay-content">
+            <button style="float: right;" onclick="off()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg></button>
+            <h4>Koppel verslag aan overlijdensdossier</h4>
+            <br>
+                <div> <label for="dossierNummer">DossierNummer</label></div>
+                <div> <input id="dossierNummer" type="text" name="dossierNummer"/></div>
+            <br>
+            <button th:onclick="koppelDossier([[${id}]], [[${kbonummer}]]);" >Koppel verslag aan dossier</button>
+        </div>
+
+    </div>
+    <span id="error"></span>
+
+    <script>
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function verwijder(id, kbonummer) {
+            fetch(window.location.origin+'/verslag/' + id , {
+                method: "delete"
+            }).then(async response => {
+                if(response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                } else {
+                    document.location.href = window.location.origin + '/verslagen?kbonummer=' + kbonummer;
+                }
+            });
+        }
+
+        function koppelDossier(id, kboNummer) {
+            const dossierNummer = document.getElementById('dossierNummer').value
+            fetch(window.location.origin+'/verslag/' + id + '/koppel?kbonummer=' + kboNummer, {
+                method: "post",
+                body: dossierNummer
+            }).then(async response => {
+                let message;
+                if(response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                }
+                off()
+            });
+
+        }
+
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</div>
+
+</body>
+</html>

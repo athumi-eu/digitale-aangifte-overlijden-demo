@@ -18,12 +18,11 @@ spring:
             token-uri: http://localhost:8090/oauth2/token
 server:
   port: 8082
+  servlet:
+    session:
+      cookie:
+        name: DEMO_APP_JSESSIONID
 dao:
   service:
     connection-url: http://localhost:8090
-logging:
-  level:
-    org:
-      springframework:
-        web: TRACE
-        security: TRACE
+
