@@ -21,9 +21,4 @@ server:
 dao:
   service:
     connection-url: http://localhost:8090
-logging:
-  level:
-    org:
-      springframework:
-        web: TRACE
-        security: TRACE
+
