@@ -5,7 +5,7 @@ import {VASTSTELLING_DOODGEBOORTE} from "../src/examples/modeld/vaststelling.mod
 
 async function createVaststellingJongerDan1Jaar(vaststelling: any): Promise<any> {
     return getAxios()
-        .post('/vaststelling/jonger-dan-1-jaar', vaststelling)
+        .post('/vaststelling/v1/jonger-dan-1-jaar', vaststelling)
         .then((r) => r.data)
         .catch((e) => e.response.data);
 }
