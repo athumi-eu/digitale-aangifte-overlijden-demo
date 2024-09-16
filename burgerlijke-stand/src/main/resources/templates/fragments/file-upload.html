@@ -32,8 +32,8 @@
                   th:action="@{toestemming/upload(id=${dossier.id()})}" id="toestemmingForm"
                   enctype="multipart/form-data">
                 <label for="toestemming">Toestemming</label>
-                <input id="toestemming" type="file" name="toestemming" onchange="uploadFile(this.form, 'toestemming')"/>
                 <input id="aanmaakDatumToestemming" type="datetime-local" name="aanmaakDatumToestemming"/>
+                <input id="toestemming" type="file" name="toestemming" onchange="uploadFile(this.form, 'toestemming')"/>
                 <span></span>
                 <div th:if="${parsedDetail.bewijzen('Toestemming')}">
                     <span th:text="${parsedDetail.bewijzen('Toestemming')}"></span>
