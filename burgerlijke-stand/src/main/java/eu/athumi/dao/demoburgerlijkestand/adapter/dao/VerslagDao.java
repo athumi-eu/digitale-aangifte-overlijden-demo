@@ -94,6 +94,22 @@ public class VerslagDao {
         return ResponseEntity.ok("Hello World!");
     }
 
+    @DeleteMapping(path = "/verslag/{id}")
+    @ResponseBody
+    public ResponseEntity<String> verwijderVerslag(@PathVariable String id) {
+        try {
+            securedWebClient
+                    .delete()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/verslagen-beedigd-arts/{id}", id)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Hello World!");
+    }
+
     public record DossierNummer(String dossierNummer) {
     }
 
