@@ -4,7 +4,7 @@ import {VERSLAG_BEEDIGD_ARTS} from "../src/examples/verslag-beedigd-arts/verslag
 
 async function createVerslagBeedigdArts(verslag: any): Promise<any> {
     return getAxios()
-        .post('/verslag-beedigd-arts', verslag)
+        .post('/verslag-beedigd-arts/v1', verslag)
         .then((r) => r.data)
         .catch((e) => e.response.data);
 }
