@@ -67,7 +67,7 @@ public class VerslagDao {
         try {
             securedWebClient
                     .post()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/verslagen-beedigd-arts/{id}/koppel", id)
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/koppel", id)
                     .body(new DossierNummer(dossierNummer))
                     .retrieve()
                     .toBodilessEntity();
@@ -84,7 +84,7 @@ public class VerslagDao {
         try {
             securedWebClient
                     .post()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/verslagen-beedigd-arts/{id}/ontkoppel", id)
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/ontkoppel", id)
                     .retrieve()
                     .toBodilessEntity();
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class VerslagDao {
         try {
             securedWebClient
                     .delete()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/verslagen-beedigd-arts/{id}", id)
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}", id)
                     .retrieve()
                     .toBodilessEntity();
         } catch (Exception e) {
