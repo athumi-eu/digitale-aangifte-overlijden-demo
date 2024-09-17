@@ -8,3 +8,4 @@ spring:
 dao:
   service:
     connection-url: https://dao.api.test-athumi.eu
+    frontend-base-url: https://dao.api.test-athumi.eu/demo

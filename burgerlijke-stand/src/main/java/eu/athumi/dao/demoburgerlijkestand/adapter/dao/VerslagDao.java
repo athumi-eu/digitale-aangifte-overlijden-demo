@@ -56,6 +56,7 @@ public class VerslagDao {
         if (detail.isPresent()) {
             var teParsen = detail.get();
             model.addAttribute("verslagDetail", new VerslagParser(teParsen));
+
             return "ongekoppeld-verslag-page";
         }
         return "detail-does-not-exist";
