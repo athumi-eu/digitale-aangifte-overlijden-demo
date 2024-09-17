@@ -26,4 +26,5 @@ server:
 dao:
   service:
     connection-url: http://localhost:8090
+    frontend-base-url: http://localhost:8082
 
