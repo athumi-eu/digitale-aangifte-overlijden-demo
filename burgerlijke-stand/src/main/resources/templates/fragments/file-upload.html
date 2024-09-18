@@ -21,11 +21,13 @@
                   th:action="@{aktes/upload(id=${dossier.id()},type='internationaal')}" id="uploadInternationaal"
                   enctype="multipart/form-data">
                 <label for="internationaalOverlijdingsAkte">Internationale overlijdingsakte</label>
-                <input id="internationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form, 'akte')"/>
+                <input id="internationaalOverlijdingsAkte" type="file" name="akte"
+                       onchange="uploadFile(this.form, 'akte')"/>
                 <span></span>
                 <div th:if="${parsedDetail.bewijzen('OverlijdensakteInternationaalMeertaligUitreksel')}">
                     <span th:text="${parsedDetail.bewijzen('OverlijdensakteInternationaalMeertaligUitreksel')}"></span>
-                    <a th:href="@{aktes/download(id=${dossier.id()},type='internationaal')}" target="_blank">Download</a>
+                    <a th:href="@{aktes/download(id=${dossier.id()},type='internationaal')}"
+                       target="_blank">Download</a>
                 </div>
             </form>
             <form class="upload-file" method="post"
@@ -42,6 +44,23 @@
             </form>
         </section>
         <script>
+            async function getErrorMessage(response) {
+                if (response.status === 413) {
+                    return 'Could not upload file maximum upload size exceeded'
+                }
+                if (response.status === 415) {
+                    return `Invalid file type: ${(await response.json()).detail}`
+                }
+                return `Could not upload file ${(await response.json()).message}`
+            }
+
+            async function getMessage(response, formData, fileFieldName) {
+                if (!response.ok) {
+                    return await getErrorMessage(response);
+                }
+                return `${formData.get(fileFieldName).name} geuploadet (refresh om metadata te zien)`
+            }
+
             function uploadFile(form, fileFieldName) {
                 const formData = new FormData(form);
                 if (!formData.get(fileFieldName).size) {
@@ -52,18 +71,7 @@
                     body: formData
                 }).then(async response => {
                     form.reset();
-
-                    let message;
-                    if(!response.ok) {
-                        if(response.status === 413) {
-                            message = 'Could not upload file maximum upload size exceeded'
-                        } else {
-                            message = `Could not upload file ${(await response.json()).message}`
-                        }
-                    } else {
-                        message = `${formData.get(fileFieldName).name} geuploadet (refresh om metadata te zien)`
-                    }
-                    form.querySelector("span").innerText = message;
+                    form.querySelector("span").innerText = await getMessage(response, formData, fileFieldName);
                 });
             }
         </script>
