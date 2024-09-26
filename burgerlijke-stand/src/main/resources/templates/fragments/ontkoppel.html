@@ -4,14 +4,14 @@
 <body>
 <div th:fragment="ontkoppel(id)">
     <div>
-        <button th:onclick="ontkoppelDossier([[${id}]]);">Ontkoppel</button>
+        <button th:onclick="ontkoppelDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Ontkoppel</button>
     </div>
 
     <span id="error"></span>
     <script>
 
-        function ontkoppelDossier(id) {
-            fetch(window.location.origin + '/verslag/' + id + '/ontkoppel', {
+        function ontkoppelDossier(id, frontedBaseUrl) {
+            fetch(frontedBaseUrl + '/verslag/' + id + '/ontkoppel', {
                 method: "post"
             }).then(async response => {
                 if (response.status === 400) {

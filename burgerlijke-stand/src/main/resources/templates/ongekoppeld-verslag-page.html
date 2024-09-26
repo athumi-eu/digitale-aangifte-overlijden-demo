@@ -15,7 +15,7 @@
 
     <div>
         <button onclick="on()">Koppel aan overlijdensdossier</button>
-        <button th:onclick="verwijder([[${id}]], [[${kbonummer}]]);">Verwijder verslag</button>
+        <button th:onclick="verwijder([[${id}]], [[${kbonummer}]], [[${@globalVariables.frontedBaseUrl}]]);">Verwijder verslag</button>
     </div>
 
     <div id="overlay">
@@ -26,7 +26,7 @@
                 <div> <label for="dossierNummer">DossierNummer</label></div>
                 <div> <input id="dossierNummer" type="text" name="dossierNummer"/></div>
             <br>
-            <button th:onclick="koppelDossier([[${id}]], [[${kbonummer}]]);" >Koppel verslag aan dossier</button>
+            <button th:onclick="koppelDossier([[${id}]], [[${kbonummer}]], [[${@globalVariables.frontedBaseUrl}]]);" >Koppel verslag aan dossier</button>
         </div>
 
     </div>
@@ -37,22 +37,22 @@
             document.getElementById("overlay").style.display = "block";
         }
 
-        function verwijder(id, kbonummer) {
-            fetch(window.location.origin+'/verslag/' + id , {
+        function verwijder(id, kbonummer, frontedBaseUrl) {
+            fetch(frontedBaseUrl +'/verslag/' + id , {
                 method: "delete"
             }).then(async response => {
                 if(response.status === 400) {
                     document.getElementById("error").style.display = "block";
                     document.getElementById("error").innerText = await response.text();
                 } else {
-                    document.location.href = window.location.origin + '/verslagen?kbonummer=' + kbonummer;
+                    document.location.href = frontedBaseUrl + '/verslagen?kbonummer=' + kbonummer;
                 }
             });
         }
 
-        function koppelDossier(id, kboNummer) {
+        function koppelDossier(id, kboNummer, frontedBaseUrl) {
             const dossierNummer = document.getElementById('dossierNummer').value
-            fetch(window.location.origin+'/verslag/' + id + '/koppel?kbonummer=' + kboNummer, {
+            fetch(frontedBaseUrl + '/verslag/' + id + '/koppel?kbonummer=' + kboNummer, {
                 method: "post",
                 body: dossierNummer
             }).then(async response => {
