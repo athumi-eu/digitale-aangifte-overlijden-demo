@@ -11,6 +11,9 @@
 </div>
 <div class="ml-3">
     <h2 th:text="'Overlijdensdossier ' + ${dossier.id()} + '(' + ${parsedDetail.naamOverledene()} +')'"></h2>
+
+    <div th:replace="~{fragments/dossier.html :: dossier(dossier=${dossier})}"></div>
+
     <div th:replace="~{fragments/vaststelling-jonger-dan-1-jaar.html :: vaststelling-jonger-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
 
     <!-- Als er een gekoppeld verslag is -->
