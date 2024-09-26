@@ -4,14 +4,14 @@
 <body>
 <div th:fragment="heropen(id)">
     <div>
-        <button th:onclick="heropenDossier([[${id}]]);">Heropen</button>
+        <button th:onclick="heropenDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Heropen</button>
     </div>
 
     <span id="error"></span>
     <script>
 
-        function heropenDossier(id) {
-            fetch(window.location.origin + '/dossier/' + id + '/heropen', {
+        function heropenDossier(id, frontendBaseUrl) {
+            fetch(frontendBaseUrl + '/dossier/' + id + '/heropen', {
                 method: "post"
             }).then(async response => {
                 if (response.status === 400) {

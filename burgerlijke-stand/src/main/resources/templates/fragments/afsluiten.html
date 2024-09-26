@@ -4,14 +4,14 @@
 <body>
 <div th:fragment="afsluiten(id)">
     <div>
-        <button th:onclick="afsluitenDossier([[${id}]]);">Sluit af</button>
+        <button th:onclick="afsluitenDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Sluit af</button>
     </div>
 
     <span id="error"></span>
     <script>
 
-        function afsluitenDossier(id) {
-            fetch(window.location.origin + '/dossier/' + id + '/afsluiten', {
+        function afsluitenDossier(id, frontedBaseUrl) {
+            fetch(frontedBaseUrl + '/dossier/' + id + '/afsluiten', {
                 method: "post"
             }).then(async response => {
                 if (response.status === 400) {
