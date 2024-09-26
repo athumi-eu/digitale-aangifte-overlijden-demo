@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="dossier(dossier)" class="grid-column">
+    <div>
+        <p>
+        <div class="label">Status</div>
+        <div th:text="${dossier.dossierStatus()}"></div>
+        </p>
+        <p>
+        <div class="label">Ingediend op</div>
+        <div th:text="${dossier.ingediendOp()}"></div>
+        </p>
+        <p>
+        <div class="label">Afgesloten op</div>
+        <div th:text="${dossier.afgeslotenOp()}"></div>
+        </p>
+        <p>
+        <div class="label">Heropend op</div>
+        <div th:text="${dossier.heropendOp()}"></div>
+        </p>
+
+        <div th:if="${dossier.afgeslotenOp() == null}">
+            <div th:replace="~{fragments/afsluiten.html :: afsluiten(id=${dossier.id()})}"></div>
+        </div>
+        <div th:if="${dossier.afgeslotenOp() != null}">
+            <div th:replace="~{fragments/heropen.html :: heropen(id=${dossier.id()})}"></div>
+        </div>
+    </div>
+
+</div>
+</html>
