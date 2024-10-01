@@ -86,11 +86,6 @@
             const rrnPvOfSysteemNummer = document.getElementById('rrnPvOfSysteemNummer').value
             const rrnPvOfSysteemNummerNVT = document.getElementById('rrnPvOfSysteemNummerNVT').checked
 
-            console.log(rrnMoederNieVerblijfshouder)
-            console.log(rrnMoederNietGekend)
-            console.log(rrnVaderOfMeeMoederNVT)
-            console.log(rrnPvOfSysteemNummerNVT)
-
             fetch(frontedBaseUrl + '/dossier/' + id + '/verrijk', {
                 method: "post",
                 body: JSON.stringify({
@@ -112,7 +107,6 @@
                     },
                 })
             }).then(async response => {
-                let message;
                 if (response.status === 400) {
                     document.getElementById("errorVerrijking").style.display = "block";
                     document.getElementById("errorVerrijking").innerText = await response.text();
