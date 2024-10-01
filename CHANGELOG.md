@@ -2,12 +2,18 @@
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
 
-
 ## [0.1.] - 
 
 ### Added
 
+- 
+
+## [0.1.22] - 2024-10-01
+
+### Added
+
 - Changelog
+- Popup om de data van een dossier te verrijken
 
 
 ## [0.1.19] - 2024-09-18
