@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="aanvullende-gegevens(id, verrijking)" class="grid-column">
+
+    <h3>Aanvulling gegevens</h3>
+    <p>
+    <div class="label">Rijksregisternummer overledene</div>
+    <div th:text="${verrijking.rrnOverledene()}">-</div>
+    </p>
+    <p>
+    <div class="label">Rijksregisternummer moeder</div>
+    <div th:text="${verrijking.rrnMoeder()}">-</div>
+    </p>
+    <p>
+    <div class="label">Rijksregisternummer vader of meemoeder</div>
+    <div th:text="${verrijking.rrnVaderOfMeeMoeder()}">-</div>
+    </p>
+    <p>
+    <div class="label">PV- / systeem-nummer</div>
+    <div th:text="${verrijking.pvOfSysteemNummer()}">-</div>
+    </p>
+
+    <div>
+        <button onclick="on()">Vul gegevens aan</button>
+    </div>
+
+    <div id="overlay">
+        <div class="overlay-content">
+            <button style="float: right;" onclick="off()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/>
+                </svg>
+            </button>
+            <h4>Vul gegevens aan</h4>
+            <br>
+            <div><label for="rrnOverledene">Rijksregisternummer overledene</label></div>
+            <div><input id="rrnOverledene" type="text" name="rrnOverledene"/></div>
+            <br>
+            <div><label for="rrnMoeder">Rijksregisternummer moeder</label></div>
+            <div><input id="rrnMoeder" type="text" name="rrnMoeder"/></div>
+            <br>
+            <div><label for="rrnVaderOfMeeMoeder">Rijksregisternummer vader of meemoeder</label></div>
+            <div><input id="rrnVaderOfMeeMoeder" type="text" name="rrnVaderOfMeeMoeder"/></div>
+            <br>
+            <div><label for="rrnPvOfSysteemNummer">PV- of systeemnummer</label></div>
+            <div><input id="rrnPvOfSysteemNummer" type="text" name="rrnPvOfSysteemNummer"/></div>
+            <br>
+
+            <button th:onclick="vulGegevensAan([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Vul gegevens aan
+            </button>
+        </div>
+
+    </div>
+    <span id="errorVerrijking"></span>
+
+    <script>
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function vulGegevensAan(id, frontedBaseUrl) {
+            const rrnOverledene = document.getElementById('rrnOverledene').value
+            const rrnMoeder = document.getElementById('rrnMoeder').value
+            const rrnVaderOfMeeMoeder = document.getElementById('rrnVaderOfMeeMoeder').value
+            const rrnPvOfSysteemNummer = document.getElementById('rrnPvOfSysteemNummer').value
+
+            console.log(id)
+            console.log(rrnOverledene)
+            console.log(frontedBaseUrl)
+
+            fetch(frontedBaseUrl + '/dossier/' + id + '/verrijk', {
+                method: "post",
+                body: JSON.stringify({
+                    overledene: {
+                        rijksregisternummer: rrnOverledene
+                    },
+                    moeder: {
+                        rijksregisternummer: rrnMoeder,
+                        nietVerblijfshouder: false,
+                        nietGekend: false,
+                    },
+                    vaderOfMeeMoeder: {
+                        nummer: rrnVaderOfMeeMoeder,
+                        nietVantoepassing: false
+                    },
+                    pvOfSystemNummer: {
+                        nummer: rrnPvOfSysteemNummer,
+                        nietVantoepassing: false
+                    },
+                })
+            }).then(async response => {
+                let message;
+                if (response.status === 400) {
+                    document.getElementById("errorVerrijking").style.display = "block";
+                    document.getElementById("errorVerrijking").innerText = await response.text();
+                }
+                off()
+            });
+
+        }
+
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+            window.location.reload();
+        }
+    </script>
+
+</div>
+</html>

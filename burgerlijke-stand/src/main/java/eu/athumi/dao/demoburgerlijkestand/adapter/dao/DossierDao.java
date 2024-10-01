@@ -1,7 +1,9 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
@@ -25,8 +27,11 @@ public class DossierDao {
     @Value("${dao.service.connection-url}")
     private String daoServiceUrl;
 
-    public DossierDao(RestClient securedWebClient) {
+    private ObjectMapper objectMapper;
+
+    public DossierDao(RestClient securedWebClient, ObjectMapper objectMapper) {
         this.securedWebClient = securedWebClient;
+        this.objectMapper = objectMapper;
     }
 
     @GetMapping()
@@ -37,10 +42,10 @@ public class DossierDao {
     @GetMapping(value = "/dossiers")
     public String dossier(Model model, @RequestParam String kbonummer) {
         DossierBurgerlijkeStandJSON[] response = securedWebClient
-            .get()
-            .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}", kbonummer)
-            .retrieve()
-            .body(DossierBurgerlijkeStandJSON[].class);
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}", kbonummer)
+                .retrieve()
+                .body(DossierBurgerlijkeStandJSON[].class);
 
         model.addAttribute("dossiers", response);
         model.addAttribute("kbonummer", kbonummer);
@@ -51,12 +56,12 @@ public class DossierDao {
     @GetMapping(value = "/dossier")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
         Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient
-                .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}", kbonummer)
-                .retrieve()
-                .body(DossierBurgerlijkeStandJSON[].class))
-            .filter(dossier -> Objects.equals(dossier.id(), id))
-            .findFirst();
+                        .get()
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}", kbonummer)
+                        .retrieve()
+                        .body(DossierBurgerlijkeStandJSON[].class))
+                .filter(dossier -> Objects.equals(dossier.id(), id))
+                .findFirst();
 
         model.addAttribute("kbonummer", kbonummer);
 
@@ -82,10 +87,10 @@ public class DossierDao {
     public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL) {
 
         VerslagBeedigdArtsJSON body = securedWebClient
-            .get()
-            .uri(verslagDetailURL)
-            .retrieve()
-            .body(VerslagBeedigdArtsJSON.class);
+                .get()
+                .uri(verslagDetailURL)
+                .retrieve()
+                .body(VerslagBeedigdArtsJSON.class);
         return body;
     }
 
@@ -94,29 +99,50 @@ public class DossierDao {
     public ResponseEntity<String> afsluitenDossier(@PathVariable String id) {
         try {
             securedWebClient
-                .post()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
-                .retrieve()
-                .toBodilessEntity();
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
+                    .retrieve()
+                    .toBodilessEntity();
         } catch (Exception e) {
             return ResponseEntity.badRequest()
-                .body(e.getMessage());
+                    .body(e.getMessage());
         }
         return ResponseEntity.ok("Ok");
     }
+
 
     @PostMapping(path = "/dossier/{id}/heropen")
     @ResponseBody
     public ResponseEntity<String> heropenDossier(@PathVariable String id) {
         try {
             securedWebClient
-                .post()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
-                .retrieve()
-                .toBodilessEntity();
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
+                    .retrieve()
+                    .toBodilessEntity();
         } catch (Exception e) {
             return ResponseEntity.badRequest()
-                .body(e.getMessage());
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping(path = "/dossier/{id}/verrijk")
+    @ResponseBody
+    public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking) {
+        try {
+            securedWebClient
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verrijken", id)
+                    .body(objectMapper.readValue(
+                            verrijking,
+                            DossierVerrijkingJSON.class
+                    ))
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
         }
         return ResponseEntity.ok("Ok");
     }
