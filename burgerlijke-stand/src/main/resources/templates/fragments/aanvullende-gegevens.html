@@ -40,20 +40,28 @@
             <br>
             <div><label for="rrnMoeder">Rijksregisternummer moeder</label></div>
             <div><input id="rrnMoeder" type="text" name="rrnMoeder"/></div>
-            <div><label for="rrnMoederNieVerblijfshouder">Niet-verblijfshouder</label></div>
-            <div><input id="rrnMoederNieVerblijfshouder" type="checkbox" name="rrnMoederNieVerblijfshouder"/></div>
-            <div><label for="rrnMoederNietGekend">Niet gekend</label></div>
-            <div><input id="rrnMoederNietGekend" type="checkbox" name="rrnMoederNietGekend"/></div>
+            <div>
+            <span>
+                <input id="rrnMoederNieVerblijfshouder" type="checkbox" name="rrnMoederNieVerblijfshouder"/>
+                <label for="rrnMoederNieVerblijfshouder">Niet-verblijfshouder</label>
+                <input id="rrnMoederNietGekend" type="checkbox" name="rrnMoederNietGekend"/>
+                <label for="rrnMoederNietGekend">Niet gekend</label>
+            </span>
+            </div>
             <br>
-            <div><label for="rrnVaderOfMeeMoeder">Rijksregisternummer vader of meemoeder</label></div>
-            <div><input id="rrnVaderOfMeeMoeder" type="text" name="rrnVaderOfMeeMoeder"/></div>
-            <div><label for="rrnVaderOfMeeMoederNVT">Niet van toepassing</label></div>
-            <div><input id="rrnVaderOfMeeMoederNVT" type="checkbox" name="rrnVaderOfMeeMoederNVT"/></div>
+            <div>
+                <div><label for="rrnVaderOfMeeMoeder">Rijksregisternummer vader of meemoeder</label></div>
+                <div><input id="rrnVaderOfMeeMoeder" type="text" name="rrnVaderOfMeeMoeder"/></div>
+                <span><input id="rrnVaderOfMeeMoederNVT" type="checkbox" name="rrnVaderOfMeeMoederNVT"/>
+            <label for="rrnVaderOfMeeMoederNVT">Niet van toepassing</label></span>
+            </div>
             <br>
-            <div><label for="rrnPvOfSysteemNummer">PV- of systeemnummer</label></div>
-            <div><input id="rrnPvOfSysteemNummer" type="text" name="rrnPvOfSysteemNummer"/></div>
-            <div><label for="rrnPvOfSysteemNummerNVT">Niet van toepassing</label></div>
-            <div><input id="rrnPvOfSysteemNummerNVT" type="checkbox" name="rrnPvOfSysteemNummerNVT"/></div>
+            <div>
+                <div><label for="rrnPvOfSysteemNummer">PV- of systeemnummer</label></div>
+                <div><input id="rrnPvOfSysteemNummer" type="text" name="rrnPvOfSysteemNummer"/></div>
+                <span><input id="rrnPvOfSysteemNummerNVT" type="checkbox" name="rrnPvOfSysteemNummerNVT"/>
+            <label for="rrnPvOfSysteemNummerNVT">Niet van toepassing</label></span>
+            </div>
             <br>
 
             <button th:onclick="vulGegevensAan([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Vul gegevens aan
@@ -108,10 +116,11 @@
                 if (response.status === 400) {
                     document.getElementById("errorVerrijking").style.display = "block";
                     document.getElementById("errorVerrijking").innerText = await response.text();
+                    off()
                 } else {
-                    // window.location.reload();
+                    off()
+                    window.location.reload();
                 }
-                off()
             });
 
         }
