@@ -7,6 +7,9 @@ import java.util.Objects;
 
 public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
+    public VerrijkingParser verrijking() {
+        return new VerrijkingParser(dossier.verrijking());
+    }
 
     public String naamOverledene() {
         var naam = Objects.isNull(dossier.naam()) ? "" : dossier.naam();
