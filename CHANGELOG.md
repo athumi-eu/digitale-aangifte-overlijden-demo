@@ -6,7 +6,13 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 
 ### Added
 
-- 
+-
+
+## [0.1.23] -2024-10-02
+
+### Added
+
+- Toon checkbox values in overview
 
 ## [0.1.22] - 2024-10-01
 

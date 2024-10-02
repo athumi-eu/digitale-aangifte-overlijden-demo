@@ -11,7 +11,10 @@ public record VerrijkingParser(DossierVerrijkingJSON json) {
                 || Objects.isNull(json.overledene())) {
             return "-";
         }
-        return json.overledene().rijksregisternummer();
+        if (!Objects.isNull(json.overledene().rijksregisternummer())) {
+            return json.overledene().rijksregisternummer();
+        }
+        return "-";
     }
 
     public String rrnMoeder() {
@@ -19,7 +22,16 @@ public record VerrijkingParser(DossierVerrijkingJSON json) {
                 || Objects.isNull(json.moeder())) {
             return "-";
         }
-        return json.moeder().rijksregisternummer();
+        if(json.moeder().nietGekend()){
+            return "Niet gekend";
+        }
+        if(json.moeder().nietVerblijfshouder()){
+            return "Niet-verblijfshouder";
+        }
+        if (!Objects.isNull(json.moeder().rijksregisternummer())) {
+            return json.moeder().rijksregisternummer();
+        }
+        return "-";
     }
 
     public String rrnVaderOfMeeMoeder() {
@@ -27,13 +39,22 @@ public record VerrijkingParser(DossierVerrijkingJSON json) {
                 || Objects.isNull(json.vaderOfMeeMoeder())) {
             return "-";
         }
-        return json.vaderOfMeeMoeder().rijksregisternummer();
+        if(json.vaderOfMeeMoeder().nietVantoepassing()){
+            return "Niet van toepassing";
+        }
+        if (!Objects.isNull(json.vaderOfMeeMoeder().rijksregisternummer())) {
+            return json.vaderOfMeeMoeder().rijksregisternummer();
+        }
+        return "-";
     }
 
     public String pvOfSysteemNummer() {
         if (Objects.isNull(json)
                 || Objects.isNull(json.pvOfSystemNummer())) {
             return "-";
+        }
+        if(json.pvOfSystemNummer().nietVantoepassing()){
+            return "Niet van toepassing";
         }
         return json.pvOfSystemNummer().nummer();
     }
