@@ -86,7 +86,7 @@ public class DossierDao {
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
         Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient
                         .get()
-                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}", kbonummer)
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id )
                         .retrieve()
                         .body(DossierBurgerlijkeStandJSON[].class))
                 .filter(dossier -> Objects.equals(dossier.id(), id))
