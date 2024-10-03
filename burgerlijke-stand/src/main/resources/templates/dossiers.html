@@ -159,7 +159,7 @@
 
         var params = new URLSearchParams(location.search);
         params.set('kbonummer', kbonummer);
-        if (!!status) {
+        if (!!status && status !== 'NVT') {
             params.set('status', status);
         } else params.delete('status')
         if (!!dossierNummer) {
@@ -214,7 +214,6 @@
     function getUrlVars() {
         let params = (new URL(document.location)).searchParams;
 
-        console.log(params)
         if (!!params.get("status")) {
             document.getElementById('status').value = params.get("status");
         }
