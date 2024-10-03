@@ -7,7 +7,7 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 ### Added
 
 
-## [0.1.24 en 25] - 2024-10-03
+## [0.1.24 en 25 en 26] - 2024-10-03
 
 ### Added
 
