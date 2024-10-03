@@ -14,11 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 @Controller
 public class DossierDao {
@@ -39,19 +43,44 @@ public class DossierDao {
         return "layout";
     }
 
+
     @GetMapping(value = "/dossiers")
-    public String dossier(Model model, @RequestParam String kbonummer) {
+    public String dossierDetailFilter(Model model,
+                                      @RequestParam String kbonummer,
+                                      @RequestParam(required = false) String status,
+                                      @RequestParam(required = false) String dossiernummer,
+                                      @RequestParam(required = false) String rijksregisternummer,
+                                      @RequestParam(required = false) LocalDate overlijden,
+                                      @RequestParam(required = false) String achternaam,
+                                      @RequestParam(required = false) Boolean heeftVerslagBeedigdArts,
+                                      @RequestParam(required = false) Boolean heeftNationaleOverlijdensakte,
+                                      @RequestParam(required = false) Boolean heeftInlichtingenfiche,
+                                      @RequestParam(required = false) Boolean heeftToestemming
+    ) {
+
+        String url = daoServiceUrl + "/burgerlijke-stand/v1/dossiers?" + new DefaultUriBuilderFactory().builder().queryParam("kbonummer", kbonummer)
+                .queryParamIfPresent("status", ofNullable(status))
+                .queryParamIfPresent("dossiernummer", ofNullable(dossiernummer))
+                .queryParamIfPresent("rijksregisternummer", ofNullable(rijksregisternummer))
+                .queryParamIfPresent("overlijden", ofNullable(overlijden))
+                .queryParamIfPresent("achternaam", ofNullable(achternaam))
+                .queryParamIfPresent("heeftVerslagBeedigdArts", ofNullable(heeftVerslagBeedigdArts))
+                .queryParamIfPresent("heeftNationaleOverlijdensakte", ofNullable(heeftNationaleOverlijdensakte))
+                .queryParamIfPresent("heeftInlichtingenfiche", ofNullable(heeftInlichtingenfiche))
+                .queryParamIfPresent("heeftToestemming", ofNullable(heeftToestemming))
+                .build().getQuery();
         DossierBurgerlijkeStandJSON[] response = securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}", kbonummer)
+                .uri(url)
                 .retrieve()
                 .body(DossierBurgerlijkeStandJSON[].class);
 
         model.addAttribute("dossiers", response);
         model.addAttribute("kbonummer", kbonummer);
 
-        return Objects.isNull(response) || response.length == 0 ? "niks-gevonden" : "dossiers";
+        return "dossiers";
     }
+
 
     @GetMapping(value = "/dossier")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
@@ -67,7 +96,7 @@ public class DossierDao {
 
         if (detail.isPresent()) {
             var dossier = detail.get();
-            var verslag = Optional.ofNullable(dossier.verslagDetailURL()).map(this::getVerslagDetail).map(VerslagParser::new).orElse(null);
+            var verslag = ofNullable(dossier.verslagDetailURL()).map(this::getVerslagDetail).map(VerslagParser::new).orElse(null);
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("dossier", dossier);
                 model.addAttribute("verslag", verslag);

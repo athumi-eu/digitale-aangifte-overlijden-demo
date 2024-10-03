@@ -7,6 +7,102 @@
 
 <div th:replace="~{fragments/navigation :: navigation(kbonummer=${kbonummer})}"></div>
 
+
+<div class="ml-3">
+    <h3>Zoeken</h3>
+</div>
+
+
+<div class="grid-container-4 ml-3">
+    <div class="grid-column">
+        <p>
+        <div class="label">Status</div>
+        <div><select name="status" id="status" class="min-breedte">
+            <option value="NVT"></option>
+            <option value="NIEUW">NIEUW</option>
+            <option value="IN_BEHANDELING">IN_BEHANDELING</option>
+            <option value="NIET_BEHANDELD">NIET_BEHANDELD</option>
+            <option value="BEHANDELD">BEHANDELD</option>
+        </select></div>
+        </p>
+        <div>
+            <label for="dossierNummer">Dossiernummer</label></div>
+        <div><input id="dossierNummer" type="text" name="dossierNummer" class="min-breedte"/>
+        </div>
+        <br>
+        <div>
+            <label for="rrn">Rijksregisternummer</label></div>
+        <div><input id="rrn" type="text" name="rrn" class="min-breedte"/>
+        </div>
+        <br>
+        <div>
+            <label for="datum">Datum</label></div>
+        <div><input id="datum" type="date" name="datum" class="min-breedte"/>
+        </div>
+        <br>
+        <div>
+            <label for="achternaam">Achternaam</label></div>
+        <div><input id="achternaam" type="text" name="achternaam" class="min-breedte"/>
+        </div>
+        <br>
+
+    </div>
+    <div class="grid-column">
+        <div>
+            <label>Overlijdensakte aanwezig</label>
+            <div>
+                <input type="radio" id="akteMNU" name="akte" value="Maakt niet uit" checked>
+                <label for="akteMNU">Maakt niet uit</label><br>
+                <input type="radio" id="akteJa" name="akte" value="Ja">
+                <label for="akteJa">Ja</label><br>
+                <input type="radio" id="akteNee" name="akte" value="Nee">
+                <label for="akteNee">Nee</label>
+            </div>
+        </div>
+        </br>
+        <div>
+            <label>Verslag aangestelde en beëdigde arts aanwezig</label>
+            <div>
+                <input type="radio" id="artsMNU" name="arts" value="Maakt niet uit" checked>
+                <label for="artsMNU">Maakt niet uit</label><br>
+                <input type="radio" id="artsJa" name="arts" value="Ja">
+                <label for="artsJa">Ja</label><br>
+                <input type="radio" id="artsNee" name="arts" value="Nee">
+                <label for="artsNee">Nee</label>
+            </div>
+        </div>
+        </br>
+        <div>
+            <label>Inlichtingenfiche aanwezig</label>
+            <div>
+                <input type="radio" id="inlichtingenMNU" name="inlichtingen" value="Maakt niet uit" checked>
+                <label for="inlichtingenMNU">Maakt niet uit</label><br>
+                <input type="radio" id="inlichtingenJa" name="inlichtingen" value="Ja">
+                <label for="inlichtingenJa">Ja</label><br>
+                <input type="radio" id="inlichtingenNee" name="inlichtingen" value="Nee">
+                <label for="inlichtingenNee">Nee</label>
+            </div>
+        </div>
+        </br>
+        <div>
+            <label>Toestemming aanwezig</label>
+            <div>
+                <input type="radio" id="toestemmingMNU" name="toestemming" value="Maakt niet uit" checked>
+                <label for="toestemmingMNU">Maakt niet uit</label><br>
+                <input type="radio" id="toestemmingJa" name="toestemming" value="Ja">
+                <label for="toestemmingJa">Ja</label><br>
+                <input type="radio" id="toestemmingNee" name="toestemming" value="Nee">
+                <label for="toestemmingNee">Nee</label>
+            </div>
+        </div>
+        </br>
+    </div>
+
+</div>
+<button class="ml-3" th:onclick="filter([[${kbonummer}]]);">Filter
+</button>
+
+
 <div class="ml-3">
     <h3>Overlijdendossiers</h3>
 </div>
@@ -43,4 +139,133 @@
     </table>
 </div>
 </body>
+
+<script>
+
+    function filter(kbonummer) {
+        const status = document.getElementById('status').value
+        const dossierNummer = document.getElementById('dossierNummer').value
+        const rrn = document.getElementById('rrn').value
+        const datum = document.getElementById('datum').value
+        const achternaam = document.getElementById('achternaam').value
+        const akteJa = document.getElementById('akteJa').checked
+        const akteNee = document.getElementById('akteNee').checked
+        const artsJa = document.getElementById('artsJa').checked
+        const artsNee = document.getElementById('artsNee').checked
+        const inlichtingenJa = document.getElementById('inlichtingenJa').checked
+        const inlichtingenNee = document.getElementById('inlichtingenNee').checked
+        const toestemmingJa = document.getElementById('toestemmingJa').checked
+        const toestemmingNee = document.getElementById('toestemmingNee').checked
+
+        var params = new URLSearchParams(location.search);
+        params.set('kbonummer', kbonummer);
+        if (!!status) {
+            params.set('status', status);
+        } else params.delete('status')
+        if (!!dossierNummer) {
+            params.set('dossiernummer', dossierNummer);
+        } else params.delete('dossiernummer')
+        if (!!rrn) {
+            params.set('rijksregisternummer', rrn);
+        } else params.delete('rijksregisternummer')
+        if (!!datum) {
+            params.set('overlijden', datum);
+        } else params.delete('overlijden')
+        if (!!achternaam) {
+            params.set('achternaam', achternaam);
+        } else params.delete('achternaam')
+
+        if (!!akteJa) {
+            params.set('heeftNationaleOverlijdensakte', "true");
+        } else if (!!akteNee) {
+            params.set('heeftNationaleOverlijdensakte', "false");
+        } else {
+            params.delete('heeftNationaleOverlijdensakte');
+        }
+
+        if (!!artsJa) {
+            params.set('heeftVerslagBeedigdArts', "true");
+        } else if (!!artsNee) {
+            params.set('heeftVerslagBeedigdArts', "false");
+        } else {
+            params.delete('heeftVerslagBeedigdArts');
+        }
+
+        if (!!inlichtingenJa) {
+            params.set('heeftInlichtingenfiche', "true");
+        } else if (!!inlichtingenNee) {
+            params.set('heeftInlichtingenfiche', "false");
+        } else {
+            params.delete('heeftInlichtingenfiche');
+        }
+
+        if (!!toestemmingJa) {
+            params.set('heeftToestemming', "true");
+        } else if (!!toestemmingNee) {
+            params.set('heeftToestemming', "false");
+        } else {
+            params.delete('heeftToestemming');
+        }
+
+        window.location.search = params.toString();
+
+    }
+
+    function getUrlVars() {
+        let params = (new URL(document.location)).searchParams;
+
+        console.log(params)
+        if (!!params.get("status")) {
+            document.getElementById('status').value = params.get("status");
+        }
+
+        if (!!params.get("dossiernummer")) {
+            document.getElementById('dossierNummer').value = params.get("dossiernummer");
+        }
+        if (!!params.get("rijksregisternummer")) {
+            document.getElementById('rrn').value = params.get("rijksregisternummer");
+        }
+        if (!!params.get("overlijden")) {
+            document.getElementById('datum').value = params.get("overlijden");
+        }
+        if (!!params.get("achternaam")) {
+            document.getElementById('achternaam').value = params.get("achternaam");
+        }
+        if (params.get("heeftNationaleOverlijdensakte") === undefined || params.get("heeftNationaleOverlijdensakte") === null) {
+            document.getElementById('akteMNU').checked = true;
+        } else if (params.get("heeftNationaleOverlijdensakte") === 'true') {
+            document.getElementById('akteJa').checked = true;
+        } else {
+            document.getElementById('akteNee').checked = true;
+        }
+        if (params.get("heeftVerslagBeedigdArts") === undefined || params.get("heeftVerslagBeedigdArts") === null) {
+            document.getElementById('artsMNU').checked = true;
+        } else if (params.get("heeftVerslagBeedigdArts") === 'true') {
+            document.getElementById('artsJa').checked = true;
+        } else {
+            document.getElementById('artsNee').checked = true;
+        }
+
+        if (params.get("heeftToestemming") === undefined || params.get("heeftToestemming") === null) {
+            document.getElementById('toestemmingMNU').checked = true;
+        } else if (params.get("heeftToestemming") === 'true') {
+            document.getElementById('toestemmingJa').checked = true;
+        } else {
+            document.getElementById('toestemmingNee').checked = true;
+        }
+
+        if (params.get("heeftInlichtingenfiche") === undefined || params.get("heeftInlichtingenfiche") === null) {
+            document.getElementById('inlichtingenMNU').checked = true;
+        } else if (params.get("heeftInlichtingenfiche") === 'true') {
+            document.getElementById('inlichtingenJa').checked = true;
+        } else {
+            document.getElementById('inlichtingenNee').checked = true;
+        }
+
+        return params;
+    }
+
+    var get = getUrlVars();
+
+</script>
 </html>
