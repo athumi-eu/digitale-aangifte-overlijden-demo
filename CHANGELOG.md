@@ -7,11 +7,11 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 ### Added
 
 
-## [0.1.24] - 2024-10-03
+## [0.1.24 en 25] - 2024-10-03
 
 ### Added
 
-- Voeg filter op dossier toe~~~~
+- Voeg filter op dossier toe
 
 ## [0.1.23] -2024-10-02
 
