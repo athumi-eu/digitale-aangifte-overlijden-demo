@@ -2,11 +2,16 @@
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
 
-## [0.1.] - 
+## [0.1.] -
 
 ### Added
 
--
+
+## [0.1.24] - 2024-10-03
+
+### Added
+
+- Voeg filter op dossier toe~~~~
 
 ## [0.1.23] -2024-10-02
 
