@@ -26,7 +26,8 @@ public record DossierBurgerlijkeStandJSON(
         LocalDateTime afgeslotenOp,
         LocalDateTime heropendOp,
         LocalDateTime ingediendOp,
-        DossierVerrijkingJSON verrijking
+        DossierVerrijkingJSON verrijking,
+        UitvaartOndernemerJSON uitvaartOndernemer
 ) implements Type {
     @Override
     public String type() {

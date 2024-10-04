@@ -94,6 +94,7 @@ public class DossierDao {
 
         model.addAttribute("kbonummer", kbonummer);
 
+        System.out.println(detail.get());
         if (detail.isPresent()) {
             var dossier = detail.get();
             var verslag = ofNullable(dossier.verslagDetailURL()).map(this::getVerslagDetail).map(VerslagParser::new).orElse(null);
