@@ -120,6 +120,7 @@ hr.solid {
     width: 40rem;
     margin-bottom: 3rem;
 }
+
 #error {
     display: none;
     border-radius: 5px 5px 5px;
@@ -132,6 +133,12 @@ hr.solid {
     border: 1px solid red;
 }
 
+.error-border {
+    border-radius: 5px 5px 5px;
+    border: 1px solid red;
+    margin-left: 2rem;
+}
+
 #overlay {
     position: fixed; /* Sit on top of the page content */
     display: none; /* Hidden by default */
@@ -141,24 +148,24 @@ hr.solid {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
     border-radius: 5px 5px 5px;
     border: 1px solid black;
 }
 
-.overlay-content{
+.overlay-content {
     position: absolute;
     top: 50%;
     left: 50%;
     background: white;
     color: black;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     padding: 2rem;
 }
 
-.min-breedte{
+.min-breedte {
     min-width: 200px;
 }

@@ -6,6 +6,11 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 
 ### Added
 
+## [0.1.27] - 2024-10-07
+
+### Added
+
+- Voeg betere foutboodschap toe als we te weinig zoek params hebben
 
 ## [0.1.24 en 25 en 26] - 2024-10-03
 

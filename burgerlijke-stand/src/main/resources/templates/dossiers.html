@@ -12,7 +12,6 @@
     <h3>Zoeken</h3>
 </div>
 
-
 <div class="grid-container-4 ml-3">
     <div class="grid-column">
         <p>
@@ -99,6 +98,11 @@
     </div>
 
 </div>
+
+<div th:if="${NOT_ENOUGH_PARAMS}" class="error-border">Gelieve een extra zoekparameter te selecteren</div>
+
+
+<div th:if="${NOT_ENOUGH_PARAMS} == 'true'" class="error"> Gelieve een extra search parameter te selecteren</div>
 <button class="ml-3" th:onclick="filter([[${kbonummer}]]);">Filter
 </button>
 
