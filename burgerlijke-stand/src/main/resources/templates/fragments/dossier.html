@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="dossier(dossier)" class="grid-column">
-    <div>
+<div th:fragment="dossier(dossier, parsedDetail)" class="grid-container-3">
+    <div class="grid-column">
         <p>
         <div class="label">Status</div>
         <div th:text="${dossier.dossierStatus()}"></div>
@@ -24,9 +24,25 @@
             <div th:replace="~{fragments/afsluiten.html :: afsluiten(id=${dossier.id()})}"></div>
         </div>
         <div th:if="${dossier.afgeslotenOp() != null}">
-            <div th:replace="~{fragments/heropen.html :: heropen(id=${dossier.id()})}"></div>
+            <div th:replace="~{fragments/heropen.html :: heropen(id=${dossier.id()})}" naam></div>
         </div>
     </div>
 
+    <div class="grid-column">
+        <p>
+        <div class="label">Uitvaartondernemer</div>
+        <div th:text="${parsedDetail.uo().naam()}"></div>
+        </p>
+        <p>
+        <div class="label">KBO-nummer</div>
+        <div th:text="${parsedDetail.uo().kboNummer()}"></div>
+        </p>
+        <p>
+        <div class="label">Dossier opgestart door uitvaartondernemer op</div>
+        <div th:text="${parsedDetail.uo().opgestartOp()}"></div>
+        </p>
+    </div>
 </div>
+
+
 </html>
