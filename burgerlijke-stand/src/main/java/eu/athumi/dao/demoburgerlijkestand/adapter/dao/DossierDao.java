@@ -13,12 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -69,16 +71,27 @@ public class DossierDao {
                 .queryParamIfPresent("heeftInlichtingenfiche", ofNullable(heeftInlichtingenfiche))
                 .queryParamIfPresent("heeftToestemming", ofNullable(heeftToestemming))
                 .build().getQuery();
-        DossierBurgerlijkeStandJSON[] response = securedWebClient
-                .get()
-                .uri(url)
-                .retrieve()
-                .body(DossierBurgerlijkeStandJSON[].class);
 
-        model.addAttribute("dossiers", response);
-        model.addAttribute("kbonummer", kbonummer);
+        try {
+            DossierBurgerlijkeStandJSON[] response = securedWebClient
+                    .get()
+                    .uri(url)
+                    .retrieve()
+                    .body(DossierBurgerlijkeStandJSON[].class);
+            model.addAttribute("dossiers", response);
+            model.addAttribute("kbonummer", kbonummer);
+            return "dossiers";
+        } catch (HttpClientErrorException ex) {
+            if (ex.getMessage().contains("Gelieve een extra request parameter toe te voegen")) {
+                model.addAttribute("NOT_ENOUGH_PARAMS", true);
+                model.addAttribute("dossiers", List.of());
+                model.addAttribute("kbonummer", kbonummer);
+                return "dossiers";
+            } else {
+                throw ex;
+            }
+        }
 
-        return "dossiers";
     }
 
 
@@ -86,7 +99,7 @@ public class DossierDao {
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
         Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient
                         .get()
-                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id )
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id)
                         .retrieve()
                         .body(DossierBurgerlijkeStandJSON[].class))
                 .filter(dossier -> Objects.equals(dossier.id(), id))
