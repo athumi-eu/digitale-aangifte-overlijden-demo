@@ -7,6 +7,11 @@ import java.util.Objects;
 
 public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
+
+    public UitvaartOndernemerParser uo() {
+        return new UitvaartOndernemerParser(dossier.uitvaartOndernemer());
+    }
+
     public VerrijkingParser verrijking() {
         return new VerrijkingParser(dossier.verrijking());
     }

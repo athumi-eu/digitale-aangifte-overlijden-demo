@@ -6,6 +6,12 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 
 ### Added
 
+## [0.1.28] - 2024-10-07
+
+### Added
+
+- Voeg uitvaart ondernemer info toe aan dossier
+
 ## [0.1.27] - 2024-10-07
 
 ### Added
