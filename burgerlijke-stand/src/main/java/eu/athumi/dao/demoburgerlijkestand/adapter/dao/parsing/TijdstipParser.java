@@ -21,8 +21,7 @@ public class TijdstipParser {
         if (Objects.isNull(date)) {
             return "/";
         }
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                + " om " + date.format(DateTimeFormatter.ofPattern("hh:mm")) ;
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy 'om' HH:mm"));
     }
 
 }
