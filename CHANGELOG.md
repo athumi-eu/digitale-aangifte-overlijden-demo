@@ -5,6 +5,7 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 ## [0.1.] -
 
 ### Added
+- Documentatie uitgesplits in verschillende startpunten
 
 ## [0.1.28] - 2024-10-07
 
