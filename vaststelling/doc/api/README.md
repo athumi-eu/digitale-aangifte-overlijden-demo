@@ -28,6 +28,9 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 - **Locatie**: `/swagger-ui/index.html`
+- [**Test**](https://dao.api.test-athumi.eu/swagger-ui/index.html?urls.primaryName=Vaststelling)
+- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Vaststelling)
+
 
 ## Validatiefouten
 
