@@ -35,6 +35,8 @@ Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezi
 | x-kbonummer    | Het KBO nummer van de actor waarvoor de request wordt uitgevoerd. |
 | Authorization  | De access token in de vorm `Bearer {{token}}`                     |
 
+//TODO: zet hier ook nog info omtrent Request, tracing, correlation id
+
 
 ### Logging
 Doordat het DAO platform omgaat met gevoelige data, heerst er de verwachting dat de clients van deze toepassing een correcte audit logging voorzien.
