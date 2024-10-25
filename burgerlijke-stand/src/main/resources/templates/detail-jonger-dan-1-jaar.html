@@ -27,10 +27,11 @@
         Nog geen verslag gekoppeld
     </div>
 
+    <div th:replace="~{fragments/inlichtingenfiche.html :: inlichtingenfiche(inlichtingenfiche=${dossier.inlichtingenfiche()})}"></div>
+
     <div th:replace="~{fragments/aanvullende-gegevens.html :: aanvullende-gegevens(id=${dossier.id()},verrijking=${parsedDetail.verrijking()})}"></div>
 
     <div th:replace="~{fragments/file-upload :: file-upload(dossier=${dossier}, parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
-
 </div>
 
 </body>
