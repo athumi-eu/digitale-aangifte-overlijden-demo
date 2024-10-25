@@ -1,6 +1,7 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json;
 
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche.InlichtingenficheJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
@@ -27,7 +28,8 @@ public record DossierBurgerlijkeStandJSON(
         LocalDateTime heropendOp,
         LocalDateTime ingediendOp,
         DossierVerrijkingJSON verrijking,
-        UitvaartOndernemerJSON uitvaartOndernemer
+        UitvaartOndernemerJSON uitvaartOndernemer,
+        InlichtingenficheJSON inlichtingenfiche
 ) implements Type {
     @Override
     public String type() {
