@@ -42,10 +42,6 @@
 
             <div class="label">Locatie</div>
             <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.locatie ?: '/'}"></div>
-
-            <div class="label">documenten</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.documenten ?: '/'}"></div>
-
         </div>
         <!--        NABESTAANDE-->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
