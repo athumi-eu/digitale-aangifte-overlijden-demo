@@ -121,6 +121,14 @@ hr.solid {
     margin-bottom: 3rem;
 }
 
+.download-icon:before {
+    content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBkPSJNNjQgMEMyOC43IDAgMCAyOC43IDAgNjRMMCA0NDhjMCAzNS4zIDI4LjcgNjQgNjQgNjRsMjU2IDBjMzUuMyAwIDY0LTI4LjcgNjQtNjRsMC0yODgtMTI4IDBjLTE3LjcgMC0zMi0xNC4zLTMyLTMyTDIyNCAwIDY0IDB6TTI1NiAwbDAgMTI4IDEyOCAwTDI1NiAwek0yMTYgMjMybDAgMTAyLjEgMzEtMzFjOS40LTkuNCAyNC42LTkuNCAzMy45IDBzOS40IDI0LjYgMCAzMy45bC03MiA3MmMtOS40IDkuNC0yNC42IDkuNC0zMy45IDBsLTcyLTcyYy05LjQtOS40LTkuNC0yNC42IDAtMzMuOXMyNC42LTkuNCAzMy45IDBsMzEgMzFMMTY4IDIzMmMwLTEzLjMgMTAuNy0yNCAyNC0yNHMyNCAxMC43IDI0IDI0eiIvPjwvc3ZnPg==");
+    height: 1em;
+    width: 1em;
+    vertical-align: -0.125em;
+    display: inline-block;
+}
+
 #error {
     display: none;
     border-radius: 5px 5px 5px;

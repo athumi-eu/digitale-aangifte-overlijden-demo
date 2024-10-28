@@ -5,6 +5,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeSta
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.FicheDocumentenParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
@@ -111,6 +112,7 @@ public class DossierDao {
         if (detail.isPresent()) {
             var dossier = detail.get();
             var verslag = ofNullable(dossier.verslagDetailURL()).map(this::getVerslagDetail).map(VerslagParser::new).orElse(null);
+            model.addAttribute("ficheDocumenten", new FicheDocumentenParser(dossier));
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("dossier", dossier);
                 model.addAttribute("verslag", verslag);

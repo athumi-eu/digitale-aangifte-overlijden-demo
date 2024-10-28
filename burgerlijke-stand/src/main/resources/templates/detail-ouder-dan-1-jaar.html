@@ -28,7 +28,7 @@
         Nog geen verslag gekoppeld
     </div>
 
-    <div th:replace="~{fragments/inlichtingenfiche.html :: inlichtingenfiche(inlichtingenfiche=${dossier.inlichtingenfiche()})}"></div>
+    <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche.html :: inlichtingenfiche(inlichtingenfiche=${dossier.inlichtingenfiche()})}"></div>
 
     <div th:replace="~{fragments/aanvullende-gegevens.html :: aanvullende-gegevens(id=${dossier.id()},verrijking=${parsedDetail.verrijking()})}"></div>
 
