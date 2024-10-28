@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 
-<div th:fragment="inlichtingenfiche(inlichtingenfiche)">
+<div th:if="${inlichtingenfiche != null}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
     <h2>Inlichtingenfiche uitvaart - Aanvraag toestemming begrafenis / crematie</h2>
     <div class="label">Inlichtingenfiche aangemaakt op</div>
-    <div id="inlichtingenfiche.aanmaakDatum" th:text="${inlichtingenfiche.aanmaakDatum}"></div>
+    <div id="inlichtingenfiche?.aanmaakDatum" th:text="${inlichtingenfiche?.aanmaakDatum}"></div>
 
     <div class="grid-container-4">
 <!--        TYPE INFO-->
@@ -43,8 +43,8 @@
             <div class="label">Locatie</div>
             <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.locatie ?: '/'}"></div>
 
-<!--            <div class="label">documenten</div>-->
-<!--            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.documenten ?: '/'}"></div>-->
+            <div class="label">documenten</div>
+            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.documenten ?: '/'}"></div>
 
         </div>
 <!--        NABESTAANDE-->
@@ -82,6 +82,11 @@
             <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
             <div class="label">Datum van overlijden van partner</div>
             <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.datumOverlijden ?: '/'}"></div>
+
+
+            <div class="label">Bestand van overlijden van partner</div>
+            <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.verzoekNabestaande ?: '/'}"></div>
+
 
         </div>
     </div>
