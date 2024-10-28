@@ -2,6 +2,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -37,6 +38,17 @@ public class FileDao {
                 .body(body)
                 .retrieve()
                 .toBodilessEntity();
+    }
+
+    @GetMapping(value = "/documenten/", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseBody
+    public byte[] downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type) {
+        //TODO dit endpoint bestaat nog niet. Te reviseren na finaliseren documenten module.
+        return securedWebClient
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", dossierId, type)
+                .retrieve()
+                .toEntity(byte[].class).getBody();
     }
 
     @GetMapping(value = "/aktes/download", produces = "application/pdf")

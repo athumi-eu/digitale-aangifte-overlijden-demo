@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="inlichtingenfiche(inlichtingenfiche)">
+    <h2> Inlichtingenfiche Uitvaart - bestanden </h2>
+    <div th:each="doc : ${ficheDocumenten.getFicheDocumenten()}">
+        <div>
+            <h3 th:text="${doc.label}"></h3>
+            <div>
+                <span th:text="${doc.opgeladen}"></span>
+                <a th:href="@{${doc.url}}"
+                   class="download-icon"
+                   target="_blank"></a>
+            </div>
+        </div>
+    </div>
+    <div th:if="${#lists.isEmpty(ficheDocumenten.getFicheDocumenten())}">
+        <h3>Geen documenten opgeladen bij de inlichtingenfiche uitvaart</h3>
+    </div>
+</div>
+</html>

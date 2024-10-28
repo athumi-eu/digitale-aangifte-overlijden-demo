@@ -8,7 +8,7 @@
     <div id="inlichtingenfiche?.aanmaakDatum" th:text="${inlichtingenfiche?.aanmaakDatum}"></div>
 
     <div class="grid-container-4">
-<!--        TYPE INFO-->
+        <!--        TYPE INFO-->
         <div class="grid-column">
             <h3>Uitvaart</h3>
             <div class="label">Keuze uitvaart</div>
@@ -31,7 +31,7 @@
                 <div th:text="${inlichtingenfiche?.crematie?.anderCrematorium ?: '/'}"></div>
             </div>
         </div>
-<!--        BESTEMMING AS -->
+        <!--        BESTEMMING AS -->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
             <h3>Bestemming as</h3>
             <div class="label">Bestemming as</div>
@@ -47,7 +47,7 @@
             <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.documenten ?: '/'}"></div>
 
         </div>
-<!--        NABESTAANDE-->
+        <!--        NABESTAANDE-->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
             <h3>Nabestaande die zorg heeft voor urne of plaats van uitstrooiing</h3>
             <div class="label">Rijksregisternummer</div>
@@ -63,7 +63,7 @@
                 <span th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.anderLandAdres ?: ''}"></span>
             </div>
         </div>
-<!--        AS PARTNER-->
+        <!--        AS PARTNER-->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
             <h3>Bestemming as eerder overleden partner</h3>
 
@@ -92,3 +92,5 @@
     </div>
 
 </div>
+
+</html>
