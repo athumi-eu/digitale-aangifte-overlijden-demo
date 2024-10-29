@@ -4,7 +4,7 @@
 
 <div th:if="${inlichtingenfiche != null}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
     <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-base-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
-<!--    <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-overige-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>-->
+    <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-overige-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
     <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-bestanden.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
 </div>
 
