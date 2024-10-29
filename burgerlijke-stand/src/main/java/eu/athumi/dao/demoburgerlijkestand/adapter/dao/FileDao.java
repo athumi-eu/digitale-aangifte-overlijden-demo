@@ -87,19 +87,18 @@ public class FileDao {
     public byte[] downloadFile(@RequestParam String id) {
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, DocumentType.TOESTEMMING_VERWERKING_OVERLIJDEN.name())
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, DocumentType.TOESTEMMING_BEGRAFENIS_OF_CREMATIE.name())
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
 
     private enum DocumentType {
-        // TODO: DAO-112 betere naamgeving
         VERZOEK_NABESTAANDE,
         TOESTEMMING_EIGENAAR,
         VERZOEK_NABESTAANDE_AS_PARTNER,
         VERZOEK_OPNAME_ALS_VADER_OF_MEEMOEDER,
         NATIONALE_AKTE,
         INTERNATIONALE_AKTE,
-        TOESTEMMING_VERWERKING_OVERLIJDEN,
+        TOESTEMMING_BEGRAFENIS_OF_CREMATIE,
     }
 }
