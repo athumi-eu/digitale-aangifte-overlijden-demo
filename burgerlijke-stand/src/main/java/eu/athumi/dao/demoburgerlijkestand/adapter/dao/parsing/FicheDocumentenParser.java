@@ -23,6 +23,7 @@ public class FicheDocumentenParser {
         var docs = new ArrayList<DocumentJSON>();
         docs.addAll(getLocatieDocumenten());
         docs.add(getWettelijkePartnerDocument());
+        docs.add(getVerzoekVaderOfMeemoederDocument());
         return docs.stream()
                 .filter(Objects::nonNull)
                 .map(this::jsonToRenderObject)
@@ -51,11 +52,19 @@ public class FicheDocumentenParser {
                 .orElse(null);
     }
 
+    private DocumentJSON getVerzoekVaderOfMeemoederDocument() {
+        return Optional.ofNullable(dossier.inlichtingenfiche())
+                .map(InlichtingenficheJSON::informatieAkteLevenloosKind)
+                .map(InformatieAkteLevenloosKindJSON::verzoekVaderOfMeemoeder)
+                .orElse(null);
+    }
+
     String documentTypeToLabel(DocumentType documentType) {
         return switch (documentType) {
             case VERZOEK_NABESTAANDE -> "Verzoek van nabestaanden";
             case TOESTEMMING_EIGENAAR -> "Toestemming eigenaar terrein";
             case VERZOEK_NABESTAANDE_AS_PARTNER -> "Verzoek van nabestaanden ivm as partner";
+            case VERZOEK_OPNAME_ALS_VADER_OF_MEEMOEDER -> "Ondertekend verzoek tot opname vader of meemoeder bij doodgeboorte";
         };
     }
 

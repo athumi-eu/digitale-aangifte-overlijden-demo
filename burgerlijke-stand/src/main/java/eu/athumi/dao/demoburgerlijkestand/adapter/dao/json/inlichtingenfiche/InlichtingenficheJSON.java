@@ -5,5 +5,6 @@ import java.time.LocalDate;
 public record InlichtingenficheJSON(
     LocalDate aanmaakDatum,
     BegraafplaatsJSON begraafplaats,
-    CrematieJSON crematie
+    CrematieJSON crematie,
+    InformatieAkteLevenloosKindJSON informatieAkteLevenloosKind
 ) {}
