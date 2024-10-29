@@ -3,7 +3,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public record VaderOfMeeMoederJSON(
+public record VaderOfMeemoederJSON(
         String rijksregisternummer,
         String voornaam,
         String naam,
