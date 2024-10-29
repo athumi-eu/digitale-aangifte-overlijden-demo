@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Controller
 public class FileDao {
@@ -54,9 +55,16 @@ public class FileDao {
     @GetMapping(value = "/aktes/download", produces = "application/pdf")
     @ResponseBody
     public byte[] downloadAkte(@RequestParam String type, @RequestParam String id) {
+        DocumentType docType;
+        if (Objects.equals("nationaal", type)) {
+            docType = DocumentType.NATIONALE_AKTE;
+        } else {
+            docType = DocumentType.INTERNATIONALE_AKTE;
+        }
+
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, docType.name())
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
@@ -80,8 +88,19 @@ public class FileDao {
     public byte[] downloadFile(@RequestParam String id) {
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, DocumentType.TOESTEMMING_VERWERKING_OVERLIJDEN.name())
                 .retrieve()
                 .toEntity(byte[].class).getBody();
+    }
+
+    private enum DocumentType {
+        // TODO: DAO-112 betere naamgeving
+        VERZOEK_NABESTAANDE,
+        TOESTEMMING_EIGENAAR,
+        VERZOEK_NABESTAANDE_AS_PARTNER,
+        VERZOEK_OPNAME_ALS_VADER_OF_MEEMOEDER,
+        NATIONALE_AKTE,
+        INTERNATIONALE_AKTE,
+        TOESTEMMING_VERWERKING_OVERLIJDEN,
     }
 }
