@@ -5,8 +5,10 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class FicheDocumentenParser {
     DossierBurgerlijkeStandJSON dossier;
@@ -28,7 +30,7 @@ public class FicheDocumentenParser {
     }
 
     private DocumentRenderObject jsonToRenderObject(DocumentJSON json) {
-        var url = String.format("documenten/?id=%s&type=%s", dossier.id(), json.type());
+        var url = String.format("documenten?dossierId=%s&type=%s", dossier.id(), json.type());
         return new DocumentRenderObject(documentTypeToLabel(json.type()), dateToLabel(json.localDateTime()), url);
     }
 
