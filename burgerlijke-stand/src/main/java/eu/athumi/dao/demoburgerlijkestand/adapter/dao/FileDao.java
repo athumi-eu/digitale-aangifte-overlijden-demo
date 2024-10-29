@@ -41,7 +41,7 @@ public class FileDao {
                 .toBodilessEntity();
     }
 
-    @GetMapping(value = "/documenten/", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/documenten", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public byte[] downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type) {
         //TODO dit endpoint bestaat nog niet. Te reviseren na finaliseren documenten module.
