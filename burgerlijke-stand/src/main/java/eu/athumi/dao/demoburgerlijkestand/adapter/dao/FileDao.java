@@ -2,7 +2,6 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -42,7 +41,7 @@ public class FileDao {
                 .toBodilessEntity();
     }
 
-    @GetMapping(value = "/documenten", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/documenten")
     @ResponseBody
     public ResponseEntity<byte[]> downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type) {
         return securedWebClient.get()
