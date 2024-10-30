@@ -44,10 +44,13 @@ public class FileDao {
     @GetMapping(value = "/documenten")
     @ResponseBody
     public ResponseEntity<byte[]> downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type) {
-        return securedWebClient.get()
+        ResponseEntity<byte[]> entity = securedWebClient.get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", dossierId, type)
                 .retrieve()
                 .toEntity(byte[].class);
+        return ResponseEntity.ok()
+                .contentType(Objects.requireNonNull(entity.getHeaders().getContentType()))
+                .body(entity.getBody());
     }
 
     @GetMapping(value = "/aktes/download", produces = "application/pdf")
