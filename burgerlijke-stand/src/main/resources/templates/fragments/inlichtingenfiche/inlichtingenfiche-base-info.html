@@ -12,48 +12,48 @@
         <div class="grid-column">
             <h3>Uitvaart</h3>
             <div class="label">Keuze uitvaart</div>
-            <div th:text="${inlichtingenfiche?.begraafplaats() != null ? 'Begrafenis' : 'Crematie'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.begraafplaats() != null ? 'Begrafenis' : 'Crematie'}"></div>
 
             <!-- begraafplaats  -->
             <div th:if="${inlichtingenfiche?.begraafplaats() != null}">
                 <div class="label">Gemeente</div>
-                <div th:text="${inlichtingenfiche?.begraafplaats?.niscodeGemeente ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.begraafplaats?.niscodeGemeente ?: '/'}"></div>
 
                 <div class="label">Begraafplaats</div>
-                <div th:text="${inlichtingenfiche?.begraafplaats?.andereLocatie ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.begraafplaats?.andereLocatie ?: '/'}"></div>
             </div>
 
             <div th:if="${inlichtingenfiche?.crematie() != null}">
                 <div class="label">Crematorium</div>
-                <div th:text="${inlichtingenfiche?.crematie?.crematoriumInBelgie ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.crematoriumInBelgie ?: '/'}"></div>
 
                 <div class="label">Buitenlands crematorium</div>
-                <div th:text="${inlichtingenfiche?.crematie?.anderCrematorium ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.anderCrematorium ?: '/'}"></div>
             </div>
         </div>
         <!--        BESTEMMING AS -->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
             <h3>Bestemming as</h3>
             <div class="label">Bestemming as</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.bestemmingAsType ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.bestemmingAsType ?: '/'}"></div>
 
             <div class="label">Plaats van bewaring</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.locatieType ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.locatieType ?: '/'}"></div>
 
             <div class="label">Locatie</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.locatie ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.locatie ?: '/'}"></div>
         </div>
         <!--        NABESTAANDE-->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
             <h3>Nabestaande die zorg heeft voor urne of plaats van uitstrooiing</h3>
             <div class="label">Rijksregisternummer</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.rijksregisternummer ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.rijksregisternummer ?: '/'}"></div>
             <div class="label">Voornaam</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.voornaam ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.voornaam ?: '/'}"></div>
             <div class="label">naam</div>
-            <div th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.naam ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.naam ?: '/'}"></div>
             <div class="label">adres</div>
-            <div>
+            <div class="bottom-spacing" >
                 <span th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.parsedAdres ?: ''}"></span>
                 <span th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.anderLandNisCode ?: ''}"></span>
                 <span th:text="${inlichtingenfiche?.crematie?.bestemmingAs?.locatie?.nabestaande?.anderLandAdres ?: ''}"></span>
@@ -64,20 +64,20 @@
             <h3>Bestemming as eerder overleden partner</h3>
 
             <div class="label">Bestemmingstype</div>
-            <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.type ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.type ?: '/'}"></div>
             <div class="label">Rijksregisternummer van partner</div>
-            <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.rijksregisternummer ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.rijksregisternummer ?: '/'}"></div>
             <div class="label">Naam van partner</div>
-            <div>
+            <div class="bottom-spacing" >
                 <span th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.voornaam ?: '/'}"></span>
                 <span th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.naam ?: ''}"></span>
             </div>
             <div class="label">Geboortedatum van partner</div>
-            <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.geboorteDatum ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.geboorteDatum ?: '/'}"></div>
             <div class="label">Plaats van overlijden van partner</div>
-            <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
             <div class="label">Datum van overlijden van partner</div>
-            <div th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.datumOverlijden ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.datumOverlijden ?: '/'}"></div>
 
         </div>
     </div>

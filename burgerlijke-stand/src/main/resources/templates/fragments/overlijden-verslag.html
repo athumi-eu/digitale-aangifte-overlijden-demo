@@ -3,26 +3,16 @@
 
     <div th:fragment="overlijden-verslag(verslagDetail)" class="grid-column">
         <h3>Details overlijden</h3>
-        <p>
         <div class="label">Datum overlijden</div>
-        <div th:text="${verslagDetail.datumOverlijden()}"/>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${verslagDetail.datumOverlijden()}"/>
         <div class="label">Gemeente van overlijden</div>
-        <div th:text="${verslagDetail.gemeenteOverlijden()}"/>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${verslagDetail.gemeenteOverlijden()}"/>
         <div class="label">Aard van overlijden</div>
-        <div th:text="${verslagDetail.aardOverlijden()}"/>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${verslagDetail.aardOverlijden()}"/>
         <div class="label">Arts 2de controle</div>
-        <div th:text="${verslagDetail.controleArts()}"/>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${verslagDetail.controleArts()}"/>
         <div class="label">Arts beëdigd door gemeente</div>
-        <div th:text="${verslagDetail.gemeenteBeediging()}"/>
-        </p>
+        <div class="bottom-spacing"  th:text="${verslagDetail.gemeenteBeediging()}"/>
 
     </div>
 </html>
