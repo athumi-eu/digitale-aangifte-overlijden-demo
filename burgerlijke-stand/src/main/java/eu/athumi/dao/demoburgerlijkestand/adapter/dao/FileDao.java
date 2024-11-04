@@ -56,16 +56,9 @@ public class FileDao {
     @GetMapping(value = "/aktes/download", produces = "application/pdf")
     @ResponseBody
     public byte[] downloadAkte(@RequestParam String type, @RequestParam String id) {
-        DocumentType docType;
-        if (Objects.equals("nationaal", type)) {
-            docType = DocumentType.NATIONALE_AKTE;
-        } else {
-            docType = DocumentType.INTERNATIONALE_AKTE;
-        }
-
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, docType.name())
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
@@ -89,7 +82,7 @@ public class FileDao {
     public byte[] downloadFile(@RequestParam String id) {
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, DocumentType.TOESTEMMING_BEGRAFENIS_OF_CREMATIE.name())
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
