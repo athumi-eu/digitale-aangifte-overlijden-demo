@@ -10,15 +10,15 @@
             <div th:if="${inlichtingenfiche?.informatieAkteLevenloosKind != null}" class="grid-column">
                 <h3>Vader of Meemoeder bij doodgeboorte</h3>
                 <div class="label">Rijksregisternummer</div>
-                <div th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.rijksregisternummer ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.rijksregisternummer ?: '/'}"></div>
                 <div class="label">Voornaam</div>
-                <div th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.voornaam ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.voornaam ?: '/'}"></div>
                 <div class="label">naam</div>
-                <div th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.naam ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.naam ?: '/'}"></div>
                 <div class="label">Geboortedatum</div>
-                <div th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.geboorteDatum ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.geboorteDatum ?: '/'}"></div>
                 <div class="label">Geboorteplaats</div>
-                <div th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.parsedGeboorteDatum() ?: '/'}"></div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.parsedGeboorteDatum() ?: '/'}"></div>
             </div>
         </div>
     </div>
