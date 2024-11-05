@@ -16,9 +16,9 @@
                 <div class="label">naam</div>
                 <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.naam ?: '/'}"></div>
                 <div class="label">Geboortedatum</div>
-                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.geboorteDatum ?: '/'}"></div>
-                <div class="label">Geboorteplaats</div>
                 <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.parsedGeboorteDatum() ?: '/'}"></div>
+                <div class="label">Geboorteplaats</div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.geboortelocatie ?: '/'}"></div>
             </div>
         </div>
     </div>
