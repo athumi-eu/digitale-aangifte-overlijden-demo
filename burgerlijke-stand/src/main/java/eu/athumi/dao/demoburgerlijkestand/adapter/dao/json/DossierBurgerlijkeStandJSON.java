@@ -8,6 +8,9 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVer
 
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.Objects;
+
+import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDateTime;
 
 public record DossierBurgerlijkeStandJSON(
         String id,
@@ -36,4 +39,21 @@ public record DossierBurgerlijkeStandJSON(
         return "Persoon";
     }
 
+    public String parsedAfgeslotenOp() {
+        return parsedDateTime(afgeslotenOp) ;
+    }
+
+    public String parsedHeropendOp() {
+        return parsedDateTime(heropendOp) ;
+    }
+    public String parsedIngediendOp() {
+        return parsedDateTime(ingediendOp) ;
+    }
+
+    private String parsedDateTime(LocalDateTime localDateTime) {
+        if (Objects.isNull(localDateTime)) {
+            return "/";
+        }
+        return parseLocalDateTime(localDateTime) ;
+    }
 }
