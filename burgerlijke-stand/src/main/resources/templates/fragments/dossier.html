@@ -6,11 +6,11 @@
         <div class="label">Status</div>
         <div class="bottom-spacing"  th:text="${dossier.dossierStatus()}"></div>
         <div class="label">Ingediend op</div>
-        <div class="bottom-spacing"  th:text="${dossier.ingediendOp()}"></div>
+        <div class="bottom-spacing"  th:text="${dossier.parsedIngediendOp()}"></div>
         <div class="label">Afgesloten op</div>
-        <div class="bottom-spacing"  th:text="${dossier.afgeslotenOp()}"></div>
+        <div class="bottom-spacing"  th:text="${dossier.parsedAfgeslotenOp()}"></div>
         <div class="label">Heropend op</div>
-        <div class="bottom-spacing"  th:text="${dossier.heropendOp()}"></div>
+        <div class="bottom-spacing"  th:text="${dossier.parsedHeropendOp()}"></div>
 
         <div th:if="${dossier.afgeslotenOp() == null}">
             <div th:replace="~{fragments/afsluiten.html :: afsluiten(id=${dossier.id()})}"></div>

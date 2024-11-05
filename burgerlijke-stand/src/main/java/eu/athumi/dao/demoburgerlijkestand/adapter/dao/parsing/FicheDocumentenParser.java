@@ -70,7 +70,7 @@ public class FicheDocumentenParser {
 
     String dateToLabel(LocalDateTime date) {
         var datum = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        var tijd = date.format(DateTimeFormatter.ofPattern("hh:mm"));
+        var tijd = date.format(DateTimeFormatter.ofPattern("HH:mm"));
         return "Opgeladen op " + datum + " om " + tijd;
     }
 
