@@ -21,9 +21,7 @@ public class FicheDocumentenParser {
 
     public List<DocumentRenderObject> getFicheDocumenten() {
         var docs = new ArrayList<DocumentJSON>();
-        docs.addAll(getLocatieDocumenten());
-        docs.add(getWettelijkePartnerDocument());
-        docs.add(getVerzoekVaderOfMeemoederDocument());
+        docs.addAll(dossier.inlichtingenfiche().documenten());
         return docs.stream()
                 .filter(Objects::nonNull)
                 .map(this::jsonToRenderObject)
@@ -33,30 +31,6 @@ public class FicheDocumentenParser {
     private DocumentRenderObject jsonToRenderObject(DocumentJSON json) {
         var url = String.format("documenten?dossierId=%s&type=%s", dossier.id(), json.type());
         return new DocumentRenderObject(documentTypeToLabel(json.type()), dateToLabel(json.localDateTime()), url);
-    }
-
-    private List<DocumentJSON> getLocatieDocumenten() {
-        return Optional.ofNullable(dossier.inlichtingenfiche())
-                .map(InlichtingenficheJSON::crematie)
-                .map(CrematieJSON::bestemmingAs)
-                .map(BestemmingAsJSON::locatie)
-                .map(LocatieJSON::documenten)
-                .orElse(List.of());
-    }
-
-    private DocumentJSON getWettelijkePartnerDocument() {
-        return Optional.ofNullable(dossier.inlichtingenfiche())
-                .map(InlichtingenficheJSON::crematie)
-                .map(CrematieJSON::asWettelijkePartner)
-                .map(AsWettelijkePartnerJSON::verzoekNabestaande)
-                .orElse(null);
-    }
-
-    private DocumentJSON getVerzoekVaderOfMeemoederDocument() {
-        return Optional.ofNullable(dossier.inlichtingenfiche())
-                .map(InlichtingenficheJSON::informatieAkteLevenloosKind)
-                .map(InformatieAkteLevenloosKindJSON::verzoekVaderOfMeemoeder)
-                .orElse(null);
     }
 
     String documentTypeToLabel(DocumentType documentType) {
