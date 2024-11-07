@@ -5,7 +5,11 @@
 <div th:if="${inlichtingenfiche != null}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
     <h2>Inlichtingenfiche uitvaart - Aanvraag toestemming begrafenis / crematie</h2>
     <div class="label">Inlichtingenfiche aangemaakt op</div>
-    <div id="inlichtingenfiche?.aanmaakDatum" th:text="${inlichtingenfiche?.aanmaakDatum}"></div>
+    <div class="bottom-spacing" id="inlichtingenfiche?.aanmaakDatum" th:text="${inlichtingenfiche?.aanmaakDatum}"></div>
+    <div th:if="${inlichtingenfiche?.wijzigingDatum() != null}">
+        <div class="label">Inlichtingenfiche gewijzigd op</div>
+        <div id="inlichtingenfiche?.wijzigingDatum" th:text="${inlichtingenfiche?.wijzigingDatum}"></div>
+    </div>
 
     <div class="grid-container-4">
         <!--        TYPE INFO-->
