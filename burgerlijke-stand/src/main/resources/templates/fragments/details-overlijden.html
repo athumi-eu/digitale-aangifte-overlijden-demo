@@ -3,26 +3,16 @@
 
 <div th:fragment="details-overlijden(parsedDetail)" class="grid-column">
     <h3>Details overlijden</h3>
-    <p>
     <div class="label">Tijdstip overlijden</div>
-    <div th:text="${parsedDetail.tijdstipOverlijden()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.tijdstipOverlijden()}"></div>
     <div class="label">Tijdstip vaststelling</div>
-    <div th:text="${parsedDetail.tijdstipVaststelling()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.tijdstipVaststelling()}"></div>
     <div class="label">Arts die vaststelling heeft gedaan</div>
-    <div th:text="${parsedDetail.artsVaststelling()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.artsVaststelling()}"></div>
     <div class="label">Adres van overlijden</div>
-    <div th:text="${parsedDetail.adresOverlijden()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.adresOverlijden()}"></div>
     <div class="label">Plaats van overlijden</div>
-    <div th:text="${parsedDetail.plaatsOverlijden()}"></div>
-    </p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.plaatsOverlijden()}"></div>
 
 </div>
 </html>

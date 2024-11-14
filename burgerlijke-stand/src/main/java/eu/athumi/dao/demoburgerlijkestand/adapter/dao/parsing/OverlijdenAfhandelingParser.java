@@ -19,10 +19,10 @@ public class OverlijdenAfhandelingParser {
     }
 
     private static String oplaadDatumAsString(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofPattern("'Opgeladen op' dd/MM/yyyy 'om' HH'u'mm"));
+        return date.format(DateTimeFormatter.ofPattern("'Opgeladen op' dd/MM/yyyy 'om' HH:mm"));
     }
 
     private static String datumAsString(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofPattern("'Aangemaakt op' dd/MM/yyyy 'om' HH'u'mm"));
+        return date.format(DateTimeFormatter.ofPattern("'Aangemaakt op' dd/MM/yyyy 'om' HH:mm"));
     }
 }

@@ -3,28 +3,17 @@
 
 <div th:fragment="overledene-jonger-dan-1-jaar(dossier, parsedDetail)" class="grid-column">
     <h3>Overledene</h3>
-    <p>
     <div class="label">Overledene</div>
-    <div th:text="${parsedDetail.naamOverledene()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.naamOverledene()}"></div>
     <div class="label">Rijksregisternummer</div>
-    <div th:text="${dossier.rijksregisternummer()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${dossier.rijksregisternummer()}"></div>
     <div class="label">Geslacht</div>
-    <div th:text="${dossier.geslacht()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${dossier.geslacht()}"></div>
     <div class="label">Verblijfplaats moeder</div>
-    <div th:text="${parsedDetail.verblijfplaatsMoeder()}"></div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${parsedDetail.verblijfplaatsMoeder()}"></div>
     <div class="label">Naam moeder</div>
-    <div th:text="${parsedDetail.naamMoeder()}">
+    <div class="bottom-spacing"  th:text="${parsedDetail.naamMoeder()}">
         someValue
     </div>
-
-    </p>
 </div>
 </html>

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-
-<div th:if="${inlichtingenfiche != null}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
-    <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-base-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
-    <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-overige-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
-    <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-bestanden.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
+<div class="ml-3">
+    <div th:if="${inlichtingenfiche}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
+        <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-base-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
+        <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-overige-info.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
+        <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche-bestanden.html :: inlichtingenfiche(inlichtingenfiche=${inlichtingenfiche})}"></div>
+    </div>
+    <div th:unless="${inlichtingenfiche}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
+        <h3>Inlichtingenfiche uitvaart - Aanvraag toestemming begrafenis / crematie</h3>
+        Nog geen inlichtingenfiche toegevoegd
+    </div>
 </div>
 
 </html>
