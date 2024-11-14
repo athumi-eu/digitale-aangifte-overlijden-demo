@@ -49,8 +49,8 @@ Wanneer er een incident voorkomt kan het zijn dat er contact wordt opgenomen met
 
 ## Testen van de api
 Om snel te controleren of alle acties correct zijn uitgevoerd is er een endpoint voorzien voor de security te testen:
-- https://dao.api.beta-athumi.eu/ping
-- https://dao.api.acc-athumi.eu/ping
-- https://dao.api.athumi.eu/ping
+- https://dao.api.beta-athumi.eu/health/v1/ping
+- https://dao.api.acc-athumi.eu/health/v1/ping
+- https://dao.api.athumi.eu/health/v1/ping
 
 Per omgeving moet er een unieke client aangevraagd worden. 
