@@ -3,22 +3,14 @@
 
 <div th:fragment="dossier(dossier, parsedDetail)" class="grid-container-3">
     <div class="grid-column">
-        <p>
         <div class="label">Status</div>
-        <div th:text="${dossier.dossierStatus()}"></div>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${dossier.dossierStatus()}"></div>
         <div class="label">Ingediend op</div>
-        <div th:text="${dossier.ingediendOp()}"></div>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${dossier.parsedIngediendOp()}"></div>
         <div class="label">Afgesloten op</div>
-        <div th:text="${dossier.afgeslotenOp()}"></div>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${dossier.parsedAfgeslotenOp()}"></div>
         <div class="label">Heropend op</div>
-        <div th:text="${dossier.heropendOp()}"></div>
-        </p>
+        <div class="bottom-spacing"  th:text="${dossier.parsedHeropendOp()}"></div>
 
         <div th:if="${dossier.afgeslotenOp() == null}">
             <div th:replace="~{fragments/afsluiten.html :: afsluiten(id=${dossier.id()})}"></div>
@@ -29,18 +21,12 @@
     </div>
 
     <div class="grid-column">
-        <p>
         <div class="label">Uitvaartondernemer</div>
-        <div th:text="${parsedDetail.uo().naam()}"></div>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${parsedDetail.uo().naam()}"></div>
         <div class="label">KBO-nummer</div>
-        <div th:text="${parsedDetail.uo().kboNummer()}"></div>
-        </p>
-        <p>
+        <div class="bottom-spacing"  th:text="${parsedDetail.uo().kboNummer()}"></div>
         <div class="label">Dossier opgestart door uitvaartondernemer op</div>
-        <div th:text="${parsedDetail.uo().opgestartOp()}"></div>
-        </p>
+        <div class="bottom-spacing"  th:text="${parsedDetail.uo().opgestartOp()}"></div>
     </div>
 </div>
 

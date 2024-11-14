@@ -4,22 +4,14 @@
 <div th:fragment="aanvullende-gegevens(id, verrijking)" class="grid-column">
 
     <h3>Aanvulling gegevens</h3>
-    <p>
     <div class="label">Rijksregisternummer overledene</div>
-    <div th:text="${verrijking.rrnOverledene()}">-</div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${verrijking.rrnOverledene()}">-</div>
     <div class="label">Rijksregisternummer moeder</div>
-    <div th:text="${verrijking.rrnMoeder()}">-</div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${verrijking.rrnMoeder()}">-</div>
     <div class="label">Rijksregisternummer vader of meemoeder</div>
-    <div th:text="${verrijking.rrnVaderOfMeeMoeder()}">-</div>
-    </p>
-    <p>
+    <div class="bottom-spacing"  th:text="${verrijking.rrnVaderOfMeeMoeder()}">-</div>
     <div class="label">PV- / systeem-nummer</div>
-    <div th:text="${verrijking.pvOfSysteemNummer()}">-</div>
-    </p>
+    <div class="bottom-spacing"  th:text="${verrijking.pvOfSysteemNummer()}">-</div>
 
     <div>
         <button onclick="on()">Vul gegevens aan</button>

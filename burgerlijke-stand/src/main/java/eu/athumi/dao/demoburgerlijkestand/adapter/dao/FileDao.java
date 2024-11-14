@@ -2,7 +2,6 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -42,28 +41,24 @@ public class FileDao {
                 .toBodilessEntity();
     }
 
-    @GetMapping(value = "/documenten", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/documenten")
     @ResponseBody
     public ResponseEntity<byte[]> downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type) {
-        return securedWebClient.get()
+        ResponseEntity<byte[]> entity = securedWebClient.get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", dossierId, type)
                 .retrieve()
                 .toEntity(byte[].class);
+        return ResponseEntity.ok()
+                .contentType(Objects.requireNonNull(entity.getHeaders().getContentType()))
+                .body(entity.getBody());
     }
 
     @GetMapping(value = "/aktes/download", produces = "application/pdf")
     @ResponseBody
     public byte[] downloadAkte(@RequestParam String type, @RequestParam String id) {
-        DocumentType docType;
-        if (Objects.equals("nationaal", type)) {
-            docType = DocumentType.NATIONALE_AKTE;
-        } else {
-            docType = DocumentType.INTERNATIONALE_AKTE;
-        }
-
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, docType.name())
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }
@@ -87,7 +82,7 @@ public class FileDao {
     public byte[] downloadFile(@RequestParam String id) {
         return securedWebClient
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", id, DocumentType.TOESTEMMING_BEGRAFENIS_OF_CREMATIE.name())
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .retrieve()
                 .toEntity(byte[].class).getBody();
     }

@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 
-    <div th:fragment="overledene-ouder-dan-1-jaar(dossier, parsedDetail)" class="grid-column">
-        <h3>Overledene</h3>
-        <p>
-        <div class="label">Overledene</div>
-        <div th:text="${parsedDetail.naamOverledene()}"/>
-        </p>
-        <p>
-        <div class="label">Rijksregisternummer</div>
-        <div th:text="${dossier.rijksregisternummer()}"/>
-        </p>
-        <p>
-        <div class="label">Geslacht</div>
-        <div th:text="${dossier.geslacht()}"/>
-        </p>
-        <p>
-        <div class="label">Verblijfplaats</div>
-        <div th:text="${parsedDetail.verblijfplaatsOverledene()}"/>
-        </p>
-        <p>
-        <div class="label">Echtgeno(o)t(te) of weduw(e)(naar) van</div>
-        <div th:text="${parsedDetail.naamPartner()}"/>
-        </p>
-    </div>
+<div th:fragment="overledene-ouder-dan-1-jaar(dossier, parsedDetail)" class="grid-column">
+    <h3>Overledene</h3>
+    <div class="label">Overledene</div>
+    <div class="bottom-spacing" th:text="${parsedDetail.naamOverledene()}"></div>
+    <div class="label">Rijksregisternummer</div>
+    <div class="bottom-spacing" th:text="${dossier.rijksregisternummer()}"/>
+    <div class="label">Geslacht</div>
+    <div class="bottom-spacing" th:text="${dossier.geslacht()}"/>
+    <div class="label">Verblijfplaats</div>
+    <div class="bottom-spacing" th:text="${parsedDetail.verblijfplaatsOverledene()}"/>
+    <div class="label">Echtgeno(o)t(te) of weduw(e)(naar) van</div>
+    <div class="bottom-spacing" th:text="${parsedDetail.naamPartner()}"/>
+</div>
 </html>
