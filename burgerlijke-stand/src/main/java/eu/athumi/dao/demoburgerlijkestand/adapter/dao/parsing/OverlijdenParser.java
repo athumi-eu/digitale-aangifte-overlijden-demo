@@ -37,7 +37,7 @@ public record OverlijdenParser(OverlijdenJSON overlijden, VaststellingOverlijden
     public String adresOverlijden() {
         if (Objects.isNull(overlijden)
                 || Objects.isNull(overlijden.getAdresOverlijden())) {
-            return "/";
+            return null;
         }
         return PlaatsParser.parseAdres(overlijden.getAdresOverlijden());
     }

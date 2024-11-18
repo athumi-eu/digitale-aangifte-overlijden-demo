@@ -47,7 +47,7 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
         if (Objects.isNull(verslag.inwonerschap())
                 || Objects.isNull(verslag.inwonerschap().verblijfplaats())
                 || Objects.isNull(verslag.inwonerschap().verblijfplaats().adres())) {
-            return "";
+            return null;
         }
         return PlaatsParser.parseAdres(verslag.inwonerschap().verblijfplaats().adres());
     }

@@ -25,7 +25,7 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         if (Objects.isNull(dossier.inwonerschap())
                 || Objects.isNull(dossier.inwonerschap().verblijfplaats())
                 || Objects.isNull(dossier.inwonerschap().verblijfplaats().adres())) {
-            return "/";
+            return null;
         }
 
         return PlaatsParser.parseAdres(dossier.inwonerschap().verblijfplaats().adres());

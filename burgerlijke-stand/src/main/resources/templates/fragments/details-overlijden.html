@@ -10,7 +10,7 @@
     <div class="label">Arts die vaststelling heeft gedaan</div>
     <div class="bottom-spacing"  th:text="${parsedDetail.artsVaststelling()}"></div>
     <div class="label">Adres van overlijden</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.adresOverlijden()}"></div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.adresOverlijden ?: '/'}"></div>
     <div class="label">Plaats van overlijden</div>
     <div class="bottom-spacing"  th:text="${parsedDetail.plaatsOverlijden()}"></div>
 
