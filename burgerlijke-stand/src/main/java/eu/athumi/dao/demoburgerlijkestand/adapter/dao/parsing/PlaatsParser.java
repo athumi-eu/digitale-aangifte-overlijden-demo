@@ -9,12 +9,13 @@ public class PlaatsParser {
 
     public static String parseAdres(AdresJSON adres) {
         if (Objects.isNull(adres)) {
-            return "/";
+            return null;
         }
         var straat = Objects.isNull(adres.straat()) ? "" : adres.straat();
-        var huisnummer =  Objects.isNull(adres.huisnummer()) ? "" : adres.huisnummer();
-        var niscode =  Objects.isNull(adres.niscode()) ? "" : adres.niscode();
-        return straat + " " + huisnummer + ", niscode: " + niscode;
+        var huisnummer = Objects.isNull(adres.huisnummer()) ? "" : adres.huisnummer();
+        var bus = Objects.isNull(adres.bus()) ? "" : adres.bus();
+        var niscode = Objects.isNull(adres.niscode()) ? "" : adres.niscode();
+        return straat + " " + huisnummer + " " + bus + ", niscode: " + niscode;
     }
 
     public static String parseLocatie(LocatieJSON locatieJSON) {

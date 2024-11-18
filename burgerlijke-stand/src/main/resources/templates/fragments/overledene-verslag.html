@@ -14,7 +14,7 @@
         <div class="label">Geboortedatum</div>
         <div class="bottom-spacing"  th:text="${verslagDetail.geboorteDatum()}"/>
         <div class="label">Verblijfplaats</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.verblijfplaatsOverledene()}"/>
+        <div class="bottom-spacing"  th:text="${verslagDetail.verblijfplaatsOverledene ?: '/'}"/>
 
     </div>
 </html>

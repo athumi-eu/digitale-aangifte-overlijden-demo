@@ -28,7 +28,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
                 || Objects.isNull(dossier.moeder().persoonsGegevens().inwonerschap())
                 || Objects.isNull(dossier.moeder().persoonsGegevens().inwonerschap().verblijfplaats())
                 || Objects.isNull(dossier.moeder().persoonsGegevens().inwonerschap().verblijfplaats().adres())) {
-            return "/";
+            return null;
         }
 
         return PlaatsParser.parseAdres(dossier.moeder().persoonsGegevens().inwonerschap().verblijfplaats().adres());
