@@ -27,5 +27,19 @@ public record UitvaartOndernemerParser(UitvaartOndernemerJSON json) {
         return TijdstipParser.parseLocalDateTime(json.opgestartOp());
     }
 
+    public String afgeslotenOp() {
+        if (Objects.isNull(json) || Objects.isNull(json.afgeslotenOp())) {
+            return "/";
+        }
+        return TijdstipParser.parseLocalDateTime(json.afgeslotenOp());
+    }
+
+    public String heropendOp() {
+        if (Objects.isNull(json) || Objects.isNull(json.heropendOp())) {
+            return "/";
+        }
+        return TijdstipParser.parseLocalDateTime(json.heropendOp());
+    }
+
 
 }
