@@ -29,3 +29,4 @@ node_modules
 dist!/.idea/
 /burgerlijke-stand/.gradle
 /burgerlijke-stand/build
+*application-secret*.yml
