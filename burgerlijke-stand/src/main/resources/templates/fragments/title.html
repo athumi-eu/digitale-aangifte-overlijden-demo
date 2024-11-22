@@ -4,6 +4,10 @@
 <body>
 <div th:fragment="title" class="mlr-3 light-grey">
     <h2>Toepassing burgerlijke stand</h2>
+    <select id="gemeente" name="gemeente" th:onchange="setKbonummer()">
+        <option value="">Selecteer een waarde</option>
+        <option th:each="sb : ${allGemeentes}" th:value="${sb.kbonummer}" th:text="${sb.naam}" th:selected="${kbonummer == sb.kbonummer}"></option>
+    </select>
 </div>
 </body>
 </html>
