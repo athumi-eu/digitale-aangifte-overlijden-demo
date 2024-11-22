@@ -1,6 +1,7 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
@@ -30,13 +31,13 @@ import static java.util.Optional.ofNullable;
 @Controller
 public class DossierDao {
 
-    private final RestClient securedWebClient;
+    private final RestClientProvider securedWebClient;
     @Value("${dao.service.connection-url}")
     private String daoServiceUrl;
 
     private ObjectMapper objectMapper;
 
-    public DossierDao(RestClient securedWebClient, ObjectMapper objectMapper) {
+    public DossierDao(RestClientProvider securedWebClient, ObjectMapper objectMapper) {
         this.securedWebClient = securedWebClient;
         this.objectMapper = objectMapper;
     }
@@ -74,7 +75,7 @@ public class DossierDao {
                 .build().getQuery();
 
         try {
-            DossierBurgerlijkeStandJSON[] response = securedWebClient
+            DossierBurgerlijkeStandJSON[] response = securedWebClient.getRestClient(kbonummer)
                     .get()
                     .uri(url)
                     .retrieve()
@@ -88,7 +89,12 @@ public class DossierDao {
                 model.addAttribute("dossiers", List.of());
                 model.addAttribute("kbonummer", kbonummer);
                 return "dossiers";
-            } else {
+            }else if (ex.getStatusCode().value() == 403) {
+                model.addAttribute("dossiers", new DossierBurgerlijkeStandJSON[0]);
+                model.addAttribute("kbonummer", kbonummer);
+                return "dossiers";
+            }
+            else {
                 throw ex;
             }
         }
@@ -98,7 +104,7 @@ public class DossierDao {
 
     @GetMapping(value = "/dossier")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
-        Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient
+        Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient.getRestClient(kbonummer)
                         .get()
                         .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id)
                         .retrieve()
@@ -108,10 +114,9 @@ public class DossierDao {
 
         model.addAttribute("kbonummer", kbonummer);
 
-        System.out.println(detail.get());
         if (detail.isPresent()) {
             var dossier = detail.get();
-            var verslag = ofNullable(dossier.verslagDetailURL()).map(this::getVerslagDetail).map(VerslagParser::new).orElse(null);
+            var verslag = ofNullable(dossier.verslagDetailURL()).map((URI verslagDetailURL) -> getVerslagDetail(verslagDetailURL, kbonummer)).map(VerslagParser::new).orElse(null);
             model.addAttribute("ficheDocumenten", new FicheDocumentenParser(dossier));
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("dossier", dossier);
@@ -129,9 +134,9 @@ public class DossierDao {
         return "detail-does-not-exist";
     }
 
-    public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL) {
+    public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL, String kbonummer) {
 
-        VerslagBeedigdArtsJSON body = securedWebClient
+        VerslagBeedigdArtsJSON body = securedWebClient.getRestClient(kbonummer)
                 .get()
                 .uri(verslagDetailURL)
                 .retrieve()
@@ -141,9 +146,9 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/afsluiten")
     @ResponseBody
-    public ResponseEntity<String> afsluitenDossier(@PathVariable String id) {
+    public ResponseEntity<String> afsluitenDossier(@PathVariable String id, Model model) {
         try {
-            securedWebClient
+            securedWebClient.getRestClient(model)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
                     .retrieve()
@@ -158,9 +163,9 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/heropen")
     @ResponseBody
-    public ResponseEntity<String> heropenDossier(@PathVariable String id) {
+    public ResponseEntity<String> heropenDossier(@PathVariable String id, Model model) {
         try {
-            securedWebClient
+            securedWebClient.getRestClient(model)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
                     .retrieve()
@@ -174,9 +179,9 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/verrijk")
     @ResponseBody
-    public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking) {
+    public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking, Model model) {
         try {
-            securedWebClient
+            securedWebClient.getRestClient(model)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verrijken", id)
                     .body(objectMapper.readValue(
@@ -191,4 +196,5 @@ public class DossierDao {
         }
         return ResponseEntity.ok("Ok");
     }
+
 }

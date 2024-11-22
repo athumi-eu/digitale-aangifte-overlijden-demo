@@ -1,0 +1,13 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          demo:
+            token-uri: https://authenticatie-ti.vlaanderen.be/op/v1/token
+            issuer-uri: https://authenticatie-ti.vlaanderen.be/op
+
+dao:
+  service:
+    connection-url: https://dao.api.beta-athumi.eu
+    frontend-base-url: https://dao.beta-athumi.eu/demo

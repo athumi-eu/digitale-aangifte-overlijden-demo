@@ -1,11 +1,7 @@
-spring:
-  security:
-    oauth2:
-      client:
-        provider:
-          demo:
-            token-uri: https://dao.api.test-athumi.eu/oauth2/token
 dao:
   service:
     connection-url: https://dao.api.test-athumi.eu
     frontend-base-url: https://dao.test-athumi.eu/demo
+  gemeentes:
+    security-method: client_credentials
+    token-uri: https://dao.api.test-athumi.eu/oauth2/token

@@ -1,5 +1,6 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,17 +15,17 @@ import java.util.*;
 @Controller
 public class VerslagDao {
 
-    private final RestClient securedWebClient;
+    private final RestClientProvider webclientProvider;
     @Value("${dao.service.connection-url}")
     private String daoServiceUrl;
 
-    public VerslagDao(RestClient securedWebClient) {
-        this.securedWebClient = securedWebClient;
+    public VerslagDao(RestClientProvider webclientProvider) {
+        this.webclientProvider = webclientProvider;
     }
 
     @GetMapping(value = "/verslagen")
     public String dossier(Model model, @RequestParam String kbonummer) {
-        VerslagBeedigdArtsJSON[] response = securedWebClient
+        VerslagBeedigdArtsJSON[] response = webclientProvider.getRestClient(kbonummer)
                 .get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts?kbonummer={kbonummer}", kbonummer)
                 .retrieve()
@@ -42,7 +43,7 @@ public class VerslagDao {
 
     @GetMapping(value = "/verslag")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
-        Optional<VerslagBeedigdArtsJSON> detail = Arrays.stream(securedWebClient
+        Optional<VerslagBeedigdArtsJSON> detail = Arrays.stream(webclientProvider.getRestClient(kbonummer)
                         .get()
                         .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts?kbonummer={kbonummer}", kbonummer)
                         .retrieve()
@@ -66,7 +67,7 @@ public class VerslagDao {
     @ResponseBody
     public ResponseEntity<String> koppelVerslag(@PathVariable String id, @RequestParam String kbonummer, @RequestBody String dossierNummer) {
         try {
-            securedWebClient
+            webclientProvider.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/koppel", id)
                     .body(new DossierNummer(dossierNummer))
@@ -81,9 +82,9 @@ public class VerslagDao {
 
     @PostMapping(path = "/verslag/{id}/ontkoppel")
     @ResponseBody
-    public ResponseEntity<String> ontkoppelVerslag(@PathVariable String id) {
+    public ResponseEntity<String> ontkoppelVerslag(@PathVariable String id,Model model) {
         try {
-            securedWebClient
+            webclientProvider.getRestClient(model)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/ontkoppel", id)
                     .retrieve()
@@ -97,9 +98,9 @@ public class VerslagDao {
 
     @DeleteMapping(path = "/verslag/{id}")
     @ResponseBody
-    public ResponseEntity<String> verwijderVerslag(@PathVariable String id) {
+    public ResponseEntity<String> verwijderVerslag(@PathVariable String id ,Model model) {
         try {
-            securedWebClient
+            webclientProvider.getRestClient(model)
                     .delete()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}", id)
                     .retrieve()
