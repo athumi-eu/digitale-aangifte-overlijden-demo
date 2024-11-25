@@ -32,6 +32,7 @@ public record DossierBurgerlijkeStandJSON(
         LocalDateTime ingediendOp,
         DossierVerrijkingJSON verrijking,
         UitvaartOndernemerJSON uitvaartOndernemer,
+        UitvaartOndernemerJSON vorigeUitvaartOndernemer,
         InlichtingenficheJSON inlichtingenfiche
 ) implements Type {
     @Override

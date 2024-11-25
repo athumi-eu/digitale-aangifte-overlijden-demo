@@ -2,6 +2,10 @@
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
 
+## [0.1.45] - 2024-22-25
+### Added
+- Vorige uitvaart ondernemer wordt getoond op het dossier detail
+
 ## [0.1.43] - 2024-22-25
 ### Added
 - Documentatie uitgesplits in verschillende startpunten

@@ -41,5 +41,12 @@ public record UitvaartOndernemerParser(UitvaartOndernemerJSON json) {
         return TijdstipParser.parseLocalDateTime(json.heropendOp());
     }
 
+    public String geannuleerdOp() {
+        if (Objects.isNull(json) || Objects.isNull(json.geannuleerdOp())) {
+            return "/";
+        }
+        return TijdstipParser.parseLocalDateTime(json.geannuleerdOp());
+    }
+
 
 }
