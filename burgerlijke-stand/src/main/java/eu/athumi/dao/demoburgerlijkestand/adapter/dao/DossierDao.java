@@ -50,7 +50,7 @@ public class DossierDao {
 
     @GetMapping(value = "/dossiers")
     public String dossierDetailFilter(Model model,
-                                      @RequestParam String kbonummer,
+                                      @RequestParam(required = false, defaultValue = "0207521503") String kbonummer,
                                       @RequestParam(required = false) String status,
                                       @RequestParam(required = false) String dossiernummer,
                                       @RequestParam(required = false) String rijksregisternummer,

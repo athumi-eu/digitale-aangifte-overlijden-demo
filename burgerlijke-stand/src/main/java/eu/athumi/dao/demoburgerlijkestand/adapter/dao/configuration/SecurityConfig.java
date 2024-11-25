@@ -19,7 +19,7 @@ public class SecurityConfig {
     private ClientConfigurationProperties clientConfigurationProperties;
 
     public SecurityConfig(ClientConfigurationProperties clientConfigurationProperties) {
-
+        this.clientConfigurationProperties = clientConfigurationProperties;
     }
 
     @Bean

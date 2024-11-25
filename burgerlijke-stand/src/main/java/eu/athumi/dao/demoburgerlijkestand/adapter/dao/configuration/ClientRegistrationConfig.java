@@ -31,8 +31,9 @@ public class ClientRegistrationConfig {
                         .clientId(item.getClientid())
                         .clientSecret(item.getClientsecret())
                         .tokenUri(clientConfigurationProperties.getTokenUri())
+                        .issuerUri(clientConfigurationProperties.getIssuerUri())
                         .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                        .clientAuthenticationMethod(clientConfigurationProperties.getAuthenticationMethod())
                         .scope("dao_lbbs")
                         .build())
                 .collect(Collectors.toList());
