@@ -2,10 +2,10 @@
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
 
-## [0.1.] -
-
+## [0.1.43] - 2024-22-25
 ### Added
 - Documentatie uitgesplits in verschillende startpunten
+- Mogelijkheid tot verschillende gemeentes te selecteren
 
 ## [0.1.28] - 2024-10-07
 
