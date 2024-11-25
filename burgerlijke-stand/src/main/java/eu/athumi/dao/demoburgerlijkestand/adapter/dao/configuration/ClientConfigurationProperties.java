@@ -3,6 +3,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration;
 import com.nimbusds.jose.jwk.JWK;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.lang.NonNull;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.validation.annotation.Validated;
 
 import java.text.ParseException;
@@ -18,11 +19,13 @@ public class ClientConfigurationProperties {
     private Map<String, GemeenteConfig> config;
     private String securityMethod;
     private String tokenUri;
+    private String issuerUri;
 
-    public ClientConfigurationProperties(String securityMethod, Map<String, GemeenteConfig> config, String tokenUri) {
+    public ClientConfigurationProperties(String securityMethod, Map<String, GemeenteConfig> config, String tokenUri, String issuerUri) {
         this.securityMethod = securityMethod;
         this.config = config;
         this.tokenUri = tokenUri;
+        this.issuerUri = issuerUri;
     }
 
     public String getSecurityMethod() {
@@ -53,6 +56,17 @@ public class ClientConfigurationProperties {
                 .findFirst()
                 .map(GemeenteConfig::getJwk)
                 .orElseThrow();
+    }
+
+    public String getIssuerUri() {
+        return issuerUri;
+    }
+
+    public ClientAuthenticationMethod getAuthenticationMethod() {
+        if("client_secret".equals(securityMethod)) {
+            return ClientAuthenticationMethod.CLIENT_SECRET_BASIC;
+        }
+        return ClientAuthenticationMethod.PRIVATE_KEY_JWT;
     }
 
 

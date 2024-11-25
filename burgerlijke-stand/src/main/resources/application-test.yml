@@ -3,5 +3,5 @@ dao:
     connection-url: https://dao.api.test-athumi.eu
     frontend-base-url: https://dao.test-athumi.eu/demo
   gemeentes:
-    security-method: client_credentials
+    security-method: client_secret
     token-uri: https://dao.api.test-athumi.eu/oauth2/token
