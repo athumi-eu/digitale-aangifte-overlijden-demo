@@ -32,6 +32,21 @@
         <div class="label">Dossier heropend door uitvaartondernemer op</div>
         <div class="bottom-spacing"  th:text="${parsedDetail.uo().heropendOp()}"></div>
     </div>
+
+    <div class="grid-column">
+        <div class="label">Vorige Uitvaartondernemer</div>
+        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().naam()}"></div>
+        <div class="label">KBO-nummer</div>
+        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().kboNummer()}"></div>
+        <div class="label">Dossier opgestart door uitvaartondernemer op</div>
+        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().opgestartOp()}"></div>
+        <div class="label">Dossier afgesloten door uitvaartondernemer op</div>
+        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().afgeslotenOp()}"></div>
+        <div class="label">Dossier heropend door uitvaartondernemer op</div>
+        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().heropendOp()}"></div>
+        <div class="label">Dossier geannuleerd door uitvaartondernemer op</div>
+        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().geannuleerdOp()}"></div>
+    </div>
 </div>
 
 

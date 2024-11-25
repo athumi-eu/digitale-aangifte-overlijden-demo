@@ -12,6 +12,10 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return new UitvaartOndernemerParser(dossier.uitvaartOndernemer());
     }
 
+    public UitvaartOndernemerParser vuo() {
+        return new UitvaartOndernemerParser(dossier.vorigeUitvaartOndernemer());
+    }
+
     public VerrijkingParser verrijking() {
         return new VerrijkingParser(dossier.verrijking());
     }
