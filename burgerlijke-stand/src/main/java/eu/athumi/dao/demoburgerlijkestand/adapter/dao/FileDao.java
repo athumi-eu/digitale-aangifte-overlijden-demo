@@ -5,14 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -32,11 +27,11 @@ public class FileDao {
 
     @PostMapping("/aktes/upload")
     @ResponseBody
-    public void uploadAkte(@RequestParam("akte") MultipartFile file, @RequestParam String type, @RequestParam String id, Model model) {
+    public void uploadAkte(@RequestParam("akte") MultipartFile file, @RequestParam String type, @RequestParam String id, @SessionAttribute String kbonummer) {
         MultiValueMap<String, Resource> body = new LinkedMultiValueMap<>();
         body.add("akte", file.getResource());
         securedWebClient
-                .getRestClient(model)
+                .getRestClient(kbonummer)
                 .post()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .body(body)
@@ -46,9 +41,9 @@ public class FileDao {
 
     @GetMapping(value = "/documenten")
     @ResponseBody
-    public ResponseEntity<byte[]> downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type, Model model) {
+    public ResponseEntity<byte[]> downloadDocument(@RequestParam("dossierId") String dossierId, @RequestParam("type") String type, @SessionAttribute String kbonummer) {
         ResponseEntity<byte[]> entity = securedWebClient
-                .getRestClient(model)
+                .getRestClient(kbonummer)
                 .get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/documenten/{type}", dossierId, type)
                 .retrieve()
@@ -60,9 +55,9 @@ public class FileDao {
 
     @GetMapping(value = "/aktes/download", produces = "application/pdf")
     @ResponseBody
-    public byte[] downloadAkte(@RequestParam String type, @RequestParam String id, Model model) {
+    public byte[] downloadAkte(@RequestParam String type, @RequestParam String id, @SessionAttribute String kbonummer) {
         return securedWebClient
-                .getRestClient(model)
+                .getRestClient(kbonummer)
                 .get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .retrieve()
@@ -71,12 +66,12 @@ public class FileDao {
 
     @PostMapping("/toestemming/upload")
     @ResponseBody
-    public void uploadFile(@RequestParam MultipartFile toestemming, @RequestParam LocalDateTime aanmaakDatumToestemming, @RequestParam String id, Model model) {
+    public void uploadFile(@RequestParam MultipartFile toestemming, @RequestParam LocalDateTime aanmaakDatumToestemming, @RequestParam String id, @SessionAttribute String kbonummer) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("toestemming", toestemming.getResource());
         body.add("aanmaakDatumToestemming", aanmaakDatumToestemming.format(DateTimeFormatter.ISO_DATE_TIME));
         securedWebClient
-                .getRestClient(model)
+                .getRestClient(kbonummer)
                 .post()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .body(body)
@@ -86,9 +81,9 @@ public class FileDao {
 
     @GetMapping(value = "/toestemming/download", produces = "application/pdf")
     @ResponseBody
-    public byte[] downloadFile(@RequestParam String id, Model model) {
+    public byte[] downloadFile(@RequestParam String id, @SessionAttribute String kbonummer) {
         return securedWebClient
-                .getRestClient(model)
+                .getRestClient(kbonummer)
                 .get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
                 .retrieve()

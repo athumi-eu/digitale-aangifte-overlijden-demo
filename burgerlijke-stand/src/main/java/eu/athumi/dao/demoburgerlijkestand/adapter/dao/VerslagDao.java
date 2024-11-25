@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestClient;
 
 import java.util.*;
 
 @Controller
+@SessionAttributes("kbonummer")
 public class VerslagDao {
 
     private final RestClientProvider webclientProvider;
@@ -82,9 +82,9 @@ public class VerslagDao {
 
     @PostMapping(path = "/verslag/{id}/ontkoppel")
     @ResponseBody
-    public ResponseEntity<String> ontkoppelVerslag(@PathVariable String id,Model model) {
+    public ResponseEntity<String> ontkoppelVerslag(@PathVariable String id, @SessionAttribute String kbonummer) {
         try {
-            webclientProvider.getRestClient(model)
+            webclientProvider.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/ontkoppel", id)
                     .retrieve()
@@ -98,9 +98,9 @@ public class VerslagDao {
 
     @DeleteMapping(path = "/verslag/{id}")
     @ResponseBody
-    public ResponseEntity<String> verwijderVerslag(@PathVariable String id ,Model model) {
+    public ResponseEntity<String> verwijderVerslag(@PathVariable String id ,@SessionAttribute String kbonummer) {
         try {
-            webclientProvider.getRestClient(model)
+            webclientProvider.getRestClient(kbonummer)
                     .delete()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}", id)
                     .retrieve()
