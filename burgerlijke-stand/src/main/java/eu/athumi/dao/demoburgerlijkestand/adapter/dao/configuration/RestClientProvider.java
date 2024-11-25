@@ -4,12 +4,10 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.web.client.RestClient;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
@@ -34,13 +32,6 @@ public class RestClientProvider {
 
     public RestClient getRestClient(String kbonummer) {
         return ofNullable(restClientMap.get(kbonummer)).orElse(restClientMap.values().stream().findFirst().orElse(null));
-    }
-    public RestClient getRestClient(Model model) {
-        return ofNullable(restClientMap.get(getKboNummerFrom(model))).orElse(restClientMap.values().stream().findFirst().orElse(null));
-    }
-
-    private String getKboNummerFrom(Model model) {
-        return (String) model.getAttribute("kbonummer");
     }
 
     public RestClient securedWebClient(String kbonummer) {

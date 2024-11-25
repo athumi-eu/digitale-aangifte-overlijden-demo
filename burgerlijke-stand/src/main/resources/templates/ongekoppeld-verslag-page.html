@@ -3,7 +3,7 @@
 <head th:replace="~{fragments/head :: head}"><title></title></head>
 <body>
 <div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
-<div th:replace="~{fragments/title :: title}"></div>
+<div th:replace="~{fragments/title :: title(kbonummer=${kbonummer})}"></div>
 
 <div class="mlr-3 mtb-3">
     <a th:href="@{verslagen(kbonummer=${kbonummer})}">Terug naar overzicht ongekoppelde verslagen beëdigd arts</a>

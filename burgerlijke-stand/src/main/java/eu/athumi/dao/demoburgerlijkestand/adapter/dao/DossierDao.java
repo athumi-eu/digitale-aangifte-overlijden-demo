@@ -10,7 +10,9 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.FicheDocumentenPar
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import java.util.Optional;
 import static java.util.Optional.ofNullable;
 
 @Controller
+@SessionAttributes("kbonummer")
 public class DossierDao {
 
     private final RestClientProvider securedWebClient;
@@ -49,6 +52,7 @@ public class DossierDao {
 
     @GetMapping(value = "/dossiers")
     public String dossierDetailFilter(Model model,
+                                      HttpSession session,
                                       @RequestParam(required = false, defaultValue = "0207521503") String kbonummer,
                                       @RequestParam(required = false) String status,
                                       @RequestParam(required = false) String dossiernummer,
@@ -58,8 +62,8 @@ public class DossierDao {
                                       @RequestParam(required = false) Boolean heeftVerslagBeedigdArts,
                                       @RequestParam(required = false) Boolean heeftNationaleOverlijdensakte,
                                       @RequestParam(required = false) Boolean heeftInlichtingenfiche,
-                                      @RequestParam(required = false) Boolean heeftToestemming
-    ) {
+                                      @RequestParam(required = false) Boolean heeftToestemming,
+                                      HttpEntity<Object> httpEntity) {
 
         String url = daoServiceUrl + "/burgerlijke-stand/v1/dossiers?" + new DefaultUriBuilderFactory().builder().queryParam("kbonummer", kbonummer)
                 .queryParamIfPresent("status", ofNullable(status))
@@ -81,6 +85,7 @@ public class DossierDao {
                     .body(DossierBurgerlijkeStandJSON[].class);
             model.addAttribute("dossiers", response);
             model.addAttribute("kbonummer", kbonummer);
+            session.setAttribute("kbonummer", kbonummer);
             return "dossiers";
         } catch (HttpClientErrorException ex) {
             if (ex.getMessage().contains("Gelieve een extra request parameter toe te voegen")) {
@@ -145,9 +150,9 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/afsluiten")
     @ResponseBody
-    public ResponseEntity<String> afsluitenDossier(@PathVariable String id, Model model) {
+    public ResponseEntity<String> afsluitenDossier(@PathVariable String id, HttpSession session) {
         try {
-            securedWebClient.getRestClient(model)
+            securedWebClient.getRestClient(session.getAttribute("kbonummer").toString())
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
                     .retrieve()
@@ -162,9 +167,9 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/heropen")
     @ResponseBody
-    public ResponseEntity<String> heropenDossier(@PathVariable String id, Model model) {
+    public ResponseEntity<String> heropenDossier(@PathVariable String id, @SessionAttribute String kbonummer) {
         try {
-            securedWebClient.getRestClient(model)
+            securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
                     .retrieve()
@@ -178,9 +183,9 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/verrijk")
     @ResponseBody
-    public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking, Model model) {
+    public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking, @SessionAttribute String kbonummer) {
         try {
-            securedWebClient.getRestClient(model)
+            securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verrijken", id)
                     .body(objectMapper.readValue(

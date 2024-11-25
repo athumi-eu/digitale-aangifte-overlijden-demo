@@ -2,12 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head ><title>Titel fragment</title></head>
 <body>
-<div th:fragment="title" class="mlr-3 light-grey">
+<div th:fragment="title(kbonummer)" class="mlr-3 light-grey">
     <h2>Toepassing burgerlijke stand</h2>
-    <select id="gemeente" name="gemeente" th:onchange="setKbonummer()">
+    <select id="gemeente" name="gemeente" th:onchange="setKbonummer()" th:kbonummer="${kbonummer}">
         <option value="">Selecteer een waarde</option>
         <option th:each="sb : ${allGemeentes}" th:value="${sb.kbonummer}" th:text="${sb.naam}" th:selected="${kbonummer == sb.kbonummer}"></option>
     </select>
+    <script>
+        function setKbonummer() {
+            var params = new URLSearchParams(location.search);
+            var kbonummer = document.getElementById("gemeente").value
+            params.set('kbonummer', kbonummer);
+            sessionStorage.setItem('kbonummer', kbonummer);
+            window.location.search = params.toString();
+        }
+    </script>
 </div>
 </body>
 </html>
