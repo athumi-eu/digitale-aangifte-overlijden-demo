@@ -4,12 +4,12 @@ dao:
     frontend-base-url: http://localhost:8082
   gemeentes:
     security-method: client_secret
-    token-uri: https://dao.api.test-athumi.eu/oauth2/token
+    token-uri: http://localhost:8090/oauth2/token
     config:
       leuven:
         naam: Leuven
         kbonummer: '0207521503'
-        clientid: demo-client
+        clientid: demo-client-leuven
         clientsecret: demo-client-leuven-secret
       oostende:
         naam: Oostende
