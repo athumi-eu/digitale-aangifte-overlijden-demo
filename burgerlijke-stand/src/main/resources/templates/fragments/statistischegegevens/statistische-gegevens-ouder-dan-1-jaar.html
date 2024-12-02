@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="statistische-gegevens(id, statistischeGegevens)" class="grid-column">
+
+    <h3>Statistisch formulier</h3>
+    <table>
+
+        <tr>
+            <th></th>
+            <th>Bron RR</th>
+            <th>Bron vaststelling</th>
+            <th>Uitvaart ondernemer</th>
+            <th>Lokaal bestuur</th>
+            <th>Wordt doorgegeven aan Departement Zorg</th>
+        </tr>
+
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geslacht()})}"></tr>
+
+
+    </table>
+
+
+</div>
+
+<tr th:fragment="tableRow(tableRow)">
+
+    <td th:text="${tableRow.label()}"></td>
+    <td th:text="${tableRow.RR()}"></td>
+    <td th:text="${tableRow.vaststelling()}"></td>
+    <td th:text="${tableRow.uitvaart()}"></td>
+    <td th:text="${tableRow.abs()}"></td>
+    <td th:text="${tableRow.departementZorg()}"></td>
+
+</tr>
+
+
+</html>
+
