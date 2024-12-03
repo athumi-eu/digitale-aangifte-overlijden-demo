@@ -8,12 +8,12 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 
 import java.util.Set;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = MannelijkeOuderJSON.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes(
-    {
-        @JsonSubTypes.Type(MannelijkeOuderJSON.class),
-        @JsonSubTypes.Type(VrouwelijkeOuderJSON.class),
-    }
+        {
+                @JsonSubTypes.Type(value = VaderOfJongsteOuder.class, name = "VaderOfJongsteOuder"),
+                @JsonSubTypes.Type(value = MoederOfOudsteOuderJSON.class, name = "MoederOfOudsteOuderJSON"),
+        }
 )
 public interface OuderJSON {
     NationaliteitJSON nationaliteit();
