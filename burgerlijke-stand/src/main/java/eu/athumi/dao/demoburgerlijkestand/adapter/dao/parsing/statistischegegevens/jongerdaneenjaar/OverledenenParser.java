@@ -3,9 +3,12 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegev
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.VerdelingVolgensGeslachtJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
+
+import java.util.Objects;
 
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalTime;
@@ -94,12 +97,17 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Gemeente/ land van geboorte",
                 "-",
+                parseVerblijfplaats(geboorteVaststelling().adres()),
                 "-",
                 "-",
-                "-",
-                // Vragen
-                "Nog te vragen"
+                parseVerblijfplaats(geboorte().adres())
         );
+    }
+
+    private String parseVerblijfplaats(AdresJSON adres) {
+        var gemeente = ofNullable(adres).map(AdresJSON::gemeente).orElse(null);
+        var land = ofNullable(adres).map(AdresJSON::land).orElse(null);
+        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.naam();
     }
 
     public TableRow plaatsGeboorte() {
@@ -117,7 +125,8 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Levend geboren of doodgeboren",
                 "-",
-                "-",
+                //TODO DAO-136: van waar komt dit
+                "Nog op te zoeken",
                 "-",
                 "-",
                 //TODO DAO-136: van waar komt dit
