@@ -35,7 +35,6 @@ public record VrouwelijkeOuderJSON(
         return geslacht;
     }
 
-    @Override
     public BurgerlijkeStaatJSONType burgerlijkeStaat() {
         return burgerlijkeStaat;
     }

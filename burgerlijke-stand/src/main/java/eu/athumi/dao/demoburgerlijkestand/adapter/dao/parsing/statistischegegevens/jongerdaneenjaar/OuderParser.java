@@ -19,7 +19,7 @@ import static java.util.Optional.ofNullable;
 public record OuderParser(OuderJSON ouder) {
 
     public boolean isExtended() {
-        return !Objects.isNull(ouder.burgerlijkeStaat());
+        return ouder instanceof VrouwelijkeOuderJSON;
     }
 
     public TableRow geslacht() {
