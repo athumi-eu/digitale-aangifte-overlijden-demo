@@ -125,12 +125,12 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Levend geboren of doodgeboren",
                 "-",
-                //TODO DAO-136: van waar komt dit
-                "Nog op te zoeken",
+                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
+                "Nog te mappen",
                 "-",
                 "-",
-                //TODO DAO-136: van waar komt dit
-                "Nog op te zoeken"
+                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
+                "Nog te mappen"
         );
     }
 
