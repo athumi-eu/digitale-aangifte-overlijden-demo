@@ -18,15 +18,23 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return (OverledeneOuderDanEenJaarJSON) statistischeGegevens().persoonsgegevens().departementZorg().overledene();
     }
 
+    private OverledeneOuderDanEenJaarJSON getOverledeneVoorVaststelling() {
+        return (OverledeneOuderDanEenJaarJSON) statistischeGegevens().persoonsgegevens().vaststelling().overledene();
+    }
+
     private HuwelijkOverledeneJSON getHuwelijkOverledene() {
         return (HuwelijkOverledeneJSON) getOverledeneVoorDepartementZorg().huwelijk();
+    }
+
+    private HuwelijkOverledeneJSON getHuwelijkOverledeneVaststelling() {
+        return (HuwelijkOverledeneJSON) getOverledeneVoorVaststelling().huwelijk();
     }
 
     public TableRow geslacht() {
         return new TableRow(
                 "Geslacht",
                 "-",
-                "-",
+                ofNullable(getOverledeneVoorVaststelling().geslacht()).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().geslacht()).map(Geslacht::name).orElse("-")
@@ -73,7 +81,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Geboortedatum",
                 "-",
-                "-",
+                ofNullable(getOverledeneVoorVaststelling().geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-")
@@ -84,7 +92,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Nationaliteit",
                 "-",
-                "-",
+                ofNullable(getOverledeneVoorVaststelling().nationaliteit()).map(NationaliteitJSON::naam).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().nationaliteit()).map(NationaliteitJSON::naam).orElse("-")
@@ -95,7 +103,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Verblijfplaats",
                 "-",
-                "-",
+                ofNullable(getOverledeneVoorVaststelling().verblijfplaats()).map(AdresJSON::gemeente).map(GemeenteJSON::naam).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(AdresJSON::gemeente).map(GemeenteJSON::naam).orElse("-")
@@ -106,7 +114,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Burgerlijke staat",
                 "-",
-                "-",
+                ofNullable(getOverledeneVoorVaststelling().burgerlijkeStaat()).map(BurgerlijkeStaatJSONType::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaat()).map(BurgerlijkeStaatJSONType::name).orElse("-")
@@ -117,7 +125,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Datum huidig huwelijk",
                 "-",
-                "-",
+                ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.datum())).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getHuwelijkOverledene()).map(huwelijk -> parseLocalDate(huwelijk.datum())).orElse("-")
@@ -128,7 +136,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Geboortedatum overlevende partner",
                 "-",
-                "-",
+                ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getHuwelijkOverledene()).map(huwelijk -> parseLocalDate(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"));
