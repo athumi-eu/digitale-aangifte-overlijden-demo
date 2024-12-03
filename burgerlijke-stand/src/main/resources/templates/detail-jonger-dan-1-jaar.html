@@ -31,6 +31,8 @@
 
     <div th:replace="~{fragments/aanvullende-gegevens.html :: aanvullende-gegevens(id=${dossier.id()},verrijking=${parsedDetail.verrijking()})}"></div>
 
+    <div th:replace="~{fragments/statistischegegevens/statistische-gegevens-jonger-dan-1-jaar.html :: statistische-gegevens(id=${dossier.id()},statistischeGegevens=${statistischeGegevens})}"></div>
+
     <div th:replace="~{fragments/file-upload :: file-upload(dossier=${dossier}, parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
 </div>
 

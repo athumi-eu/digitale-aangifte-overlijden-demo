@@ -16,6 +16,15 @@
         </tr>
 
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geslacht()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.tijdstipOverlijden()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.gemeenteOverlijden()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.plaatsOverlijden()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geboorteDatum()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.nationaliteit()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.verblijfplaats()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.burgerlijkeStaat()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.huwelijksDatum()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geboorteDatumPartner()})}"></tr>
 
 
     </table>

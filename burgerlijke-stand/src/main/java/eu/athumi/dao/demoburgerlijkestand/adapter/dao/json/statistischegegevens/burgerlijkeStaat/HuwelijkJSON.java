@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.time.LocalDate;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = HuwelijkOuderJSON.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = HuwelijkOverledeneJSON.class)
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(HuwelijkOuderJSON.class),
