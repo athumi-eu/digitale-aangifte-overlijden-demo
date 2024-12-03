@@ -5,13 +5,12 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.BurgerlijkeStaatJSONType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.VrouwelijkeOuderJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.PlaatsParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
@@ -77,21 +76,11 @@ public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
         return new TableRow(
                 "Verblijfplaats",
                 "-",
-                getVerblijfplaats(ouderVaststelling),
+                PlaatsParser.getVerblijfplaatsVoorOuder(ouderVaststelling),
                 "-",
                 "-",
-                getVerblijfplaats(ouder)
+                PlaatsParser.getVerblijfplaatsVoorOuder(ouder)
         );
-    }
-
-    private String getVerblijfplaats(OuderJSON ouder) {
-        if (Objects.isNull(ouder)) {
-            return "-";
-        }
-        var vrouwelijkeOuder = (VrouwelijkeOuderJSON) ouder;
-        var gemeente = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(AdresJSON::gemeente).orElse(null);
-        var land = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(AdresJSON::land).orElse(null);
-        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.naam();
     }
 
     public TableRow burgerlijkeStaat() {
