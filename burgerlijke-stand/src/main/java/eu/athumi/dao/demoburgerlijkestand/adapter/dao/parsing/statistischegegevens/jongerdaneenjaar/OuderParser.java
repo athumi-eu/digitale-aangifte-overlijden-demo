@@ -5,8 +5,8 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.BurgerlijkeStaatJSONType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.VrouwelijkeOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.PlaatsParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
@@ -18,7 +18,7 @@ import static java.util.Optional.ofNullable;
 public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
 
     public boolean isExtended() {
-        return ouder instanceof VrouwelijkeOuderJSON;
+        return ouder instanceof MoederOfOudsteOuderJSON;
     }
 
     public TableRow geslacht() {
@@ -87,7 +87,7 @@ public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuder = (VrouwelijkeOuderJSON) ouder;
+        var vrouwelijkeOuder = (MoederOfOudsteOuderJSON) ouder;
         return new TableRow(
                 "Burgerlijke staat",
                 "-",
@@ -102,7 +102,7 @@ public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuder = (VrouwelijkeOuderJSON) ouder;
+        var vrouwelijkeOuder = (MoederOfOudsteOuderJSON) ouder;
         return new TableRow(
                 "Datum huidig huwelijk",
                 "-",

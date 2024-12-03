@@ -10,7 +10,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 
 import java.util.Set;
 
-public record VrouwelijkeOuderJSON(
+public record MoederOfOudsteOuderJSON(
         NationaliteitJSON nationaliteit,
         GeboorteJSON geboorte,
         Geslacht geslacht,
