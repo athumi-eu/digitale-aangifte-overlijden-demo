@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
 
-public record OuderParser(OuderJSON ouder) {
+public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
 
     public boolean isExtended() {
         return ouder instanceof VrouwelijkeOuderJSON;
@@ -37,7 +37,7 @@ public record OuderParser(OuderJSON ouder) {
         return new TableRow(
                 "Geboortedatum",
                 "-",
-                "-",
+                ofNullable(ouderVaststelling).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
                 "-",
                 "-",
                 ofNullable(ouder.geboorte()).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
@@ -74,17 +74,24 @@ public record OuderParser(OuderJSON ouder) {
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuder = (VrouwelijkeOuderJSON) ouder;
-        var gemeente = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(AdresJSON::gemeente).orElse(null);
-        var land = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(AdresJSON::land).orElse(null);
         return new TableRow(
                 "Verblijfplaats",
                 "-",
+                getVerblijfplaats(ouderVaststelling),
                 "-",
                 "-",
-                "-",
-                Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.naam()
+                getVerblijfplaats(ouder)
         );
+    }
+
+    private String getVerblijfplaats(OuderJSON ouder) {
+        if (Objects.isNull(ouder)) {
+            return "-";
+        }
+        var vrouwelijkeOuder = (VrouwelijkeOuderJSON) ouder;
+        var gemeente = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(AdresJSON::gemeente).orElse(null);
+        var land = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(AdresJSON::land).orElse(null);
+        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.naam();
     }
 
     public TableRow burgerlijkeStaat() {
