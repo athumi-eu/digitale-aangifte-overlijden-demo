@@ -4,9 +4,11 @@
 <div th:fragment="statistische-gegevens(id, statistischeGegevens)" class="grid-column">
 
     <h3>Statistisch formulier</h3>
+    <p>Onderstaande rijksregisternummers zijn gebruikt voor de verrijking van de gegevens</p>
+
     <table>
 
-        <tr>
+        <tr class="title">
             <th></th>
             <th>Bron RR</th>
             <th>Bron vaststelling</th>
@@ -15,6 +17,21 @@
             <th>Wordt doorgegeven aan Departement Zorg</th>
         </tr>
 
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.rrnOverledene()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.rrnMoeder()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.rrnVaderOfMoeder()})}"></tr>
+
+
+        <tr class="spacer"><td colspan="6">&nbsp;</td></tr>
+
+        <tr class="title">
+            <th></th>
+            <th>Bron RR</th>
+            <th>Bron vaststelling</th>
+            <th>Uitvaart ondernemer</th>
+            <th>Lokaal bestuur</th>
+            <th>Wordt doorgegeven aan Departement Zorg</th>
+        </tr>
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.overledene().geslacht()})}"></tr>
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.overledene().tijdstipOverlijden()})}"></tr>
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.overledene().gemeenteOverlijden()})}"></tr>
