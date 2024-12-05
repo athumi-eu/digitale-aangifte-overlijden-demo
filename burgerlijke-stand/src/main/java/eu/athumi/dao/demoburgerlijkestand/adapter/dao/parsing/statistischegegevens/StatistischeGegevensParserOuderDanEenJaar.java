@@ -8,7 +8,13 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkOverledeneJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneOuderDanEenJaarJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.AdresStatistischJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdenStatistischJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdensgegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 
 import java.util.Optional;
 
@@ -37,6 +43,14 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 .orElse(null);
     }
 
+    public Optional<OverlijdenStatistischJSON> overlijden() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijden);
+    }
+
+    public Optional<OverlijdensgegevensJSON> overlijdensgegevens() {
+        return Optional.ofNullable(statistischeGegevens.overlijdensgegevens());
+    }
+
     public TableRow geslacht() {
         return new TableRow(
                 "Geslacht",
@@ -52,11 +66,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Tijdstip overlijden",
                 "-",
+                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-"),
                 "-",
                 "-",
-                "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "-"
+                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-")
         );
     }
 
@@ -64,11 +77,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Gemeente van overlijden",
                 "-",
+                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
                 "-",
                 "-",
-                "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "-"
+                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
         );
     }
 
@@ -76,11 +88,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Plaats van overlijden",
                 "-",
+                overlijden().flatMap(this::parsePlaats).orElse("-"),
                 "-",
                 "-",
-                "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "-"
+                overlijden().flatMap(this::parsePlaats).orElse("-")
         );
     }
 
@@ -150,4 +161,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
 
     }
 
+    private Optional<String> parsePlaats(Plaats plaats) {
+        if (plaats.plaats() == PlaatsTypeJSON.ANDERE) {
+            return Optional.ofNullable(plaats.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
+        }
+        return Optional.ofNullable(plaats.plaats()).map(Enum::name);
+    }
 }

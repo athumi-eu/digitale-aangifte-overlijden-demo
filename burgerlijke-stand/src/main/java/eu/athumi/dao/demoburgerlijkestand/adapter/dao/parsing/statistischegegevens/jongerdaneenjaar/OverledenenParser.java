@@ -6,8 +6,14 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.VerdelingVolgensGeslachtJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.AdresStatistischJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdenStatistischJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdensgegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
 import java.util.Objects;
@@ -24,8 +30,18 @@ public record OverledenenParser(
 
 
     public Optional<MeervoudigeZwangerschapJSON> meervoudigeZwangerschapData() {
-        return Optional.ofNullable(statistischeGegevensJSON.meervoudigeZwangerschap());
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::meervoudigeZwangerschap);
     }
+
+    public Optional<OverlijdenStatistischJSON> overlijden() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijden);
+    }
+
+    public Optional<OverlijdensgegevensJSON> overlijdensgegevens() {
+        return Optional.ofNullable(statistischeGegevensJSON.overlijdensgegevens());
+    }
+
+
     public GeboorteJongerDanEenJaarJSON geboorte() {
         return (GeboorteJongerDanEenJaarJSON) departementZorg.geboorte();
     }
@@ -49,11 +65,11 @@ public record OverledenenParser(
         return new TableRow(
                 "Tijdstip overlijden",
                 "-",
-                "-",
+                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-"),
                 "-",
                 "-",
                 // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "-"
+                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-")
         );
     }
 
@@ -61,11 +77,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Gemeente van overlijden",
                 "-",
+                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
                 "-",
                 "-",
-                "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "-"
+                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
         );
     }
 
@@ -73,11 +88,11 @@ public record OverledenenParser(
         return new TableRow(
                 "Plaats van overlijden",
                 "-",
-                "-",
+                overlijden().flatMap(this::parsePlaats).orElse("-"),
                 "-",
                 "-",
                 // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "-"
+                overlijden().flatMap(this::parsePlaats).orElse("-")
         );
     }
 
@@ -131,11 +146,11 @@ public record OverledenenParser(
         );
     }
 
-    private Optional<String> parsePlaats(GeboorteJongerDanEenJaarJSON v) {
-        if (v.plaats() == PlaatsTypeJSON.ANDERE) {
-            return Optional.ofNullable(v.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
+    private Optional<String> parsePlaats(Plaats plaats) {
+        if (plaats.plaats() == PlaatsTypeJSON.ANDERE) {
+            return Optional.ofNullable(plaats.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
         }
-        return Optional.ofNullable(v.plaats()).map(Enum::name);
+        return Optional.ofNullable(plaats.plaats()).map(Enum::name);
     }
 
     public TableRow levendOfDoodGeboren() {
