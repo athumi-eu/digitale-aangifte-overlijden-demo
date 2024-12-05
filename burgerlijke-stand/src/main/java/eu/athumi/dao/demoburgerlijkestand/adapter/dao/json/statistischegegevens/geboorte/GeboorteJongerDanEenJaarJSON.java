@@ -10,12 +10,9 @@ public record GeboorteJongerDanEenJaarJSON(
         LocalDate datum,
         LocalTime tijdstip,
         PlaatsTypeJSON plaats,
+        String plaatsBeschrijving,
         AdresJSON adres,
-        Boolean meervoudigeZwangerschap,
-        Integer totaalAantalGeboren,
-        Integer rangnummer,
-        VerdelingVolgensGeslachtJSON aantalLevendGeboren,
-        VerdelingVolgensGeslachtJSON aantalDoodGeboren
+        Boolean meervoudigeZwangerschap
 ) implements GeboorteJSON {
 
     @Override
