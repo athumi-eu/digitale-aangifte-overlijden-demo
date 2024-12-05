@@ -155,6 +155,11 @@ public class DossierDao {
     }
 
     public StatistischeGegevensJSON getStatistischeGegevens(String kbonummer, String dossiernummer) {
+        String bodyAsString = securedWebClient.getRestClient(kbonummer)
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossiernummer}/statistische-gegevens", dossiernummer)
+                .retrieve()
+                .body(String.class);
         StatistischeGegevensJSON body = securedWebClient.getRestClient(kbonummer)
                 .get()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossiernummer}/statistische-gegevens", dossiernummer)

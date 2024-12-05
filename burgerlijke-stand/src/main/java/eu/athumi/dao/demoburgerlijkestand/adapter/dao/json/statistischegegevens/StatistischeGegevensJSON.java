@@ -1,5 +1,7 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens;
 
-public record StatistischeGegevensJSON(PersoonsgegevensJSON persoonsgegevens) {
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregisternummers.RijksregisternummersJSON;
+
+public record StatistischeGegevensJSON(PersoonsgegevensJSON persoonsgegevens, RijksregisternummersJSON rijksregisternummers) {
 
 }
