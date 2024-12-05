@@ -10,6 +10,8 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregisternummers.RijksregisternummersJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
+import java.util.Optional;
+
 import static java.util.Optional.ofNullable;
 
 public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSON statistischeGegevens) {
@@ -22,12 +24,14 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
         return (OverledeneJongerDanEenJaarJSON) getPersoonsGegevensVoorDepartementZorg().overledene();
     }
 
-    private PersoonsgegevensVaststellingJSON getPersoonsGegevensVoorVaststelling() {
-        return statistischeGegevens().persoonsgegevens().vaststelling();
+    private Optional<PersoonsgegevensVaststellingJSON> getPersoonsGegevensVoorVaststelling() {
+        return Optional.ofNullable(statistischeGegevens().persoonsgegevens().vaststelling());
     }
 
-    private OverledeneJongerDanEenJaarJSON getOverledeneVoorVaststelling() {
-        return (OverledeneJongerDanEenJaarJSON) getPersoonsGegevensVoorVaststelling().overledene();
+    private Optional<OverledeneJongerDanEenJaarJSON> getOverledeneVoorVaststelling() {
+        return getPersoonsGegevensVoorVaststelling()
+                .map(PersoonsgegevensVaststellingJSON::overledene)
+                .map(o -> (OverledeneJongerDanEenJaarJSON) o);
     }
 
     private OudersJSON getOudersVoorDepartementZorg() {
@@ -35,11 +39,11 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     }
 
     private OudersJSON getOudersVoorVaststelling() {
-        return getPersoonsGegevensVoorVaststelling().ouders();
+        return getPersoonsGegevensVoorVaststelling().map(PersoonsgegevensVaststellingJSON::ouders).orElse(null);
     }
 
     public OverledenenParser overledene() {
-        return new OverledenenParser(getOverledeneVoorDepartementZorg(), getOverledeneVoorVaststelling());
+        return new OverledenenParser(statistischeGegevens(), getOverledeneVoorDepartementZorg(), getOverledeneVoorVaststelling());
     }
 
     public OuderParser ouder1() {

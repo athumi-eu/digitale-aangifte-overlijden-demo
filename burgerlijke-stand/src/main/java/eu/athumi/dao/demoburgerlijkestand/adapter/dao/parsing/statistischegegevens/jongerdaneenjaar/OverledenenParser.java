@@ -1,6 +1,8 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.MeervoudigeZwangerschapJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.VerdelingVolgensGeslachtJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
@@ -9,26 +11,34 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalTime;
 import static java.util.Optional.ofNullable;
 
-public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, OverledeneJongerDanEenJaarJSON vaststelling) {
+public record OverledenenParser(
+        StatistischeGegevensJSON statistischeGegevensJSON,
+        OverledeneJongerDanEenJaarJSON departementZorg,
+        Optional<OverledeneJongerDanEenJaarJSON> vaststelling) {
 
+
+    public Optional<MeervoudigeZwangerschapJSON> meervoudigeZwangerschapData() {
+        return Optional.ofNullable(statistischeGegevensJSON.meervoudigeZwangerschap());
+    }
     public GeboorteJongerDanEenJaarJSON geboorte() {
         return (GeboorteJongerDanEenJaarJSON) departementZorg.geboorte();
     }
 
-    public GeboorteJongerDanEenJaarJSON geboorteVaststelling() {
-        return (GeboorteJongerDanEenJaarJSON) vaststelling.geboorte();
+    public Optional<GeboorteJongerDanEenJaarJSON> geboorteVaststelling() {
+        return vaststelling.map(OverledeneJongerDanEenJaarJSON::geboorte).map(o -> (GeboorteJongerDanEenJaarJSON) o);
     }
 
     public TableRow geslacht() {
         return new TableRow(
                 "Geslacht",
                 "-",
-                ofNullable(vaststelling.geslacht()).map(Geslacht::name).orElse("-"),
+                vaststelling.map(OverledeneJongerDanEenJaarJSON::geslacht).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(departementZorg.geslacht()).map(Geslacht::name).orElse("-")
@@ -75,7 +85,7 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Datum geboorte",
                 "-",
-                ofNullable(geboorteVaststelling()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
+                geboorteVaststelling().map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
                 ofNullable(geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-")
@@ -86,7 +96,7 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Tijdstip geboorte",
                 "-",
-                ofNullable(geboorteVaststelling()).map(geboorte -> parseLocalTime(geboorte.tijdstip())).orElse("-"),
+                geboorteVaststelling().map(geboorte -> parseLocalTime(geboorte.tijdstip())).orElse("-"),
                 "-",
                 "-",
                 ofNullable(geboorte()).map(geboorte -> parseLocalTime(geboorte.tijdstip())).orElse("-")
@@ -97,7 +107,7 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Gemeente/ land van geboorte",
                 "-",
-                parseVerblijfplaats(geboorteVaststelling().adres()),
+                parseVerblijfplaats(geboorteVaststelling().map(GeboorteJongerDanEenJaarJSON::adres).orElse(null)),
                 "-",
                 "-",
                 parseVerblijfplaats(geboorte().adres())
@@ -107,18 +117,25 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
     private String parseVerblijfplaats(AdresJSON adres) {
         var gemeente = ofNullable(adres).map(AdresJSON::gemeente).orElse(null);
         var land = ofNullable(adres).map(AdresJSON::land).orElse(null);
-        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.naam();
+        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.niscode();
     }
 
     public TableRow plaatsGeboorte() {
         return new TableRow(
                 "Plaats van geboorte",
                 "-",
-                ofNullable(geboorteVaststelling().plaats()).map(PlaatsTypeJSON::name).orElse("-"),
+                geboorteVaststelling().flatMap(this::parsePlaats).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().plaats()).map(PlaatsTypeJSON::name).orElse("-")
+                ofNullable(geboorte()).flatMap(this::parsePlaats).orElse("-")
         );
+    }
+
+    private Optional<String> parsePlaats(GeboorteJongerDanEenJaarJSON v) {
+        if (v.plaats() == PlaatsTypeJSON.ANDERE) {
+            return Optional.ofNullable(v.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
+        }
+        return Optional.ofNullable(v.plaats()).map(Enum::name);
     }
 
     public TableRow levendOfDoodGeboren() {
@@ -138,7 +155,7 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Meervoudige zwangerschap",
                 "-",
-                ofNullable(geboorteVaststelling().meervoudigeZwangerschap()).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "Ja" : "Neen").orElse("-"),
+                geboorteVaststelling().map(GeboorteJongerDanEenJaarJSON::meervoudigeZwangerschap).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "Ja" : "Neen").orElse("-"),
                 "-",
                 "-",
                 ofNullable(geboorte().meervoudigeZwangerschap()).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "Ja" : "Neen").orElse("-")
@@ -149,10 +166,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Totaal aantal geboren",
                 "-",
-                ofNullable(geboorteVaststelling().totaalAantalGeboren()).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::totaalAantalKinderen).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().totaalAantalGeboren()).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::totaalAantalKinderen).map(Object::toString).orElse("-")
         );
     }
 
@@ -160,10 +177,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Rangnummer",
                 "-",
-                ofNullable(geboorteVaststelling().rangnummer()).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::rangOverledene).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().rangnummer()).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::rangOverledene).map(Object::toString).orElse("-")
         );
     }
 
@@ -171,10 +188,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Aantal levend geboren mannelijk",
                 "-",
-                ofNullable(geboorteVaststelling().aantalLevendGeboren()).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalLevendGeboren).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().aantalLevendGeboren()).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalLevendGeboren).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-")
         );
     }
 
@@ -182,10 +199,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Aantal levend geboren vrouwelijk",
                 "-",
-                ofNullable(geboorteVaststelling().aantalLevendGeboren()).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalLevendGeboren).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().aantalLevendGeboren()).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalLevendGeboren).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-")
         );
     }
 
@@ -193,10 +210,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Aantal levend geboren onbepaald",
                 "-",
-                ofNullable(geboorteVaststelling().aantalLevendGeboren()).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalLevendGeboren).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().aantalLevendGeboren()).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalLevendGeboren).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-")
         );
     }
 
@@ -204,10 +221,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Aantal dood geboren mannelijk",
                 "-",
-                ofNullable(geboorteVaststelling().aantalDoodGeboren()).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalDoodGeboren).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().aantalDoodGeboren()).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalDoodGeboren).map(VerdelingVolgensGeslachtJSON::mannelijk).map(Object::toString).orElse("-")
         );
     }
 
@@ -215,10 +232,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Aantal dood geboren vrouwelijk",
                 "-",
-                ofNullable(geboorteVaststelling().aantalDoodGeboren()).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalDoodGeboren).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().aantalDoodGeboren()).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalDoodGeboren).map(VerdelingVolgensGeslachtJSON::vrouwelijk).map(Object::toString).orElse("-")
         );
     }
 
@@ -226,10 +243,10 @@ public record OverledenenParser(OverledeneJongerDanEenJaarJSON departementZorg, 
         return new TableRow(
                 "Aantal dood geboren onbepaald",
                 "-",
-                ofNullable(geboorteVaststelling().aantalDoodGeboren()).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-"),
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalDoodGeboren).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().aantalDoodGeboren()).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-")
+                meervoudigeZwangerschapData().map(MeervoudigeZwangerschapJSON::aantalDoodGeboren).map(VerdelingVolgensGeslachtJSON::onbepaald).map(Object::toString).orElse("-")
         );
     }
 }

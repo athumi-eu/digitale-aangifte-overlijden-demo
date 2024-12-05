@@ -38,7 +38,7 @@ public class PlaatsParser {
         var vrouwelijkeOuder = (MoederOfOudsteOuderJSON) ouder;
         var gemeente = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON::gemeente).orElse(null);
         var land = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON::land).orElse(null);
-        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.naam();
+        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.niscode();
     }
 
 }

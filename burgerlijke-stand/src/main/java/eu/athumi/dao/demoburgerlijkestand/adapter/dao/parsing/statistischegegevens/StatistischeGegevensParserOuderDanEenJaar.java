@@ -2,12 +2,15 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegev
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.PersoonsgegevensVaststellingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.BurgerlijkeStaatJSONType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkOverledeneJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneOuderDanEenJaarJSON;
+
+import java.util.Optional;
 
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static java.util.Optional.ofNullable;
@@ -18,8 +21,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return (OverledeneOuderDanEenJaarJSON) statistischeGegevens().persoonsgegevens().departementZorg().overledene();
     }
 
-    private OverledeneOuderDanEenJaarJSON getOverledeneVoorVaststelling() {
-        return (OverledeneOuderDanEenJaarJSON) statistischeGegevens().persoonsgegevens().vaststelling().overledene();
+    private Optional<OverledeneOuderDanEenJaarJSON> getOverledeneVoorVaststelling() {
+        return Optional.ofNullable(statistischeGegevens().persoonsgegevens().vaststelling())
+                .map(PersoonsgegevensVaststellingJSON::overledene)
+                .map(v -> (OverledeneOuderDanEenJaarJSON) v);
     }
 
     private HuwelijkOverledeneJSON getHuwelijkOverledene() {
@@ -27,14 +32,16 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     }
 
     private HuwelijkOverledeneJSON getHuwelijkOverledeneVaststelling() {
-        return (HuwelijkOverledeneJSON) getOverledeneVoorVaststelling().huwelijk();
+        return (HuwelijkOverledeneJSON) getOverledeneVoorVaststelling()
+                .map(OverledeneOuderDanEenJaarJSON::huwelijk)
+                .orElse(null);
     }
 
     public TableRow geslacht() {
         return new TableRow(
                 "Geslacht",
                 "-",
-                ofNullable(getOverledeneVoorVaststelling().geslacht()).map(Geslacht::name).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::geslacht).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().geslacht()).map(Geslacht::name).orElse("-")
@@ -81,7 +88,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Geboortedatum",
                 "-",
-                ofNullable(getOverledeneVoorVaststelling().geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::geboorte).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-")
@@ -92,7 +99,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Nationaliteit",
                 "-",
-                ofNullable(getOverledeneVoorVaststelling().nationaliteit()).map(NationaliteitJSON::naam).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::nationaliteit).map(NationaliteitJSON::naam).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().nationaliteit()).map(NationaliteitJSON::naam).orElse("-")
@@ -103,10 +110,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Verblijfplaats",
                 "-",
-                ofNullable(getOverledeneVoorVaststelling().verblijfplaats()).map(AdresJSON::gemeente).map(GemeenteJSON::naam).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::verblijfplaats).map(AdresJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(AdresJSON::gemeente).map(GemeenteJSON::naam).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(AdresJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
         );
     }
 
@@ -114,7 +121,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Burgerlijke staat",
                 "-",
-                ofNullable(getOverledeneVoorVaststelling().burgerlijkeStaat()).map(BurgerlijkeStaatJSONType::name).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::burgerlijkeStaat).map(BurgerlijkeStaatJSONType::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaat()).map(BurgerlijkeStaatJSONType::name).orElse("-")
