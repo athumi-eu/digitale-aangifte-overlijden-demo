@@ -7,6 +7,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.MoederVaststellingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.PlaatsParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
 
-public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
+public record OuderParser(OuderJSON ouder, MoederVaststellingJSON moederVaststelling) {
 
     public boolean isExtended() {
         return ouder instanceof MoederOfOudsteOuderJSON;
@@ -25,7 +26,7 @@ public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
         return new TableRow(
                 "Geslacht",
                 "-",
-                "-",
+                ofNullable(moederVaststelling.geslacht()).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(ouder.geslacht()).map(Geslacht::name).orElse("-")
@@ -36,7 +37,7 @@ public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
         return new TableRow(
                 "Geboortedatum",
                 "-",
-                ofNullable(ouderVaststelling).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
+                "-",
                 "-",
                 "-",
                 ofNullable(ouder.geboorte()).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
@@ -76,7 +77,7 @@ public record OuderParser(OuderJSON ouder, OuderJSON ouderVaststelling) {
         return new TableRow(
                 "Verblijfplaats",
                 "-",
-                PlaatsParser.getVerblijfplaatsVoorOuder(ouderVaststelling),
+                PlaatsParser.getVerblijfplaatsVoorOuder(moederVaststelling),
                 "-",
                 "-",
                 PlaatsParser.getVerblijfplaatsVoorOuder(ouder)

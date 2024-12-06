@@ -1,8 +1,10 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.PersoonsgegevensDepartementZorgJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.PersoonsgegevensVaststellingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.MoederVaststellingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.PersoonsgegevensVaststellingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OudersJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregisternummers.RijksregisternummerPersoonJSON;
@@ -38,8 +40,8 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
         return getPersoonsGegevensVoorDepartementZorg().ouders();
     }
 
-    private OudersJSON getOudersVoorVaststelling() {
-        return getPersoonsGegevensVoorVaststelling().map(PersoonsgegevensVaststellingJSON::ouders).orElse(null);
+    private MoederVaststellingJSON getMoederVoorVaststelling() {
+        return getPersoonsGegevensVoorVaststelling().map(PersoonsgegevensVaststellingJSON::moeder).orElse(null);
     }
 
     public OverledenenParser overledene() {
@@ -47,11 +49,11 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     }
 
     public OuderParser ouder1() {
-        return new OuderParser(getOudersVoorDepartementZorg().moederOfOudsteOuder(), ofNullable(getOudersVoorVaststelling()).map(OudersJSON::moederOfOudsteOuder).orElse(null));
+        return new OuderParser(getOudersVoorDepartementZorg().moederOfOudsteOuder(), getMoederVoorVaststelling());
     }
 
     public OuderParser ouder2() {
-        return new OuderParser(getOudersVoorDepartementZorg().vaderOfJongsteOuder(), ofNullable(getOudersVoorVaststelling()).map(OudersJSON::vaderOfJongsteOuder).orElse(null));
+        return new OuderParser(getOudersVoorDepartementZorg().vaderOfJongsteOuder(), null);
     }
 
     public TableRow rrnOverledene() {
