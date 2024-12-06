@@ -10,9 +10,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.AdresStatistischJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdenStatistischJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdensgegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
@@ -30,17 +28,20 @@ public record OverledenenParser(
 
 
     public Optional<MeervoudigeZwangerschapJSON> meervoudigeZwangerschapData() {
-        return overlijdensgegevens().map(OverlijdensgegevensJSON::meervoudigeZwangerschap);
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensVaststelling).map(OverlijdensgegevensVaststellingJSON::meervoudigeZwangerschap);
     }
 
-    public Optional<OverlijdenStatistischJSON> overlijden() {
-        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijden);
+    public Optional<OverlijdenStatistischJSON> overlijdenVastelling() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensVaststelling).map(OverlijdensgegevensVaststellingJSON::overlijden);
+    }
+
+    public Optional<OverlijdenStatistischJSON> overlijdenDepartementZorg() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensDepartementZorg).map(OverlijdensgegevensDepartementZorgJSON::overlijden);
     }
 
     public Optional<OverlijdensgegevensJSON> overlijdensgegevens() {
         return Optional.ofNullable(statistischeGegevensJSON.overlijdensgegevens());
     }
-
 
     public GeboorteJongerDanEenJaarJSON geboorte() {
         return (GeboorteJongerDanEenJaarJSON) departementZorg.geboorte();
@@ -65,11 +66,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Tijdstip overlijden",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-"),
+                overlijdenVastelling().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijdenVastelling().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-"),
                 "-",
                 "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-")
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijdenVastelling().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-")
         );
     }
 
@@ -77,10 +77,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Gemeente van overlijden",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
+                overlijdenVastelling().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
                 "-",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
         );
     }
 
@@ -88,11 +88,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Plaats van overlijden",
                 "-",
-                overlijden().flatMap(this::parsePlaats).orElse("-"),
+                overlijdenVastelling().flatMap(this::parsePlaats).orElse("-"),
                 "-",
                 "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                overlijden().flatMap(this::parsePlaats).orElse("-")
+                overlijdenDepartementZorg().flatMap(this::parsePlaats).orElse("-")
         );
     }
 

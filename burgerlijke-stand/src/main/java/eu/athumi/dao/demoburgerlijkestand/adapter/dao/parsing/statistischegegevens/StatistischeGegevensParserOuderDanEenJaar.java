@@ -11,9 +11,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneOuderDanEenJaarJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.AdresStatistischJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdenStatistischJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.OverlijdensgegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 
 import java.util.Optional;
@@ -43,8 +41,12 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 .orElse(null);
     }
 
-    public Optional<OverlijdenStatistischJSON> overlijden() {
-        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijden);
+    public Optional<OverlijdenStatistischJSON> overlijdenVaststelling() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensVaststelling).map(OverlijdensgegevensVaststellingJSON::overlijden);
+    }
+
+    public Optional<OverlijdenStatistischJSON> overlijdenDepartementZorg() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensDepartementZorg).map(OverlijdensgegevensDepartementZorgJSON::overlijden);
     }
 
     public Optional<OverlijdensgegevensJSON> overlijdensgegevens() {
@@ -66,10 +68,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Tijdstip overlijden",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-"),
+                overlijdenVaststelling().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijdenVaststelling().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-"),
                 "-",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijden().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-")
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::tijdstip).map(TijdstipParser::parseLocalDateTime).or(() -> overlijdenVaststelling().map(OverlijdenStatistischJSON::beschrijvingTijdstip)).orElse("-")
         );
     }
 
@@ -77,10 +79,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Gemeente van overlijden",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
+                overlijdenVaststelling().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
                 "-",
                 "-",
-                overlijden().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
         );
     }
 
@@ -88,10 +90,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Plaats van overlijden",
                 "-",
-                overlijden().flatMap(this::parsePlaats).orElse("-"),
+                overlijdenVaststelling().flatMap(this::parsePlaats).orElse("-"),
                 "-",
                 "-",
-                overlijden().flatMap(this::parsePlaats).orElse("-")
+                overlijdenDepartementZorg().flatMap(this::parsePlaats).orElse("-")
         );
     }
 
