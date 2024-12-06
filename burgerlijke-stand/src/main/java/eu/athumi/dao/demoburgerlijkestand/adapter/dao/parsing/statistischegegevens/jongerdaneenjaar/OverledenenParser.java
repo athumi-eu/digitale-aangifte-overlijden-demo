@@ -156,12 +156,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Levend geboren of doodgeboren",
                 "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "Nog te mappen",
+                overlijdenVastelling().map(OverlijdenStatistischJSON::doodGeboren).map(d -> d ? "Doodgeboren" : "Levend geboren").orElse("-"),
                 "-",
                 "-",
-                // TODO DAO-136: Mappen als we de overlijdensgegevens hebben
-                "Nog te mappen"
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::doodGeboren).map(d -> d ? "Doodgeboren" : "Levend geboren").orElse("-")
         );
     }
 
@@ -169,10 +167,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Meervoudige zwangerschap",
                 "-",
-                geboorteVaststelling().map(GeboorteJongerDanEenJaarJSON::meervoudigeZwangerschap).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "Ja" : "Neen").orElse("-"),
+                geboorteVaststelling().map(GeboorteJongerDanEenJaarJSON::meervoudigeZwangerschap).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "ja" : "neen").orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte().meervoudigeZwangerschap()).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "Ja" : "Neen").orElse("-")
+                ofNullable(geboorte().meervoudigeZwangerschap()).map(meervoudigeZwangerschap -> meervoudigeZwangerschap ? "ja" : "neen").orElse("-")
         );
     }
 
