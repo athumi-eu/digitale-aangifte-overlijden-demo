@@ -11,5 +11,6 @@ public record OverlijdenStatistischJSON(
     String beschrijvingTijdstip,
     PlaatsTypeJSON plaats,
     String plaatsBeschrijving,
-    AdresStatistischJSON adres
+    AdresStatistischJSON adres,
+    boolean doodGeboren
 ) implements Plaats {}

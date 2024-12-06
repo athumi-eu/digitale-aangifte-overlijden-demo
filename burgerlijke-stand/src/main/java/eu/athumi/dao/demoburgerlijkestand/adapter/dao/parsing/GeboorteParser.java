@@ -36,7 +36,7 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
         if (Objects.isNull(toestand)) {
             return "/";
         }
-        return Objects.equals(toestand.meerling(), BevallingToestandJSON.JaNeen.Ja) ? "Ja" : "Neen";
+        return Objects.equals(toestand.meerling(), BevallingToestandJSON.JaNeen.Ja) ? "ja" : "neen";
     }
 
     public String totaalAantalGeboorten() {
