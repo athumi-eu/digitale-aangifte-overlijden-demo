@@ -17,6 +17,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static java.util.Optional.ofNullable;
@@ -234,9 +235,9 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 "Huidig beroep (laatst uitgeoefend)",
                 DASH,
                 DASH,
-                seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
     public TableRow beroep2() {
