@@ -8,10 +8,12 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
 
+import java.util.List;
+
 public record OverledeneOuderDanEenJaarJSON(
         Geslacht geslacht,
         NationaliteitJSON nationaliteit,
-        BurgerlijkeStaatJSONType burgerlijkeStaat,
+        List<BurgerlijkeStaatJSON> burgerlijkeStaten,
         HuwelijkJSON huwelijk,
         GeboorteJSON geboorte,
         AdresJSON verblijfplaats

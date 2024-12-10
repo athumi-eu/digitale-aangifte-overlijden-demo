@@ -4,12 +4,12 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.BurgerlijkeStaatJSONType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkOverledeneJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneOuderDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister.OverledeneRijksregisterJSON;
@@ -26,6 +26,7 @@ import static java.util.Optional.ofNullable;
 
 public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON statistischeGegevens) {
     static final String DASH = "-";
+
     private OverledeneOuderDanEenJaarJSON getOverledeneVoorDepartementZorg() {
         return (OverledeneOuderDanEenJaarJSON) statistischeGegevens().persoonsgegevens().departementZorg().overledene();
     }
@@ -148,10 +149,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Burgerlijke staat",
                 "-",
-                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::burgerlijkeStaat).map(BurgerlijkeStaatJSONType::name).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::burgerlijkeStaten).map(List::getFirst).map(BurgerlijkeStaatJSON::type).map(Enum::name).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaat()).map(BurgerlijkeStaatJSONType::name).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(List::getFirst).map(BurgerlijkeStaatJSON::type).map(Enum::name).orElse("-")
         );
     }
 
@@ -162,7 +163,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.datum())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getHuwelijkOverledene()).map(huwelijk -> parseLocalDate(huwelijk.datum())).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(List::getFirst).map(BurgerlijkeStaatJSON::huwelijksDatum).orElse("-")
         );
     }
 
@@ -173,20 +174,22 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getHuwelijkOverledene()).map(huwelijk -> parseLocalDate(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"));
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(List::getFirst).map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseLocalDate).orElse("-"));
 
     }
 
     private String parseOpleiding(Opleiding seg) {
         if (seg != null) {
-            if(seg.opleidingAndere() != null && !seg.opleidingAndere().isBlank()) {
+            if (seg.opleidingAndere() != null && !seg.opleidingAndere().isBlank()) {
                 return seg.opleidingAndere();
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
                 return seg.type().getLabel() + " " + extraInfo;
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow opleiding() {
         return new TableRow(
                 "Hoogst voltooide opleiding",
@@ -200,13 +203,15 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
 
     private String parseBeroepstoestand(Beroepstoestand seg) {
         if (seg != null) {
-            if(seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
+            if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
                 return String.valueOf(seg.type());
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow beroepstoestand() {
         return new TableRow(
                 "Huidige beroepstoestand",
@@ -220,13 +225,15 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
 
     private String parseSocialeStaat(SocialeStaat seg) {
         if (seg != null) {
-            if(seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
+            if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
                 return String.valueOf(seg.type());
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow socialestaat() {
         return new TableRow(
                 "Sociale staat huidig beroep",
@@ -237,6 +244,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
         );
     }
+
     public TableRow beroep1() {
         return new TableRow(
                 "Huidig beroep (laatst uitgeoefend)",
@@ -247,6 +255,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
+
     public TableRow beroep2() {
         return new TableRow(
                 "Vorig beroep 1",
@@ -257,6 +266,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 1).map(l -> l.get(1)).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
+
     public TableRow beroep3() {
         return new TableRow(
                 "Vorig beroep 2",
@@ -267,15 +277,18 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 2).map(l -> l.get(2)).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
+
     private String parseWoonsituatie(Woonsituatie seg) {
         if (seg != null) {
-            if(seg.woonsituatieAndere() != null && !seg.woonsituatieAndere().isBlank()) {
+            if (seg.woonsituatieAndere() != null && !seg.woonsituatieAndere().isBlank()) {
                 return seg.woonsituatieAndere();
             } else {
                 return String.valueOf(seg.type());
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow woonsituatie() {
         return new TableRow(
                 "woonsituatie",
@@ -286,7 +299,6 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH)
         );
     }
-
 
 
     private Optional<String> parsePlaats(Plaats plaats) {
