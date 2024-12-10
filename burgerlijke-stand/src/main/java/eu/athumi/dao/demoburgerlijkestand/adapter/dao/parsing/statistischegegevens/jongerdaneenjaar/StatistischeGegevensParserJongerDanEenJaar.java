@@ -15,6 +15,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegeve
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import static java.util.Optional.ofNullable;
 
@@ -91,10 +92,6 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
         );
     }
 
-
-    /*
-    * TODO: BABY MAMA PAPA
-    *  */
     private Optional<SEG> seg() {
         return Optional.ofNullable(statistischeGegevens).map(StatistischeGegevensJSON::socioeconomischegegevens);
     }
@@ -193,9 +190,9 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 "Huidig beroep (laatst uitgeoefend)",
                 DASH,
                 DASH,
-                seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
     public TableRow beroepPapa() {
@@ -203,9 +200,9 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 "Huidig beroep (laatst uitgeoefend)",
                 DASH,
                 DASH,
-                seg().map(s -> s.uitvaart()).map(u -> u.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.uitvaart()).map(u -> u.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
     private String parseGezinstoestand(Gezinstoestand seg) {
