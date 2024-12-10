@@ -20,6 +20,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static java.util.Optional.ofNullable;
@@ -126,7 +127,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow nationaliteit() {
         return new TableRow(
                 "Nationaliteit",
-                "-",
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::nationaliteit).map(NationaliteitJSON::naam).orElse("-"),
                 getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::nationaliteit).map(NationaliteitJSON::naam).orElse("-"),
                 "-",
                 "-",
@@ -148,33 +149,33 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow burgerlijkeStaat() {
         return new TableRow(
                 "Burgerlijke staat",
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::burgerlijkeStaten).map(t -> t.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(","))).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::burgerlijkeStaten).map(t -> t.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(","))).orElse("-"),
                 "-",
-                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::burgerlijkeStaten).map(List::getFirst).map(BurgerlijkeStaatJSON::type).map(Enum::name).orElse("-"),
                 "-",
-                "-",
-                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(List::getFirst).map(BurgerlijkeStaatJSON::type).map(Enum::name).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(t -> t.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(","))).orElse("-")
         );
     }
 
     public TableRow huwelijksDatum() {
         return new TableRow(
                 "Datum huidig huwelijk",
-                "-",
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::burgerlijkeStaten).map(t -> t.stream().map(BurgerlijkeStaatJSON::huwelijksDatum).collect(Collectors.joining(","))).orElse("-"),
                 ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.datum())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(List::getFirst).map(BurgerlijkeStaatJSON::huwelijksDatum).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(t -> t.stream().map(BurgerlijkeStaatJSON::huwelijksDatum).collect(Collectors.joining(","))).orElse("-")
         );
     }
 
     public TableRow geboorteDatumPartner() {
         return new TableRow(
                 "Geboortedatum overlevende partner",
-                "-",
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::burgerlijkeStaten).map(t -> t.stream().map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseLocalDate).collect(Collectors.joining(","))).orElse("-"),
                 ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(List::getFirst).map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseLocalDate).orElse("-"));
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(t -> t.stream().map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseLocalDate).collect(Collectors.joining(","))).orElse("-"));
 
     }
 
