@@ -2,15 +2,15 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegev
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.PersoonsgegevensDepartementZorgJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.MoederVaststellingJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.PersoonsgegevensVaststellingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OudersJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister.PersoonsgegevensRijksregisterJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregisternummers.RijksregisternummerPersoonJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregisternummers.RijksregisternummersJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregisternummers.RijksregisternummersJongerDanEenJaarJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.MoederVaststellingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.PersoonsgegevensVaststellingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
 import java.util.List;
@@ -23,6 +23,10 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     static final String DASH = "-";
     private PersoonsgegevensDepartementZorgJSON getPersoonsGegevensVoorDepartementZorg() {
         return statistischeGegevens().persoonsgegevens().departementZorg();
+    }
+
+    private PersoonsgegevensRijksregisterJSON getPersoonsGegevensVoorRR() {
+        return statistischeGegevens().persoonsgegevens().rijksregister();
     }
 
     private OverledeneJongerDanEenJaarJSON getOverledeneVoorDepartementZorg() {
@@ -43,6 +47,10 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
         return getPersoonsGegevensVoorDepartementZorg().ouders();
     }
 
+    private OudersJSON getOudersVoorRR() {
+        return getPersoonsGegevensVoorRR().ouders();
+    }
+
     private MoederVaststellingJSON getMoederVoorVaststelling() {
         return getPersoonsGegevensVoorVaststelling().map(PersoonsgegevensVaststellingJSON::moeder).orElse(null);
     }
@@ -52,11 +60,11 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     }
 
     public OuderParser ouder1() {
-        return new OuderParser(getOudersVoorDepartementZorg().moederOfOudsteOuder(), getMoederVoorVaststelling());
+        return new OuderParser(getOudersVoorDepartementZorg().moederOfOudsteOuder(), getMoederVoorVaststelling(), getOudersVoorRR().moederOfOudsteOuder());
     }
 
     public OuderParser ouder2() {
-        return new OuderParser(getOudersVoorDepartementZorg().vaderOfJongsteOuder(), null);
+        return new OuderParser(getOudersVoorDepartementZorg().vaderOfJongsteOuder(), null, getOudersVoorRR().vaderOfJongsteOuder());
     }
 
     public TableRow rrnOverledene() {
