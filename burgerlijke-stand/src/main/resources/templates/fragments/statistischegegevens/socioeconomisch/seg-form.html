@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="seg(id, seg)" class="grid-column">
+
+    <dialog id="seg-dialog">
+        <button onclick="closeDialog()">Close</button>
+        <p th:text="${id}"></p>
+        <p th:text="${seg}"></p>
+        <form th:object="${seg}">
+            <div th:if="${seg.overledene != null}">
+            <h3>Overledene</h3>
+            <label>opleidingsType</label>
+            <input id="overledene-opleiding-type" type="text" th:value="*{overledene?.opleiding?.type}"/>
+            <input id="overledene-opleiding-opleidingAndere"  type="text" th:value="*{overledene?.opleiding?.opleidingAndere}" />
+            <br/>
+            <label>onderwijsType</label>
+            <input id="overledene-opleiding-onderwijsType"  type="text" th:value="*{overledene?.opleiding?.onderwijsType}"/>
+            <br/>
+            <label>beroepstoestand</label>
+            <input id="overledene-beroepstoestand-type"  type="text" th:value="*{overledene?.beroepstoestand?.type}"/>
+            <input id="overledene-beroepstoestand-beroepstoestandAndere"  type="text" th:value="*{overledene?.beroepstoestand?.beroepstoestandAndere}"/>
+            <br/>
+            <label>Beroepen</label>
+            <input id="overledene-beroepstoestand-beroepen"  type="text" th:value="*{overledene?.beroepstoestand?.beroepen}"/>
+            <br/>
+            <label>sociale staat</label>
+            <input  id="overledene-socialeStaat-type"  type="text" th:value="*{overledene?.socialeStaat?.type}"/>
+            <input  id="overledene-socialeStaat-socialeStaatAndere"  type="text" th:value="*{overledene?.socialeStaat?.socialeStaatAndere}"/>
+            <br/>
+            <label>woonsituatie</label>
+            <input  id="overledene-woonsituatie-type"  type="text" th:value="*{overledene?.woonsituatie?.type}"/>
+            <input  id="overledene-woonsituatie-woonsituatieAndere"  type="text" th:value="*{overledene?.woonsituatie?.woonsituatieAndere}"/>
+            </div>
+
+
+            <div th:if="${seg.moeder != null}">
+                <h3>Moeder</h3>
+                <label>opleidingsType</label>
+                <input  id="moeder-opleiding-type"  type="text" th:value="*{moeder?.opleiding?.type}"/>
+                <input  id="moeder-opleiding-opleidingAndere"  type="text" th:value="*{moeder?.opleiding?.opleidingAndere}" />
+                <br/>
+                <label>onderwijsType</label>
+                <input  id="moeder-opleiding-onderwijsType"  type="text" th:value="*{moeder?.opleiding?.onderwijsType}"/>
+                <br/>
+                <label>beroepstoestand</label>
+                <input  id="moeder-beroepstoestand-type"  type="text" th:value="*{moeder?.beroepstoestand?.type}"/>
+                <input  id="moeder-beroepstoestand-beroepstoestandAndere"  type="text" th:value="*{moeder?.beroepstoestand?.beroepstoestandAndere}"/>
+                <br/>
+                <label>Beroepen</label>
+                <input  id="moeder-beroepstoestand-beroepen"  type="text" th:value="*{moeder?.beroepstoestand?.beroepen}"/>
+                <br/>
+                <label>sociale staat</label>
+                <input  id="moeder-socialeStaat-type"  type="text" th:value="*{moeder?.socialeStaat?.type}"/>
+                <input  id="moeder-socialeStaat-socialeStaatAndere"  type="text" th:value="*{moeder?.socialeStaat?.socialeStaatAndere}"/>
+                <br/>
+                <label>gezinstoestand</label>
+                <input  id="moeder-gezinstoestand-type"  type="text" th:value="*{moeder?.gezinstoestand?.type}"/>
+                <input  id="moeder-gezinstoestand-gezinstoestandAndere"  type="text" th:value="*{moeder?.gezinstoestand?.gezinstoestandAndere}"/>
+
+                <h3>vaderOfMeemoeder</h3>
+                <label>opleidingsType</label>
+                <input  id="vaderOfMeemoeder-opleiding-type"  type="text" th:value="*{vaderOfMeemoeder?.opleiding?.type}"/>
+                <input  id="vaderOfMeemoeder-opleiding-opleidingAndere"  type="text" th:value="*{vaderOfMeemoeder?.opleiding?.opleidingAndere}" />
+                <br/>
+                <label>onderwijsType</label>
+                <input  id="vaderOfMeemoeder-opleiding-onderwijsType"  type="text" th:value="*{vaderOfMeemoeder?.opleiding?.onderwijsType}"/>
+                <br/>
+                <label>beroepstoestand</label>
+                <input  id="vaderOfMeemoeder-beroepstoestand-type"  type="text" th:value="*{vaderOfMeemoeder?.beroepstoestand?.type}"/>
+                <input  id="vaderOfMeemoeder-beroepstoestand-beroepstoestandAndere"  type="text" th:value="*{vaderOfMeemoeder?.beroepstoestand?.beroepstoestandAndere}"/>
+                <br/>
+                <label>Beroepen</label>
+                <input  id="vaderOfMeemoeder-beroepstoestand-beroepen"  type="text" th:value="*{vaderOfMeemoeder?.beroepstoestand?.beroepen}"/>
+                <br/>
+                <label>sociale staat</label>
+                <input  id="vaderOfMeemoeder-socialeStaat-type"  type="text" th:value="*{vaderOfMeemoeder?.socialeStaat?.type}"/>
+                <input  id="vaderOfMeemoeder-socialeStaat-socialeStaatAndere"  type="text" th:value="*{vaderOfMeemoeder?.socialeStaat?.socialeStaatAndere}"/>
+                <br/>
+            </div>
+            <br/>
+            <br/>
+        </form>
+        <span id="error" class="error"></span>
+        <button th:onclick="submit([[${id}]], [[${@globalVariables.frontedBaseUrl}]])">submit
+        </button>
+    </dialog>
+    <button onclick="openDialog()">socio-economische gegevens aanpassen</button>
+
+
+    <script>
+        function openDialog() { document.getElementById("seg-dialog").showModal(); }
+        function closeDialog() { document.getElementById("seg-dialog").close(); }
+
+        function getForType(type) {
+            return (field) => document.getElementById(type + "-" + field)?.value || null;
+        }
+        function submit(id, url) {
+            const body = constructPostBody();
+            console.log(body)
+            fetch(url + '/dossier/' + id + '/seg',  {
+                method: "post",
+                body: JSON.stringify(body)
+            }).then(async response => {
+                if (response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                } else {
+                    closeDialog()
+                    window.location.reload();
+                }
+            });
+        }
+
+        function constructPostBody() {
+            const body = {}
+            if(document.getElementById("overledene-opleiding-type")) {
+                const get = getForType("overledene")
+                body.overledene = {
+                    "opleiding": {
+                        "type": get("opleiding-type"),
+                        "opleidingAndere": get("opleiding-opleidingAndere"),
+                        "onderwijsType": get("opleiding-onderwijsType")
+                    },
+                    "beroepstoestand": {
+                        "type": get("beroepstoestand-type"),
+                        "beroepstoestandAndere": get("beroepstoestand-beroepstoestandAndere"),
+                        "beroepsInformatieGekend": get("beroepstoestand-beroepen")?.length > 0,
+                        "beroepen": JSON.parse(get("beroepstoestand-beroepen"))
+                    },
+                    "socialeStaat": {
+                        "type": get("socialeStaat-type"),
+                        "socialeStaatAndere": get("socialeStaat-socialeStaatAndere")
+                    },
+                    "woonsituatie": {
+                        "type": get("woonsituatie-type"),
+                        "woonsituatieAndere": get("woonsituatie-woonsituatieAndere")
+                    },
+                }
+            } else {
+                let get = getForType("moeder")
+                body.moeder = {
+                    "opleiding": {
+                        "type": get("opleiding-type"),
+                        "opleidingAndere": get("opleiding-opleidingAndere"),
+                        "onderwijsType": get("opleiding-onderwijsType")
+                    },
+                    "beroepstoestand": {
+                        "type": get("beroepstoestand-type"),
+                        "beroepstoestandAndere": get("beroepstoestand-beroepstoestandAndere"),
+                        "beroepsInformatieGekend": get("beroepstoestand-beroepen")?.length > 0,
+                        "beroepen": JSON.parse(get("beroepstoestand-beroepen"))
+                    },
+                    "socialeStaat": {
+                        "type": get("socialeStaat-type"),
+                        "socialeStaatAndere": get("socialeStaat-socialeStaatAndere")
+                    },
+                    "gezinstoestand": {
+                        "type": get("gezinstoestand-type"),
+                        "gezinstoestandAndere": get("gezinstoestand-gezinstoestandAndere")
+                    }
+                }
+                get = getForType("vaderOfMeemoeder")
+                body.vaderOfMeemoeder = {
+                    "opleiding": {
+                        "type": get("opleiding-type"),
+                        "opleidingAndere": get("opleiding-opleidingAndere"),
+                        "onderwijsType": get("opleiding-onderwijsType")
+                    },
+                    "beroepstoestand": {
+                        "type": get("beroepstoestand-type"),
+                        "beroepstoestandAndere": get("beroepstoestand-beroepstoestandAndere"),
+                        "beroepsInformatieGekend": get("beroepstoestand-beroepen")?.length > 0,
+                        "beroepen": JSON.parse(get("beroepstoestand-beroepen"))
+                    },
+                    "socialeStaat": {
+                        "type": get("socialeStaat-type"),
+                        "socialeStaatAndere": get("socialeStaat-socialeStaatAndere")
+                    }
+                }
+            }
+            return body;
+        }
+    </script>
+</div>
+</html>

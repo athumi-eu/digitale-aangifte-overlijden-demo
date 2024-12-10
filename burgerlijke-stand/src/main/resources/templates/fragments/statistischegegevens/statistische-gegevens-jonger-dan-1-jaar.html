@@ -14,8 +14,9 @@
     <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
     <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">-</div>
 
-    <p>Onderstaande rijksregisternummers zijn gebruikt voor de verrijking van de gegevens</p>
+    <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur})}"></div>
 
+    <p>Onderstaande rijksregisternummers zijn gebruikt voor de verrijking van de gegevens</p>
     <table>
 
         <tr class="title">
