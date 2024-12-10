@@ -4,6 +4,15 @@
 <div th:fragment="statistische-gegevens(id, statistischeGegevens)" class="grid-column">
 
     <h3>Statistisch formulier</h3>
+    <div class="label">Status statistisch formulier</div>
+    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp}  ? 'Aangevuld': 'Niet aangevuld'">-</div>
+    <div class="label">Datum laatste aanvulling statistisch formulier</div>
+    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp ?: '-'}">-</div>
+    <div class="label">Status statistisch formulier uitvaartondernemer</div>
+    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp} ? 'Ingevuld': 'Nog niet ingevuld'">-</div>
+    <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
+    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">-</div>
+
     <table>
 
         <tr class="title">
