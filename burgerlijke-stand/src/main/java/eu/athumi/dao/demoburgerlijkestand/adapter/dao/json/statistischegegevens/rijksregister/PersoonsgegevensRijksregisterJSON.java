@@ -1,3 +1,5 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister;
 
-public record PersoonsgegevensRijksregisterJSON(OverledeneRijksregisterJSON overledene) {}
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OudersJSON;
+
+public record PersoonsgegevensRijksregisterJSON(OverledeneRijksregisterJSON overledene, OudersJSON ouders) {}

@@ -3,18 +3,19 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.BurgerlijkeStaatJSONType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
 
+import java.util.List;
 import java.util.Set;
 
 public record MoederOfOudsteOuderJSON(
         NationaliteitJSON nationaliteit,
         GeboorteJSON geboorte,
         Geslacht geslacht,
-        BurgerlijkeStaatJSONType burgerlijkeStaat,
+        List<BurgerlijkeStaatJSON> burgerlijkeStaten,
         Set<NationaliteitJSON> oorspronkelijkeNationaliteit,
         AdresJSON verblijfplaats,
         HuwelijkJSON huwelijk
@@ -35,8 +36,9 @@ public record MoederOfOudsteOuderJSON(
         return geslacht;
     }
 
-    public BurgerlijkeStaatJSONType burgerlijkeStaat() {
-        return burgerlijkeStaat;
+    @Override
+    public List<BurgerlijkeStaatJSON> burgerlijkeStaten() {
+        return burgerlijkeStaten;
     }
 
     @Override
