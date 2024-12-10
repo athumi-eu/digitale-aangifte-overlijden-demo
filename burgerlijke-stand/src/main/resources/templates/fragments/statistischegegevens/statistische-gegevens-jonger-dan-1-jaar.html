@@ -61,6 +61,12 @@
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().burgerlijkeStaat()})}"></tr>
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().datumHuidigHuwelijk()})}"></tr>
         </div>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.opleidingMama()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroepstoestandMama()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.socialestaatMama()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroepMama()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.gezinstoestand()})}"></tr>
+
         <tr><th colspan="100%">Gegevens ouder 2</th></tr>
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder2().geslacht()})}"></tr>
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder2().geboorteDatum()})}"></tr>
@@ -71,6 +77,10 @@
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder2().burgerlijkeStaat()})}"></tr>
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder2().datumHuidigHuwelijk()})}"></tr>
         </div>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.opleidingPapa()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroepstoestandPapa()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.socialestaatPapa()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroepPapa()})}"></tr>
     </table>
 
 

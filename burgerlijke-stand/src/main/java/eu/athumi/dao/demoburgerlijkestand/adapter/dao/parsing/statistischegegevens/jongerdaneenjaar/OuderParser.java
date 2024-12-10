@@ -26,7 +26,7 @@ public record OuderParser(OuderJSON ouder, MoederVaststellingJSON moederVaststel
         return new TableRow(
                 "Geslacht",
                 "-",
-                ofNullable(moederVaststelling.geslacht()).map(Geslacht::name).orElse("-"),
+                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geslacht).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
                 ofNullable(ouder.geslacht()).map(Geslacht::name).orElse("-")
