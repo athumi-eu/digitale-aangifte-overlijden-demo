@@ -12,6 +12,7 @@
     <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp} ? 'Ingevuld': 'Nog niet ingevuld'">-</div>
     <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
     <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">-</div>
+    <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur})}"></div>
 
     <table>
 

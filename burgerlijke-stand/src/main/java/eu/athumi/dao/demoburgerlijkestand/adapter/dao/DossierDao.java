@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
@@ -205,6 +206,26 @@ public class DossierDao {
                     .body(objectMapper.readValue(
                             verrijking,
                             DossierVerrijkingJSON.class
+                    ))
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping(path = "/dossier/{id}/seg")
+    @ResponseBody
+    public ResponseEntity<String> saveSEG(@PathVariable String id, @RequestBody String seg, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .put()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/socio-economische-gegevens", id)
+                    .body(objectMapper.readValue(
+                            seg,
+                            SEGLB.class
                     ))
                     .retrieve()
                     .toBodilessEntity();
