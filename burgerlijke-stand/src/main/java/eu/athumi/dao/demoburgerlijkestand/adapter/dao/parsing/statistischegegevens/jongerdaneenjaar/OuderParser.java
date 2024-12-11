@@ -26,33 +26,33 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
     public TableRow geslacht() {
         return new TableRow(
                 "Geslacht",
-                ofNullable(ouderRR.geslacht()).map(Geslacht::name).orElse("-"),
+                ofNullable(ouderRR).map(OuderJSON::geslacht).map(Geslacht::name).orElse("-"),
                 ofNullable(moederVaststelling).map(MoederVaststellingJSON::geslacht).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
-                ofNullable(ouderDepartementZorg.geslacht()).map(Geslacht::name).orElse("-")
+                ofNullable(ouderDepartementZorg).map(OuderJSON::geslacht).map(Geslacht::name).orElse("-")
         );
     }
 
     public TableRow geboorteDatum() {
         return new TableRow(
                 "Geboortedatum",
-                ofNullable(ouderRR.geboorte()).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
+                ofNullable(ouderRR).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
                 "-",
                 "-",
                 "-",
-                ofNullable(ouderDepartementZorg.geboorte()).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
+                ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
         );
     }
 
     public TableRow huidigeNationaliteit() {
         return new TableRow(
                 "Huidige nationaliteit",
-                ofNullable(ouderRR.nationaliteit()).map(NationaliteitJSON::naam).orElse("-"),
+                ofNullable(ouderRR).map(OuderJSON::nationaliteit).map(NationaliteitJSON::naam).orElse("-"),
                 "-",
                 "-",
                 "-",
-                ofNullable(ouderDepartementZorg.nationaliteit()).map(NationaliteitJSON::naam).orElse("-")
+                ofNullable(ouderDepartementZorg).map(OuderJSON::nationaliteit).map(NationaliteitJSON::naam).orElse("-")
         );
     }
 
@@ -93,11 +93,11 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         var vrouwelijkeOuderDepZorg = (MoederOfOudsteOuderJSON) ouderDepartementZorg;
         return new TableRow(
                 "Burgerlijke staat",
-                ofNullable(vrouwelijkeOuderRR.burgerlijkeStaten()).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(", "))).orElse("-"),
+                ofNullable(vrouwelijkeOuderRR).map(MoederOfOudsteOuderJSON::burgerlijkeStaten).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(", "))).orElse("-"),
                 "-",
                 "-",
                 "-",
-                ofNullable(vrouwelijkeOuderDepZorg.burgerlijkeStaten()).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(", "))).orElse("-")
+                ofNullable(vrouwelijkeOuderDepZorg).map(MoederOfOudsteOuderJSON::burgerlijkeStaten).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::type).map(Enum::name).collect(Collectors.joining(", "))).orElse("-")
         );
     }
 
@@ -109,11 +109,11 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         var vrouwelijkeOuderDepZorg = (MoederOfOudsteOuderJSON) ouderDepartementZorg;
         return new TableRow(
                 "Datum huidig huwelijk",
-                ofNullable(vrouwelijkeOuderRR.burgerlijkeStaten()).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::huwelijksDatum).map(this::parseLocalDate).collect(Collectors.joining(", "))).orElse("-"),
+                ofNullable(vrouwelijkeOuderRR).map(MoederOfOudsteOuderJSON::burgerlijkeStaten).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::huwelijksDatum).map(this::parseLocalDate).collect(Collectors.joining(", "))).orElse("-"),
                 "-",
                 "-",
                 "-",
-                ofNullable(vrouwelijkeOuderDepZorg.burgerlijkeStaten()).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::huwelijksDatum).map(this::parseLocalDate).collect(Collectors.joining(", "))).orElse("-")
+                ofNullable(vrouwelijkeOuderDepZorg).map(MoederOfOudsteOuderJSON::burgerlijkeStaten).map(staten -> staten.stream().map(BurgerlijkeStaatJSON::huwelijksDatum).map(this::parseLocalDate).collect(Collectors.joining(", "))).orElse("-")
         );
     }
 
