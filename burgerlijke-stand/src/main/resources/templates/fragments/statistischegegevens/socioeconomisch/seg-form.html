@@ -4,8 +4,6 @@
 
     <dialog id="seg-dialog">
         <button onclick="closeDialog()">Close</button>
-        <p th:text="${id}"></p>
-        <p th:text="${seg}"></p>
         <form th:object="${seg}">
             <div th:if="${seg.overledene != null}">
             <h3>Overledene</h3>
