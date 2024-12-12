@@ -1,3 +1,12 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking;
 
-public record OverledeneJSON(String rijksregisternummer) {}
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
+
+import java.time.LocalDate;
+
+public record OverledeneJSON(String rijksregisternummer,
+                             String naam,
+                             String voornaam,
+                             Geslacht geslacht,
+                             LocalDate geboorteDatum) {
+}
