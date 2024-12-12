@@ -54,6 +54,12 @@
                 <label>gezinstoestand</label>
                 <input  id="moeder-gezinstoestand-type"  type="text" th:value="*{moeder?.gezinstoestand?.type}"/>
                 <input  id="moeder-gezinstoestand-gezinstoestandAndere"  type="text" th:value="*{moeder?.gezinstoestand?.gezinstoestandAndere}"/>
+                <br/>
+                <label>Levendgeboren kinderen in huidig huwelijk</label>
+                <input  id="moeder-levendgeboren"  type="text" th:value="*{moeder?.levendgeborenKinderen}"/>
+                <br/>
+                <label>Doodgeboren kinderen in huidig huwelijk</label>
+                <input  id="moeder-doodgeboren"  type="text" th:value="*{moeder?.doodgeborenKinderen}"/>
 
                 <h3>vaderOfMeemoeder</h3>
                 <label>opleidingsType</label>
@@ -155,7 +161,9 @@
                     "gezinstoestand": {
                         "type": get("gezinstoestand-type"),
                         "gezinstoestandAndere": get("gezinstoestand-gezinstoestandAndere")
-                    }
+                    },
+                    "levendgeborenKinderen": get("levendgeboren"),
+                    "doodgeborenKinderen": get("doodgeboren")
                 }
                 get = getForType("vaderOfMeemoeder")
                 body.vaderOfMeemoeder = {
