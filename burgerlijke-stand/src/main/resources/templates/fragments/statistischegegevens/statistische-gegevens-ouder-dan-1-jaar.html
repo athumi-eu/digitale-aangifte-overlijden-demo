@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="statistische-gegevens(id, statistischeGegevens)" class="grid-column">
+<div th:fragment="statistische-gegevens(id, statistischeGegevens)">
 
-    <h3>Statistisch formulier</h3>
-    <div class="label">Status statistisch formulier</div>
-    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp}  ? 'Aangevuld': 'Niet aangevuld'">-</div>
-    <div class="label">Datum laatste aanvulling statistisch formulier</div>
-    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp ?: '-'}">-</div>
-    <div class="label">Status statistisch formulier uitvaartondernemer</div>
-    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp} ? 'Ingevuld': 'Nog niet ingevuld'">-</div>
-    <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
-    <div class="bottom-spacing"  th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">-</div>
-    <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur})}"></div>
-
+    <h2>Statistisch formulier</h2>
+    <section class="grid-column">
+        <div class="label">Status statistisch formulier</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp}  ? 'Aangevuld': 'Niet aangevuld'">
+            -
+        </div>
+        <div class="label">Datum laatste aanvulling statistisch formulier</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp ?: '-'}">
+            -
+        </div>
+        <div class="label">Status statistisch formulier uitvaartondernemer</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp} ? 'Ingevuld': 'Nog niet ingevuld'">
+            -
+        </div>
+        <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">
+            -
+        </div>
+        <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur})}"></div>
+    </section>
     <table>
 
         <tr class="title">
@@ -45,8 +58,6 @@
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroep3()})}"></tr>
 
     </table>
-
-
 </div>
 
 <tr th:fragment="tableRow(tableRow)">
