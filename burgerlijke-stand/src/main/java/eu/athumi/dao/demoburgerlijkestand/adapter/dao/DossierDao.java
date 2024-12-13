@@ -207,7 +207,7 @@ public class DossierDao {
         try {
             securedWebClient.getRestClient(kbonummer)
                     .post()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verrijken", id)
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/aanvullen", id)
                     .body(objectMapper.readValue(
                             verrijking,
                             DossierVerrijkingJSON.class

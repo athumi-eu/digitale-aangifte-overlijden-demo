@@ -56,10 +56,10 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
 - **Beschrijving**: Gebruik dit endpoint om aktes of toestemming aan een dossier toe te voegen.
 
-### Verrijken van een dossier
+### Aanvullen van een dossier
 
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/verrijken`
-- **Beschrijving**: Gebruik dit endpoint om een dossier te verrijken. Een verrijking is niet altijd toegestaan. Bekijk
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aanvullen`
+- **Beschrijving**: Gebruik dit endpoint om een dossier aan te vullen. Een aanvulling is niet altijd toegestaan. Bekijk
   de lijst met error codes voor meer uitleg.
 
 ### Afsluiten/heropen van een dossier
