@@ -185,7 +185,9 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 return seg.opleidingAndere();
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
-                return seg.type().getLabel() + " " + extraInfo;
+                var type = Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("");
+                var joinedInfo =  type + " " + extraInfo;
+                return joinedInfo.isBlank() ? DASH : joinedInfo;
             }
         }
         return DASH;
@@ -207,7 +209,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -229,7 +231,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -284,7 +286,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.woonsituatieAndere() != null && !seg.woonsituatieAndere().isBlank()) {
                 return seg.woonsituatieAndere();
             } else {
-                return String.valueOf(seg.type());
+                return Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
