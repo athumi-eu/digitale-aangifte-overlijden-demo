@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="seg(id, seg)" class="grid-column">
+<div th:fragment="seg(id, seg, ouderdan)" class="grid-column">
 
     <dialog id="seg-dialog">
         <button onclick="closeDialog()">Close</button>
-        <form th:object="${seg}">
-            <div th:if="${seg.overledene != null}">
-            <h3>Overledene</h3>
-            <label>opleidingsType</label>
-            <input id="overledene-opleiding-type" type="text" th:value="*{overledene?.opleiding?.type}"/>
-            <input id="overledene-opleiding-opleidingAndere"  type="text" th:value="*{overledene?.opleiding?.opleidingAndere}" />
-            <br/>
-            <label>onderwijsType</label>
-            <input id="overledene-opleiding-onderwijsType"  type="text" th:value="*{overledene?.opleiding?.onderwijsType}"/>
-            <br/>
-            <label>beroepstoestand</label>
-            <input id="overledene-beroepstoestand-type"  type="text" th:value="*{overledene?.beroepstoestand?.type}"/>
-            <input id="overledene-beroepstoestand-beroepstoestandAndere"  type="text" th:value="*{overledene?.beroepstoestand?.beroepstoestandAndere}"/>
-            <br/>
-            <label>Beroepen</label>
-            <input id="overledene-beroepstoestand-beroepen"  type="text" th:value="*{overledene?.beroepstoestand?.beroepen}"/>
-            <br/>
-            <label>sociale staat</label>
-            <input  id="overledene-socialeStaat-type"  type="text" th:value="*{overledene?.socialeStaat?.type}"/>
-            <input  id="overledene-socialeStaat-socialeStaatAndere"  type="text" th:value="*{overledene?.socialeStaat?.socialeStaatAndere}"/>
-            <br/>
-            <label>woonsituatie</label>
-            <input  id="overledene-woonsituatie-type"  type="text" th:value="*{overledene?.woonsituatie?.type}"/>
-            <input  id="overledene-woonsituatie-woonsituatieAndere"  type="text" th:value="*{overledene?.woonsituatie?.woonsituatieAndere}"/>
+        <form>
+            <div th:if="${ouderdan}">
+                <h3>Overledene</h3>
+                <label>opleidingsType</label>
+                <input id="overledene-opleiding-type" type="text" th:value="${seg?.overledene?.opleiding?.type}"/>
+                <input id="overledene-opleiding-opleidingAndere"  type="text" th:value="${seg?.overledene?.opleiding?.opleidingAndere}" />
+                <br/>
+                <label>onderwijsType</label>
+                <input id="overledene-opleiding-onderwijsType"  type="text" th:value="${seg?.overledene?.opleiding?.onderwijsType}"/>
+                <br/>
+                <label>beroepstoestand</label>
+                <input id="overledene-beroepstoestand-type"  type="text" th:value="${seg?.overledene?.beroepstoestand?.type}"/>
+                <input id="overledene-beroepstoestand-beroepstoestandAndere"  type="text" th:value="${seg?.overledene?.beroepstoestand?.beroepstoestandAndere}"/>
+                <br/>
+                <label>Beroepen</label>
+                <input id="overledene-beroepstoestand-beroepen"  type="text" th:value="${seg?.overledene?.beroepstoestand?.beroepen}"/>
+                <br/>
+                <label>sociale staat</label>
+                <input  id="overledene-socialeStaat-type"  type="text" th:value="${seg?.overledene?.socialeStaat?.type}"/>
+                <input  id="overledene-socialeStaat-socialeStaatAndere"  type="text" th:value="${seg?.overledene?.socialeStaat?.socialeStaatAndere}"/>
+                <br/>
+                <label>woonsituatie</label>
+                <input  id="overledene-woonsituatie-type"  type="text" th:value="${seg?.overledene?.woonsituatie?.type}"/>
+                <input  id="overledene-woonsituatie-woonsituatieAndere"  type="text" th:value="${seg?.overledene?.woonsituatie?.woonsituatieAndere}"/>
             </div>
 
 
-            <div th:if="${seg.moeder != null}">
+            <div th:if="${!ouderdan}">
                 <h3>Moeder</h3>
                 <label>opleidingsType</label>
-                <input  id="moeder-opleiding-type"  type="text" th:value="*{moeder?.opleiding?.type}"/>
-                <input  id="moeder-opleiding-opleidingAndere"  type="text" th:value="*{moeder?.opleiding?.opleidingAndere}" />
+                <input  id="moeder-opleiding-type"  type="text" th:value="${seg?.moeder?.opleiding?.type}"/>
+                <input  id="moeder-opleiding-opleidingAndere"  type="text" th:value="${seg?.moeder?.opleiding?.opleidingAndere}" />
                 <br/>
                 <label>onderwijsType</label>
-                <input  id="moeder-opleiding-onderwijsType"  type="text" th:value="*{moeder?.opleiding?.onderwijsType}"/>
+                <input  id="moeder-opleiding-onderwijsType"  type="text" th:value="${seg?.moeder?.opleiding?.onderwijsType}"/>
                 <br/>
                 <label>beroepstoestand</label>
-                <input  id="moeder-beroepstoestand-type"  type="text" th:value="*{moeder?.beroepstoestand?.type}"/>
-                <input  id="moeder-beroepstoestand-beroepstoestandAndere"  type="text" th:value="*{moeder?.beroepstoestand?.beroepstoestandAndere}"/>
+                <input  id="moeder-beroepstoestand-type"  type="text" th:value="${seg?.moeder?.beroepstoestand?.type}"/>
+                <input  id="moeder-beroepstoestand-beroepstoestandAndere"  type="text" th:value="${seg?.moeder?.beroepstoestand?.beroepstoestandAndere}"/>
                 <br/>
                 <label>Beroepen</label>
-                <input  id="moeder-beroepstoestand-beroepen"  type="text" th:value="*{moeder?.beroepstoestand?.beroepen}"/>
+                <input  id="moeder-beroepstoestand-beroepen"  type="text" th:value="${seg?.moeder?.beroepstoestand?.beroepen}"/>
                 <br/>
                 <label>sociale staat</label>
-                <input  id="moeder-socialeStaat-type"  type="text" th:value="*{moeder?.socialeStaat?.type}"/>
-                <input  id="moeder-socialeStaat-socialeStaatAndere"  type="text" th:value="*{moeder?.socialeStaat?.socialeStaatAndere}"/>
+                <input  id="moeder-socialeStaat-type"  type="text" th:value="${seg?.moeder?.socialeStaat?.type}"/>
+                <input  id="moeder-socialeStaat-socialeStaatAndere"  type="text" th:value="${seg?.moeder?.socialeStaat?.socialeStaatAndere}"/>
                 <br/>
                 <label>gezinstoestand</label>
-                <input  id="moeder-gezinstoestand-type"  type="text" th:value="*{moeder?.gezinstoestand?.type}"/>
-                <input  id="moeder-gezinstoestand-gezinstoestandAndere"  type="text" th:value="*{moeder?.gezinstoestand?.gezinstoestandAndere}"/>
+                <input  id="moeder-gezinstoestand-type"  type="text" th:value="${seg?.moeder?.gezinstoestand?.type}"/>
+                <input  id="moeder-gezinstoestand-gezinstoestandAndere"  type="text" th:value="${seg?.moeder?.gezinstoestand?.gezinstoestandAndere}"/>
                 <br/>
                 <label>Levendgeboren kinderen in huidig huwelijk</label>
-                <input  id="moeder-levendgeboren"  type="text" th:value="*{moeder?.levendgeborenKinderen}"/>
+                <input  id="moeder-levendgeboren"  type="text" th:value="${seg?.moeder?.levendgeborenKinderen}"/>
                 <br/>
                 <label>Doodgeboren kinderen in huidig huwelijk</label>
-                <input  id="moeder-doodgeboren"  type="text" th:value="*{moeder?.doodgeborenKinderen}"/>
+                <input  id="moeder-doodgeboren"  type="text" th:value="${seg?.moeder?.doodgeborenKinderen}"/>
 
                 <h3>vaderOfMeemoeder</h3>
                 <label>opleidingsType</label>
-                <input  id="vaderOfMeemoeder-opleiding-type"  type="text" th:value="*{vaderOfMeemoeder?.opleiding?.type}"/>
-                <input  id="vaderOfMeemoeder-opleiding-opleidingAndere"  type="text" th:value="*{vaderOfMeemoeder?.opleiding?.opleidingAndere}" />
+                <input  id="vaderOfMeemoeder-opleiding-type"  type="text" th:value="${seg?.vaderOfMeemoeder?.opleiding?.type}"/>
+                <input  id="vaderOfMeemoeder-opleiding-opleidingAndere"  type="text" th:value="${seg?.vaderOfMeemoeder?.opleiding?.opleidingAndere}" />
                 <br/>
                 <label>onderwijsType</label>
-                <input  id="vaderOfMeemoeder-opleiding-onderwijsType"  type="text" th:value="*{vaderOfMeemoeder?.opleiding?.onderwijsType}"/>
+                <input  id="vaderOfMeemoeder-opleiding-onderwijsType"  type="text" th:value="${seg?.vaderOfMeemoeder?.opleiding?.onderwijsType}"/>
                 <br/>
                 <label>beroepstoestand</label>
-                <input  id="vaderOfMeemoeder-beroepstoestand-type"  type="text" th:value="*{vaderOfMeemoeder?.beroepstoestand?.type}"/>
-                <input  id="vaderOfMeemoeder-beroepstoestand-beroepstoestandAndere"  type="text" th:value="*{vaderOfMeemoeder?.beroepstoestand?.beroepstoestandAndere}"/>
+                <input  id="vaderOfMeemoeder-beroepstoestand-type"  type="text" th:value="${seg?.vaderOfMeemoeder?.beroepstoestand?.type}"/>
+                <input  id="vaderOfMeemoeder-beroepstoestand-beroepstoestandAndere"  type="text" th:value="${seg?.vaderOfMeemoeder?.beroepstoestand?.beroepstoestandAndere}"/>
                 <br/>
                 <label>Beroepen</label>
-                <input  id="vaderOfMeemoeder-beroepstoestand-beroepen"  type="text" th:value="*{vaderOfMeemoeder?.beroepstoestand?.beroepen}"/>
+                <input  id="vaderOfMeemoeder-beroepstoestand-beroepen"  type="text" th:value="${seg?.vaderOfMeemoeder?.beroepstoestand?.beroepen}"/>
                 <br/>
                 <label>sociale staat</label>
-                <input  id="vaderOfMeemoeder-socialeStaat-type"  type="text" th:value="*{vaderOfMeemoeder?.socialeStaat?.type}"/>
-                <input  id="vaderOfMeemoeder-socialeStaat-socialeStaatAndere"  type="text" th:value="*{vaderOfMeemoeder?.socialeStaat?.socialeStaatAndere}"/>
+                <input  id="vaderOfMeemoeder-socialeStaat-type"  type="text" th:value="${seg?.vaderOfMeemoeder?.socialeStaat?.type}"/>
+                <input  id="vaderOfMeemoeder-socialeStaat-socialeStaatAndere"  type="text" th:value="${seg?.vaderOfMeemoeder?.socialeStaat?.socialeStaatAndere}"/>
                 <br/>
             </div>
             <br/>
