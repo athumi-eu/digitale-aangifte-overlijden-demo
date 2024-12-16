@@ -6,7 +6,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeSta
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.FicheDocumentenParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
@@ -201,16 +201,16 @@ public class DossierDao {
         return ResponseEntity.ok("Ok");
     }
 
-    @PostMapping(path = "/dossier/{id}/verrijk")
+    @PostMapping(path = "/dossier/{id}/aanvullen")
     @ResponseBody
     public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking, @SessionAttribute String kbonummer) {
         try {
             securedWebClient.getRestClient(kbonummer)
                     .post()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verrijken", id)
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/aanvullen", id)
                     .body(objectMapper.readValue(
                             verrijking,
-                            DossierVerrijkingJSON.class
+                            DossierAanvullingJSON.class
                     ))
                     .retrieve()
                     .toBodilessEntity();
