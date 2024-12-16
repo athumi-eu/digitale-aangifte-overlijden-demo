@@ -1,6 +1,6 @@
-package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking;
+package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling;
 
-public record DossierVerrijkingJSON(
+public record DossierAanvullingJSON(
     OverledeneJSON overledene,
     MoederJSON moeder,
     VaderOfMeeMoederJSON vaderOfMeeMoeder,
