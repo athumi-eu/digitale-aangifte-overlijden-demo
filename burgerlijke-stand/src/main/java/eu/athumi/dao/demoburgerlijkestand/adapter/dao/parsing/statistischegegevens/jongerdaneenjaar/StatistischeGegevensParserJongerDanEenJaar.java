@@ -213,6 +213,29 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
+
+    public TableRow levendeKinderen() {
+        return new TableRow(
+                "Levendgeboren kinderen uit huidige huwelijk",
+                DASH,
+                seg().map(s -> s.rijksregister()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH),
+                DASH,
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH),
+                DASH
+        );
+    }
+
+
+    public TableRow dodeKinderen() {
+        return new TableRow(
+                "Doodgeboren kinderen uit huidige huwelijk",
+                DASH,
+                DASH,
+                DASH,
+                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(m -> m.doodgeborenKinderen()).map(String::valueOf).orElse(DASH),
+                null
+        );
+    }
     private String parseGezinstoestand(Gezinstoestand seg) {
         if (seg != null) {
             if(seg.gezinstoestandAndere() != null && !seg.gezinstoestandAndere().isBlank()) {

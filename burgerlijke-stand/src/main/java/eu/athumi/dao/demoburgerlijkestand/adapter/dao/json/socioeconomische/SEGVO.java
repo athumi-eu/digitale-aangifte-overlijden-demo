@@ -6,6 +6,8 @@ public record SEGVO(
     Beroepstoestand beroepstoestand,
     SocialeStaat socialeStaat,
     Woonsituatie woonsituatie,
-    Gezinstoestand gezinstoestand
+    Gezinstoestand gezinstoestand,
+    Integer levendgeborenKinderen,
+    Integer doodgeborenKinderen
 ) {
 }
