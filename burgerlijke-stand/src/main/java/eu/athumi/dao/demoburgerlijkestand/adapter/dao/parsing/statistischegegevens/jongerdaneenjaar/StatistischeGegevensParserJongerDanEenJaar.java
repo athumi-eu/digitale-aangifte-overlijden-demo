@@ -111,7 +111,9 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 return seg.opleidingAndere();
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
-                return Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("") + " " + extraInfo;
+                var type = Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("");
+                var joinedInfo =  type + " " + extraInfo;
+                return joinedInfo.isBlank() ? DASH : joinedInfo;
             }
         }
         return DASH;
@@ -124,7 +126,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
         );
     }
 
@@ -135,7 +137,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.vaderOfMeemoeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.vaderOfMeemoeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
         );
     }
 
@@ -144,7 +146,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -157,7 +159,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
         );
     }
 
@@ -168,7 +170,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
         );
     }
 
@@ -177,7 +179,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -190,7 +192,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
         );
     }
 
@@ -201,7 +203,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.vaderOfMeemoeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.vaderOfMeemoeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
         );
     }
 
@@ -212,7 +214,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
 
@@ -223,7 +225,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.vaderOfMeemoeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
 
@@ -234,7 +236,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.rijksregister()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH),
                 DASH,
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH),
-                DASH
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH)
         );
     }
 
@@ -246,7 +248,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 DASH,
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(m -> m.doodgeborenKinderen()).map(String::valueOf).orElse(DASH),
-                null
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(m -> m.doodgeborenKinderen()).map(String::valueOf).orElse(DASH)
         );
     }
 
@@ -255,7 +257,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.gezinstoestandAndere() != null && !seg.gezinstoestandAndere().isBlank()) {
                 return seg.gezinstoestandAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -268,7 +270,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH)
         );
     }
 }
