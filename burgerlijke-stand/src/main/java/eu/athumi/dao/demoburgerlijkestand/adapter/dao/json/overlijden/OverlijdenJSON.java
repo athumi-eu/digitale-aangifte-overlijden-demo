@@ -25,6 +25,6 @@ public record OverlijdenJSON(TijdstipJSON tijdstip, List<Plaats> plaats, boolean
     }
 
     public OverlijdenAfhandelingOutputJSON getOverlijdenAfhandeling(String type) {
-        return bewijzen.stream().filter(t -> t.type().toString().equals(type)).findFirst().orElseGet(() -> new OverlijdenAfhandelingOutputJSON(null, null, null,null));
+        return bewijzen.stream().filter(t -> t.type().toString().equals(type)).findFirst().orElseGet(() -> new OverlijdenAfhandelingOutputJSON(null, null, null,null, null));
     }
 }

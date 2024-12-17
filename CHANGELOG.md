@@ -1,12 +1,15 @@
 # Changelog
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
+## [0.1.46] - 2024-12-17
+### Added
+Aktenummer kan worden toegevoegd aan de nationale akte
 
-## [0.1.45] - 2024-22-25
+## [0.1.45] - 2024-11-25
 ### Added
 - Vorige uitvaart ondernemer wordt getoond op het dossier detail
 
-## [0.1.43] - 2024-22-25
+## [0.1.43] - 2024-11-25
 ### Added
 - Documentatie uitgesplits in verschillende startpunten
 - Mogelijkheid tot verschillende gemeentes te selecteren

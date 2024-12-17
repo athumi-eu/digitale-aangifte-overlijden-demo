@@ -7,10 +7,13 @@
         <section>
             <h4>Overlijdensaktes</h4>
             <form class="upload-file" method="post"
-                  th:action="@{aktes/upload(type='nationaal', id=${dossier.id()})}" id="uploadNationaal"
-                  enctype="multipart/form-data">
+                  th:action="@{aktes/upload(id=${dossier.id()},type='nationaal')}"
+                  enctype="multipart/form-data"
+                  id="uploadNationaal">
                 <label for="nationaalOverlijdingsAkte">Nationale overlijdingsakte</label>
-                <input id="nationaalOverlijdingsAkte" type="file" name="akte" onchange="uploadFile(this.form, 'akte')"/>
+                <input id="aktenummer" name="aktenummer" placeholder="aktenummer"/>
+                <input id="nationaalOverlijdingsAkte" type="file" name="akte"/>
+                <button type="button" style="max-width:150px;" onclick="uploadFile(this.form, 'akte', true)">Upload</button>
                 <span></span>
                 <div th:if="${parsedDetail.bewijzen('Overlijdensakte')}">
                     <span th:text="${parsedDetail.bewijzen('Overlijdensakte')}"></span>
@@ -61,9 +64,10 @@
                 return `${formData.get(fileFieldName).name} geuploadet (refresh om metadata te zien)`
             }
 
-            function uploadFile(form, fileFieldName) {
+            function uploadFile(form, fileFieldName, ignoreFieldSize = false) {
+                console.log(form)
                 const formData = new FormData(form);
-                if (!formData.get(fileFieldName).size) {
+                if (!formData.get(fileFieldName).size && !ignoreFieldSize) {
                     return;
                 }
                 fetch(form.action, {

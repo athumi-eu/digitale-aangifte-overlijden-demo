@@ -3,8 +3,10 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.Optional;
+
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 @Controller
 public class FileDao {
@@ -27,14 +32,20 @@ public class FileDao {
 
     @PostMapping("/aktes/upload")
     @ResponseBody
-    public void uploadAkte(@RequestParam("akte") MultipartFile file, @RequestParam String type, @RequestParam String id, @SessionAttribute String kbonummer) {
-        MultiValueMap<String, Resource> body = new LinkedMultiValueMap<>();
-        body.add("akte", file.getResource());
+    public void uploadAkte( @RequestParam(value = "akte", required = false) MultipartFile file, @RequestParam(required = false) String aktenummer, @RequestParam String type, @RequestParam String id, @SessionAttribute String kbonummer) {
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        System.out.println(file.getSize());
+        System.out.println(aktenummer);
+        if(file.getSize() > 0){
+            body.add("akte", file.getResource());
+        }
+        Optional.ofNullable(aktenummer).ifPresent(item -> body.add("aktenummer", aktenummer));
         securedWebClient
                 .getRestClient(kbonummer)
                 .post()
                 .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/aktes/{type}", id, type)
                 .body(body)
+                .contentType(MULTIPART_FORM_DATA)
                 .retrieve()
                 .toBodilessEntity();
     }

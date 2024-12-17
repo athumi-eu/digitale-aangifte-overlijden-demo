@@ -9,13 +9,25 @@ import java.util.Optional;
 public class OverlijdenAfhandelingParser {
 
     public static String parseOverlijdenAfhandeling(OverlijdenAfhandelingOutputJSON overlijdenAfhandeling) {
-        String datum = Optional.ofNullable(overlijdenAfhandeling.datum())
-                .map(OverlijdenAfhandelingParser::datumAsString)
-                .orElse(null);
-        String oplaadDatum = Optional.ofNullable(overlijdenAfhandeling.oplaadDatum())
+        StringBuilder sb = new StringBuilder();
+
+        Optional.ofNullable(overlijdenAfhandeling.aktenummer())
+                .map(OverlijdenAfhandelingParser::aktenummerAsString)
+                .ifPresent(item -> sb.append(item).append(" | "));
+
+        Optional.ofNullable(overlijdenAfhandeling.oplaadDatum())
                 .map(OverlijdenAfhandelingParser::oplaadDatumAsString)
-                .orElse(null);
-        return datum == null ? oplaadDatum : datum.concat(" | ").concat(oplaadDatum == null ? "" : oplaadDatum);
+                .ifPresent(item -> sb.append(item).append(" | "));
+
+        Optional.ofNullable(overlijdenAfhandeling.datum())
+                .map(OverlijdenAfhandelingParser::datumAsString)
+                .ifPresent(sb::append);
+
+        return sb.toString();
+    }
+
+    private static String aktenummerAsString(String aktenummer) {
+        return "Aktenummer %s".formatted(aktenummer);
     }
 
     private static String oplaadDatumAsString(LocalDateTime date) {

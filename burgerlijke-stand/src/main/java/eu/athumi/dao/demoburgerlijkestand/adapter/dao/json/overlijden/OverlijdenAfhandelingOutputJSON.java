@@ -6,6 +6,7 @@ public record OverlijdenAfhandelingOutputJSON(
         OverlijdenAfhandelingOutputType type,
         LocalDateTime datum,
         LocalDateTime oplaadDatum,
-        String documentatie
+        String documentatie,
+        String aktenummer
 ) {
 }
