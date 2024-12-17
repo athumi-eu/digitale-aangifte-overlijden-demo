@@ -1,7 +1,7 @@
 # Changelog
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
-## [0.1.46] - 2024-12-17
+## [0.1.51] - 2024-12-17
 ### Added
 Aktenummer kan worden toegevoegd aan de nationale akte
 
