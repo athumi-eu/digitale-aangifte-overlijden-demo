@@ -27,7 +27,7 @@
         </div>
         <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur})}"></div>
     </section>
-    <table>
+    <table class="bottom-spacing">
 
         <tr class="title">
             <th></th>
@@ -58,6 +58,9 @@
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroep3()})}"></tr>
 
     </table>
+
+    <div th:replace="~{fragments/statistischegegevens/refresh-rijksregister.html :: refresh-rijksregister(id=${dossier.id()})}"></div>
+
 </div>
 
 <tr th:fragment="tableRow(tableRow)">

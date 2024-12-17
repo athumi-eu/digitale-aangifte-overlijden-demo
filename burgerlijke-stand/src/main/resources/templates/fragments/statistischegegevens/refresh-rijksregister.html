@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="refresh-rijksregister(id)" class="grid-column">
+    <section>
+        <div>
+            <button th:onclick="refreshRijksregister([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Refresh
+                rijksregister
+            </button>
+        </div>
+
+        <span id="error-refresh"></span>
+        <script>
+
+            function refreshRijksregister(id, frontendBaseUrl) {
+                fetch(frontendBaseUrl + '/dossier/' + id + '/statistische-gegevens/refresh', {
+                    method: "post"
+                }).then(async response => {
+                    if (response.status === 400) {
+                        document.getElementById("error-refresh").style.display = "block";
+                        document.getElementById("error-refresh").innerText = await response.text();
+                    } else {
+                        window.location.reload();
+                    }
+
+                });
+            }
+
+        </script>
+    </section>
+</div>

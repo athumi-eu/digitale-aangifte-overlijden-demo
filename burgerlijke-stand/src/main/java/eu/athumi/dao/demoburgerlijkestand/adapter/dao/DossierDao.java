@@ -241,4 +241,20 @@ public class DossierDao {
         return ResponseEntity.ok("Ok");
     }
 
+    @PostMapping(path = "/dossier/{id}/statistische-gegevens/refresh")
+    @ResponseBody
+    public ResponseEntity<String> refreshRijksregister(@PathVariable String id, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/refresh", id)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
 }

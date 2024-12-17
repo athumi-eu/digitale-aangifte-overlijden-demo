@@ -96,6 +96,7 @@
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroepPapa()})}"></tr>
     </table>
 
+    <div th:replace="~{fragments/statistischegegevens/refresh-rijksregister.html :: refresh-rijksregister(id=${dossier.id()})}"></div>
 
 </div>
 
