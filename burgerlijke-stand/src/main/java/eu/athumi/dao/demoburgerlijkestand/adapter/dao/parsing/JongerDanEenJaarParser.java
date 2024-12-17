@@ -16,8 +16,12 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return new UitvaartOndernemerParser(dossier.vorigeUitvaartOndernemer());
     }
 
-    public VerrijkingParser verrijking() {
-        return new VerrijkingParser(dossier.verrijking());
+    public AanvullingParser aanvulling() {
+        return new AanvullingParser(dossier.aanvulling());
+    }
+
+    public VerrijkingRijksregisterParser verrijkingRijksregister() {
+        return new VerrijkingRijksregisterParser(dossier.verrijkingRijksregister());
     }
 
     public String naamOverledene() {

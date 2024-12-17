@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <div th:fragment="file-upload(dossier, parsedDetail)">
-    <section>
-        <h3>Documenten</h3>
-        <section>
-            <h4>Overlijdensaktes</h4>
+    <h2>Documenten</h2>
+    <section class="grid-column">
+        <h3>Overlijdensaktes</h3>
+        <section class="grid-column">
             <form class="upload-file" method="post"
                   th:action="@{aktes/upload(id=${dossier.id()},type='nationaal')}"
                   enctype="multipart/form-data"
@@ -33,6 +33,9 @@
                        target="_blank">Download</a>
                 </div>
             </form>
+        </section>
+        <h3>Toestemming</h3>
+        <section class="grid-column">
             <form class="upload-file" method="post"
                   th:action="@{toestemming/upload(id=${dossier.id()})}" id="toestemmingForm"
                   enctype="multipart/form-data">

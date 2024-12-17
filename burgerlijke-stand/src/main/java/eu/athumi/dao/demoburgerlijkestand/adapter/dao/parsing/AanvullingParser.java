@@ -1,10 +1,10 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 
 import java.util.Objects;
 
-public record VerrijkingParser(DossierVerrijkingJSON json) {
+public record AanvullingParser(DossierAanvullingJSON json) {
 
     public String rrnOverledene() {
         if (Objects.isNull(json)
@@ -22,10 +22,10 @@ public record VerrijkingParser(DossierVerrijkingJSON json) {
                 || Objects.isNull(json.moeder())) {
             return "-";
         }
-        if(json.moeder().nietGekend()){
+        if (json.moeder().nietGekend()) {
             return "Niet gekend";
         }
-        if(json.moeder().nietVerblijfshouder()){
+        if (json.moeder().nietVerblijfshouder()) {
             return "Niet-verblijfshouder";
         }
         if (!Objects.isNull(json.moeder().rijksregisternummer())) {
@@ -39,7 +39,7 @@ public record VerrijkingParser(DossierVerrijkingJSON json) {
                 || Objects.isNull(json.vaderOfMeeMoeder())) {
             return "-";
         }
-        if(json.vaderOfMeeMoeder().nietVantoepassing()){
+        if (json.vaderOfMeeMoeder().nietVantoepassing()) {
             return "Niet van toepassing";
         }
         if (!Objects.isNull(json.vaderOfMeeMoeder().rijksregisternummer())) {
@@ -53,13 +53,11 @@ public record VerrijkingParser(DossierVerrijkingJSON json) {
                 || Objects.isNull(json.pvOfSystemNummer())) {
             return "-";
         }
-        if(json.pvOfSystemNummer().nietVantoepassing()){
+        if (json.pvOfSystemNummer().nietVantoepassing()) {
             return "Niet van toepassing";
         }
         return json.pvOfSystemNummer().nummer();
     }
-
-
 
 
 }

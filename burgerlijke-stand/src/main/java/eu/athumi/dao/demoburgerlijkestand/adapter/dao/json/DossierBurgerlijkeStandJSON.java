@@ -4,7 +4,8 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche.InlichtingenficheJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.rijksregister.VerrijkingRijksregisterJSON;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -30,7 +31,8 @@ public record DossierBurgerlijkeStandJSON(
         LocalDateTime afgeslotenOp,
         LocalDateTime heropendOp,
         LocalDateTime ingediendOp,
-        DossierVerrijkingJSON verrijking,
+        DossierAanvullingJSON aanvulling,
+        VerrijkingRijksregisterJSON verrijkingRijksregister,
         UitvaartOndernemerJSON uitvaartOndernemer,
         UitvaartOndernemerJSON vorigeUitvaartOndernemer,
         InlichtingenficheJSON inlichtingenfiche
@@ -41,20 +43,21 @@ public record DossierBurgerlijkeStandJSON(
     }
 
     public String parsedAfgeslotenOp() {
-        return parsedDateTime(afgeslotenOp) ;
+        return parsedDateTime(afgeslotenOp);
     }
 
     public String parsedHeropendOp() {
-        return parsedDateTime(heropendOp) ;
+        return parsedDateTime(heropendOp);
     }
+
     public String parsedIngediendOp() {
-        return parsedDateTime(ingediendOp) ;
+        return parsedDateTime(ingediendOp);
     }
 
     private String parsedDateTime(LocalDateTime localDateTime) {
         if (Objects.isNull(localDateTime)) {
             return "/";
         }
-        return parseLocalDateTime(localDateTime) ;
+        return parseLocalDateTime(localDateTime);
     }
 }

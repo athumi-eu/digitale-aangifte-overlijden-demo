@@ -3,7 +3,7 @@
 <head><title>Titel fragment</title></head>
 <body>
 <div th:fragment="verslag(verslag)">
-    <h3 th:text="'Verslag van de aangestelde beëdigd arts. Aangemaakt op: ' + ${verslag.aanmaakDatum()}"></h3>
+    <h2 th:text="'Verslag van de aangestelde beëdigd arts. Aangemaakt op: ' + ${verslag.aanmaakDatum()}"></h2>
 
     <div class="grid-container-2">
         <div th:replace="~{fragments/overledene-verslag.html :: overledene-verslag(verslagDetail=${verslag})}"></div>
