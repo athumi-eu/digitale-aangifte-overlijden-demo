@@ -185,7 +185,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 return seg.opleidingAndere();
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
-                return seg.type().getLabel() + " " + extraInfo;
+                return Optional.ofNullable(seg.type()).map(t -> t.getLabel()).orElse("") + " " + extraInfo;
             }
         }
         return DASH;

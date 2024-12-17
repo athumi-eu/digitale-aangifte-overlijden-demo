@@ -21,6 +21,7 @@ import static java.util.Optional.ofNullable;
 
 public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSON statistischeGegevens) {
     static final String DASH = "-";
+
     private PersoonsgegevensDepartementZorgJSON getPersoonsGegevensVoorDepartementZorg() {
         return statistischeGegevens().persoonsgegevens().departementZorg();
     }
@@ -103,16 +104,19 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     private Optional<SEG> seg() {
         return Optional.ofNullable(statistischeGegevens).map(StatistischeGegevensJSON::socioeconomischegegevens);
     }
+
     private String parseOpleiding(Opleiding seg) {
         if (seg != null) {
-            if(seg.opleidingAndere() != null && !seg.opleidingAndere().isBlank()) {
+            if (seg.opleidingAndere() != null && !seg.opleidingAndere().isBlank()) {
                 return seg.opleidingAndere();
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
-                return seg.type().getLabel() + " " + extraInfo;
+                return Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("") + " " + extraInfo;
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow opleidingMama() {
         return new TableRow(
                 "Hoogst voltooide opleiding",
@@ -123,6 +127,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
         );
     }
+
     public TableRow opleidingPapa() {
         return new TableRow(
                 "Hoogst voltooide opleiding",
@@ -136,13 +141,15 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
 
     private String parseBeroepstoestand(Beroepstoestand seg) {
         if (seg != null) {
-            if(seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
+            if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
                 return String.valueOf(seg.type());
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow beroepstoestandMama() {
         return new TableRow(
                 "Huidige beroepstoestand",
@@ -153,6 +160,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
         );
     }
+
     public TableRow beroepstoestandPapa() {
         return new TableRow(
                 "Huidige beroepstoestand",
@@ -166,13 +174,15 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
 
     private String parseSocialeStaat(SocialeStaat seg) {
         if (seg != null) {
-            if(seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
+            if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
                 return String.valueOf(seg.type());
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow socialestaatMama() {
         return new TableRow(
                 "Sociale staat huidig beroep",
@@ -183,6 +193,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
         );
     }
+
     public TableRow socialestaatPapa() {
         return new TableRow(
                 "Sociale staat huidig beroep",
@@ -193,6 +204,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.vaderOfMeemoeder()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
         );
     }
+
     public TableRow beroepMama() {
         return new TableRow(
                 "Huidig beroep (laatst uitgeoefend)",
@@ -203,6 +215,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
+
     public TableRow beroepPapa() {
         return new TableRow(
                 "Huidig beroep (laatst uitgeoefend)",
@@ -236,15 +249,18 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
                 null
         );
     }
+
     private String parseGezinstoestand(Gezinstoestand seg) {
         if (seg != null) {
-            if(seg.gezinstoestandAndere() != null && !seg.gezinstoestandAndere().isBlank()) {
+            if (seg.gezinstoestandAndere() != null && !seg.gezinstoestandAndere().isBlank()) {
                 return seg.gezinstoestandAndere();
             } else {
                 return String.valueOf(seg.type());
             }
-        } return DASH;
+        }
+        return DASH;
     }
+
     public TableRow gezinstoestand() {
         return new TableRow(
                 "Gezinstoestand",
