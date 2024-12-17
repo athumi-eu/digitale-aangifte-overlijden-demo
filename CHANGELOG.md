@@ -5,7 +5,12 @@ Use following guidelines in the changelog: [Common Changelog](https://common-cha
 ### Added
 Aktenummer kan worden toegevoegd aan de nationale akte
 
-## [0.1.45] - 2024-11-25
+## [0.1.50] - 2024-12-17
+### Added
+- Verrijkte gegevens van het rijksregister
+- Knop om de gegevens van het rijksregister opnieuw op te halen
+
+## [0.1.45] - 2024-22-25
 ### Added
 - Vorige uitvaart ondernemer wordt getoond op het dossier detail
 
