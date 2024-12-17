@@ -1,0 +1,42 @@
+<div th:fragment="verrijking(id, verrijking)">
+
+    <h2>Verrijking</h2>
+    <section>
+        <h3>Rijksregister</h3>
+        <div class="grid-container-3">
+            <section class="grid-column">
+                <h4>Overledene</h4>
+                <div class="label">Rijksregisternummer</div>
+                <div class="bottom-spacing" th:text="${verrijking.rrnOverledene()}">-</div>
+                <div class="label">Naam</div>
+                <div class="bottom-spacing" th:text="${verrijking.naamOverledene()}">-</div>
+                <div class="label">Geslacht</div>
+                <div class="bottom-spacing" th:text="${verrijking.geslachtOverledene()}">-</div>
+                <div class="label">Datum</div>
+                <div class="bottom-spacing" th:text="${verrijking.geboorteDatumOverledene()}">-</div>
+            </section>
+            <section th:if="${verrijking.hasMoeder()}" class="grid-column">
+                <h4>Moeder</h4>
+                <div class="label">Rijksregisternummer</div>
+                <div class="bottom-spacing" th:text="${verrijking.rrnMoeder()}">-</div>
+                <div class="label">Naam</div>
+                <div class="bottom-spacing" th:text="${verrijking.naamMoeder()}">-</div>
+                <div class="label">Geslacht</div>
+                <div class="bottom-spacing" th:text="${verrijking.geslachtMoeder()}">-</div>
+                <div class="label">Datum</div>
+                <div class="bottom-spacing" th:text="${verrijking.geboorteDatumMoeder()}">-</div>
+            </section>
+            <section th:if="${verrijking.hasVaderOfMeeMoeder()}" class="grid-column">
+                <h4>Vader of meemoeder</h4>
+                <div class="label">Rijksregisternummer</div>
+                <div class="bottom-spacing" th:text="${verrijking.rrnVaderOfMeeMoeder()}">-</div>
+                <div class="label">Naam</div>
+                <div class="bottom-spacing" th:text="${verrijking.naamVaderOfMeeMoeder()}">-</div>
+                <div class="label">Geslacht</div>
+                <div class="bottom-spacing" th:text="${verrijking.geslachtVaderOfMeeMoeder()}">-</div>
+                <div class="label">Datum</div>
+                <div class="bottom-spacing" th:text="${verrijking.geboorteDatumVaderOfMeeMoeder()}">-</div>
+            </section>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="statistische-gegevens(id, statistischeGegevens)">
+
+    <h2>Statistisch formulier</h2>
+    <section class="grid-column">
+        <div class="label">Status statistisch formulier</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp}  ? 'Aangevuld': 'Niet aangevuld'">
+            -
+        </div>
+        <div class="label">Datum laatste aanvulling statistisch formulier</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp ?: '-'}">
+            -
+        </div>
+        <div class="label">Status statistisch formulier uitvaartondernemer</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp} ? 'Ingevuld': 'Nog niet ingevuld'">
+            -
+        </div>
+        <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
+        <div class="bottom-spacing"
+             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">
+            -
+        </div>
+        <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur}, ouderdan=${true})}"></div>
+    </section>
+    <table class="bottom-spacing">
+
+        <tr class="title">
+            <th></th>
+            <th>Bron RR</th>
+            <th>Bron vaststelling</th>
+            <th>Uitvaart ondernemer</th>
+            <th>Lokaal bestuur</th>
+            <th>Wordt doorgegeven aan Departement Zorg</th>
+        </tr>
+
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geslacht()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.tijdstipOverlijden()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.gemeenteOverlijden()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.plaatsOverlijden()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geboorteDatum()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.nationaliteit()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.verblijfplaats()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.burgerlijkeStaat()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.huwelijksDatum()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.geboorteDatumPartner()})}"></tr>
+
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.woonsituatie()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.opleiding()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroepstoestand()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.socialestaat()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroep1()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroep2()})}"></tr>
+        <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.beroep3()})}"></tr>
+
+    </table>
+
+    <div th:replace="~{fragments/statistischegegevens/refresh-rijksregister.html :: refresh-rijksregister(id=${dossier.id()})}"></div>
+
+</div>
+
+<tr th:fragment="tableRow(tableRow)">
+
+    <td th:text="${tableRow.label()}"></td>
+    <td th:text="${tableRow.RR()}"></td>
+    <td th:text="${tableRow.vaststelling()}"></td>
+    <td th:text="${tableRow.uitvaart()}"></td>
+    <td th:text="${tableRow.abs()}"></td>
+    <td th:text="${tableRow.departementZorg()}"></td>
+
+</tr>
+
+
+</html>
+

@@ -2,7 +2,9 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.TijdstipJSON;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -22,6 +24,20 @@ public class TijdstipParser {
             return "/";
         }
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy 'om' HH:mm"));
+    }
+
+    public static String parseLocalDate(LocalDate date) {
+        if (Objects.isNull(date)) {
+            return "-";
+        }
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public static String parseLocalTime(LocalTime time) {
+        if (Objects.isNull(time)) {
+            return "-";
+        }
+        return time.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
 }

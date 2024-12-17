@@ -15,6 +15,7 @@
     <div th:replace="~{fragments/dossier.html :: dossier(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
 
     <div th:replace="~{fragments/vaststelling-jonger-dan-1-jaar.html :: vaststelling-jonger-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
+    <div th:replace="~{fragments/verrijking.html :: verrijking(id=${dossier.id()},verrijking=${parsedDetail.verrijkingRijksregister()})}"></div>
 
     <!-- Als er een gekoppeld verslag is -->
     <div th:if="${verslag}">
@@ -29,7 +30,9 @@
 
     <div th:replace="~{fragments/inlichtingenfiche/inlichtingenfiche.html :: inlichtingenfiche(inlichtingenfiche=${dossier.inlichtingenfiche()})}"></div>
 
-    <div th:replace="~{fragments/aanvullende-gegevens.html :: aanvullende-gegevens(id=${dossier.id()},verrijking=${parsedDetail.verrijking()})}"></div>
+    <div th:replace="~{fragments/aanvullende-gegevens.html :: aanvullende-gegevens(id=${dossier.id()},aanvulling=${parsedDetail.aanvulling()})}"></div>
+
+    <div th:replace="~{fragments/statistischegegevens/statistische-gegevens-jonger-dan-1-jaar.html :: statistische-gegevens(id=${dossier.id()},statistischeGegevens=${statistischeGegevens})}"></div>
 
     <div th:replace="~{fragments/file-upload :: file-upload(dossier=${dossier}, parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
 </div>

@@ -4,12 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.DossierVerrijkingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.FicheDocumentenParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.StatistischeGegevensParserOuderDanEenJaar;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar.StatistischeGegevensParserJongerDanEenJaar;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -93,12 +97,11 @@ public class DossierDao {
                 model.addAttribute("dossiers", List.of());
                 model.addAttribute("kbonummer", kbonummer);
                 return "dossiers";
-            }else if (ex.getStatusCode().value() == 403) {
+            } else if (ex.getStatusCode().value() == 403) {
                 model.addAttribute("dossiers", new DossierBurgerlijkeStandJSON[0]);
                 model.addAttribute("kbonummer", kbonummer);
                 return "dossiers";
-            }
-            else {
+            } else {
                 throw ex;
             }
         }
@@ -121,15 +124,19 @@ public class DossierDao {
         if (detail.isPresent()) {
             var dossier = detail.get();
             var verslag = ofNullable(dossier.verslagDetailURL()).map((URI verslagDetailURL) -> getVerslagDetail(verslagDetailURL, kbonummer)).map(VerslagParser::new).orElse(null);
+            var statistischeGegevens = getStatistischeGegevens(kbonummer, dossier.id());
+
             model.addAttribute("ficheDocumenten", new FicheDocumentenParser(dossier));
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("dossier", dossier);
                 model.addAttribute("verslag", verslag);
+                model.addAttribute("statistischeGegevens", new StatistischeGegevensParserOuderDanEenJaar(statistischeGegevens));
                 model.addAttribute("parsedDetail", new OuderDanEenJaarParser(dossier));
                 return "detail-ouder-dan-1-jaar";
             } else {
                 model.addAttribute("dossier", dossier);
                 model.addAttribute("verslag", verslag);
+                model.addAttribute("statistischeGegevens", new StatistischeGegevensParserJongerDanEenJaar(statistischeGegevens));
                 model.addAttribute("parsedDetail", new JongerDanEenJaarParser(dossier));
                 return "detail-jonger-dan-1-jaar";
             }
@@ -146,6 +153,19 @@ public class DossierDao {
                 .retrieve()
                 .body(VerslagBeedigdArtsJSON.class);
         return body;
+    }
+
+    public StatistischeGegevensJSON getStatistischeGegevens(String kbonummer, String dossiernummer) {
+        var tt = securedWebClient.getRestClient(kbonummer)
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossiernummer}/statistische-gegevens", dossiernummer)
+                .retrieve()
+                .body(String.class);
+        return securedWebClient.getRestClient(kbonummer)
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossiernummer}/statistische-gegevens", dossiernummer)
+                .retrieve()
+                .body(StatistischeGegevensJSON.class);
     }
 
     @PostMapping(path = "/dossier/{id}/afsluiten")
@@ -181,17 +201,53 @@ public class DossierDao {
         return ResponseEntity.ok("Ok");
     }
 
-    @PostMapping(path = "/dossier/{id}/verrijk")
+    @PostMapping(path = "/dossier/{id}/aanvullen")
     @ResponseBody
     public ResponseEntity<String> verrijkDossier(@PathVariable String id, @RequestBody String verrijking, @SessionAttribute String kbonummer) {
         try {
             securedWebClient.getRestClient(kbonummer)
                     .post()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verrijken", id)
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/aanvullen", id)
                     .body(objectMapper.readValue(
                             verrijking,
-                            DossierVerrijkingJSON.class
+                            DossierAanvullingJSON.class
                     ))
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping(path = "/dossier/{id}/seg")
+    @ResponseBody
+    public ResponseEntity<String> saveSEG(@PathVariable String id, @RequestBody String seg, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .put()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/socio-economische-gegevens", id)
+                    .body(objectMapper.readValue(
+                            seg,
+                            SEGLB.class
+                    ))
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping(path = "/dossier/{id}/statistische-gegevens/refresh")
+    @ResponseBody
+    public ResponseEntity<String> refreshRijksregister(@PathVariable String id, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/refresh", id)
                     .retrieve()
                     .toBodilessEntity();
         } catch (Exception e) {
