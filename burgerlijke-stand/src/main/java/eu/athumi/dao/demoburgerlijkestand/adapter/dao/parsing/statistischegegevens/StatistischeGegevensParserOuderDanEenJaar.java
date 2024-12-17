@@ -185,7 +185,9 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 return seg.opleidingAndere();
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
-                return Optional.ofNullable(seg.type()).map(t -> t.getLabel()).orElse("") + " " + extraInfo;
+                var type = Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("");
+                var joinedInfo =  type + " " + extraInfo;
+                return joinedInfo.isBlank() ? DASH : joinedInfo;
             }
         }
         return DASH;
@@ -198,7 +200,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.opleiding()).map(this::parseOpleiding).orElse(DASH)
         );
     }
 
@@ -207,7 +209,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -220,7 +222,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(this::parseBeroepstoestand).orElse(DASH)
         );
     }
 
@@ -229,7 +231,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
-                return String.valueOf(seg.type());
+                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -242,7 +244,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.socialeStaat()).map(this::parseSocialeStaat).orElse(DASH)
         );
     }
 
@@ -253,7 +255,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(Predicate.not(List::isEmpty)).map(List::getFirst).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
 
@@ -264,7 +266,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 1).map(l -> l.get(1)).map(b -> b.omschrijving()).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 1).map(l -> l.get(1)).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 1).map(l -> l.get(1)).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 1).map(l -> l.get(1)).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
 
@@ -275,7 +277,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 2).map(l -> l.get(2)).map(b -> b.omschrijving()).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 2).map(l -> l.get(2)).map(b -> b.omschrijving()).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 2).map(l -> l.get(2)).map(b -> b.omschrijving()).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.beroepstoestand()).map(b -> b.beroepen()).filter(l -> l.size() > 2).map(l -> l.get(2)).map(b -> b.omschrijving()).orElse(DASH)
         );
     }
 
@@ -284,7 +286,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.woonsituatieAndere() != null && !seg.woonsituatieAndere().isBlank()) {
                 return seg.woonsituatieAndere();
             } else {
-                return String.valueOf(seg.type());
+                return Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -297,7 +299,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH),
-                seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH)
+                seg().map(s -> s.departementZorg()).map(l -> l.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH)
         );
     }
 
