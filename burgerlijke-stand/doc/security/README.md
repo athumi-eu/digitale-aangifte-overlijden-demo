@@ -10,7 +10,6 @@ Voor het aanvragen van een Client voor zowel de Beta, Acceptatie als Productie k
 Om onze rest api aan te spreken dient er een access token meegegeven te worden in de vorm van Bearer Authentication.
 Voor deze token aan te vragen, die uiteraard aangeleverd vanuit het Vlaams Toegansbeheer, kan je de [documentatie van de Vlaamse Overheid](https://authenticatie.vlaanderen.be/docs/beveiligen-van-api/oauth-rest/) volgen.
 
-
 ### Scopes
 Voor het correct gebruik van onze applicatie moet er tijdens het aanvragen van de access token ook de juiste scopes meegeleverd worden.
 Doordat er maar een beperkte set van API endpoints beschikbaar is, en deze per doelgroep geklusterd zijn, hebben we besloten om de scopes role based te maken.
@@ -27,6 +26,11 @@ Dit heeft als voordeel dat het, zowel tijdens het aanvragen van de client of acc
 
 Tijdens het aanvragen van de access token moet altijd zowel `vo_info` als een van de andere scopes worden meegegeven. 
 Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken tussen de verschillende actoren, is er de verwachting dat er per actor (bvb een Lokaal bestuur) een client wordt aangevraagd.
+
+### Rollen beheer
+Doordat er een client per lokaal bestuur wordt gebruikt is het DAO platform verantwoordelijk voor de controle of de client toelating heeft tot het platform, en voor het correct afschermen van de gegevens tussen de verschillende lokale besturen. 
+Echter, de controle of de gebruiker van de toepassing gelinkt is aan het lokaal bestuur en of de rol van de gebruiker correct is voor het dao platform te gebruiken is de verantwoordelijkheid van de integrator.
+Dit is een sterke verantwoordelijkheid die ook gepaard gaat met een verplichting tot een audit log.
 
 ### Headers
 Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezig zijn:
@@ -50,6 +54,7 @@ Ook is er de verwachting dat wanneer er gebruikers informatie gebruiken die afko
 om deze handelingen te koppelen met de gebruiker. 
 
 Wanneer er een incident voorkomt kan het zijn dat er contact wordt opgenomen met beheerder van de client om deze informatie op te vragen.
+
 
 ## Testen van de api
 Om snel te controleren of alle acties correct zijn uitgevoerd is er een endpoint voorzien voor de security te testen:
