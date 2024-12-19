@@ -15,10 +15,3 @@ dao:
   gemeentes:
     security-method: client_secret
     token-uri: https://dao.api.test-athumi.eu/oauth2/token
-    config:
-      leuven:
-        naam: Leuven
-        kbonummer: '0207521503'
-      oostende:
-        naam: Oostende
-        kbonummer: '0207436775'

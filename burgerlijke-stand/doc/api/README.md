@@ -25,8 +25,7 @@ Een verwachte flow van de applicatie is:
 Om in te loggen moet een OAuth token meegegeven worden. Meer informatie hierover vind je in
 het [security document](../security/README.md).
 
-Het token dat aangemaakt wordt in de voorbeeldcode werkt enkel voor de dev/test omgeving.
-Integratoren worden verwacht enkel met de beta omgeving en daarboven te integreren.
+Voor een token in de test omgeving moet er contact worden opgenomen met Athumi.
 
 ## Endpoints
 
@@ -50,11 +49,17 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}`
 - **Beschrijving**: Gebruik dit endpoint om het detail van een dossier op te vragen
 
-### (up/down)loaden van een toestemming/(inter)nationale akte
+### (down)loaden van een toestemming/(inter)nationale akte
+
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/documenten/{type}`
+- **Beschrijving**: Gebruik dit endpoint om aktes, toestemmingen of andere documenten van een dossier te downloaden.
+- 
+### (up)loaden van een toestemming/(inter)nationale akte
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
-- **Beschrijving**: Gebruik dit endpoint om aktes of toestemming aan een dossier toe te voegen.
+- **Beschrijving**: Gebruik dit endpoint om aktes of toestemming van een dossier te uploaden.
 
 ### Aanvullen van een dossier
 
@@ -67,6 +72,10 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/heropen`
 - **Beschrijving**: Gebruik dit endpoint om een dossier af te sluiten of te heropenen. Afsluiten of heropenen is niet altijd toegestaan. Bekijk
   de lijst met error codes voor meer uitleg.
+
+### Aanvullen van een dossier
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aanvullen`
+- **Beschrijving**: Gebruik dit endpoint om voor een dossier wat extra informatie op te slaan.
 
 ### Ophalen van (een) verslag(en)
 
@@ -85,6 +94,16 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}`
 - **Beschrijving**: Gebruik dit endpoint om een verslag te verwijderen
+
+### Statische gegevens
+ 
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens`
+- **Beschrijving**: Gebruik dit endpoint statische gegevens op te vragen, en te updaten
+
+### Refresh gegevens rijkregister
+
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/refresh`
+- **Beschrijving**: Gebruik dit endpoint om de verrijking vanuit het rijksregister opnieuw te starten.
 
 ## Swagger
 
