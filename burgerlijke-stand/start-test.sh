@@ -1,0 +1,1 @@
+./gradlew bootRun --args="--spring.profiles.active='test,secret-test'"

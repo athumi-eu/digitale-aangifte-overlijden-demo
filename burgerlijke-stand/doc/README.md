@@ -10,8 +10,29 @@ Het kboNummer is een vast kboNummer. Dat mee geconfigureerd is op de testclient 
 ## Gebruik
 Uitleg over het gebruik van de api en de security kunnen gevonden worden in de doc/ folder.
 
-**Opgelet** Indien je deze applicatie wil opstarten dient de Oauth2 configuratie in de application.yml aangepast te worden zodat
-deze een token ophaalt van ACM/IDM in plaats van de Spring Authorization server van onze dev/test omgeving.
+Om de applicatie lokaal op te starten zijn er 2 scripts voorzien:
+- **beta**: `start-beta.sh`
+- **test**: `start-test.sh`
+
+Voordat u deze scripts uitvoerd moet u onder `src/main/resources` volgende files toevoegen:
+- **beta**: `application-secret-beta.yml`
+- **test**: `application-secret-test.yml`
+met de volgende structuur:
+```yaml
+dao:
+  gemeentes:
+    security-method: private_key_jwt
+    config:
+      <gemeentenaam>:
+        naam: <Gemeentenaam>
+        kbonummer: <kbonummer gemeente>
+        clientid: <clientid gemeente>
+        clientsecret: <clientsecret gemeente>
+```
+Het is mogelijk om meerdere gemeentes toe te voegen aan deze config.
+
+Voor de beta omgeving kan u hier de client ingeven die u [zelf kan aanvragen](security/client-aanvragen.md).
+Voor test neemt u best contact op met Athumi om deze clients te verkrijgen.
 
 Deze applicatie dient enkel als voorbeeld en is niet productie waardig.
 
