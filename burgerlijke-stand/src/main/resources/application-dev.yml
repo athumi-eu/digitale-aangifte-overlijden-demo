@@ -9,10 +9,6 @@ dao:
       leuven:
         naam: Leuven
         kbonummer: '0207521503'
-        clientid: demo-client-leuven
-        clientsecret: demo-client-leuven-secret
       oostende:
         naam: Oostende
         kbonummer: '0207436775'
-        clientid: demo-client-oostende
-        clientsecret: demo-client-oostende-secret
