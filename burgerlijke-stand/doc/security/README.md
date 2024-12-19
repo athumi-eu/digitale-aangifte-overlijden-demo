@@ -16,13 +16,14 @@ Voor het correct gebruik van onze applicatie moet er tijdens het aanvragen van d
 Doordat er maar een beperkte set van API endpoints beschikbaar is, en deze per doelgroep geklusterd zijn, hebben we besloten om de scopes role based te maken.
 Dit heeft als voordeel dat het, zowel tijdens het aanvragen van de client of access token, duidelijk is welke scopes er voor de gevraagde doelgroep nodig zijn.  
 
-| Scope       | Beschrijving                                                                                                                                                                                                   |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-| vo_info     | Deze scope zorgt ervoor dat het DAO platform de vo_info claims ontvangen tijdens de introspectie van het acces token. Dankzij deze claims zijn wij in staat om te diferentiëren welke actor de actie uitvoert. |
-| dao_begr    | Deze scope dient gebruikt te worden voor een actor binnen de Uitvaart sector.                                                                                                                                  |
-| dao_crem    | Deze scope dient gebruikt te worden voor een crematorium.                                                                                                                                                      |
-| dao_depzorg | Deze scope dient gebruikt te worden voor het Departement zorg.                                                                                                                                                 |
-| dao_lbbs    | Deze scope dient gebruikt te worden voor een lokaal bestuur.                                                                                                                                                   |
+| Scope                  | Beschrijving                                                                                                                                                                                                   |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| vo_info                | Deze scope zorgt ervoor dat het DAO platform de vo_info claims ontvangen tijdens de introspectie van het acces token. Dankzij deze claims zijn wij in staat om te diferentiëren welke actor de actie uitvoert. |
+| dao_uitvaartondernemer | Deze scope dient gebruikt te worden voor een actor binnen de Uitvaart sector.                                                                                                                                  |
+| dao_crematorium        | Deze scope dient gebruikt te worden voor een crematorium.                                                                                                                                                      |
+| dao_depzorg            | Deze scope dient gebruikt te worden voor het Departement zorg.                                                                                                                                                 |
+| dao_lbbs               | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als dienst burgelijke stand.                                                                                    |
+| dao_begraafplaats      | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als verantwoordelijke voor de begraafplaats.                                                                    |
 
 Tijdens het aanvragen van de access token moet altijd zowel `vo_info` als een van de andere scopes worden meegegeven. 
 Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken tussen de verschillende actoren, is er de verwachting dat er per actor (bvb een Lokaal bestuur) een client wordt aangevraagd.
@@ -30,12 +31,11 @@ Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken 
 ### Headers
 Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezig zijn:
 
-| Header         | Beschrijving                                                      |
-|----------------|-------------------------------------------------------------------|
-| x-kbonummer    | Het KBO nummer van de actor waarvoor de request wordt uitgevoerd. |
-| Authorization  | De access token in de vorm `Bearer {{token}}`                     |
+| Header           | Beschrijving                                                      |
+|------------------|-------------------------------------------------------------------|
+| Authorization    | De access token in de vorm `Bearer {{token}}`                     |
+| x-correlation-id |  
 
-//TODO: zet hier ook nog info omtrent Request, tracing, correlation id
 
 
 ### Logging
