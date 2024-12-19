@@ -31,11 +31,15 @@ Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken 
 ### Headers
 Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezig zijn:
 
-| Header           | Beschrijving                                                      |
-|------------------|-------------------------------------------------------------------|
-| Authorization    | De access token in de vorm `Bearer {{token}}`                     |
-| x-correlation-id |  
+| Header           | Beschrijving                                                                                                                                                   |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Authorization    | De access token in de vorm `Bearer {{token}}`                                                                                                                  |
+| x-correlation-id | Een uuid die wordt gebruikt om bij elkaar horende requesten te koppelen. Dit kunnen verschillende requesten zijn die gebruikt worden om 1 scherm op te vullen. |
+| x-tracing-id     | Een uuid die wordt gebruikt om requesten die binnen dezelfde lokale transactie worden verstuurd te koppelen.                                                   |
+| x-request-id     | Een uuid die per request uniek is.                                                                                                                             | 
 
+Een voorbeeld vanuit MAGDA:
+![Request ids](../diagrams/request-ids.svg)
 
 
 ### Logging
