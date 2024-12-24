@@ -89,7 +89,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuderRR = (MoederOfOudsteOuderJSON) ouderRR;
+        var vrouwelijkeOuderRR = ouderRR instanceof MoederOfOudsteOuderJSON test? test: null;
         var vrouwelijkeOuderDepZorg = (MoederOfOudsteOuderJSON) ouderDepartementZorg;
         return new TableRow(
                 "Burgerlijke staat",
@@ -105,7 +105,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuderRR = (MoederOfOudsteOuderJSON) ouderRR;
+        var vrouwelijkeOuderRR = ouderRR instanceof MoederOfOudsteOuderJSON test? test: null;
         var vrouwelijkeOuderDepZorg = (MoederOfOudsteOuderJSON) ouderDepartementZorg;
         return new TableRow(
                 "Datum huidig huwelijk",
@@ -118,10 +118,14 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
     }
 
     private String parseLocalDate(String date) {
-        if (date.length() != 10) {
-            return "-";
-        }
-        return TijdstipParser.parseLocalDate(LocalDate.of(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10))));
+        return ofNullable(date)
+                .map(item -> {
+                    if (item.length() != 10) {
+                        return "-";
+                    }
+                    return TijdstipParser.parseLocalDate(LocalDate.of(Integer.parseInt(item.substring(0, 4)), Integer.parseInt(item.substring(5, 7)), Integer.parseInt(item.substring(8, 10))));
+                }).orElse("");
+
     }
 
 }

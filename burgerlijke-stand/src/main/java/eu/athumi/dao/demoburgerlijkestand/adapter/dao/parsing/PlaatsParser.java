@@ -1,5 +1,6 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
@@ -34,10 +35,9 @@ public class PlaatsParser {
     }
 
     public static String getVerblijfplaatsVoorOuder(OuderJSON ouder) {
-        if (Objects.isNull(ouder)) {
+        if (Objects.isNull(ouder) || ! (ouder instanceof MoederOfOudsteOuderJSON vrouwelijkeOuder)) {
             return "-";
         }
-        var vrouwelijkeOuder = (MoederOfOudsteOuderJSON) ouder;
         var gemeente = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON::gemeente).orElse(null);
         var land = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON::land).orElse(null);
         return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.niscode();

@@ -1,6 +1,14 @@
 # Changelog
 
 Use following guidelines in the changelog: [Common Changelog](https://common-changelog.org/)
+## [0.1.53] - 2024-12-24
+### Added
+Fix plaats type
+
+## [0.1.52] - 2024-12-24
+### Added
+Sociale status aangepast
+
 ## [0.1.51] - 2024-12-17
 ### Added
 Aktenummer kan worden toegevoegd aan de nationale akte
