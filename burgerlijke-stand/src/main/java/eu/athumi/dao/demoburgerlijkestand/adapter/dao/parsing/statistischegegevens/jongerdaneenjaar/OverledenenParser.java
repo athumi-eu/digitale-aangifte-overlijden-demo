@@ -152,6 +152,13 @@ public record OverledenenParser(
         return Optional.ofNullable(plaats.plaats()).map(Enum::name);
     }
 
+    private Optional<String> parsePlaats(OverlijdenStatistischJSON plaats) {
+        if (PlaatsOverlijdenTypeJSON.ANDERE.equals(plaats.plaats())) {
+            return Optional.ofNullable(plaats.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
+        }
+        return Optional.ofNullable(plaats.plaats()).map(Enum::name);
+    }
+
     public TableRow levendOfDoodGeboren() {
         return new TableRow(
                 "Levend geboren of doodgeboren",
