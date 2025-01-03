@@ -12,7 +12,7 @@
         </div>
         <div class="label">Datum laatste aanvulling statistisch formulier</div>
         <div class="bottom-spacing"
-             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp ?: '-'}">
+             th:text="${#temporals.format(statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur?.aangepastOp, 'dd/MM/yyyy HH:mm') ?: '-'}">
             -
         </div>
         <div class="label">Status statistisch formulier uitvaartondernemer</div>
@@ -22,7 +22,7 @@
         </div>
         <div class="label">Datum laatste aanvulling statistisch formulier door uitvaartondernemer</div>
         <div class="bottom-spacing"
-             th:text="${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp ?: '-'}">
+             th:text="${#temporals.format(statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.uitvaart?.aangepastOp, 'dd/MM/yyyy HH:mm') ?: '-'}">
             -
         </div>
         <div th:replace="~{fragments/statistischegegevens/socioeconomisch/seg-form :: seg(id=${id}, seg=${statistischeGegevens.statistischeGegevens?.socioeconomischegegevens?.lokaalBestuur}, ouderdan=${true})}"></div>
