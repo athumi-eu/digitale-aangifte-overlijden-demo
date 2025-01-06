@@ -295,7 +295,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow woonsituatie() {
         return new TableRow(
                 "woonsituatie",
-                DASH,
+                seg().map(s -> s.rijksregister()).map(u -> u.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH),
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.overledene()).map(o -> o.woonsituatie()).map(this::parseWoonsituatie).orElse(DASH),
