@@ -232,8 +232,8 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     public TableRow levendeKinderen() {
         return new TableRow(
                 "Levendgeboren kinderen uit huidige huwelijk",
-                DASH,
                 seg().map(s -> s.rijksregister()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH),
+                DASH,
                 DASH,
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH),
                 seg().map(s -> s.departementZorg()).map(l -> l.moeder()).map(m -> m.levendgeborenKinderen()).map(String::valueOf).orElse(DASH)
@@ -266,7 +266,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     public TableRow gezinstoestand() {
         return new TableRow(
                 "Gezinstoestand",
-                DASH,
+                seg().map(s -> s.rijksregister()).map(u -> u.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH),
                 DASH,
                 seg().map(s -> s.uitvaart()).map(u -> u.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH),
                 seg().map(s -> s.lokaalBestuur()).map(l -> l.moeder()).map(o -> o.gezinstoestand()).map(this::parseGezinstoestand).orElse(DASH),
