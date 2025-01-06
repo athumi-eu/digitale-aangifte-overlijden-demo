@@ -10,7 +10,7 @@
                   th:action="@{aktes/upload(id=${dossier.id()},type='nationaal')}"
                   enctype="multipart/form-data"
                   id="uploadNationaal">
-                <label for="nationaalOverlijdingsAkte">Nationale overlijdingsakte</label>
+                <label for="nationaalOverlijdingsAkte">Afschrift/uittreksel overlijdensakte</label>
                 <input id="aktenummer" name="aktenummer" placeholder="aktenummer"/>
                 <input id="nationaalOverlijdingsAkte" type="file" name="akte"/>
                 <button type="button" style="max-width:150px;" onclick="uploadFile(this.form, 'akte', true)">Upload</button>
@@ -23,7 +23,7 @@
             <form class="upload-file" method="post"
                   th:action="@{aktes/upload(id=${dossier.id()},type='internationaal')}" id="uploadInternationaal"
                   enctype="multipart/form-data">
-                <label for="internationaalOverlijdingsAkte">Internationale overlijdingsakte</label>
+                <label for="internationaalOverlijdingsAkte">Internationaal meertalig uittreksel overlijdensakte</label>
                 <input id="internationaalOverlijdingsAkte" type="file" name="akte"
                        onchange="uploadFile(this.form, 'akte')"/>
                 <span></span>
