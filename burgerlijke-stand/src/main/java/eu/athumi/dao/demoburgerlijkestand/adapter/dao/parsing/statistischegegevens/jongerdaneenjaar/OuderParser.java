@@ -63,7 +63,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
                 "-",
                 "-",
                 "-",
-                ofNullable(ouderDepartementZorg.oorspronkelijkeNationaliteit()).map(nationaliteiten ->
+                ofNullable(ouderDepartementZorg).map(OuderJSON::oorspronkelijkeNationaliteit).map(nationaliteiten ->
                                 nationaliteiten.stream()
                                         .map(NationaliteitJSON::naam)
                                         .collect(Collectors.joining(", ")))
