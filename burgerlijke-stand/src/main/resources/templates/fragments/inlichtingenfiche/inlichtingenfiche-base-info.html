@@ -5,10 +5,10 @@
 <div th:if="${inlichtingenfiche != null}" th:fragment="inlichtingenfiche(inlichtingenfiche)">
     <h2>Inlichtingenfiche uitvaart - Aanvraag toestemming begrafenis / crematie</h2>
     <div class="label">Inlichtingenfiche aangemaakt op</div>
-    <div class="bottom-spacing" id="inlichtingenfiche?.aanmaakDatum" th:text="${inlichtingenfiche?.aanmaakDatum}"></div>
+    <div class="bottom-spacing" id="inlichtingenfiche?.aanmaakDatum" th:text="${#temporals.format(inlichtingenfiche?.aanmaakDatum, 'dd/MM/yyyy HH:mm')}"></div>
     <div th:if="${inlichtingenfiche?.wijzigingDatum() != null}">
         <div class="label">Inlichtingenfiche gewijzigd op</div>
-        <div id="inlichtingenfiche?.wijzigingDatum" th:text="${inlichtingenfiche?.wijzigingDatum}"></div>
+        <div id="inlichtingenfiche?.wijzigingDatum" th:text="${#temporals.format(inlichtingenfiche?.wijzigingDatum, 'dd/MM/yyyy HH:mm')}"></div>
     </div>
 
     <div class="grid-container-4">
@@ -77,11 +77,11 @@
                 <span th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.naam ?: ''}"></span>
             </div>
             <div class="label">Geboortedatum van partner</div>
-            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.geboorteDatum ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.crematie?.asWettelijkePartner?.geboorteDatum, 'dd/MM/yyyy') ?: '/'}"></div>
             <div class="label">Plaats van overlijden van partner</div>
             <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
             <div class="label">Datum van overlijden van partner</div>
-            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.datumOverlijden ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.crematie?.asWettelijkePartner?.datumOverlijden, 'dd/MM/yyyy') ?: '/'}"></div>
 
         </div>
     </div>
