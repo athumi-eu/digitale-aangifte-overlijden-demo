@@ -19,6 +19,10 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return new AanvullingParser(dossier.aanvulling());
     }
 
+    public GeboorteParser geboorteDetails() {
+        return new GeboorteParser(dossier.geboorte(), dossier.overlijden(), dossier.moeder());
+    }
+
     public VerrijkingRijksregisterParser verrijkingRijksregister() {
         return new VerrijkingRijksregisterParser(dossier.verrijkingRijksregister());
     }
