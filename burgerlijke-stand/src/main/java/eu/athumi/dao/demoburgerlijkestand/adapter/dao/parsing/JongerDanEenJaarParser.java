@@ -93,7 +93,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         if (Objects.isNull(bijkomendMedischAttest)) {
             return "Niet ingevuld";
         }
-        return bijkomendMedischAttest.type();
+        return bijkomendMedischAttest.aardOverlijdenBijkomendMedischAttestType().toString();
     }
 
 }
