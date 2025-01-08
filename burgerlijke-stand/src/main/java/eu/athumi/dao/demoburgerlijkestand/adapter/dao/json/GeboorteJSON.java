@@ -3,10 +3,13 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public record GeboorteJSON(
-        LocalDateTime datum,
+        LocalDate datum,
+        LocalTime uur,
         LocatieJSON plaats,
         GeboorteToestandJSON geboorteToestand
 )
