@@ -4,10 +4,11 @@
 <div th:fragment="vaststelling-jonger-dan-1-jaar(dossier, parsedDetail)">
     <section>
         <h2>Gegevens uit de vaststelling</h2>
-        <div class="grid-container-5">
+        <div class="grid-container-6">
             <div th:replace="~{fragments/overledene-jonger-dan-1-jaar :: overledene-jonger-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
             <div th:replace="~{fragments/details-overlijden.html :: details-overlijden(parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
             <div th:replace="~{fragments/details-geboorte.html :: details-geboorte(parsedDetail=${parsedDetail.geboorteDetails()})}"></div>
+            <div th:replace="~{fragments/aanvullende-details-geboorte.html :: aanvullende-details-geboorte(parsedDetail=${parsedDetail.geboorteDetails()})}"></div>
             <div th:replace="~{fragments/bijkomend-medisch-attest.html :: bijkomend-medisch-attest(parsedDetail=${parsedDetail})}"></div>
             <div th:replace="~{fragments/risico-en-bezwaren.html :: risico-en-bezwaren(parsedDetail=${parsedDetail})}"></div>
         </div>
