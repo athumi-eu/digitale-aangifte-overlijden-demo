@@ -6,6 +6,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, MoederJSON moeder) {
 
@@ -29,6 +30,44 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
             return "/";
         }
         return PlaatsParser.parseLocatie(geboorte.plaats());
+    }
+
+    public String adresGeboorte() {
+        var adres = geboorte.adres();
+        if(Objects.isNull(adres)) {
+            return "/";
+        }
+        var gemeenteString = "";
+        var landString = "";
+        if(adres.gemeente() != null) {
+            if(adres.gemeente().naam() != null) {
+                gemeenteString += adres.gemeente().naam();
+            }
+            if(adres.gemeente().niscode() != null) {
+                gemeenteString += " (" + adres.gemeente().niscode() + ")";
+            }
+        }
+
+        if(adres.land() != null) {
+            if(adres.land().naam() != null) {
+                landString += adres.land().naam();
+            }
+            if(adres.land().niscode() != null) {
+                landString += " (" + adres.land().niscode() + ")";
+            }
+        }
+
+        var buitenlandString = Optional.ofNullable(adres.buitenlandseGemeente()).orElse("");
+
+        return String.join(" ", gemeenteString, landString, buitenlandString);
+        /*
+        * const formattedGeboorteGemeente = computed(() => {
+    const adres = props.persoonsgegevens.geboorteAdres;
+    const buitenlandseGemeente = adres?.buitenlandseGemeente ? ', ' + adres.buitenlandseGemeente : '';
+    const postcode = adres?.gemeente?.postcode ? ' (' + adres?.gemeente?.postcode + ')' : '';
+    return isBelgie(adres?.land) ? adres?.gemeente?.postnaam + postcode : adres?.land.naamNl + buitenlandseGemeente;
+});
+        * */
     }
 
     public String meervoudigeZwangerschap() {
