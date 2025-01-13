@@ -1,7 +1,9 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.MeervoudigeZwangerschapJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.PersoonsgegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.VerdelingVolgensGeslachtJSON;
@@ -11,6 +13,9 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.*;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister.OverledeneRijksregisterJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister.PersoonsgegevensRijksregisterJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.PersoonsgegevensVaststellingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
@@ -43,6 +48,10 @@ public record OverledenenParser(
         return Optional.ofNullable(statistischeGegevensJSON.overlijdensgegevens());
     }
 
+    public Optional<OverledeneRijksregisterJSON> persoonRR() {
+        return Optional.ofNullable(statistischeGegevensJSON.persoonsgegevens()).map(PersoonsgegevensJSON::rijksregister).map(PersoonsgegevensRijksregisterJSON::overledene);
+    }
+
     public GeboorteJongerDanEenJaarJSON geboorte() {
         return (GeboorteJongerDanEenJaarJSON) departementZorg.geboorte();
     }
@@ -54,7 +63,7 @@ public record OverledenenParser(
     public TableRow geslacht() {
         return new TableRow(
                 "Geslacht",
-                "-",
+                persoonRR().map(OverledeneRijksregisterJSON::geslacht).map(Geslacht::name).orElse("-"),
                 vaststelling.map(OverledeneJongerDanEenJaarJSON::geslacht).map(Geslacht::name).orElse("-"),
                 "-",
                 "-",
@@ -98,7 +107,7 @@ public record OverledenenParser(
     public TableRow geboorteDatum() {
         return new TableRow(
                 "Datum geboorte",
-                "-",
+                persoonRR().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseLocalDate).orElse("-"),
                 geboorteVaststelling().map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
@@ -120,18 +129,12 @@ public record OverledenenParser(
     public TableRow gemeenteLandGeboorte() {
         return new TableRow(
                 "Gemeente/ land van geboorte",
+                persoonRR().map(OverledeneRijksregisterJSON::geboorteAdres).map(GemeenteEnLand::toString).orElse("-"),
+                geboorteVaststelling().map(GeboorteJongerDanEenJaarJSON::adres).map(GemeenteEnLand::toString).orElse("-"),
                 "-",
-                parseVerblijfplaats(geboorteVaststelling().map(GeboorteJongerDanEenJaarJSON::adres).orElse(null)),
                 "-",
-                "-",
-                parseVerblijfplaats(geboorte().adres())
+                Optional.ofNullable(geboorte()).map(GeboorteJongerDanEenJaarJSON::adres).map(GemeenteEnLand::toString).orElse("-")
         );
-    }
-
-    private String parseVerblijfplaats(AdresJSON adres) {
-        var gemeente = ofNullable(adres).map(AdresJSON::gemeente).orElse(null);
-        var land = ofNullable(adres).map(AdresJSON::land).orElse(null);
-        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.niscode();
     }
 
     public TableRow plaatsGeboorte() {
