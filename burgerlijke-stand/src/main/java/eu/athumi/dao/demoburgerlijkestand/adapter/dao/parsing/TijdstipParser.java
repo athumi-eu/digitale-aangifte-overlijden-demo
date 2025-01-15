@@ -13,7 +13,7 @@ public class TijdstipParser {
     public static String parseTijdstip(TijdstipJSON tijdstip) {
         if (Objects.isNull(tijdstip)) {
             return "/";
-        } else if(!Objects.isNull(tijdstip.beschrijvingTijdstip())) {
+        } else if(!Objects.isNull(tijdstip.beschrijvingTijdstip()) && !tijdstip.beschrijvingTijdstip().isBlank()) {
             return tijdstip.beschrijvingTijdstip();
         }
         return parseLocalDateTime(tijdstip.datum()) ;
