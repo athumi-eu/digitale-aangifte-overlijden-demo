@@ -1,8 +1,10 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
@@ -12,6 +14,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.TableRow;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
@@ -42,6 +45,17 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
                 "-",
                 "-",
                 ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
+        );
+    }
+
+    public TableRow gemeenteLandGeboorte() {
+        return new TableRow(
+                "Gemeente/ land van geboorte",
+                ofNullable(ouderRR).map(OuderJSON::geboorte).map(GeboorteJSON::adres).map(GemeenteEnLand::toString).orElse("-"),
+                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geboorteAdres).map(GemeenteEnLand::toString).orElse("-"),
+                "-",
+                "-",
+                Optional.ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::adres).map(GemeenteEnLand::toString).orElse("-")
         );
     }
 

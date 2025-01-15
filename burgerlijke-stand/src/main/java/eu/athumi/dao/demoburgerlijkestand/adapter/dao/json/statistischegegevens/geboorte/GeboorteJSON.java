@@ -2,6 +2,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 
 import java.time.LocalDate;
 
@@ -20,4 +21,6 @@ import java.time.LocalDate;
 )
 public interface GeboorteJSON {
     LocalDate datum();
+
+    GemeenteEnLand adres();
 }

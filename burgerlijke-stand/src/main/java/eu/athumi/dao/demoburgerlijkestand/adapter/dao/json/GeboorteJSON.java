@@ -1,13 +1,17 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json;
 
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public record GeboorteJSON(
-        LocalDateTime datum,
+        LocalDate datum,
+        LocalTime uur,
         LocatieJSON plaats,
+        GemeenteEnLand adres,
         GeboorteToestandJSON geboorteToestand
 )
         implements Type {

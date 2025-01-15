@@ -19,6 +19,10 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return new AanvullingParser(dossier.aanvulling());
     }
 
+    public GeboorteParser geboorteDetails() {
+        return new GeboorteParser(dossier.geboorte(), dossier.overlijden(), dossier.moeder());
+    }
+
     public VerrijkingRijksregisterParser verrijkingRijksregister() {
         return new VerrijkingRijksregisterParser(dossier.verrijkingRijksregister());
     }
@@ -78,6 +82,14 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
             return List.of();
         }
         return medischVerslag.maatregel().stream().map(Enum::toString).toList();
+    }
+
+    public String bijkomendMedischAttest() {
+        var bijkomendMedischAttest = MedischVerslagParser.getBijkomendMedischAttest(dossier.medischeToestand().medischeVerslagen());
+        if (Objects.isNull(bijkomendMedischAttest)) {
+            return "Niet ingevuld";
+        }
+        return bijkomendMedischAttest.aardOverlijdenBijkomendMedischAttestType().toString();
     }
 
 }

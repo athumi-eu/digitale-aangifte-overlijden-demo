@@ -1,6 +1,6 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte;
 
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 
@@ -12,7 +12,7 @@ public record GeboorteJongerDanEenJaarJSON(
         LocalTime tijdstip,
         PlaatsTypeJSON plaats,
         String plaatsBeschrijving,
-        AdresJSON adres,
+        GemeenteEnLand adres,
         Boolean meervoudigeZwangerschap
 ) implements GeboorteJSON, Plaats {
 

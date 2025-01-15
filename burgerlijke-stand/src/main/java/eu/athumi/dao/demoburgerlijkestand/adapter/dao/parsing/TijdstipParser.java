@@ -40,4 +40,13 @@ public class TijdstipParser {
         return time.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
+    public static String parseLocalDate(LocalDate datum, LocalTime uur) {
+        if (Objects.isNull(datum)) {
+            return "-";
+        }
+        if(Objects.isNull(uur)) {
+            return parseLocalDate(datum);
+        }
+        return parseLocalDateTime(LocalDateTime.of(datum, uur));
+    }
 }
