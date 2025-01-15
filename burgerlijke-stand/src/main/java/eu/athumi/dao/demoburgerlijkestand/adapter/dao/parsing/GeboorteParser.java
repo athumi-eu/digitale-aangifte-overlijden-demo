@@ -4,8 +4,10 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.GeboorteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.BevallingToestandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, MoederJSON moeder) {
 
@@ -14,7 +16,7 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
                 || Objects.isNull(geboorte.datum())) {
             return "/";
         }
-        return TijdstipParser.parseLocalDateTime(geboorte.datum());
+        return TijdstipParser.parseLocalDate(geboorte.datum());
     }
 
     public String levendGeboren() {
@@ -29,6 +31,10 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
             return "/";
         }
         return PlaatsParser.parseLocatie(geboorte.plaats());
+    }
+
+    public String adresGeboorte() {
+        return Optional.ofNullable(geboorte).map(GeboorteJSON::adres).map(GemeenteEnLand::toString).orElse("/");
     }
 
     public String meervoudigeZwangerschap() {

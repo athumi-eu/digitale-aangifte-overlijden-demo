@@ -6,29 +6,7 @@
     <h3>Details geboorte</h3>
     <div class="label">Tijdstip geboorte</div>
     <div class="bottom-spacing"  th:text="${parsedDetail.tijdstipGeboorte()}"></div>
-    <div class="label">Het kind is</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.levendGeboren} "></div>
-    <div class="label">Plaats van de geboorte</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.plaatsGeboorte()}"></div>
-    <div class="label">meervoudige zwangerschap</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.meervoudigeZwangerschap()}"></div>
-    <div class="label">totaal aantal geboorten</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.totaalAantalGeboorten()}"></div>
-    <div class="label">Rang nummer van het kind</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.rang()}"></div>
-    <div class="label">Aantal levend geboren</div>
-    <div>mannelijk: <span th:text="${parsedDetail.aantalLevendGeboren().mannelijk()}"></span>
-    </div>
-    <div>vrouwelijk: <span th:text="${parsedDetail.aantalLevendGeboren().vrouwelijk()}"></span>
-    </div>
-    <div class="bottom-spacing" >onbepaald: <span th:text="${parsedDetail.aantalLevendGeboren().onbepaald()}"></span>
-    </div>
-    <div class="label">Aantal dood geboren</div>
-    <div>mannelijk: <span th:text="${parsedDetail.aantalDoodGeboren().mannelijk()}"></span>
-    </div>
-    <div>vrouwelijk: <span th:text="${parsedDetail.aantalDoodGeboren().vrouwelijk()}"></span>
-    </div>
-    <div class="bottom-spacing" >onbepaald: <span th:text="${parsedDetail.aantalDoodGeboren().onbepaald()}"></span>
-    </div>
+    <div class="label">Plaats geboorte</div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.adresGeboorte()}"></div>
 </div>
 </html>
