@@ -8,10 +8,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGL
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.FicheDocumentenParser;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.JongerDanEenJaarParser;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.OuderDanEenJaarParser;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.StatistischeGegevensParserOuderDanEenJaar;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar.StatistischeGegevensParserJongerDanEenJaar;
 import jakarta.servlet.http.HttpSession;
@@ -138,6 +135,7 @@ public class DossierDao {
                 model.addAttribute("verslag", verslag);
                 model.addAttribute("statistischeGegevens", new StatistischeGegevensParserJongerDanEenJaar(statistischeGegevens));
                 model.addAttribute("parsedDetail", new JongerDanEenJaarParser(dossier));
+                model.addAttribute("zwangerschapsduur", new MedischAttestZwangerschapsduurParser(dossier));
                 return "detail-jonger-dan-1-jaar";
             }
 
