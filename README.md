@@ -6,4 +6,6 @@ Voor meer informatie rond de integratie als **Lokaal bestuur** kan je navigeren 
 
 Voor meer informatie rond de integratie als **Arts** kan je navigeren naar: [Startpunt arts](vaststelling/doc/README.md)
 
-(WIP = Work In Progress)
+![screenshot](static/athumi.jpg)
+
+
