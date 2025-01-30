@@ -1,12 +1,15 @@
 # Startpunt burgelijke stand
 
 ## Context
+*uitleg wat hier te vinden
 [Context](userstories/README.md)
 
 ## API documentatie
+*uitleg wat hier te vinden
 [API](api/README.md)
 
 ## Security
+*uitleg wat hier te vinden -> benoem duidelijk logging requirements + bewaartermijnen
 [Security](security/README.md)
 
 ## Demo app
