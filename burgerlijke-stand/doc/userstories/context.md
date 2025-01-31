@@ -6,7 +6,7 @@ Deze pagina bevat een aantal diagrammen die kunnen helpen om extra context te ge
 
 ## Doel platform
 
-![doel]()
+![doel](../diagrams/Doel.jpg)
 
 ## Betrokken partijen
 
