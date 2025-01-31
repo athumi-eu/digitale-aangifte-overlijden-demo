@@ -1,5 +1,9 @@
 # User Stories Burgerlijke Stand
 
+## Inleiding
+
+Deze pagina geeft een overzicht van de user stories die voorzien moeten worden in de applicatie, samen met de endpoints die in het DAO platform aangeboden worden. 
+
 ## Dossierbeheer en gegevens ophalen
 
 1. "Ik wil als ambtenaar burgerlijke stand (ABS) snel op de hoogte zijn van nieuwe dossiers zodat ik hiervoor de overlijdensakten kan aanmaken en de data kan controleren."
