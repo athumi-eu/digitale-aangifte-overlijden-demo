@@ -68,6 +68,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
 - **Beschrijving**: Gebruik dit endpoint om aktes of een toestemming van een dossier te uploaden.
+- **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_toestemmingbegravencrematie.docx) beschikbaar. De layout van dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
 
 ### Aanvullen van een dossier
 
