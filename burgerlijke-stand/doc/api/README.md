@@ -118,3 +118,9 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 ## Validatiefouten
 
 Als er validatiefouten optreden bij het versturen van een request, zal de API een HTTP 400-fout terugsturen. 
+
+## Error codes
+
+Een lijst met error codes kan hier worden teruggevonden.
+
+[Error codes lokaal bestuur](https://athumi.atlassian.net/wiki/external/MWJiOTdjM2RlMDlhNDMwMDk5YTJlZjhkZjg4YTk2YWQ)
