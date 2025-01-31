@@ -74,13 +74,15 @@ Deze pagina geeft een overzicht van de user stories die voorzien moeten worden i
 
        [POST /burgerlijke-stand/v1/dossiers/{id}/toestemming](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/uploadToestemming)
 
-12. “Als ABS kan ik de toestemming bekijken die in het platform is opgeladen.”
+    **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_toestemmingbegravencrematie.docx) beschikbaar. De layout van dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
+
+13. “Als ABS kan ik de toestemming bekijken die in het platform is opgeladen.”
 
     [GET /burgerlijke-stand/v1/dossiers/{id}/documenten/{type}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/downloadDocument_1)
 
     **Type:** TOESTEMMING_BEGRAFENIS_OF_CREMATIE
 
-13. “Als ABS wil ik het PV-nr, het rijksregisternummer van de overledene (enkel indien leeg) en rijksregisternummers ouders kunnen aanvullen zodat deze informatie zo snel mogelijk kan gedeeld worden met Departement zorg en/of kan gebruikt worden voor bronverrijking.”
+14. “Als ABS wil ik het PV-nr, het rijksregisternummer van de overledene (enkel indien leeg) en rijksregisternummers ouders kunnen aanvullen zodat deze informatie zo snel mogelijk kan gedeeld worden met Departement zorg en/of kan gebruikt worden voor bronverrijking.”
 
     [POST /burgerlijke-stand/v1/dossiers/{id}/aanvullen](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/verrijken)
 
