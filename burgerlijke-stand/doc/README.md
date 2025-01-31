@@ -11,7 +11,7 @@ Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.
 ## Security
 Info over authenticeren en vereisten naar logging toe staan [hier](security/README.md).
 
-Daarnaast zijn er ook vereisten naar [bewaartermijnen](security/bewaartermijnen) toe.
+Daarnaast zijn er ook vereisten naar [bewaartermijnen](security/bewaartermijnen.md) toe.
 
 ## Demo app
 Doordat er geen UI voorzien werd voor de burgelijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 
