@@ -29,6 +29,14 @@ Voor een token in de test omgeving moet er contact worden opgenomen met Athumi.
 
 ## Endpoints
 
+### Swagger
+
+De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
+
+- **Locatie**: `/swagger-ui/index.html`
+- [**Test**](https://dao.api.test-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
+- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
+
 ### Json-ld context
 
 Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende contextbestanden:
@@ -47,19 +55,19 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 ### Ophalen van het detail van een dossier
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}`
-- **Beschrijving**: Gebruik dit endpoint om het detail van een dossier op te vragen
+- **Beschrijving**: Gebruik dit endpoint om het detail van een dossier op te vragen.
 
 ### (down)loaden van een toestemming/(inter)nationale akte
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/documenten/{type}`
 - **Beschrijving**: Gebruik dit endpoint om aktes, toestemmingen of andere documenten van een dossier te downloaden.
-- 
+
 ### (up)loaden van een toestemming/(inter)nationale akte
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
-- **Beschrijving**: Gebruik dit endpoint om aktes of toestemming van een dossier te uploaden.
+- **Beschrijving**: Gebruik dit endpoint om aktes of een toestemming van een dossier te uploaden.
 
 ### Aanvullen van een dossier
 
@@ -68,50 +76,44 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
   de lijst met error codes voor meer uitleg.
 
 ### Afsluiten/heropen van een dossier
+
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/afsluiten`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/heropen`
 - **Beschrijving**: Gebruik dit endpoint om een dossier af te sluiten of te heropenen. Afsluiten of heropenen is niet altijd toegestaan. Bekijk
   de lijst met error codes voor meer uitleg.
-
-### Aanvullen van een dossier
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aanvullen`
-- **Beschrijving**: Gebruik dit endpoint om voor een dossier wat extra informatie op te slaan.
 
 ### Ophalen van (een) verslag(en)
 
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts`
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}`
 - **Beschrijving**: Gebruik dit endpoint om een lijst van verslagen of het detail van een individueel verslag te
-  bekijken
-- 
+  bekijken.
+
 ### (ont)koppelen van een verslag
 
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/ontkoppel`
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}/koppel`
-- **Beschrijving**: Gebruik dit endpoint om een verslag te (ont)koppelen van een dossier
+- **Beschrijving**: Gebruik dit endpoint om een verslag te (ont)koppelen van een dossier.
 
 ### Verwijderen van een verslag
 
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}`
-- **Beschrijving**: Gebruik dit endpoint om een verslag te verwijderen
+- **Beschrijving**: Gebruik dit endpoint om een verslag te verwijderen.
 
-### Statische gegevens
+### Statistische gegevens opvragen
  
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens`
-- **Beschrijving**: Gebruik dit endpoint statische gegevens op te vragen, en te updaten
+- **Beschrijving**: Gebruik dit endpoint om statistische gegevens op te vragen.
+
+### Statistische gegevens updaten
+ 
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/socio-economische-gegevens`
+- **Beschrijving**: Gebruik dit endpoint om statistische gegevens te updaten.
 
 ### Refresh gegevens rijkregister
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/refresh`
 - **Beschrijving**: Gebruik dit endpoint om de verrijking vanuit het rijksregister opnieuw te starten.
-
-## Swagger
-
-De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
-
-- **Locatie**: `/swagger-ui/index.html`
-- [**Test**](https://dao.api.test-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
-- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
 
 ## Validatiefouten
 
