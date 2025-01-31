@@ -43,6 +43,7 @@ Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezi
 | x-request-id     | Een uuid die per request uniek is.                                                                                                                             | 
 
 Een voorbeeld vanuit MAGDA:
+
 ![Request ids](../diagrams/request-ids.svg)
 
 
