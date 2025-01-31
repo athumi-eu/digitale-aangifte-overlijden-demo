@@ -2,7 +2,7 @@
 
 Voor meer informatie over het aanvragen van de client kan u gebruik maken van de documentatie van het [Beheerportaal Vlaanderen](https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/6282739963/Uw+OAuth-client+beheren+via+het+ACM-Beheerportaal).
 
-Met als referentie: `DAO (Digitale Aangifte Overlijden) API T&I` of `DAO (Digitale Aangifte Overlijden) API`  
+Met als referentie: `DAO (Digitale Aangifte Overlijden) API beta` of `DAO (Digitale Aangifte Overlijden) API`  
 
 Met als client name: `DAO [omgeving] <organisatie> client`  </br>
 hierbij is de omgeving een van de volgende waardes: beta/acc/PROD </br> 
@@ -26,7 +26,7 @@ De API waarvoor u toegang moet vragen heeft volgende kenmerken
 
 | Omgeving   | Referentie                                 |
 |------------|--------------------------------------------|
-| Beta & Acc | DAO (Digitale Aangifte Overlijden) API T&I |
+| Beta & Acc | DAO (Digitale Aangifte Overlijden) API beta|
 | Productie  | DAO (Digitale Aangifte Overlijden) API     |
 
 Er wordt verwacht dit te doen via
