@@ -55,7 +55,7 @@ De verwachting is dat wanneer er gebruikers informatie gebruiken die afkomstig i
 
 Wanneer er een incident voorkomt kan het zijn dat er contact wordt opgenomen met beheerder van de client om deze informatie op te vragen.
 
-Deze audit logs moeten bewaard worden gedurende 10 jaar, zoals ook beschreven in [bewaartermijnen](/bewaartermijnen.md).
+Deze audit logs moeten bewaard worden gedurende 10 jaar, zoals ook beschreven in [bewaartermijnen](bewaartermijnen.md).
 
 
 ## Testen van de api
