@@ -64,6 +64,10 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return moederOpt().map(MoederDetailJSON::geslacht).map(Objects::toString).orElse("/");
     }
 
+    public String rijksregisterMoeder() {
+        return moederOpt().map(MoederDetailJSON::rijksregisternummer).orElse("/");
+    }
+
     public String geboorteAdresMoeder() {
         return moederOpt().map(MoederDetailJSON::geboorte).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.GeboorteJSON::adres).map(Objects::toString).orElse("/");
     }

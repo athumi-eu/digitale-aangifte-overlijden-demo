@@ -13,6 +13,7 @@ public record MoederDetailJSON(
     InwonerschapJSON inwonerschap,
     BevallingJSON bevalling,
     Geslacht geslacht,
+    String rijksregisternummer,
     GeboorteJSON geboorte
 )
     implements Type {
