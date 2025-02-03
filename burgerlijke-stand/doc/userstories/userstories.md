@@ -4,6 +4,8 @@
 
 Deze pagina geeft een overzicht van de user stories die voorzien moeten worden in de applicatie, samen met de endpoints die in het DAO platform aangeboden worden. 
 
+Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele andere zaken die het proces kunnen verbeteren voor de lokale besturen dienen met hen besproken te worden.
+
 ## Dossierbeheer en gegevens ophalen
 
 1. "Ik wil als ambtenaar burgerlijke stand (ABS) snel op de hoogte zijn van nieuwe dossiers zodat ik hiervoor de overlijdensakten kan aanmaken en de data kan controleren."
