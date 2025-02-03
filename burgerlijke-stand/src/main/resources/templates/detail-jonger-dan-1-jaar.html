@@ -15,6 +15,7 @@
     <div th:replace="~{fragments/dossier.html :: dossier(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
 
     <div th:replace="~{fragments/vaststelling-jonger-dan-1-jaar.html :: vaststelling-jonger-dan-1-jaar(dossier=${dossier}, parsedDetail=${parsedDetail})}"></div>
+    <div th:replace="~{fragments/medisch-attest-zwangerschapsduur.html :: medisch-attest-zwangerschapsduur(attest=${zwangerschapsduur})}"></div>
     <div th:replace="~{fragments/verrijking.html :: verrijking(id=${dossier.id()},verrijking=${parsedDetail.verrijkingRijksregister()})}"></div>
 
     <!-- Als er een gekoppeld verslag is -->

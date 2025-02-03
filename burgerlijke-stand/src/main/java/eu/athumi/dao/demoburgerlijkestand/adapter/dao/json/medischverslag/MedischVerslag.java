@@ -20,6 +20,10 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.MedischVersla
                         value = VaststellingOverlijdenJSON.class,
                         name = "MedischVerslagOverlijden"
                 ),
+                @JsonSubTypes.Type(
+                        value = MedischAttestZwangerschapsduurJSON.class,
+                        name = "MedischAttestZwangerschapsduur"
+                ),
         }
 )
 public interface MedischVerslag {

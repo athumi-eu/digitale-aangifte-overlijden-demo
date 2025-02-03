@@ -5,3 +5,7 @@ Deze demo app kan gebruikt worden voor de verschillende integratoren die het sys
 Voor meer informatie rond de integratie als **Lokaal bestuur** kan je navigeren naar: [Startpunt burgelijke stand](burgerlijke-stand/doc/README.md)
 
 Voor meer informatie rond de integratie als **Arts** kan je navigeren naar: [Startpunt arts](vaststelling/doc/README.md)
+
+![screenshot](static/athumi.jpg)
+
+
