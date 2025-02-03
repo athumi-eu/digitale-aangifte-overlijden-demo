@@ -9,4 +9,4 @@ Dossiers in het DAO platform zijn na de juridisch bepaalde bewaartermijn niet la
 Gemeentelijke systemen zullen verantwoordelijk zijn om te bewaren:
 * Gegevens vaststelling strook A (10 jaar)
 * Ingediende inlichtingenfiche uitvaart + afgeleverde toestemming (10 jaar)
-* Auditlogs (gebruikersniveau)
+* Auditlogs (gebruikersniveau): 10 jaar
