@@ -1,7 +1,7 @@
-# Startpunt burgelijke stand
+# Startpunt burgerlijke stand
 
 ## Context toepassing burgerlijke stand
-Achtergrond informatie over het platform en de toepassing burgerlijke stand kan [hier](userstories/context.md) gevonden worden.
+Achtergrondinformatie over het platform en de toepassing burgerlijke stand kan [hier](userstories/context.md) gevonden worden.
 
 De [User stories](userstories/userstories.md) pagina beschrijft welke user stories in de toepassing voorzien moeten worden, en welke DAO API's hiervoor gebruikt kunnen worden. 
 
