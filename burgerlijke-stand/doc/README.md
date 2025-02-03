@@ -14,7 +14,7 @@ Info over authenticeren en vereisten naar logging toe staan [hier](security/READ
 Daarnaast zijn er ook vereisten naar [bewaartermijnen](security/bewaartermijnen.md) toe.
 
 ## Demo app
-Doordat er geen UI voorzien werd voor de burgelijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 
-nodige schermen binnen de toepassing burgelijke stand. 
+Doordat er geen UI voorzien werd voor de burgerlijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 
+nodige schermen binnen de toepassing burgerlijke stand. 
 
 [Demo app](demo-app/README.md)
