@@ -1,6 +1,6 @@
 # Demo applicatie
-Doordat er geen UI voorzien werd voor de burgelijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 
-nodige schermen binnen de toepassing burgelijke stand. 
+Doordat er geen UI voorzien werd voor de burgerlijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 
+nodige schermen binnen de toepassing burgerlijke stand. 
 
 Op beta staat deze app gedeployed onder: [https://dao.beta-athumi.eu/demo/dossiers?kbonummer=0207521503](https://dao.beta-athumi.eu/demo/dossiers?kbonummer=0207521503)
 
