@@ -52,7 +52,7 @@ Deze pagina geeft een overzicht van de user stories die voorzien moeten worden i
 
 8. “Wanneer een dossier werd heropend, wil ik zien waarom dit het geval is: manuele actie, socio-economische gegevens werden ingevuld/gewijzigd, inlichtingenfiche uitvaart (aanvraag toestemming of verzoek opname akte levenloos kind) werd geüpdatet zodat ik kan evalueren welke actie van mij vereist wordt.”
 
-   !! **API endpoint nog niet ontwikkeld**
+   **API endpoint nog niet ontwikkeld**
 
 ## Gegevens en documenten opladen
 
