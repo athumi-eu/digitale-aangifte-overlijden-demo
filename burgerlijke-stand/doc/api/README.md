@@ -48,7 +48,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers`
 - **Beschrijving**: Gebruik dit endpoint om een lijst van dossiers op te halen. Voor dit endpoint kunnen er een reeks
-  query parameters meegegeven worden. Minsten 1 van de volgende parameters moet meegegeven worden: Status dossier,
+  query parameters meegegeven worden. Minstens 1 van de volgende parameters moet meegegeven worden: Status dossier,
   rijksregisternummer, datum overlijden of achternaam overledene. Als status dossier behandeld of niet behandeld is moet
   nog 1 extra parameter meegegeven worden.
 
