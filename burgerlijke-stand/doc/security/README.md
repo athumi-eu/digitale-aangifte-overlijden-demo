@@ -43,17 +43,20 @@ Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezi
 | x-request-id     | Een uuid die per request uniek is.                                                                                                                             | 
 
 Een voorbeeld vanuit MAGDA:
+
 ![Request ids](../diagrams/request-ids.svg)
 
 
-### Logging
-Doordat het DAO platform omgaat met gevoelige data, heerst er de verwachting dat de clients van deze toepassing een correcte audit logging voorzien.
+### Logging vereisten voor de integratoren
+Aangezien integrators connecteren met de API van het DAO-platform via een access token weet het platform niet welke gebruiker (dus welke persoon) acties uitvoert. 
+Er kan in het DAO-platform enkel gelogd worden welke organisatie er een actie doet. 
 Het platform zal altijd loggen welke acties de client hebben uitgevoerd en dit telkens gecorreleerd op een of meerdere aangiftes. 
-Wij verwachten dat deze informatie ook beschikbaar is in de audit logging van de clients. 
-Ook is er de verwachting dat wanneer er gebruikers informatie gebruiken die afkomstig is vanuit het platform, of acties ondernemen met het platform, het mogelijk moet zijn
-om deze handelingen te koppelen met de gebruiker. 
+Omdat het DAO platform omgaat met gevoelige data, moeten de clients die gebruik maken van de API zelf een correcte audit logging voorzien. 
+De verwachting is dat wanneer er gebruikers informatie gebruiken die afkomstig is vanuit het platform, of acties ondernemen met het platform, het mogelijk moet zijn om deze handelingen te koppelen met individuele gebruikers. 
 
 Wanneer er een incident voorkomt kan het zijn dat er contact wordt opgenomen met beheerder van de client om deze informatie op te vragen.
+
+Deze audit logs moeten bewaard worden gedurende 10 jaar, zoals ook beschreven in [bewaartermijnen](bewaartermijnen.md).
 
 
 ## Testen van de api

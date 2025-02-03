@@ -1,14 +1,19 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder;
 
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.GeboorteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.InwonerschapJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Type;
+
 
 public record MoederDetailJSON(
     String naam,
     String voornaam,
     InwonerschapJSON inwonerschap,
-    BevallingJSON bevalling
+    BevallingJSON bevalling,
+    Geslacht geslacht,
+    GeboorteJSON geboorte
 )
     implements Type {
 

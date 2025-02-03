@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="gegevens-moeder(dossier, parsedDetail)" class="grid-column">
+    <h3>Moeder</h3>
+    <div class="label">Naam</div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.naamMoeder()}"></div>
+    <div class="label">Geslacht</div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.geslachtMoeder()}"></div>
+    <div class="label">Verblijfplaats</div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.verblijfplaatsMoeder ?: '/'}"></div>
+    <div class="label">Geboorteplaats</div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.geboorteAdresMoeder()}"></div>
+    <div class="label">Geboortedatum</div>
+    <div class="bottom-spacing" th:text="${parsedDetail.geboorteDatumMoeder()}"></div>
+</div>
+</html>

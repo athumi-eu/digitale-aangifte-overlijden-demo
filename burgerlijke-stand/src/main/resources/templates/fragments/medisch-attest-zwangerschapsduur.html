@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="medisch-attest-zwangerschapsduur(attest)">
+    <div th:if="${attest.isPresent()}" class="grid-column">
+        <h3>Medisch attest zwangerschapsduur</h3>
+        <div class="label">Aantal dagen zwangerschap vanaf de conceptie</div>
+        <div class="bottom-spacing"  th:text="${attest.aantalDagenZwanger()}"></div>
+        <div class="label">Geslacht</div>
+        <div class="bottom-spacing"  th:text="${attest.geslacht()}"></div>
+        <div class="label">Tijdstip van de geboorte</div>
+        <div class="bottom-spacing"  th:text="${attest.tijdstip()}"></div>
+        <div class="label">Adres van de geboorte</div>
+        <div class="bottom-spacing"  th:text="${attest.plaats()}"></div>
+        <div class="label">Gegevens van de moeder</div>
+        <div class="bottom-spacing"  th:text="${attest.moeder()}"></div>
+    </div>
+</div>
+</html>
