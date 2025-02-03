@@ -21,7 +21,7 @@ Dit heeft als voordeel dat het, zowel tijdens het aanvragen van de client of acc
 | dao_uitvaartondernemer | Deze scope dient gebruikt te worden voor een actor binnen de Uitvaart sector.                                                                                                                                  |
 | dao_crematorium        | Deze scope dient gebruikt te worden voor een crematorium.                                                                                                                                                      |
 | dao_depzorg            | Deze scope dient gebruikt te worden voor het Departement zorg.                                                                                                                                                 |
-| dao_lbbs               | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als dienst burgelijke stand.                                                                                    |
+| dao_lbbs               | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als dienst burgerlijke stand.                                                                                    |
 | dao_begraafplaats      | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als verantwoordelijke voor de begraafplaats.                                                                    |
 
 Tijdens het aanvragen van de access token moet altijd zowel `vo_info` als een van de andere scopes worden meegegeven. 
