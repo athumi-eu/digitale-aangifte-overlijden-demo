@@ -25,8 +25,6 @@ Een verwachte flow van de applicatie is:
 Om in te loggen moet een OAuth token meegegeven worden. Meer informatie hierover vind je in
 het [security document](../security/README.md).
 
-Voor een token in de test omgeving moet er contact worden opgenomen met Athumi.
-
 ## Endpoints
 
 ### Swagger
@@ -34,7 +32,6 @@ Voor een token in de test omgeving moet er contact worden opgenomen met Athumi.
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 
 - **Locatie**: `/swagger-ui/index.html`
-- [**Test**](https://dao.api.test-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
 - [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
 
 ### Json-ld context
@@ -60,6 +57,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 ### (down)loaden van een toestemming/(inter)nationale akte
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/documenten/{type}`
 - **Beschrijving**: Gebruik dit endpoint om aktes, toestemmingen of andere documenten van een dossier te downloaden.
 

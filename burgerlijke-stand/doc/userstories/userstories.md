@@ -4,6 +4,8 @@
 
 Deze pagina geeft een overzicht van de user stories die voorzien moeten worden in de applicatie, samen met de endpoints die in het DAO platform aangeboden worden. 
 
+Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele andere zaken die het proces kunnen verbeteren voor de lokale besturen dienen met hen besproken te worden.
+
 ## Dossierbeheer en gegevens ophalen
 
 1. "Ik wil als ambtenaar burgerlijke stand (ABS) snel op de hoogte zijn van nieuwe dossiers zodat ik hiervoor de overlijdensakten kan aanmaken en de data kan controleren."
@@ -26,31 +28,31 @@ Deze pagina geeft een overzicht van de user stories die voorzien moeten worden i
 
       [GET /burgerlijke-stand/v1/dossiers](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/getDossiers)
 
+    [GET /burgerlijke-stand/v1/dossiers/{id}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/getDossier)
+
     **Status:** IN_BEHANDELING
 
-    [GET /burgerlijke-stand/v1/dossiers/{id}/toestemming](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/downloadDocument)
+   **Opmerking:** Ons endpoint geeft de laatste staat van het dossier terug. Duidelijk maken aan de ambtenaar burgerlijke stand welk wijzigingen er geweest zijn (zoals aanpassing aan de aanvraag toestemming) in het dossier sinds de vorige keer dienen door de gemeentelijke software voorzien te worden (door een eigen diff logica te voorzien).
 
-   !! Gemeentelijke software voorziet diff om in data-object aanvraagTotToestemming: datumVanAanvraag > eigen datumVanAanvraag in storage
-
-4. "Als ABS wil ik de bijlagen bij de inlichtingenfiche downloaden als onderdeel van de voorbereiding van de af te leveren documenten."
+5. "Als ABS wil ik de bijlagen bij de inlichtingenfiche downloaden als onderdeel van de voorbereiding van de af te leveren documenten."
 
     [GET /burgerlijke-stand/v1/dossiers/{id}/documenten/{type}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/downloadDocument_1)
 
     **Type:** VERZOEK_NABESTAANDE, TOESTEMMING_EIGENAAR, VERZOEK_NABESTAANDE_AS_PARTNER, VERZOEK_OPNAME_ALS_VADER_OF_MEEMOEDER
 
-5. "Als ABS wil ik weten of er een laatste wilsbeschikking aanwezig is voor de overleden persoon en indien wel, de inhoud ervan bekijken zodat de afgeleverde toestemming hiermee in overeenstemming is."
+6. "Als ABS wil ik weten of er een laatste wilsbeschikking aanwezig is voor de overleden persoon en indien wel, de inhoud ervan bekijken zodat de afgeleverde toestemming hiermee in overeenstemming is."
 
     **API endpoint nog niet ontwikkeld**
 
-6. "Wanneer ik alles heb afgewerkt voor een dossier (overlijdensakten, toestemming, aanvulling gegevens) wil ik als ABS een dossier afsluiten, zodat ik een duidelijk overzicht behoud en achterliggend de socio-economische gegevens aan het Departement Zorg bezorgd worden."
+7. "Wanneer ik alles heb afgewerkt voor een dossier (overlijdensakten, toestemming, aanvulling gegevens) wil ik als ABS een dossier afsluiten, zodat ik een duidelijk overzicht behoud en achterliggend de socio-economische gegevens aan het Departement Zorg bezorgd worden."
 
     [POST /burgerlijke-stand/v1/dossiers/{id}/afsluiten](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/afsluiten)
 
-7. "Wanneer ik een behandeld dossier heb afgesloten, maar ik alsnog een fout heb opgemerkt (bv. in overlijdensakte) wil ik als ABS het dossier heropenen."
+8. "Wanneer ik een behandeld dossier heb afgesloten, maar ik alsnog een fout heb opgemerkt (bv. in overlijdensakte) wil ik als ABS het dossier heropenen."
 
     [POST /burgerlijke-stand/v1/dossiers/{id}/heropen](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/heropen)
 
-8. “Wanneer een dossier werd heropend, wil ik zien waarom dit het geval is: manuele actie, socio-economische gegevens werden ingevuld/gewijzigd, inlichtingenfiche uitvaart (aanvraag toestemming of verzoek opname akte levenloos kind) werd geüpdatet zodat ik kan evalueren welke actie van mij vereist wordt.”
+9. “Wanneer een dossier werd heropend, wil ik zien waarom dit het geval is: manuele actie, socio-economische gegevens werden ingevuld/gewijzigd, inlichtingenfiche uitvaart (aanvraag toestemming of verzoek opname akte levenloos kind) werd geüpdatet zodat ik kan evalueren welke actie van mij vereist wordt.”
 
    **API endpoint nog niet ontwikkeld**
 
@@ -78,11 +80,13 @@ Deze pagina geeft een overzicht van de user stories die voorzien moeten worden i
 
 13. “Als ABS kan ik de toestemming bekijken die in het platform is opgeladen.”
 
+    [GET /burgerlijke-stand/v1/dossiers/{id}/toestemming](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/downloadDocument)
+
     [GET /burgerlijke-stand/v1/dossiers/{id}/documenten/{type}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/downloadDocument_1)
 
     **Type:** TOESTEMMING_BEGRAFENIS_OF_CREMATIE
 
-14. “Als ABS wil ik het PV-nr, het rijksregisternummer van de overledene (enkel indien leeg) en rijksregisternummers ouders kunnen aanvullen zodat deze informatie zo snel mogelijk kan gedeeld worden met Departement zorg en/of kan gebruikt worden voor bronverrijking.”
+15. “Als ABS wil ik het PV-nr, het rijksregisternummer van de overledene (enkel indien leeg) en rijksregisternummers ouders kunnen aanvullen zodat deze informatie zo snel mogelijk kan gedeeld worden met Departement zorg en/of kan gebruikt worden voor bronverrijking.”
 
     [POST /burgerlijke-stand/v1/dossiers/{id}/aanvullen](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/verrijken)
 
