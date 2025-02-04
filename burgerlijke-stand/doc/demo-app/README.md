@@ -10,13 +10,12 @@ Het kboNummer is een vast kboNummer dat mee geconfigureerd is op de testclient v
 ## Gebruik
 Uitleg over het gebruik van de api en de security kunnen gevonden worden in de doc/ folder.
 
-Om de applicatie lokaal op te starten zijn er 2 scripts voorzien:
+Om de applicatie lokaal op te starten is volgend script voorzien:
 - **beta**: `start-beta.sh`
-- **test**: `start-test.sh`
 
-Voordat u deze scripts uitvoerd moet u onder `src/main/resources` volgende files toevoegen:
+Voordat u dit script uitvoerd moet u onder `src/main/resources` volgende file toevoegen:
 - **beta**: `application-secret-beta.yml`
-- **test**: `application-secret-test.yml`
+
 met de volgende structuur:
 ```yaml
 dao:
@@ -32,7 +31,6 @@ dao:
 Het is mogelijk om meerdere gemeentes toe te voegen aan deze config.
 
 Voor de beta omgeving kan u hier de client ingeven die u [zelf kan aanvragen](security/client-aanvragen.md).
-Voor test neemt u best contact op met Athumi om deze clients te verkrijgen.
 
 Deze applicatie dient enkel als voorbeeld en is niet productie waardig.
 
