@@ -1,16 +1,18 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.Gemeente;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.AdresStatistischJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.vaststelling.MoederVaststellingJSON;
 
 import java.util.Objects;
-
-import static java.util.Optional.ofNullable;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PlaatsParser {
 
@@ -18,11 +20,12 @@ public class PlaatsParser {
         if (Objects.isNull(adres)) {
             return null;
         }
-        var straat = Objects.isNull(adres.straat()) ? "" : adres.straat();
-        var huisnummer = Objects.isNull(adres.huisnummer()) ? "" : adres.huisnummer();
-        var bus = Objects.isNull(adres.bus()) ? "" : adres.bus();
-        var niscode = Objects.isNull(adres.niscode()) ? "" : adres.niscode();
-        return straat + " " + huisnummer + " " + bus + ", niscode: " + niscode;
+
+        var gemeenteEnLandString = new GemeenteEnLand(
+                new Gemeente(adres.niscode(), adres.gemeentenaam()),
+                adres.land(), adres.buitenlandsAdres()
+        ).toString();
+        return Stream.of(adres.straat(), adres.huisnummer(), adres.bus(), gemeenteEnLandString).filter(Objects::nonNull).collect(Collectors.joining(", "));
     }
 
     public static String parseLocatie(LocatieJSON locatieJSON) {
@@ -35,21 +38,16 @@ public class PlaatsParser {
     }
 
     public static String getVerblijfplaatsVoorOuder(OuderJSON ouder) {
-        if (Objects.isNull(ouder) || ! (ouder instanceof MoederOfOudsteOuderJSON vrouwelijkeOuder)) {
-            return "-";
-        }
-        var gemeente = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON::gemeente).orElse(null);
-        var land = ofNullable(vrouwelijkeOuder.verblijfplaats()).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON::land).orElse(null);
-        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.niscode();
+        return Optional.ofNullable(ouder)
+                .filter(MoederOfOudsteOuderJSON.class::isInstance)
+                .map(MoederOfOudsteOuderJSON.class::cast)
+                .map(MoederOfOudsteOuderJSON::verblijfplaats)
+                .map(GemeenteEnLandJSON::toString)
+                .orElse("-");
     }
 
     public static String getVerblijfplaatsVoorOuder(MoederVaststellingJSON moederVaststelling) {
-        if (Objects.isNull(moederVaststelling)) {
-            return "-";
-        }
-        var gemeente = ofNullable(moederVaststelling.verblijfplaats()).map(AdresStatistischJSON::gemeente).orElse(null);
-        var land = ofNullable(moederVaststelling.verblijfplaats()).map(AdresStatistischJSON::land).orElse(null);
-        return Objects.isNull(gemeente) ? (Objects.isNull(land) ? "-" : land.naam()) : gemeente.niscode();
+        return Optional.ofNullable(moederVaststelling).map(MoederVaststellingJSON::verblijfplaats).map(GemeenteEnLandJSON::toString).orElse("-");
     }
 
 }

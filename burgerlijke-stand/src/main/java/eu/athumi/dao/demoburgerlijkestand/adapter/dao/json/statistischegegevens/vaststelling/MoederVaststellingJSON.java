@@ -2,7 +2,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.AdresStatistischJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 
-public record MoederVaststellingJSON(Geslacht geslacht, AdresStatistischJSON verblijfplaats,
-                                     GemeenteEnLand geboorteAdres) {}
+public record MoederVaststellingJSON(Geslacht geslacht, GemeenteEnLandJSON verblijfplaats, GemeenteEnLand geboorteAdres) {
+}
