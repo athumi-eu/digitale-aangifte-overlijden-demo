@@ -1,7 +1,6 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.Gemeente;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
@@ -95,10 +94,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Gemeente van overlijden",
                 "-",
-                overlijdenVaststelling().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-"),
+                overlijdenVaststelling().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::toString).orElse("-"),
                 "-",
                 "-",
-                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-")
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::toString).orElse("-")
         );
     }
 
@@ -138,11 +137,11 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow verblijfplaats() {
         return new TableRow(
                 "Verblijfplaats",
-                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::verblijfsAdres).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-"),
-                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::verblijfplaats).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-"),
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::verblijfsAdres).map(GemeenteEnLandJSON::toString).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::verblijfplaats).map(GemeenteEnLandJSON::toString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(GemeenteEnLandJSON::toString).orElse("-")
         );
     }
 
