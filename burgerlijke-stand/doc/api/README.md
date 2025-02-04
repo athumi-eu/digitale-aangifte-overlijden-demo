@@ -57,6 +57,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 ### (down)loaden van een toestemming/(inter)nationale akte
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/documenten/{type}`
 - **Beschrijving**: Gebruik dit endpoint om aktes, toestemmingen of andere documenten van een dossier te downloaden.
 
