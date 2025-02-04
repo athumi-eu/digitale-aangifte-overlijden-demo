@@ -1,12 +1,12 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.Gemeente;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkOverledeneJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
@@ -95,10 +95,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Gemeente van overlijden",
                 "-",
-                overlijdenVaststelling().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
+                overlijdenVaststelling().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-"),
                 "-",
                 "-",
-                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(AdresStatistischJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
+                overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-")
         );
     }
 
@@ -138,11 +138,11 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow verblijfplaats() {
         return new TableRow(
                 "Verblijfplaats",
-                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::verblijfsAdres).map(AdresJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
-                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::verblijfplaats).map(AdresJSON::gemeente).map(GemeenteJSON::niscode).orElse("-"),
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::verblijfsAdres).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::verblijfplaats).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(AdresJSON::gemeente).map(GemeenteJSON::niscode).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(GemeenteEnLandJSON::gemeente).map(Gemeente::niscode).orElse("-")
         );
     }
 
@@ -186,7 +186,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             } else {
                 var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
                 var type = Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("");
-                var joinedInfo =  type + " " + extraInfo;
+                var joinedInfo = type + " " + extraInfo;
                 return joinedInfo.isBlank() ? DASH : joinedInfo;
             }
         }
@@ -209,7 +209,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
-                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
+                return Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -231,7 +231,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
             if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
-                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
+                return Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -312,7 +312,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     }
 
     private Optional<String> parsePlaats(OverlijdenStatistischJSON plaats) {
-        if (PlaatsOverlijdenTypeJSON.ANDERE.equals(plaats.plaats() )) {
+        if (PlaatsOverlijdenTypeJSON.ANDERE.equals(plaats.plaats())) {
             return Optional.ofNullable(plaats.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
         }
         return Optional.ofNullable(plaats.plaats()).map(Enum::name);
