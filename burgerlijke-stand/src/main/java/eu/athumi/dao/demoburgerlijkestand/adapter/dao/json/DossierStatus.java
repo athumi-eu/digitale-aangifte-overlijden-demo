@@ -4,5 +4,6 @@ public enum DossierStatus {
     NIEUW,
     IN_BEHANDELING,
     NIET_BEHANDELD,
-    BEHANDELD
+    BEHANDELD,
+    VERWIJDERD
 }
