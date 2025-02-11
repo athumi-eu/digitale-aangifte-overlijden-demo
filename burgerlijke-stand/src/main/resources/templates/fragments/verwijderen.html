@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head><title></title></head>
+<body>
+<div th:fragment="verwijderen(id)">
+    <div>
+        <button th:onclick="verwijderenDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Verwijder</button>
+    </div>
+
+    <span id="error"></span>
+    <script>
+
+        function verwijderenDossier(id, frontedBaseUrl) {
+            fetch(frontedBaseUrl + '/dossier/' + id + '/verwijderen', {
+                method: "post"
+            }).then(async response => {
+                if (response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                } else {
+                    window.location.reload();
+                }
+
+            });
+        }
+
+    </script>
+
+</div>
+
+</body>
+</html>

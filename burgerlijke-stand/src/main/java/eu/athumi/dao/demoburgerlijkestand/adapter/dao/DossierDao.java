@@ -182,6 +182,22 @@ public class DossierDao {
         return ResponseEntity.ok("Ok");
     }
 
+    @PostMapping(path = "/dossier/{id}/verwijderen")
+    @ResponseBody
+    public ResponseEntity<String> verwijderenDossier(@PathVariable String id, HttpSession session) {
+        try {
+            securedWebClient.getRestClient(session.getAttribute("kbonummer").toString())
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verwijderen", id)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
 
     @PostMapping(path = "/dossier/{id}/heropen")
     @ResponseBody
