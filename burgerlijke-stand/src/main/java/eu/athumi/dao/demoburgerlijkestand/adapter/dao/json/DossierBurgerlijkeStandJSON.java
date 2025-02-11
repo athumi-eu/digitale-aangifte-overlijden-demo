@@ -30,6 +30,7 @@ public record DossierBurgerlijkeStandJSON(
         OverlijdensToestandJSON medischeToestand,
         LocalDateTime afgeslotenOp,
         LocalDateTime heropendOp,
+        LocalDateTime verwijderdOp,
         LocalDateTime ingediendOp,
         DossierAanvullingJSON aanvulling,
         VerrijkingRijksregisterJSON verrijkingRijksregister,
@@ -48,6 +49,10 @@ public record DossierBurgerlijkeStandJSON(
 
     public String parsedHeropendOp() {
         return parsedDateTime(heropendOp);
+    }
+
+    public String parsedVerwijderdOp() {
+        return parsedDateTime(verwijderdOp);
     }
 
     public String parsedIngediendOp() {
