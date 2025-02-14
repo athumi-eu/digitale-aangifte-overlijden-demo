@@ -5,7 +5,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public record MoederOfOudsteOuderJSON(
         Geslacht geslacht,
         List<BurgerlijkeStaatJSON> burgerlijkeStaten,
         Set<NationaliteitJSON> oorspronkelijkeNationaliteit,
-        AdresJSON verblijfplaats,
+        GemeenteEnLandJSON verblijfplaats,
         HuwelijkJSON huwelijk
 ) implements OuderJSON {
 

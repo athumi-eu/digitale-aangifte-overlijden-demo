@@ -11,7 +11,7 @@ import java.util.Set;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes(
         {
-                @JsonSubTypes.Type(value = VaderOfJongsteOuder.class, name = "VaderOfJongsteOuder"),
+                @JsonSubTypes.Type(value = VaderOfJongsteOuderJSON.class, name = "VaderOfJongsteOuderJSON"),
                 @JsonSubTypes.Type(value = MoederOfOudsteOuderJSON.class, name = "MoederOfOudsteOuderJSON"),
         }
 )

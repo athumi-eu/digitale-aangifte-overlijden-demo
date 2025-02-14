@@ -2,7 +2,7 @@
 
 Voor meer informatie over het aanvragen van de client kan u gebruik maken van de documentatie van het [Beheerportaal Vlaanderen](https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/6282739963/Uw+OAuth-client+beheren+via+het+ACM-Beheerportaal).
 
-Met als referentie: `DAO (Digitale Aangifte Overlijden) API T&I` of `DAO (Digitale Aangifte Overlijden) API`  
+Met als referentie: `DAO (Digitale Aangifte Overlijden) API beta` of `DAO (Digitale Aangifte Overlijden) API`  
 
 Met als client name: `DAO [omgeving] <organisatie> client`  </br>
 hierbij is de omgeving een van de volgende waardes: beta/acc/PROD </br> 
@@ -14,7 +14,7 @@ Voor een snelle start kan u gebruik maken van volgende stappen:
 
 Een eerste stap is een client aanmaken in ACM/IDM en hiervoor toegang tot onze DAO API te vragen.
 
-Voor lokaal bestuur dienst Burgelijke Stand u volgende scope aan: dao_lbbs
+Voor lokaal bestuur dienst Burgerlijke Stand u volgende scope aan: dao_lbbs
 
 Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het DAO platform.
 
@@ -26,7 +26,7 @@ De API waarvoor u toegang moet vragen heeft volgende kenmerken
 
 | Omgeving   | Referentie                                 |
 |------------|--------------------------------------------|
-| Beta & Acc | DAO (Digitale Aangifte Overlijden) API T&I |
+| Beta & Acc | DAO (Digitale Aangifte Overlijden) API beta|
 | Productie  | DAO (Digitale Aangifte Overlijden) API     |
 
 Er wordt verwacht dit te doen via

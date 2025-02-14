@@ -4,7 +4,6 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
@@ -41,7 +40,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         return new TableRow(
                 "Geboortedatum",
                 ofNullable(ouderRR).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
-                "-",
+                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
                 "-",
                 "-",
                 ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
@@ -52,7 +51,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         return new TableRow(
                 "Gemeente/ land van geboorte",
                 ofNullable(ouderRR).map(OuderJSON::geboorte).map(GeboorteJSON::adres).map(GemeenteEnLand::toString).orElse("-"),
-                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geboorteAdres).map(GemeenteEnLand::toString).orElse("-"),
+                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geboorte).map(GeboorteJSON::adres).map(GemeenteEnLand::toString).orElse("-"),
                 "-",
                 "-",
                 Optional.ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::adres).map(GemeenteEnLand::toString).orElse("-")
@@ -103,7 +102,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuderRR = ouderRR instanceof MoederOfOudsteOuderJSON test? test: null;
+        var vrouwelijkeOuderRR = ouderRR instanceof MoederOfOudsteOuderJSON test ? test : null;
         var vrouwelijkeOuderDepZorg = (MoederOfOudsteOuderJSON) ouderDepartementZorg;
         return new TableRow(
                 "Burgerlijke staat",
@@ -119,7 +118,7 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
         if (!isExtended()) {
             return TableRow.empty();
         }
-        var vrouwelijkeOuderRR = ouderRR instanceof MoederOfOudsteOuderJSON test? test: null;
+        var vrouwelijkeOuderRR = ouderRR instanceof MoederOfOudsteOuderJSON test ? test : null;
         var vrouwelijkeOuderDepZorg = (MoederOfOudsteOuderJSON) ouderDepartementZorg;
         return new TableRow(
                 "Datum huidig huwelijk",

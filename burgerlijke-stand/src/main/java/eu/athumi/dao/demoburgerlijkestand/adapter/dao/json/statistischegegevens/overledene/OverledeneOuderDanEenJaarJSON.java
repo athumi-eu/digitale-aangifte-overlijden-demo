@@ -3,10 +3,9 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.BurgerlijkeStaatJSONType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.burgerlijkeStaat.HuwelijkJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public record OverledeneOuderDanEenJaarJSON(
         List<BurgerlijkeStaatJSON> burgerlijkeStaten,
         HuwelijkJSON huwelijk,
         GeboorteJSON geboorte,
-        AdresJSON verblijfplaats
+        GemeenteEnLandJSON verblijfplaats
 ) implements OverledeneJSON {
 
     @Override
