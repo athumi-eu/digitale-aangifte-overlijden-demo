@@ -3,7 +3,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
 
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ public record OverledeneRijksregisterJSON(
         Geslacht geslacht,
         LocalDate geboortedatum,
         GemeenteEnLand geboorteAdres,
-        AdresJSON verblijfsAdres,
+        GemeenteEnLandJSON verblijfsAdres,
         NationaliteitJSON nationaliteit,
         List<BurgerlijkeStaatJSON> burgerlijkeStaten
 ) {

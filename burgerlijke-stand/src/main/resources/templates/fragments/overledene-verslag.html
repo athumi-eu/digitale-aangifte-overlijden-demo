@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-    <div th:fragment="overledene-verslag(verslagDetail)" class="grid-column">
-        <h3>Overledene</h3>
-        <div class="label">Overledene</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.naamOverledene()}"/>
-        <div class="label">Rijksregisternummer</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.rijksregisternummer()}"/>
-        <div class="label">Geslacht</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.geslacht()}"/>
-        <div class="label">Geboorteplaats</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.geboortePlaats()}"/>
-        <div class="label">Geboortedatum</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.geboorteDatum()}"/>
-        <div class="label">Verblijfplaats</div>
-        <div class="bottom-spacing"  th:text="${verslagDetail.verblijfplaatsOverledene ?: '/'}"/>
+<div th:fragment="overledene-verslag(verslagDetail)" class="grid-column">
+    <h3>Overledene</h3>
+    <div class="label">Overledene</div>
+    <div class="bottom-spacing" th:text="${verslagDetail.naamOverledene()}"/>
+    <div class="label">Rijksregisternummer</div>
+    <div class="bottom-spacing" th:text="${verslagDetail.rijksregisternummer()}"/>
+    <div class="label">Geslacht</div>
+    <div class="bottom-spacing" th:text="${verslagDetail.geslacht()}"/>
+    <div class="label">Geboorteplaats</div>
+    <div class="bottom-spacing" th:text="${verslagDetail.geboortePlaats()}"/>
+    <div class="label">Geboortedatum</div>
+    <div class="bottom-spacing" th:text="${verslagDetail.geboorteDatum()}"/>
+    <div class="label">Verblijfplaats</div>
+    <div class="bottom-spacing" th:text="${verslagDetail.verblijfplaatsOverledene() ?: '/'}"/>
 
-    </div>
+</div>
 </html>

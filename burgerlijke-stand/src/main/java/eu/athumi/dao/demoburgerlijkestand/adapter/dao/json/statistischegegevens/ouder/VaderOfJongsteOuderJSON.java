@@ -7,7 +7,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 
 import java.util.Set;
 
-public record VaderOfJongsteOuder(
+public record VaderOfJongsteOuderJSON(
         NationaliteitJSON nationaliteit,
         GeboorteJSON geboorte,
         Geslacht geslacht,

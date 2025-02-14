@@ -1,5 +1,7 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens;
 
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
+
 import java.time.LocalDateTime;
 
 public record OverlijdenStatistischJSON(
@@ -7,6 +9,6 @@ public record OverlijdenStatistischJSON(
     String beschrijvingTijdstip,
     PlaatsOverlijdenTypeJSON plaats,
     String plaatsBeschrijving,
-    AdresStatistischJSON adres,
+    GemeenteEnLandJSON adres,
     boolean doodGeboren
 ) {}

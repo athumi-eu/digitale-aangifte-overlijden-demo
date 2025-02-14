@@ -16,7 +16,7 @@ public record GeboorteParser(GeboorteJSON geboorte, OverlijdenJSON overlijden, M
                 || Objects.isNull(geboorte.datum())) {
             return "/";
         }
-        return TijdstipParser.parseLocalDate(geboorte.datum());
+        return TijdstipParser.parseLocalDate(geboorte.datum(), geboorte().uur());
     }
 
     public String levendGeboren() {
