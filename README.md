@@ -10,7 +10,9 @@ Voor meer informatie rond de integratie als **Arts** kan je navigeren naar: [Sta
 
 Voor meer informatie rond de integratie als **Departement zorg** kan je navigeren naar: [Startpunt departement zorg](departementzorg/doc/README.md)
 
-Voor meer informatie rond de integratie als **Uitvaartsector ** kan je navigeren naar: [Startpunt uitvaartsector](uitvaartsector/doc/README.md)
+Voor meer informatie rond de integratie als **Uitvaartsector** kan je navigeren naar: [Startpunt uitvaartsector](uitvaartsector/doc/README.md)
+
+Voor meer informatie rond de integratie als **Begraafplaats** kan je navigeren naar: [Startpunt begraafplaats](begraafplaats/doc/README.md)
 
 ## Omgevingen
 
