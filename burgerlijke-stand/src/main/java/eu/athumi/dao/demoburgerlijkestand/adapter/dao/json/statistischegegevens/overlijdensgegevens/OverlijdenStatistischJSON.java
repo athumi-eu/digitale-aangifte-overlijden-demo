@@ -5,10 +5,11 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import java.time.LocalDateTime;
 
 public record OverlijdenStatistischJSON(
-    LocalDateTime tijdstip,
-    String beschrijvingTijdstip,
-    PlaatsOverlijdenTypeJSON plaats,
-    String plaatsBeschrijving,
-    GemeenteEnLandJSON adres,
-    boolean doodGeboren
-) {}
+        LocalDateTime tijdstip,
+        String beschrijvingTijdstip,
+        PlaatsType plaats,
+        String plaatsBeschrijving,
+        GemeenteEnLandJSON adres,
+        boolean doodGeboren
+) {
+}
