@@ -2,9 +2,11 @@
 
 ## Inleiding
 
-Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een overlijden te registreren. 
+Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een overlijden te registreren.
 
 ## Endpoints
+
+Alle endpoints buiten de context starten altijd met: `/vaststelling/v1`
 
 ### Json-ld context
 
