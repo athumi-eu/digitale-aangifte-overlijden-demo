@@ -14,7 +14,15 @@ Voor een snelle start kan u gebruik maken van volgende stappen:
 
 Een eerste stap is een client aanmaken in ACM/IDM en hiervoor toegang tot onze DAO API te vragen.
 
-Voor lokaal bestuur dienst Burgerlijke Stand u volgende scope aan: dao_lbbs
+Volgende scopes moeten aangevraagd worden:
+
+
+| Integrator         | Scope                  |
+|--------------------|------------------------|
+| Lokaal bestuur     | dao_lbbs               |
+| Begraafplaats      | dao_begraafplaats      |
+| Uitvaartondernemer | dao_uitvaartondernemer |
+| Crematorium        | dao_crematorium        |
 
 Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het DAO platform.
 

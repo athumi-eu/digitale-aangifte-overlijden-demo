@@ -1,5 +1,5 @@
-# Startpunt Arts
-Om een indicatie te geven van de verschillende mogelijkheden als integrator voor de arts 
+# Startpunt Departement zorg
+Om een indicatie te geven van de verschillende mogelijkheden als integrator voor department zorg 
 zijn er onder **src/tests/x.spec.ts** calls geschreven met voorbeelden van de toepassing.
 
 Deze calls zijn bedoeld voor de test omgeving, en gebruiken een .env file om de juist parameters binnen te halen.

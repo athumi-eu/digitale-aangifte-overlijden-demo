@@ -8,6 +8,20 @@ Voor meer informatie rond de integratie als **Lokaal bestuur** kan je navigeren 
 
 Voor meer informatie rond de integratie als **Arts** kan je navigeren naar: [Startpunt arts](vaststelling/doc/README.md)
 
+Voor meer informatie rond de integratie als **Departement zorg** kan je navigeren naar: [Startpunt departement zorg](departementzorg/doc/README.md)
+
+Voor meer informatie rond de integratie als **Uitvaartsector ** kan je navigeren naar: [Startpunt uitvaartsector](uitvaartsector/doc/README.md)
+
+## Omgevingen
+
+Het dao platform bestaat uit 2 toepassingen, namelijk een frontend voor de Artsen en uitvaart ondernemers, en een API waar de verschillende actoren mee kunnen integreren.
+
+### Frontend:
+| Omgeving | Link                                                           | Omschrijving                                                                                                                                                                                                                                          |
+|----------|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| test     | https://dao.test-athumi.eu/ en https://dao.api.test-athumi.eu/ | Deze omgeving is geconnecteerd met een eigen oauth implementatie, en bevat nooit persoonsgegevens. Deze is vooral bedoeld voor het develop team om tijdens het ontwikkel process te testen. Indien nodig kunnen hier credentials voor gevraagd worden |
+| beta | https://dao.beta-athumi.eu/ en https://dao.api.beta-athumi.eu/ | Deze omgeving is geconnecteerd met acm-idm maar bevat nooit persoonsgegevens. Deze is bedoeld voor acceptatie testen, en connectie met integraten.                                                                                                    |
+| Acceptatie | https://dao.beta-athumi.eu/ en https://dao.api.beta-athumi.eu/ | Deze omgeving is geconnecteerd met acm-idm en gaat naar de magda test omgeving. Wegens limitaties aan deze omgeving kan hier echte gegevens van het rijksregister beschikbaar zijn. Deze is vooral bedoeld voor end to end flows te testen            |
+| Productie | https://dao.athumi.eu/ en https://dao.api.athumi.eu/ | De productie omgeving.                                                                                                                                                                                                                                |
+
 ![screenshot](static/athumi.jpg)
-
-

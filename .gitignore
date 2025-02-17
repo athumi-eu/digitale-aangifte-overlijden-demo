@@ -32,3 +32,4 @@ dist!/.idea/
 
 *application-secret*.yml
 *application-secret.yml
+*.env
