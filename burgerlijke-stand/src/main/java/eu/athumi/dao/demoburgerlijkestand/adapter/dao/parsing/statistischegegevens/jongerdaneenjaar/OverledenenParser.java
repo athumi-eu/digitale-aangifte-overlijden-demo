@@ -10,7 +10,6 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.VerdelingVolgensGeslachtJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister.OverledeneRijksregisterJSON;
@@ -147,14 +146,14 @@ public record OverledenenParser(
     }
 
     private Optional<String> parsePlaats(Plaats plaats) {
-        if (plaats.plaats() == PlaatsTypeJSON.ANDERE) {
+        if (plaats.plaats() == PlaatsType.ANDERE) {
             return Optional.ofNullable(plaats.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
         }
         return Optional.ofNullable(plaats.plaats()).map(Enum::name);
     }
 
     private Optional<String> parsePlaats(OverlijdenStatistischJSON plaats) {
-        if (PlaatsOverlijdenTypeJSON.ANDERE.equals(plaats.plaats())) {
+        if (PlaatsType.ANDERE.equals(plaats.plaats())) {
             return Optional.ofNullable(plaats.plaatsBeschrijving()).map(beschrijving -> String.format("ANDERE: %s", beschrijving));
         }
         return Optional.ofNullable(plaats.plaats()).map(Enum::name);
