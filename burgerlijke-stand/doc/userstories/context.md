@@ -6,13 +6,13 @@ Deze pagina bevat een aantal diagrammen die kunnen helpen om extra context te ge
 
 ## Doel platform
 
-![doel](../diagrams/Doel.jpg)
+![doel](../../../static/Doel.jpg)
 
 ## Betrokken partijen
 
 Dit context diagram toont een overzicht van de verschillende actoren en toepassingen die interageren met het DAO platform.
 
-![context diagram](../diagrams/context-diagram.jpg)
+![context diagram](../../../static/context-diagram.jpg)
 
 ## Toepassing burgerlijke stand
 
@@ -24,13 +24,13 @@ Hieronder vindt u sequentie of state diagrammen terug die de belangrijkste proce
 
 ### Koppeling verslag beëdigd arts
 
-![koppeling verslagen](../diagrams/koppelen-verslag.jpg)
+![koppeling verslagen](../../../static/koppelen-verslag.jpg)
 
 ### Dossier statussen
 
-![dossier statussen lb](../diagrams/statussen-dossier-lb.jpg)
+![dossier statussen lb](../../../static/statussen-dossier-lb.jpg)
 
-![dossier statussen uo](../diagrams/statussen-dossier-uo.jpg)
+![dossier statussen uo](../../../static/statussen-dossier-uo.jpg)
 
 ## Datadeling met Departement Zorg
 
@@ -38,8 +38,8 @@ Volgende diagrammen tonen onder andere op welke manier de toepassing burgerlijke
 
 ### Gebruikelijke flow
 
-![datadeling gebruikelijk](../diagrams/dz-gebruikelijke-flow.jpg)
+![datadeling gebruikelijk](../../../static/dz-gebruikelijke-flow.jpg)
 
 ### Heropenen dossier
 
-![datadeling heropen](../diagrams/dz-heropenen.jpg)
+![datadeling heropen](../../../static/dz-heropenen.jpg)
