@@ -113,7 +113,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
 
-    **Opmerking:** Bekijk het [schema](../../../static/Sjabloon_toestemmingbegravencrematie.docx) met de opbouw van de aanvraag toestemming/crematie of de Athumi GUI om te weten welke documenten wanneer verwacht worden: verzoek nabestaanden, toestemming eigenaar, verzoek nabestaanden as partner.
+    **Opmerking:** Bekijk het [schema](../diagrams/inlichtingenfiche.jpg) met de opbouw van de aanvraag toestemming/crematie of de Athumi GUI om te weten welke documenten wanneer verwacht worden: verzoek nabestaanden, toestemming eigenaar, verzoek nabestaanden as partner.
 
 15. “In het geval van een doodgeboorte >180d zwangerschap, wil ik op vraag van de ouders het verzoek tot opname van de naam en/of voornaam en/of het verzoek tot opname van de vader/meemoeder (inclusief het ondertekend verzoek in PDF, Word, JPEG, PNG) op de akte levenloos kind via het platform doorgeven aan de ambtenaar van de burgerlijke stand via de inlichtingenfiche.”
 

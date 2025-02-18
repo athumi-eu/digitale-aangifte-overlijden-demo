@@ -62,3 +62,14 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 - **Endpoint**: `/dossiers/{dossierNummer}/socio-economische-gegevens`
 - **Beschrijving**: De socio economische gegevens kunnen opgehaald worden met de Get en aangepast worden met de Put.  
   De gegevens worden vooringevuld met de gegevens die we hebben vanuit de verschillende bronnen.
+
+
+## Validatiefouten
+
+Als er validatiefouten optreden bij het versturen van een request, zal de API een HTTP 400-fout terugsturen. 
+
+## Error codes
+
+Een lijst met error codes kan hier worden teruggevonden.
+
+[Error codes uitvaartondernemer](https://athumi.atlassian.net/wiki/external/ZDA4OTU0YTE2NzI1NDExMGExZjlhMzRjNTJlZjcxNmM)
