@@ -44,7 +44,7 @@ Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezi
 
 Een voorbeeld vanuit MAGDA:
 
-![Request ids](../diagrams/request-ids.svg)
+![Request ids](../../static/request-ids.svg)
 
 
 ### Logging vereisten voor de integratoren
