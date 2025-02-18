@@ -9,9 +9,9 @@ De [User stories](userstories/userstories.md) pagina beschrijft welke user stori
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
 
 ## Security
-Info over authenticeren en vereisten naar logging toe staan [hier](security/README.md).
+Info over authenticeren en vereisten naar logging toe staan [hier](../../algemeen/security/README.md).
 
-Daarnaast zijn er ook vereisten naar [bewaartermijnen](security/bewaartermijnen.md) toe.
+Daarnaast zijn er ook vereisten naar [bewaartermijnen](../../algemeen/security/bewaartermijnen.md) toe.
 
 ## Demo app
 Doordat er geen UI voorzien werd voor de burgerlijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 

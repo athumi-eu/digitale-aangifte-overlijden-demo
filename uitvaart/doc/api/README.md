@@ -3,7 +3,7 @@
 ## Inleiding
 
 Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een dossier af te handelen in de context van de uitvaart sector.
-Voor meer info omtrent de security kan je [hier meerlezen](../../../burgerlijke-stand/doc/security/README.md)
+Voor meer info omtrent de security kan je [hier meerlezen](../../../algemeen/security/README.md)
 
 ## Endpoints
 Alle endpoints starten altijd met: `/uitvaart/v1`
