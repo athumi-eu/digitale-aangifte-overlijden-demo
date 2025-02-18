@@ -66,13 +66,13 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     [GET/uitvaart/v1/dossiers](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
     
-        "heeftActies": true
+      "heeftActies": true
 
     **Melding in detail dossier**
 
     [GET/uitvaart/v1/dossiers/{dossierNummer}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossierByDossierNummer)
 
-        "acties": ["string"]
+      "acties": ["string"]
 
     **Opmerking:** mogelijke acties: Een overlijdensakte werd opgeladen/gewijzigd; een toestemming werd opgeladen/gewijzigd; een rijksregisternummer van de overledene werd toegevoegd aan het dossier (indien niet ingevuld door de arts in de vaststelling); de bronbevraging is gebeurd voor socio-economische gegevens van de ouders (vader/meemoeder).
 
