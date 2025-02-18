@@ -18,7 +18,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 2. “Als uitvaartondernemer, kan ik een overlijdensdossier opzoeken dat nog niet toegekend is of wel aan mijn onderneming toegekend of door mijn onderneming behandeld is.”
 
-    [GET/uitvaart/v1/dossiers](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
+    [GET/uitvaart/v1/overlijdens](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/overlijdens-controller/getDossiersByRijksregisternummer_1_1)
 
     **Opmerking:** Dit kan of door het rijksregisternummer, of door het dossiernummer of door de combinatie van achternaam, niscode en datum overlijden mee te geven.
 
@@ -40,7 +40,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/start-op](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp)
 
-    **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/dossiers om het juiste dossier op te zoeken.
+    **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/overlijdens om het juiste dossier op te zoeken.
 
 
 5. “Als uitvaartondernemer moet ik na de opstart van een dossier een platformvergoeding betalen vooraleer ik verder kan gaan met mijn acties.”
@@ -93,7 +93,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/heropen](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/heropen)
 
-    **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/dossiers om het juiste dossier op te zoeken.
+    **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/overlijdens om het juiste dossier op te zoeken.
 
 ## Gegevens en documenten ophalen en ingeven
 
