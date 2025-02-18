@@ -1,12 +1,18 @@
-# Gebruik van de API van het DAO-platform voor de uitvaart sector
+# Gebruik van de API van het eLys platform voor de uitvaartondernemer
 
 ## Inleiding
 
-Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een dossier af te handelen in de context van de uitvaart sector.
-Voor meer info omtrent de security kan je [hier meerlezen](../../../algemeen/security/README.md)
+Dit document legt uit hoe je de API van het eLys platform kunt gebruiken om een dossier af te handelen in de context van de uitvaartondernemer.
+
+Voor meer info omtrent de security kan je [hier meer lezen](../../../algemeen/security/README.md)
 
 ## Endpoints
 Alle endpoints starten altijd met: `/uitvaart/v1`
+
+## Swagger
+De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
+- **Locatie**: `/swagger-ui/index.html`
+- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
 
 ### Dossiers ophalen
 - **Endpoint**: `/dossiers`
@@ -56,11 +62,3 @@ Alle endpoints starten altijd met: `/uitvaart/v1`
 - **Endpoint**: `/dossiers/{id}/socio-economische-gegevens`
 - **Beschrijving**: De socio economische gegevens kunnen opgehaald worden met de Get en aangepast worden met de Put.  
   De gegevens worden vooringevuld met de gegevens die we hebben vanuit de verschillende bronnen.
-
-
-## Swagger
-
-De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
-- **Locatie**: `/swagger-ui/index.html`
-- [**Test**](https://dao.api.test-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
-- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
