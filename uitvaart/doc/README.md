@@ -8,8 +8,6 @@ De [User stories](userstories/userstories.md) pagina beschrijft welke user stori
 ## API documentatie
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
 
-Gebruikte standaarden??
-
 ## Security
 Info over authenticeren en vereisten naar logging toe staan [hier](../../algemeen/security/README.md).
 
