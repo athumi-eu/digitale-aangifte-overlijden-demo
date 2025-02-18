@@ -3,7 +3,7 @@
 ## Inleiding
 
 Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om toestemmingen te verkrijgen.
-Voor meer info omtrent de security kan je [hier meerlezen](../../../burgerlijke-stand/doc/security/README.md)
+Voor meer info omtrent de security kan je [hier meer lezen](../../../algemeen/security/README.md)
 
 ## Endpoints
 

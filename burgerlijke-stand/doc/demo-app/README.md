@@ -30,7 +30,7 @@ dao:
 ```
 Het is mogelijk om meerdere gemeentes toe te voegen aan deze config.
 
-Voor de beta omgeving kan u hier de client ingeven die u [zelf kan aanvragen](security/client-aanvragen.md).
+Voor de beta omgeving kan u hier de client ingeven die u [zelf kan aanvragen](../../../algemeen/security/client-aanvragen.md).
 
 Deze applicatie dient enkel als voorbeeld en is niet productie waardig.
 
