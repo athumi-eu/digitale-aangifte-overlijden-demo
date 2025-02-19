@@ -1,15 +1,29 @@
 import axios from "axios";
 import * as https from "node:https";
+import process from "node:process";
 
-const TARGET = 'http://localhost:8090';
-// const TARGET = 'https://dao.api.test-athumi.eu';
+const TARGET = process.env.TARGET;
 
+let authToken = await axios.post(process.env.TOKEN_URL, {
+    grant_type: 'client_credentials',
+    scope: ['dao_arts'],
+}, {
+    headers: {
+        'Authorization': `Basic ${process.env.BASIC_CLIENT}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+})
+    .then((response => response.data));
 
 export function getAxios() {
     return axios.create({
         httpsAgent: new https.Agent({
             rejectUnauthorized: false
         }),
-        baseURL: TARGET
+        baseURL: TARGET,
+        headers: {
+            'Authorization': `Bearer ${authToken.access_token}`,
+            'x-scopes': 'dao_depzorg'
+        }
     });
 }
