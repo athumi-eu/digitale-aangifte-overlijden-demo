@@ -2,7 +2,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.Plaats;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.PlaatsTypeJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overlijdensgegevens.PlaatsType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 public record GeboorteJongerDanEenJaarJSON(
         LocalDate datum,
         LocalTime tijdstip,
-        PlaatsTypeJSON plaats,
+        PlaatsType plaats,
         String plaatsBeschrijving,
         GemeenteEnLand adres,
         Boolean meervoudigeZwangerschap

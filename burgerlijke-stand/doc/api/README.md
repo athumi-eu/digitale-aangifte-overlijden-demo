@@ -23,7 +23,7 @@ Een verwachte flow van de applicatie is:
 ### Inloggen
 
 Om in te loggen moet een OAuth token meegegeven worden. Meer informatie hierover vind je in
-het [security document](../security/README.md).
+het [security document](../../../algemeen/security/README.md).
 
 ## Endpoints
 
