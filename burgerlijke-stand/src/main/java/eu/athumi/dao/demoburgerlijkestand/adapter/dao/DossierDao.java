@@ -4,16 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.StatistischeGegevensParserOuderDanEenJaar;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegevens.jongerdaneenjaar.StatistischeGegevensParserJongerDanEenJaar;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -271,4 +273,20 @@ public class DossierDao {
         return ResponseEntity.ok("Ok");
     }
 
+    @PostMapping(path = "/dossier/{id}/ontkoppel", consumes = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> ontkoppelUitvaartOndernemer(@PathVariable String id, @RequestBody @Nullable String message, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/ontkoppel", id)
+                    .body("{\"message\": \"" + Optional.ofNullable(message).orElse("") + "\"}")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
 }
