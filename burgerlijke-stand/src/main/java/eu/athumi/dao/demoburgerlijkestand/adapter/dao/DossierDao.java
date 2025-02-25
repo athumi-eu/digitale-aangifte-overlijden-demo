@@ -280,7 +280,7 @@ public class DossierDao {
             securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/ontkoppel", id)
-                    .body("{\"message\": \"" + Optional.ofNullable(message).orElse("") + "\"}")
+                    .body("{\"boodschap\": \"" + Optional.ofNullable(message).orElse("") + "\"}")
                     .contentType(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .toBodilessEntity();
