@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="dossier(dossier, parsedDetail)" class="grid-container-3">
+<div th:fragment="dossier(dossier, parsedDetail)" class="grid-container-4">
     <section class="grid-column">
+        <h3>Dossier status</h3>
         <div class="label">Status dossier lokaal bestuur</div>
-        <div class="bottom-spacing"  th:text="${dossier.dossierStatus()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.dossierStatus()}"></div>
         <div class="label">Ingediend op</div>
-        <div class="bottom-spacing"  th:text="${dossier.parsedIngediendOp()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.parsedIngediendOp()}"></div>
         <div class="label">Afgesloten op</div>
-        <div class="bottom-spacing"  th:text="${dossier.parsedAfgeslotenOp()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.parsedAfgeslotenOp()}"></div>
         <div class="label">Heropend op</div>
-        <div class="bottom-spacing"  th:text="${dossier.parsedHeropendOp()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.parsedHeropendOp()}"></div>
         <div class="label">Verwijderd op</div>
-        <div class="bottom-spacing"  th:text="${dossier.parsedVerwijderdOp()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.parsedVerwijderdOp()}"></div>
 
         <div th:if="${dossier.afgeslotenOp() == null}" style="margin-bottom: 1rem">
             <div th:replace="~{fragments/afsluiten.html :: afsluiten(id=${dossier.id()})}"></div>
@@ -21,38 +22,45 @@
             <div th:replace="~{fragments/heropen.html :: heropen(id=${dossier.id()})}" naam></div>
         </div>
         <div th:if="${dossier.verwijderdOp() == null}">
-            <div th:replace="~{fragments/verwijderen.html :: verwijderen(id=${dossier.id()})}" style="margin-bottom: 1rem" ></div>
+            <div th:replace="~{fragments/verwijderen.html :: verwijderen(id=${dossier.id()})}"
+                 style="margin-bottom: 1rem"></div>
         </div>
+    </section>
+
+    <section class="grid-column">
+        <h3>Lokaal bestuur van behandeling</h3>
+        <div class="label">KBONummer</div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().kboNummer()}"></div>
     </section>
 
     <section class="grid-column">
         <h3>Uitvaartondernemer</h3>
         <div class="label">Naam</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.uo().naam()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.uo().naam()}"></div>
         <div class="label">KBO-nummer</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.uo().kboNummer()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.uo().kboNummer()}"></div>
         <div class="label">Dossier opgestart door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.uo().opgestartOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.uo().opgestartOp()}"></div>
         <div class="label">Dossier afgesloten door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.uo().afgeslotenOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.uo().afgeslotenOp()}"></div>
         <div class="label">Dossier heropend door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.uo().heropendOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.uo().heropendOp()}"></div>
     </section>
 
     <section class="grid-column">
         <h3>Vorige Uitvaartondernemer</h3>
         <div class="label">Naam</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().naam()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.vuo().naam()}"></div>
         <div class="label">KBO-nummer</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().kboNummer()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.vuo().kboNummer()}"></div>
         <div class="label">Dossier opgestart door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().opgestartOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.vuo().opgestartOp()}"></div>
         <div class="label">Dossier afgesloten door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().afgeslotenOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.vuo().afgeslotenOp()}"></div>
         <div class="label">Dossier heropend door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().heropendOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.vuo().heropendOp()}"></div>
         <div class="label">Dossier geannuleerd door uitvaartondernemer op</div>
-        <div class="bottom-spacing"  th:text="${parsedDetail.vuo().geannuleerdOp()}"></div>
+        <div class="bottom-spacing" th:text="${parsedDetail.vuo().geannuleerdOp()}"></div>
     </section>
 </div>
 
