@@ -31,6 +31,12 @@
         <h3>Lokaal bestuur van behandeling</h3>
         <div class="label">KBONummer</div>
         <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().kboNummer()}"></div>
+        <div class="label">Naam</div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().naam()}"></div>
+        <div class="label">Niscode</div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().niscode()}"></div>
+        <div th:if="${dossier.lokaalBestuurVanBehandeling().postcode()}" class="label">Postcode</div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().postcode()}"></div>
     </section>
 
     <section class="grid-column">
