@@ -5,6 +5,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche.Inl
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verantwoordelijk.LokaalBestuurVanBehandeling;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.rijksregister.VerrijkingRijksregisterJSON;
 
 import java.net.URI;
@@ -16,6 +17,7 @@ import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipPar
 public record DossierBurgerlijkeStandJSON(
         String id,
         DossierStatus dossierStatus,
+        LokaalBestuurVanBehandeling lokaalBestuurVanBehandeling,
         URI verslagDetailURL,
         VaststellingType vaststellingType,
         String naam,
