@@ -1,0 +1,70 @@
+<div th:fragment="ontkoppelUitvaartOndernemer(id)">
+    <button id="ou-open">Ontkoppel</button>
+    <dialog id="ou-dialog" onmousedown="event.target==this && this.close()">
+        <form>
+            <h3>Ontkoppel de huidige uitvaartondernemer</h3>
+            <label for="ou-message">
+                Reden van ontkoppeling
+                <textarea autofocus id="ou-message" name="message"></textarea>
+            </label>
+            <div>
+                <button formmethod="dialog">Annuleer</button>
+                <button id="ou-submit">Ontkoppel</button>
+            </div>
+            <span id="ou-error"></span>
+        </form>
+    </dialog>
+    <script>
+        /*<![CDATA[*/
+        const dialog = document.getElementById("ou-dialog");
+        const openButton = document.getElementById("ou-open");
+        const submitButton = document.getElementById("ou-submit");
+        const input = document.getElementById("ou-message")
+        const error = document.getElementById("ou-error")
+
+        openButton.addEventListener("click", () => dialog.showModal())
+        submitButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            ontkoppel()
+        })
+
+        function ontkoppel() {
+            const id = '[[${id}]]';
+            const url = '[[${@globalVariables.frontedBaseUrl}]]';
+            const message = input.value ?? '';
+
+            fetch(url + '/dossier/' + id + '/ontkoppel', {
+                method: "post",
+                body: message
+            }).then(async response => {
+                if (response.status === 400) {
+                    error.style.display = "block";
+                    error.innerText = await response.text();
+                } else {
+                    window.location.reload();
+                }
+
+            });
+        }
+
+        /*]]>*/
+    </script>
+    <style>
+        #ou-dialog::backdrop {
+            background: black;
+            opacity: 0.75;
+        }
+
+        #ou-dialog > form > label > textarea {
+            resize: vertical;
+            width: 90%;
+        }
+
+        #ou-dialog > form > div {
+            display: flex;
+            justify-content: end;
+            gap: 1em;
+            margin-top: 1em;
+        }
+    </style>
+</div>

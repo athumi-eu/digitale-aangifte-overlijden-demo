@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="dossier(dossier, parsedDetail)" class="grid-container-4">
+<div th:fragment="dossier(dossier, parsedDetail)" class="grid-container-3">
     <section class="grid-column">
         <h3>Dossier status</h3>
         <div class="label">Status dossier lokaal bestuur</div>
@@ -22,21 +22,40 @@
             <div th:replace="~{fragments/heropen.html :: heropen(id=${dossier.id()})}" naam></div>
         </div>
         <div th:if="${dossier.verwijderdOp() == null}">
-            <div th:replace="~{fragments/verwijderen.html :: verwijderen(id=${dossier.id()})}"
-                 style="margin-bottom: 1rem"></div>
+            <div th:replace="~{fragments/verwijderen.html :: verwijderen(id=${dossier.id()})}" style="margin-bottom: 1rem"></div>
         </div>
+    </section>
+
+    <section class="grid-column" style="grid-column: 2 / 4; ">
+        <h3>Historiek</h3>
+        <table>
+            <thead>
+            <tr>
+                <th> Actie</th>
+                <th> Boodschap</th>
+                <th> Datum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${dossier?.historiek()}">
+                <td th:text="${item?.type()}"></td>
+                <td th:text="${item?.message()}"></td>
+                <td th:text="${#temporals.format(item?.tijdstip, 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 
     <section class="grid-column">
         <h3>Lokaal bestuur van behandeling</h3>
         <div class="label">KBONummer</div>
-        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().kboNummer()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling()?.kboNummer()}"></div>
         <div class="label">Naam</div>
-        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().naam()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling()?.naam()}"></div>
         <div class="label">Niscode</div>
-        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().niscode()}"></div>
-        <div th:if="${dossier.lokaalBestuurVanBehandeling().postcode()}" class="label">Postcode</div>
-        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling().postcode()}"></div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling()?.niscode()}"></div>
+        <div th:if="${dossier.lokaalBestuurVanBehandeling()?.postcode()}" class="label">Postcode</div>
+        <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling()?.postcode()}"></div>
     </section>
 
     <section class="grid-column">
@@ -51,6 +70,7 @@
         <div class="bottom-spacing" th:text="${parsedDetail.uo().afgeslotenOp()}"></div>
         <div class="label">Dossier heropend door uitvaartondernemer op</div>
         <div class="bottom-spacing" th:text="${parsedDetail.uo().heropendOp()}"></div>
+        <div th:replace="~{fragments/ontkoppelUitvaartOndernemer.html :: ontkoppelUitvaartOndernemer(id=${dossier.id()})}"></div>
     </section>
 
     <section class="grid-column">
@@ -65,7 +85,7 @@
         <div class="bottom-spacing" th:text="${parsedDetail.vuo().afgeslotenOp()}"></div>
         <div class="label">Dossier heropend door uitvaartondernemer op</div>
         <div class="bottom-spacing" th:text="${parsedDetail.vuo().heropendOp()}"></div>
-        <div class="label">Dossier geannuleerd door uitvaartondernemer op</div>
+        <div class="label">Dossier geannuleerd op</div>
         <div class="bottom-spacing" th:text="${parsedDetail.vuo().geannuleerdOp()}"></div>
     </section>
 </div>
