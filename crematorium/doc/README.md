@@ -1,4 +1,4 @@
-# Startpunt Begraafplaats
+# Startpunt Crematorium
 Om een indicatie te geven van de verschillende mogelijkheden als integrator voor een begraafplaats 
 zijn er onder **src/tests/x.spec.ts** calls geschreven met voorbeelden van de toepassing.
 
