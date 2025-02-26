@@ -203,13 +203,15 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/heropen")
     @ResponseBody
-    public ResponseEntity<String> heropenDossier(@PathVariable String id, @SessionAttribute String kbonummer) {
+    public ResponseEntity<String> heropenDossier(@PathVariable String id, @SessionAttribute String kbonummer, @RequestBody(required = false) @Nullable String message) {
         try {
-            securedWebClient.getRestClient(kbonummer)
+            var body = Optional.ofNullable(message).map(s -> "{\"boodschap\": \"" + Optional.ofNullable(s).orElse("") + "\"}");
+            var rq = securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
-                    .retrieve()
-                    .toBodilessEntity();
+                    .contentType(MediaType.APPLICATION_JSON);
+            body.ifPresent(rq::body);
+            rq.retrieve().toBodilessEntity();
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(e.getMessage());

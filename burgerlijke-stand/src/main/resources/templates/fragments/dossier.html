@@ -32,6 +32,7 @@
             <thead>
             <tr>
                 <th> Actie</th>
+                <th> Reden</th>
                 <th> Boodschap</th>
                 <th> Datum</th>
             </tr>
@@ -39,6 +40,7 @@
             <tbody>
             <tr th:each="item : ${dossier?.historiek()}">
                 <td th:text="${item?.type()}"></td>
+                <td th:text="${item?.reden()}"></td>
                 <td th:text="${item?.message()}"></td>
                 <td th:text="${#temporals.format(item?.tijdstip, 'dd/MM/yyyy HH:mm')}"></td>
             </tr>
