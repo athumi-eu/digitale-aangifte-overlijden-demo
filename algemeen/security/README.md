@@ -21,8 +21,9 @@ Dit heeft als voordeel dat het, zowel tijdens het aanvragen van de client of acc
 | dao_uitvaartondernemer | Deze scope dient gebruikt te worden voor een actor binnen de Uitvaart sector.                                                                                                                                  |
 | dao_crematorium        | Deze scope dient gebruikt te worden voor een crematorium.                                                                                                                                                      |
 | dao_depzorg            | Deze scope dient gebruikt te worden voor het Departement zorg.                                                                                                                                                 |
-| dao_lbbs               | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als dienst burgerlijke stand.                                                                                    |
+| dao_lbbs               | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als dienst burgerlijke stand.                                                                                   |
 | dao_begraafplaats      | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als verantwoordelijke voor de begraafplaats.                                                                    |
+| dao_arts               | Deze scope dient gebruikt te worden voor een arts.                                                                                                                                                             |
 
 Tijdens het aanvragen van de access token moet altijd zowel `vo_info` als een van de andere scopes worden meegegeven. 
 Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken tussen de verschillende actoren, is er de verwachting dat er per actor (bvb een Lokaal bestuur) een client wordt aangevraagd.

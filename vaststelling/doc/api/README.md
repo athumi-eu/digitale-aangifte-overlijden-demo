@@ -4,6 +4,8 @@
 
 Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een overlijden te registreren.
 
+Voor meer info omtrent de security kan je [hier meer lezen](../../../algemeen/security/README.md)
+
 ## Endpoints
 
 Alle endpoints buiten de context starten altijd met: `/vaststelling/v1`
