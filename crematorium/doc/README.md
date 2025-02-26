@@ -1,5 +1,5 @@
 # Startpunt Crematorium
-Om een indicatie te geven van de verschillende mogelijkheden als integrator voor een begraafplaats 
+Om een indicatie te geven van de verschillende mogelijkheden als integrator voor een crematorium 
 zijn er onder **src/tests/x.spec.ts** calls geschreven met voorbeelden van de toepassing.
 
 Deze calls zijn bedoeld voor de test omgeving, en gebruiken een .env file om de juist parameters binnen te halen.
