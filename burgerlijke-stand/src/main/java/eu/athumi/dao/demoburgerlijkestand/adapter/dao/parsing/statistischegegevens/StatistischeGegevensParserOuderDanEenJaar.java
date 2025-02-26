@@ -59,6 +59,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensVaststelling).map(OverlijdensgegevensVaststellingJSON::overlijden);
     }
 
+    public Optional<GemeenteEnLandJSON> overlijdenBurgerlijkeStand() {
+        return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensBurgerlijkeStand).map(OverlijdensgegevensBurgerlijkeStandJSON::adres);
+    }
+
     public Optional<OverlijdenStatistischJSON> overlijdenDepartementZorg() {
         return overlijdensgegevens().map(OverlijdensgegevensJSON::overlijdensgegevensDepartementZorg).map(OverlijdensgegevensDepartementZorgJSON::overlijden);
     }
@@ -95,7 +99,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
                 "-",
                 overlijdenVaststelling().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::toString).orElse("-"),
                 "-",
-                "-",
+                overlijdenBurgerlijkeStand().map(GemeenteEnLandJSON::toString).orElse("-"),
                 overlijdenDepartementZorg().map(OverlijdenStatistischJSON::adres).map(GemeenteEnLandJSON::toString).orElse("-")
         );
     }

@@ -118,6 +118,7 @@ public class DossierDao {
                 .filter(dossier -> Objects.equals(dossier.id(), id))
                 .findFirst();
 
+        model.addAttribute("wijzigPlaatsOverlijdenForm", new WijzigPlaatsOverlijden("", ""));
         model.addAttribute("kbonummer", kbonummer);
 
         if (detail.isPresent()) {
@@ -273,6 +274,26 @@ public class DossierDao {
                     .body(e.getMessage());
         }
         return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping(path = "/dossier/{id}/wijzig-plaats-overlijden")
+    @ResponseBody
+    public ResponseEntity<String> wijzigPlaatsOverlijden(@PathVariable String id, @RequestBody WijzigPlaatsOverlijden wijzigPlaatsOverlijden, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/wijzig-plaats-overlijden", id)
+                    .body(wijzigPlaatsOverlijden)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    public record WijzigPlaatsOverlijden(String niscode, String postcode) {
     }
 
     @PostMapping(path = "/dossier/{id}/ontkoppel", consumes = MediaType.TEXT_PLAIN_VALUE)
