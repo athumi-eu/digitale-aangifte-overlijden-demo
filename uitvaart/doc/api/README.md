@@ -9,7 +9,7 @@ Voor meer info omtrent de security kan je [hier meer lezen](../../../algemeen/se
 ## Endpoints
 Alle endpoints starten altijd met: `/uitvaart/v1`
 
-## Swagger
+### Swagger
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 - **Locatie**: `/swagger-ui/index.html`
 - [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
