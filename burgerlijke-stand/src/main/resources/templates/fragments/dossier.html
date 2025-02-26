@@ -58,6 +58,7 @@
         <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling()?.niscode()}"></div>
         <div th:if="${dossier.lokaalBestuurVanBehandeling()?.postcode()}" class="label">Postcode</div>
         <div class="bottom-spacing" th:text="${dossier.lokaalBestuurVanBehandeling()?.postcode()}"></div>
+        <div th:replace="~{fragments/wijzigenPlaatsOverlijden/wijzigen-plaats-overlijden.html :: wijzigen-plaats-overlijden(dossier=${dossier})}"></div>
     </section>
 
     <section class="grid-column">
