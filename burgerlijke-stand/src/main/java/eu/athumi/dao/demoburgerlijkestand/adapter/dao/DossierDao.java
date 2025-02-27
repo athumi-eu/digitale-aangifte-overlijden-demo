@@ -118,7 +118,6 @@ public class DossierDao {
                 .filter(dossier -> Objects.equals(dossier.id(), id))
                 .findFirst();
 
-        model.addAttribute("wijzigPlaatsOverlijdenForm", new WijzigPlaatsOverlijden("", ""));
         model.addAttribute("kbonummer", kbonummer);
 
         if (detail.isPresent()) {
@@ -293,7 +292,7 @@ public class DossierDao {
         return ResponseEntity.ok("Ok");
     }
 
-    public record WijzigPlaatsOverlijden(String niscode, String postcode) {
+    public record WijzigPlaatsOverlijden(String niscode, String postcode, String reden) {
     }
 
     @PostMapping(path = "/dossier/{id}/ontkoppel", consumes = MediaType.TEXT_PLAIN_VALUE)
