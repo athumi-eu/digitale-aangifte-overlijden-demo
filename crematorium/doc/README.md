@@ -1,5 +1,8 @@
 # Startpunt Crematorium
 
+## Context crematoria
+De [User stories](userstories/userstories.md) pagina beschrijft welke user stories in de toepassing voorzien moeten worden, en welke eLys API's hiervoor gebruikt kunnen worden. 
+
 ## API documentatie
 Een beschrijving van de functionaliteit staat [hier](api/beschrijving.md).
 
