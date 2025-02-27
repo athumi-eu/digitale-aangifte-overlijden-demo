@@ -17,6 +17,7 @@
             Reden wijziging
             <textarea name="reden"></textarea>
         </label>
+        <span id="error-wijzigen" class="error"></span>
         <button type="button" onclick="wijzigenPlaatsOverlijden(this.form)">Wijzig</button>
     </form>
 
@@ -31,7 +32,12 @@
                     "Content-Type": "application/json"
                 }
             }).then(async response => {
-                form.reset();
+                if (response.status === 400) {
+                    document.getElementById("error-wijzigen").style.display = "block";
+                    document.getElementById("error-wijzigen").innerText = await response.text();
+                } else {
+                    form.reset();
+                }
             });
         }
     </script>
