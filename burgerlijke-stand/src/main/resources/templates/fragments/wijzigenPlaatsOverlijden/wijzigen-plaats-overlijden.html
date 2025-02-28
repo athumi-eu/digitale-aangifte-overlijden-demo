@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <div th:fragment="wijzigen-plaats-overlijden(dossier)">
-    <form action="#" th:action="@{/dossier/{id}/wijzig-plaats-overlijden(id=${dossier.id})}" method="post"
+    <form action="#" th:action="@{dossier/{id}/wijzig-plaats-overlijden(id=${dossier.id})}" method="post"
           style="display: flex; flex-direction: column; gap: 0.5rem">
         <h4>Wijzig plaats overlijden</h4>
         <label>
