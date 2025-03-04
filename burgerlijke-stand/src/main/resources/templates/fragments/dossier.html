@@ -15,13 +15,13 @@
         <div class="label">Verwijderd op</div>
         <div class="bottom-spacing" th:text="${dossier.parsedVerwijderdOp()}"></div>
 
-        <div th:if="${dossier.dossierStatus() != 'VERWIJDERD' && dossier.dossierStatus() != 'BEHANDELD'}" style="margin-bottom: 1rem">
+        <div th:if="${!dossier.hasStatus('VERWIJDERD') && !dossier.hasStatus('BEHANDELD')}" style="margin-bottom: 1rem">
             <div th:replace="~{fragments/afsluiten.html :: afsluiten(id=${dossier.id()})}"></div>
         </div>
-        <div th:if="${dossier.dossierStatus() == 'VERWIJDERD' || dossier.dossierStatus() == 'BEHANDELD'}" style="margin-bottom: 1rem">
+        <div th:if="${dossier.hasStatus('VERWIJDERD') || dossier.hasStatus('BEHANDELD')}" style="margin-bottom: 1rem">
             <div th:replace="~{fragments/heropen.html :: heropen(id=${dossier.id()})}" naam></div>
         </div>
-        <div th:if="${dossier.dossierStatus() != 'VERWIJDERD'}">
+        <div th:if="${!dossier.hasStatus('VERWIJDERD')}">
             <div th:replace="~{fragments/verwijderen.html :: verwijderen(id=${dossier.id()})}" style="margin-bottom: 1rem"></div>
         </div>
     </section>
