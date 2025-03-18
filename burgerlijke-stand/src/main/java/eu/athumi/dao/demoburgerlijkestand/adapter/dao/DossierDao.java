@@ -66,8 +66,9 @@ public class DossierDao {
                                       @RequestParam(required = false) Boolean heeftNationaleOverlijdensakte,
                                       @RequestParam(required = false) Boolean heeftInlichtingenfiche,
                                       @RequestParam(required = false) Boolean heeftToestemming,
+                                      @RequestParam(required = false) String postcodes,
                                       HttpEntity<Object> httpEntity) {
-
+        var postcode = ofNullable(postcodes).map(p -> p.split(",")).map(List::of).orElse(List.of());
         String url = daoServiceUrl + "/burgerlijke-stand/v1/dossiers?" + new DefaultUriBuilderFactory().builder().queryParam("kbonummer", kbonummer)
                 .queryParamIfPresent("status", ofNullable(status))
                 .queryParamIfPresent("dossiernummer", ofNullable(dossiernummer))
@@ -78,6 +79,7 @@ public class DossierDao {
                 .queryParamIfPresent("heeftNationaleOverlijdensakte", ofNullable(heeftNationaleOverlijdensakte))
                 .queryParamIfPresent("heeftInlichtingenfiche", ofNullable(heeftInlichtingenfiche))
                 .queryParamIfPresent("heeftToestemming", ofNullable(heeftToestemming))
+                .queryParam("postcode", postcode)
                 .build().getQuery();
 
         try {

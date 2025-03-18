@@ -45,6 +45,11 @@
         <div><input id="achternaam" type="text" name="achternaam" class="min-breedte"/>
         </div>
         <br>
+        <label style="display: flex;flex-direction: column;">
+            Postcodes
+            <input id="postcodes" type="text" name="postcodes" class="min-breedte" placeholder="3010,3020"/>
+        </label>
+        <br>
 
     </div>
     <div class="grid-column">
@@ -153,6 +158,7 @@
         const rrn = document.getElementById('rrn').value
         const datum = document.getElementById('datum').value
         const achternaam = document.getElementById('achternaam').value
+        const postcodes = document.getElementById('postcodes').value;
         const akteJa = document.getElementById('akteJa').checked
         const akteNee = document.getElementById('akteNee').checked
         const artsJa = document.getElementById('artsJa').checked
@@ -179,6 +185,9 @@
         if (!!achternaam) {
             params.set('achternaam', achternaam);
         } else params.delete('achternaam')
+        if(!!postcodes) {
+            params.set('postcodes', postcodes)
+        } else params.delete('postcodes')
 
         if (!!akteJa) {
             params.set('heeftNationaleOverlijdensakte', "true");
@@ -234,6 +243,9 @@
         }
         if (!!params.get("achternaam")) {
             document.getElementById('achternaam').value = params.get("achternaam");
+        }
+        if (!!params.get("postcodes")) {
+            document.getElementById('postcodes').value = params.get("postcodes");
         }
         if (params.get("heeftNationaleOverlijdensakte") === undefined || params.get("heeftNationaleOverlijdensakte") === null) {
             document.getElementById('akteMNU').checked = true;
