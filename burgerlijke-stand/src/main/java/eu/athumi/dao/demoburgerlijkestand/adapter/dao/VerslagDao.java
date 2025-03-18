@@ -24,10 +24,16 @@ public class VerslagDao {
     }
 
     @GetMapping(value = "/verslagen")
-    public String dossier(Model model, @RequestParam String kbonummer) {
+    public String dossier(Model model, @RequestParam String kbonummer, @RequestParam(required = false) List<String> postcode) {
+        StringBuilder url = new StringBuilder(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts?kbonummer=" + kbonummer);
+        if (postcode != null) {
+            for (String code : postcode) {
+                url.append("&postcode=").append(code);
+            }
+        }
         VerslagBeedigdArtsJSON[] response = webclientProvider.getRestClient(kbonummer)
                 .get()
-                .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts?kbonummer={kbonummer}", kbonummer)
+                .uri(url.toString())
                 .retrieve()
                 .body(VerslagBeedigdArtsJSON[].class);
 
@@ -38,7 +44,7 @@ public class VerslagDao {
         }
         model.addAttribute("kbonummer", kbonummer);
 
-        return verslagen.isEmpty() ? "niks-gevonden" : "ongekoppelde-verslagen";
+        return "ongekoppelde-verslagen";
     }
 
     @GetMapping(value = "/verslag")
@@ -98,7 +104,7 @@ public class VerslagDao {
 
     @DeleteMapping(path = "/verslag/{id}")
     @ResponseBody
-    public ResponseEntity<String> verwijderVerslag(@PathVariable String id ,@SessionAttribute String kbonummer) {
+    public ResponseEntity<String> verwijderVerslag(@PathVariable String id, @SessionAttribute String kbonummer) {
         try {
             webclientProvider.getRestClient(kbonummer)
                     .delete()
