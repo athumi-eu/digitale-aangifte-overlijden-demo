@@ -60,5 +60,16 @@
         const newUrl = window.location.href.split('?')[0] + '?' + searchParams.toString();
         window.location.href = newUrl;
     }
+
+    function prefillPostcodes() {
+        const searchParams = new URLSearchParams(window.location.search);
+        console.log('params', searchParams);
+        const postcodes = searchParams.getAll('postcode');
+        if (postcodes && postcodes.length > 0) {
+            document.getElementById('postcodes').value = postcodes.join(',');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', prefillPostcodes);
 </script>
 </html>
