@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
-@JsonSubTypes({ @JsonSubTypes.Type(AdresJSON.class), @JsonSubTypes.Type(LocatieJSON.class) })
+@JsonSubTypes({ @JsonSubTypes.Type(AdresOverlijdenJSON.class), @JsonSubTypes.Type(LocatieJSON.class) })
 public interface Plaats {
     @JsonProperty("@type")
     default String type() {

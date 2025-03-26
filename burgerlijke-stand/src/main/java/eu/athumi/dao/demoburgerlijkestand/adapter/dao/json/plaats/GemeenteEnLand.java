@@ -8,12 +8,7 @@ public record GemeenteEnLand(Gemeente gemeente, Land land, String buitenlandseGe
         var gemeenteString = "";
         var landString = "";
         if (this.gemeente() != null) {
-            if (this.gemeente().naam() != null) {
-                gemeenteString += this.gemeente().naam();
-            }
-            if (this.gemeente().niscode() != null) {
-                gemeenteString += " (niscode: " + this.gemeente().niscode() + ")";
-            }
+            gemeenteString += gemeente().toString();
         }
 
         if (this.land() != null) {
