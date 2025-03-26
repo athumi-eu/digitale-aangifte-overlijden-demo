@@ -3,21 +3,22 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.TijdstipJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Type;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresOverlijdenJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.Plaats;
 
 import java.util.List;
 
-public record OverlijdenJSON(TijdstipJSON tijdstip, List<Plaats> plaats, boolean doodgeboorte, List<OverlijdenAfhandelingOutputJSON> bewijzen)
+public record OverlijdenJSON(TijdstipJSON tijdstip, List<Plaats> plaats, boolean doodgeboorte,
+                             List<OverlijdenAfhandelingOutputJSON> bewijzen)
         implements Type {
     @Override
     public String type() {
         return "Overlijden";
     }
 
-    public AdresJSON getAdresOverlijden() {
-        return plaats.stream().filter(json -> json instanceof AdresJSON).map(json -> (AdresJSON) json).findFirst().orElseGet(() -> new AdresJSON(null, null, null, null, null, null, null, null));
+    public AdresOverlijdenJSON getAdresOverlijden() {
+        return plaats.stream().filter(json -> json instanceof AdresOverlijdenJSON).map(json -> (AdresOverlijdenJSON) json).findFirst().orElseGet(() -> new AdresOverlijdenJSON(null, null, null, null, null, null, null));
     }
 
     public LocatieJSON getLocatieOverlijden() {
