@@ -32,7 +32,7 @@ public class PlaatsParser {
 
         var gemeenteString = new Gemeente(adres.niscode(), adres.gemeentenaam()
         ).toString();
-        return Stream.of(adres.straat(), adres.huisnummer(), adres.bus(), gemeenteString, adres.beschrijving()).filter(Objects::nonNull).collect(Collectors.joining(", "));
+        return Stream.of(adres.straat(), adres.huisnummer(), adres.bus(), adres.postcode(), gemeenteString, adres.beschrijving()).filter(Objects::nonNull).collect(Collectors.joining(", "));
     }
 
     public static String parseLocatie(LocatieJSON locatieJSON) {
