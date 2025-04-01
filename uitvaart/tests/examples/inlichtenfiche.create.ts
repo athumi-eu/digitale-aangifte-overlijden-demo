@@ -1,12 +1,30 @@
 export const ENKEL_BEGRAAFPLAATS = {
     "begraafplaats": {
         "niscodeGemeente": "24062"
+    },
+    "asWettelijkePartner": {
+        "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
+        "rijksregisternummer": "81.70.22-996-50",
+        "voornaam": "Justine",
+        "naam": "Janssens",
+        "geboorteDatum": "1981-10-22",
+        "datumOverlijden": "1996-06-01",
+        "plaatsOverlijden": "Kortenberg"
     }
 }
 
 export const BEGRAAFPLAATS_ANDERE_LOCATIE = {
     "begraafplaats": {
         "andereLocatie": "andereLocatie"
+    },
+    "asWettelijkePartner": {
+        "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
+        "rijksregisternummer": "81.70.22-996-50",
+        "voornaam": "Justine",
+        "naam": "Janssens",
+        "geboorteDatum": "1981-10-22",
+        "datumOverlijden": "1996-06-01",
+        "plaatsOverlijden": "Kortenberg"
     }
 }
 
@@ -20,9 +38,9 @@ export const ANDER_CREMATORIUM = {
             "nabestaande": null,
             "documenten": []
         },
-        "asWettelijkePartner": {
-            "type": "NIET_VAN_TOEPASSING"
-        }
+    },
+    "asWettelijkePartner": {
+        "type": "NIET_VAN_TOEPASSING"
     }
 }
 
@@ -35,10 +53,10 @@ export const CREMATORIUM_BELGIE = {
             "locatie": "Een locatie via hint",
             "nabestaande": null,
             "documenten": []
-        },
-        "asWettelijkePartner": {
-            "type": "NIET_VAN_TOEPASSING"
         }
+    },
+    "asWettelijkePartner": {
+        "type": "NIET_VAN_TOEPASSING"
     }
 }
 
@@ -62,10 +80,10 @@ export const PRIVATE_BEGRAVING = {
                 },
                 "documenten": []
             }
-        },
-        "asWettelijkePartner": {
-            "type": "NIET_VAN_TOEPASSING"
         }
+    },
+    "asWettelijkePartner": {
+        "type": "NIET_VAN_TOEPASSING"
     }
 }
 
@@ -89,16 +107,16 @@ export const MET_AS_WETTELIJKE_PARTNER = {
                 },
                 "documenten": []
             }
-        },
-        "asWettelijkePartner": {
-            "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
-            "rijksregisternummer": "81.70.22-996-50",
-            "voornaam": "Justine",
-            "naam": "Janssens",
-            "geboorteDatum": "1981-10-22",
-            "datumOverlijden": "1996-06-01",
-            "plaatsOverlijden": "Kortenberg"
         }
+    },
+    "asWettelijkePartner": {
+        "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
+        "rijksregisternummer": "81.70.22-996-50",
+        "voornaam": "Justine",
+        "naam": "Janssens",
+        "geboorteDatum": "1981-10-22",
+        "datumOverlijden": "1996-06-01",
+        "plaatsOverlijden": "Kortenberg"
     }
 }
 
@@ -122,29 +140,29 @@ export const LEVENLOOS_KIND = {
                 },
                 "documenten": []
             }
-        },
-        "asWettelijkePartner": {
-            "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
-            "rijksregisternummer": "81.70.22-996-50",
-            "voornaam": "Justine",
-            "naam": "Janssens",
-            "geboorteDatum": "1981-10-22",
-            "datumOverlijden": "1996-06-01",
-            "plaatsOverlijden": "Kortenberg"
         }
+    },
+    "asWettelijkePartner": {
+        "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
+        "rijksregisternummer": "81.70.22-996-50",
+        "voornaam": "Justine",
+        "naam": "Janssens",
+        "geboorteDatum": "1981-10-22",
+        "datumOverlijden": "1996-06-01",
+        "plaatsOverlijden": "Kortenberg"
     },
     "informatieAkteLevenloosKind": {
         "vaderOfMeemoeder": {
             "rijksregisternummer": "62650675348",
-            "voornaam":  "Voornaam meemoeder",
+            "voornaam": "Voornaam meemoeder",
             "naam": "Achternaam meemoeder",
-            "geboorteDatum":  "1981-10-22",
+            "geboorteDatum": "1981-10-22",
             "geboortelocatie": "Gent"
         }
     }
 }
 
-export const BESTEMMING_EN_AS_WETTELIJKE_PARTNER ={
+export const BESTEMMING_EN_AS_WETTELIJKE_PARTNER = {
     "crematie": {
         "crematoriumInBelgie": "a00a44aa-332d-4a0e-ac3c-12ec97715c37",
         "bestemmingAs": {
@@ -164,15 +182,15 @@ export const BESTEMMING_EN_AS_WETTELIJKE_PARTNER ={
                 },
                 "documenten": []
             }
-        },
-        "asWettelijkePartner": {
-            "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
-            "rijksregisternummer": "81.70.22-996-50",
-            "voornaam": "Justine",
-            "naam": "Janssens",
-            "geboorteDatum": "1981-10-22",
-            "datumOverlijden": "1996-06-01",
-            "plaatsOverlijden": "Kortenberg"
         }
+    },
+    "asWettelijkePartner": {
+        "type": "SAMEN_MET_DE_DOODSKIST_BEGRAVEN",
+        "rijksregisternummer": "81.70.22-996-50",
+        "voornaam": "Justine",
+        "naam": "Janssens",
+        "geboorteDatum": "1981-10-22",
+        "datumOverlijden": "1996-06-01",
+        "plaatsOverlijden": "Kortenberg"
     }
 }
