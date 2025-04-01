@@ -1,6 +1,8 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.stereotype.Component;
@@ -18,11 +20,13 @@ public class RestClientProvider {
     private Map<String, RestClient> restClientMap = new HashMap<>();
     private final OAuth2AuthorizedClientManager authorizedClientManager;
     private final OAuth2AuthorizedClientRepository authorizedClientRepository;
+    private final ObjectMapper objectMapper;
 
-    public RestClientProvider(ClientConfigurationProperties clientConfigurationProperties, OAuth2AuthorizedClientManager authorizedClientManager, OAuth2AuthorizedClientRepository authorizedClientRepository) {
+    public RestClientProvider(ClientConfigurationProperties clientConfigurationProperties, OAuth2AuthorizedClientManager authorizedClientManager, OAuth2AuthorizedClientRepository authorizedClientRepository, ObjectMapper objectMapper) {
         this.clientConfigurationProperties = clientConfigurationProperties;
         this.authorizedClientManager = authorizedClientManager;
         this.authorizedClientRepository = authorizedClientRepository;
+        this.objectMapper = objectMapper;
     }
 
     @PostConstruct
@@ -39,6 +43,9 @@ public class RestClientProvider {
             new OAuth2ClientHttpRequestInterceptor(authorizedClientManager, kbonummer);
         requestInterceptor.setAuthorizedClientRepository(authorizedClientRepository);
 
-        return RestClient.builder().requestInterceptor(requestInterceptor).build();
+        return RestClient.builder().messageConverters(c -> {
+            c.removeIf(MappingJackson2HttpMessageConverter.class::isInstance);
+            c.add(new MappingJackson2HttpMessageConverter(objectMapper));
+        }).requestInterceptor(requestInterceptor).build();
     }
 }
