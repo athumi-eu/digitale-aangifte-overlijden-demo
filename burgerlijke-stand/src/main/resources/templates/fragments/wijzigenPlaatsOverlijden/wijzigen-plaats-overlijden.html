@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="wijzigen-plaats-overlijden(dossier)">
+    <form action="#" th:action="@{dossier/{id}/wijzig-plaats-overlijden(id=${dossier.id})}" method="post"
+          style="display: flex; flex-direction: column; gap: 0.5rem">
+        <h4>Wijzig plaats overlijden</h4>
+        <label>
+            Niscode
+            <input type="text" name="niscode"/>
+        </label>
+        <label>
+            Postcode
+            <input type="text" name="postcode"/>
+        </label>
+        <label>
+            Reden wijziging
+            <textarea name="reden"></textarea>
+        </label>
+        <span id="error-wijzigen" class="error"></span>
+        <button type="button" onclick="wijzigenPlaatsOverlijden(this.form)">Wijzig</button>
+    </form>
+
+    <script language="JavaScript">
+        function wijzigenPlaatsOverlijden(form) {
+            const formData = new FormData(form);
+            console.log(formData);
+            fetch(form.action, {
+                method: "post",
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(async response => {
+                if (response.status === 400) {
+                    document.getElementById("error-wijzigen").style.display = "block";
+                    document.getElementById("error-wijzigen").innerText = await response.text();
+                } else {
+                    form.reset();
+                }
+            });
+        }
+    </script>
+</div>

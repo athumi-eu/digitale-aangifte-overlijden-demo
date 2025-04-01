@@ -4,19 +4,25 @@
 <body>
 <div th:fragment="heropen(id)">
     <div>
+        <label>
+            Reden van heropening
+            <input id="heropening-input" type="text"/>
+        </label>
         <button th:onclick="heropenDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Heropen</button>
     </div>
 
-    <span id="error"></span>
+    <span id="heropening-error"></span>
     <script>
 
         function heropenDossier(id, frontendBaseUrl) {
+            const message = document.getElementById("heropening-input")?.value;
             fetch(frontendBaseUrl + '/dossier/' + id + '/heropen', {
-                method: "post"
+                method: "post",
+                body: message ? message : undefined
             }).then(async response => {
                 if (response.status === 400) {
-                    document.getElementById("error").style.display = "block";
-                    document.getElementById("error").innerText = await response.text();
+                    document.getElementById("heropening-error").style.display = "block";
+                    document.getElementById("heropening-error").innerText = await response.text();
                 } else {
                     window.location.reload();
                 }

@@ -1,9 +1,6 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.AdresJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.Gemeente;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.LocatieJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
@@ -26,6 +23,16 @@ public class PlaatsParser {
                 adres.land(), adres.buitenlandsAdres()
         ).toString();
         return Stream.of(adres.straat(), adres.huisnummer(), adres.bus(), gemeenteEnLandString).filter(Objects::nonNull).collect(Collectors.joining(", "));
+    }
+
+    public static String parseAdres(AdresOverlijdenJSON adres) {
+        if (Objects.isNull(adres)) {
+            return null;
+        }
+
+        var gemeenteString = new Gemeente(adres.niscode(), adres.gemeentenaam()
+        ).toString();
+        return Stream.of(adres.straat(), adres.huisnummer(), adres.bus(), adres.postcode(), gemeenteString, adres.beschrijving()).filter(Objects::nonNull).collect(Collectors.joining(", "));
     }
 
     public static String parseLocatie(LocatieJSON locatieJSON) {

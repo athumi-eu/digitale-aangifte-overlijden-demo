@@ -3,11 +3,8 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.historiek;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
-public record DossierGebeurtenis(GebeurtenisType type, LocalDateTime tijdstip, String message)
+public record DossierGebeurtenis(GebeurtenisType type, GebeurtenisReden reden, String message, LocalDateTime tijdstip)
         implements Comparable<DossierGebeurtenis> {
-    public DossierGebeurtenis(GebeurtenisType type, String message) {
-        this(type, LocalDateTime.now(), message);
-    }
 
     @Override
     public int compareTo(DossierGebeurtenis o) {

@@ -6,7 +6,6 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.historiek.DossierGebe
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche.InlichtingenficheJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verantwoordelijk.LokaalBestuurVanBehandeling;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.rijksregister.VerrijkingRijksregisterJSON;
 
@@ -70,5 +69,9 @@ public record DossierBurgerlijkeStandJSON(
             return "/";
         }
         return parseLocalDateTime(localDateTime);
+    }
+
+    public boolean hasStatus(String status) {
+        return DossierStatus.valueOf(status).equals(this.dossierStatus);
     }
 }
