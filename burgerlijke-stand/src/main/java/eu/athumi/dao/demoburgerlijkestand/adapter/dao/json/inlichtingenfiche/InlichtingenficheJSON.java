@@ -9,5 +9,6 @@ public record InlichtingenficheJSON(
     List<DocumentJSON> documenten,
     BegraafplaatsJSON begraafplaats,
     CrematieJSON crematie,
+    AsWettelijkePartnerJSON asWettelijkePartner,
     InformatieAkteLevenloosKindJSON informatieAkteLevenloosKind
 ) {}

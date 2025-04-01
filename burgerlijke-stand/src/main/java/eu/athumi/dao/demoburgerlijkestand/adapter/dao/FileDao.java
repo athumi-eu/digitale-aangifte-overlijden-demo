@@ -34,8 +34,6 @@ public class FileDao {
     @ResponseBody
     public void uploadAkte( @RequestParam(value = "akte", required = false) MultipartFile file, @RequestParam(required = false) String aktenummer, @RequestParam String type, @RequestParam String id, @SessionAttribute String kbonummer) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        System.out.println(file.getSize());
-        System.out.println(aktenummer);
         if(file.getSize() > 0){
             body.add("akte", file.getResource());
         }

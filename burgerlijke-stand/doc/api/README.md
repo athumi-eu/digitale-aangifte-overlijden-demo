@@ -45,9 +45,10 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers`
 - **Beschrijving**: Gebruik dit endpoint om een lijst van dossiers op te halen. Voor dit endpoint kunnen er een reeks
-  query parameters meegegeven worden. Minstens 1 van de volgende parameters moet meegegeven worden: Status dossier,
-  rijksregisternummer, datum overlijden of achternaam overledene. Als status dossier behandeld of niet behandeld is moet
-  nog 1 extra parameter meegegeven worden.
+  query parameters meegegeven worden. Bij het niet meegeven van een status, of bij het opvragen van dossiers in status BEHANDELD, VERWIJDERD of ZWANGERSCHAP_MINDER_DAN_180D
+  moet bijkomend minstens 1 van de volgende parameters worden meegegeven :
+  Status dossier, rijksregisternummer, datum overlijden of achternaam overledene.
+  Er kan optioneel nog verder gefilterd worden op de exacte postcode/district van het overlijden.
 
 ### Ophalen van het detail van een dossier
 
@@ -66,7 +67,8 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
 - **Beschrijving**: Gebruik dit endpoint om aktes of een toestemming van een dossier te uploaden.
-- **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_toestemmingbegravencrematie.docx) beschikbaar. De layout van dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
+- **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_toestemmingbegravencrematie.docx) beschikbaar. De layout van
+  dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
 
 ### Aanvullen van een dossier
 
@@ -100,12 +102,12 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Beschrijving**: Gebruik dit endpoint om een verslag te verwijderen.
 
 ### Statistische gegevens opvragen
- 
+
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens`
 - **Beschrijving**: Gebruik dit endpoint om statistische gegevens op te vragen.
 
 ### Statistische gegevens updaten
- 
+
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/socio-economische-gegevens`
 - **Beschrijving**: Gebruik dit endpoint om statistische gegevens te updaten.
 
@@ -116,7 +118,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 ## Validatiefouten
 
-Als er validatiefouten optreden bij het versturen van een request, zal de API een HTTP 400-fout terugsturen. 
+Als er validatiefouten optreden bij het versturen van een request, zal de API een HTTP 400-fout terugsturen.
 
 ## Error codes
 

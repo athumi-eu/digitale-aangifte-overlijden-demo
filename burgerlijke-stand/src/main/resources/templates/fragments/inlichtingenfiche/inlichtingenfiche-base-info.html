@@ -64,24 +64,24 @@
             </div>
         </div>
         <!--        AS PARTNER-->
-        <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
+        <div class="grid-column" th:if="${inlichtingenfiche?.asWettelijkePartner() != null}">
             <h3>Bestemming as eerder overleden partner</h3>
 
             <div class="label">Bestemmingstype</div>
-            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.type ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.asWettelijkePartner?.type ?: '/'}"></div>
             <div class="label">Rijksregisternummer van partner</div>
-            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.rijksregisternummer ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.asWettelijkePartner?.rijksregisternummer ?: '/'}"></div>
             <div class="label">Naam van partner</div>
             <div class="bottom-spacing" >
-                <span th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.voornaam ?: '/'}"></span>
-                <span th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.naam ?: ''}"></span>
+                <span th:text="${inlichtingenfiche?.asWettelijkePartner?.voornaam ?: '/'}"></span>
+                <span th:text="${inlichtingenfiche?.asWettelijkePartner?.naam ?: ''}"></span>
             </div>
             <div class="label">Geboortedatum van partner</div>
-            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.crematie?.asWettelijkePartner?.geboorteDatum, 'dd/MM/yyyy') ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.asWettelijkePartner?.geboorteDatum, 'dd/MM/yyyy') ?: '/'}"></div>
             <div class="label">Plaats van overlijden van partner</div>
-            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
             <div class="label">Datum van overlijden van partner</div>
-            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.crematie?.asWettelijkePartner?.datumOverlijden, 'dd/MM/yyyy') ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.asWettelijkePartner?.datumOverlijden, 'dd/MM/yyyy') ?: '/'}"></div>
 
         </div>
     </div>

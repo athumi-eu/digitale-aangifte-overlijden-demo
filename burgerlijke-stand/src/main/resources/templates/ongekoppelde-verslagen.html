@@ -11,8 +11,13 @@
     <h3>Ongekoppelde verslagen beëdigd arts</h3>
 </div>
 
-<div th:if="${ not#lists.isEmpty(verslagen)}" class="grey-border ml-3 mr-3 outer">
+<label>
+    Postcodes
+    <input id="postcodes" type="text" placeholder="3010, 3050"/>
+</label>
+<button onclick="reload()">zoek</button>
 
+<div th:if="${ not#lists.isEmpty(verslagen)}" class="grey-border ml-3 mr-3 mtb-3 outer">
     <table>
 
         <tr>
@@ -38,5 +43,33 @@
         </tr>
     </table>
 </div>
+<div th:if="${ #lists.isEmpty(verslagen)}">
+    Niks gevonden
+</div>
 </body>
+<script>
+    function reload() {
+        const codes = document.getElementById("postcodes").value;
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.delete('postcode');
+        if (codes) {
+            const splitCodes = codes.split(',');
+            splitCodes.forEach(postcode => searchParams.append('postcode', postcode))
+        }
+
+        const newUrl = window.location.href.split('?')[0] + '?' + searchParams.toString();
+        window.location.href = newUrl;
+    }
+
+    function prefillPostcodes() {
+        const searchParams = new URLSearchParams(window.location.search);
+        console.log('params', searchParams);
+        const postcodes = searchParams.getAll('postcode');
+        if (postcodes && postcodes.length > 0) {
+            document.getElementById('postcodes').value = postcodes.join(',');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', prefillPostcodes);
+</script>
 </html>

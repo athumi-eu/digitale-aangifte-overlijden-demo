@@ -66,8 +66,9 @@ public class DossierDao {
                                       @RequestParam(required = false) Boolean heeftNationaleOverlijdensakte,
                                       @RequestParam(required = false) Boolean heeftInlichtingenfiche,
                                       @RequestParam(required = false) Boolean heeftToestemming,
+                                      @RequestParam(required = false) String postcodes,
                                       HttpEntity<Object> httpEntity) {
-
+        var postcode = ofNullable(postcodes).map(p -> p.split(",")).map(List::of).orElse(List.of());
         String url = daoServiceUrl + "/burgerlijke-stand/v1/dossiers?" + new DefaultUriBuilderFactory().builder().queryParam("kbonummer", kbonummer)
                 .queryParamIfPresent("status", ofNullable(status))
                 .queryParamIfPresent("dossiernummer", ofNullable(dossiernummer))
@@ -78,6 +79,7 @@ public class DossierDao {
                 .queryParamIfPresent("heeftNationaleOverlijdensakte", ofNullable(heeftNationaleOverlijdensakte))
                 .queryParamIfPresent("heeftInlichtingenfiche", ofNullable(heeftInlichtingenfiche))
                 .queryParamIfPresent("heeftToestemming", ofNullable(heeftToestemming))
+                .queryParam("postcode", postcode)
                 .build().getQuery();
 
         try {
@@ -203,13 +205,15 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/heropen")
     @ResponseBody
-    public ResponseEntity<String> heropenDossier(@PathVariable String id, @SessionAttribute String kbonummer) {
+    public ResponseEntity<String> heropenDossier(@PathVariable String id, @SessionAttribute String kbonummer, @RequestBody(required = false) @Nullable String message) {
         try {
-            securedWebClient.getRestClient(kbonummer)
+            var body = Optional.ofNullable(message).map(s -> "{\"boodschap\": \"" + Optional.ofNullable(s).orElse("") + "\"}");
+            var rq = securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
-                    .retrieve()
-                    .toBodilessEntity();
+                    .contentType(MediaType.APPLICATION_JSON);
+            body.ifPresent(rq::body);
+            rq.retrieve().toBodilessEntity();
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(e.getMessage());
@@ -271,6 +275,26 @@ public class DossierDao {
                     .body(e.getMessage());
         }
         return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping(path = "/dossier/{id}/wijzig-plaats-overlijden")
+    @ResponseBody
+    public ResponseEntity<String> wijzigPlaatsOverlijden(@PathVariable String id, @RequestBody WijzigPlaatsOverlijden wijzigPlaatsOverlijden, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/wijzig-plaats-overlijden", id)
+                    .body(wijzigPlaatsOverlijden)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    public record WijzigPlaatsOverlijden(String niscode, String postcode, String reden) {
     }
 
     @PostMapping(path = "/dossier/{id}/ontkoppel", consumes = MediaType.TEXT_PLAIN_VALUE)
