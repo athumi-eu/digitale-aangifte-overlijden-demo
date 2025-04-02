@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,7 +80,7 @@ public class FileDao {
     public void uploadFile(@RequestParam MultipartFile toestemming, @RequestParam LocalDateTime aanmaakDatumToestemming, @RequestParam String id, @SessionAttribute String kbonummer) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("toestemming", toestemming.getResource());
-        body.add("aanmaakDatumToestemming", aanmaakDatumToestemming.format(DateTimeFormatter.ISO_DATE_TIME));
+        body.add("aanmaakDatumToestemming", ZonedDateTime.of(aanmaakDatumToestemming, ZoneId.systemDefault()).format(DateTimeFormatter.ISO_DATE_TIME));
         securedWebClient
                 .getRestClient(kbonummer)
                 .post()
