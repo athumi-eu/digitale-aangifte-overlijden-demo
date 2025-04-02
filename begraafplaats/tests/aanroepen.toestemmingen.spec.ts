@@ -4,7 +4,7 @@ import {describe, expect, test} from "vitest";
 describe('oproepen van toestemmingen api', () => {
     test('Oproepen met enkel van ', async () => {
         const axios = getAxios()
-        const response = await axios.get('/begraafplaats/v1/toestemmingen?van=2024-12-20T10:00:00')
+        const response = await axios.get('/begraafplaats/v1/toestemmingen?van=2024-12-20T10:00:00Z')
 
         console.log(response.data);
         expect(response.status).toEqual(200);
@@ -12,7 +12,7 @@ describe('oproepen van toestemmingen api', () => {
 
     test('Oproepen met van en tot', async () => {
         const axios = getAxios()
-        const response = await axios.get('/begraafplaats/v1/toestemmingen?van=2024-12-20T10:00:00&tot=2024-12-28T10:00:00')
+        const response = await axios.get('/begraafplaats/v1/toestemmingen?van=2024-12-20T10:00:00Z&tot=2024-12-28T10:00:00Z')
 
         console.log(response.data);
         expect(response.status).toEqual(200);
