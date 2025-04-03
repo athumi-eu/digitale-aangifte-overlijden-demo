@@ -188,11 +188,12 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/verwijderen")
     @ResponseBody
-    public ResponseEntity<String> verwijderenDossier(@PathVariable String id, HttpSession session) {
+    public ResponseEntity<String> verwijderenDossier(@PathVariable String id, HttpSession session, @RequestBody(required = false) @Nullable String message) {
         try {
             securedWebClient.getRestClient(session.getAttribute("kbonummer").toString())
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/verwijderen", id)
+                    .body(new Message(message == null ? "" : message))
                     .retrieve()
                     .toBodilessEntity();
         } catch (Exception e) {
@@ -207,19 +208,18 @@ public class DossierDao {
     @ResponseBody
     public ResponseEntity<String> heropenDossier(@PathVariable String id, @SessionAttribute String kbonummer, @RequestBody(required = false) @Nullable String message) {
         try {
-            var body = Optional.ofNullable(message).map(s -> "{\"boodschap\": \"" + Optional.ofNullable(s).orElse("") + "\"}");
-            var rq = securedWebClient.getRestClient(kbonummer)
+            securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/heropen", id)
-                    .contentType(MediaType.APPLICATION_JSON);
-            body.ifPresent(rq::body);
-            rq.retrieve().toBodilessEntity();
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(new Message(message == null ? "" : message)).retrieve().toBodilessEntity();
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(e.getMessage());
         }
         return ResponseEntity.ok("Ok");
     }
+
 
     @PostMapping(path = "/dossier/{id}/aanvullen")
     @ResponseBody
@@ -313,4 +313,9 @@ public class DossierDao {
         }
         return ResponseEntity.ok("Ok");
     }
+
+    public static record Message(String boodschap) {
+    }
+
+    ;
 }
