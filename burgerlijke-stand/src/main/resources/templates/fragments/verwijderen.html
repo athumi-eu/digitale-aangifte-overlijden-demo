@@ -4,6 +4,10 @@
 <body>
 <div th:fragment="verwijderen(id)">
     <div>
+        <label>
+            Reden van verwijderen
+            <input id="verwijderen-input" type="text"/>
+        </label>
         <button th:onclick="verwijderenDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Verwijder</button>
     </div>
 
@@ -11,8 +15,10 @@
     <script>
 
         function verwijderenDossier(id, frontedBaseUrl) {
+            const message = document.getElementById("verwijderen-input")?.value;
             fetch(frontedBaseUrl + '/dossier/' + id + '/verwijderen', {
-                method: "post"
+                method: "post",
+                body: message ? message : undefined
             }).then(async response => {
                 if (response.status === 400) {
                     document.getElementById("error").style.display = "block";
