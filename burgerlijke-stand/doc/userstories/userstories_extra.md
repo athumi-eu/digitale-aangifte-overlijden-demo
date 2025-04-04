@@ -4,7 +4,7 @@
 
 VVSG heeft samen met een groep van experten uit lokale besturen een aantal extra user stories geformuleerd.
 Deze user stories zijn specifiek bedoeld om te zorgen dat de integratie van eLys in het lokaal systeem zo goed mogelijk aansluit bij de noden van de besturen.
-De user stories staan op volgorde van belangrijkheid en kregen een typering 'must' 'should have' 'could have' 'not required'.
+De user stories staan op volgorde van belangrijkheid en kregen een typering 'must' 'should have' 'could have'.
 
 ## User stories
 
@@ -56,7 +56,3 @@ De user stories staan op volgorde van belangrijkheid en kregen een typering 'mus
 13. Als ABS LBO kan ik erop rekenen dat de gegevens uit het overlijdensdossier, de aanvraag tot toestemming begraven/crematie en de bijhorende documenten 10 jaar bewaard worden . Zo kan ik via naam of Rijksregisternummer opzoekingen doen. Ik vind bijvoorbeeld bij herbestemming van lichaam of as, verdachte overlijdens, schenkingen aan de wetenschap de originele documenten terug. 
 
 14. Als ABS LBO word ik via de toepassing gewezen op de dossiers waarvoor alle benodigde acties zijn voldaan (akte(n) en toestemming opgeladen, gegevens aangevuld (RRN, PV)) en kunnen afgesloten worden.
-
-### Not required
-
-15. Als ABS van het lokaal bestuur van domicilie krijg ik in mijn toepassing via de notificatie van het rijksregister een melding over het overlijden van één van mijn inwoners zodat ik de gezinsbinding kan controleren. Dit is nu al beschikbaar en hoeft niet extra te worden voorzien.
