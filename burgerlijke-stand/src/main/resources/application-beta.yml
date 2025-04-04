@@ -9,8 +9,8 @@ spring:
 
 dao:
   service:
-    connection-url: https://dao.api.beta-athumi.eu
-    frontend-base-url: https://dao.beta-athumi.eu/demo
+    connection-url: https://elys.api.beta-athumi.eu
+    frontend-base-url: https://elys.beta-athumi.eu/demo
   gemeentes:
     security-method: private_key_jwt
     issuer-uri: https://authenticatie-ti.vlaanderen.be/op

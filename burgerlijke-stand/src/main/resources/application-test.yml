@@ -1,7 +1,7 @@
 dao:
   service:
-    connection-url: https://dao.api.test-athumi.eu
-    frontend-base-url: https://dao.test-athumi.eu/demo
+    connection-url: https://elys.api.test-athumi.eu
+    frontend-base-url: https://elys.test-athumi.eu/demo
   gemeentes:
     security-method: client_secret
-    token-uri: https://dao.api.test-athumi.eu/oauth2/token
+    token-uri: https://elys.api.test-athumi.eu/oauth2/token

@@ -18,4 +18,4 @@ dao:
     frontend-base-url: http://localhost:8082
   gemeentes:
     security-method: client_secret
-    token-uri: https://dao.api.test-athumi.eu/oauth2/token
+    token-uri: https://elys.api.test-athumi.eu/oauth2/token
