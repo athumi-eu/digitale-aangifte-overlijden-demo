@@ -5,6 +5,8 @@ Achtergrondinformatie over het platform en de toepassing burgerlijke stand kan [
 
 De [User stories](userstories/userstories.md) pagina beschrijft welke user stories in de toepassing voorzien moeten worden, en welke DAO API's hiervoor gebruikt kunnen worden. 
 
+Daarnaast heeft VVSG samen met een groep van experten uit lokale besturen een aantal extra [user stories](userstories/userstories_extra.md) geformuleerd.
+
 ## API documentatie
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
 
