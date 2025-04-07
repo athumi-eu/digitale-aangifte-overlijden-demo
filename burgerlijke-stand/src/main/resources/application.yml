@@ -19,3 +19,4 @@ dao:
   gemeentes:
     security-method: client_secret
     token-uri: https://elys.api.test-athumi.eu/oauth2/token
+  project: ${PROJECT_NAME:"dao"}
