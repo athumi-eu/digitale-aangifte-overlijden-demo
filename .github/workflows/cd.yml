@@ -39,6 +39,9 @@ jobs:
           docker login -u ${{ vars.AZURE_ELYS_REPO_USERNAME }} -p ${{ secrets.AZURE_ELYS_REPO_PASSWORD }} ${{ vars.AZURE_REPO_URL }}
           docker tag dao-demo:${{ steps.versions.outputs.APP_VERSION }} "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_ELYS_REPO_PROJECT }}/dao-demo:${{ steps.versions.outputs.APP_VERSION }}"
           docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_ELYS_REPO_PROJECT }}/dao-demo:${{ steps.versions.outputs.APP_VERSION }}"
+          docker login -u ${{ vars.AZURE_REPO_USERNAME }} -p ${{ secrets.AZURE_REPO_PASSWORD }} ${{ vars.AZURE_REPO_URL }}
+          docker tag dao-demo:${{ steps.versions.outputs.APP_VERSION }} "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:${{ steps.versions.outputs.APP_VERSION }}"
+          docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_REPO_PROJECT }}/dao-demo:${{ steps.versions.outputs.APP_VERSION }}"
         env:
           SPRING_PROFILES_ACTIVE: dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
