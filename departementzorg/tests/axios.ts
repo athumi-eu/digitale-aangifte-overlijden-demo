@@ -9,7 +9,7 @@ const TARGET = process.env.TARGET;
 
 let authToken = await axios.post(process.env.TOKEN_URL, {
         grant_type: 'client_credentials',
-        scope: ['dao_depzorg'],
+        scope: ['elys_depzorg'],
     }, {
         headers: {
             'Authorization': `Basic ${process.env.BASIC_CLIENT}`,
@@ -26,7 +26,7 @@ export  function getAxios() {
         baseURL: TARGET,
         headers: {
             'Authorization': `Bearer ${authToken.access_token}`,
-            'x-scopes': 'dao_depzorg'
+            'x-scopes': 'elys_depzorg'
         }
     });
 }
