@@ -19,10 +19,10 @@ Volgende scopes moeten aangevraagd worden:
 
 | Integrator         | Scope                  |
 |--------------------|------------------------|
-| Lokaal bestuur     | dao_lbbs               |
-| Begraafplaats      | dao_begraafplaats      |
-| Uitvaartondernemer | dao_uitvaartondernemer |
-| Crematorium        | dao_crematorium        |
+| Lokaal bestuur     | elys_lbbs               |
+| Begraafplaats      | elys_begraafplaats      |
+| Uitvaartondernemer | elys_uitvaartondernemer |
+| Crematorium        | elys_crematorium        |
 
 Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het DAO platform.
 
@@ -65,7 +65,7 @@ Bij succesvolle aanmelding en ping call zal u als respons een JSON terug krijgen
 ```json
 {
   "VoOrgcode": <<Kbonummer vanuit ACMIDM>>,
-  "scopes": "dao_lbbs",
+  "scopes": "elys_lbbs",
   "token": {
     "sub": <<Subject id>>,
     "vo_orgcode": <<Zelfde als VoOrgcode>>,

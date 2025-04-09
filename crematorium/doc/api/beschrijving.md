@@ -4,7 +4,7 @@
 
 ### Architectuur
 
-- Scope: dao_crematorium (!) wordt nog gewijzigd naar eLys
+- Scope: elys_crematorium (!) wordt nog gewijzigd naar eLys
 - Crematoria kunnen voor een overlijden gegevens opvragen vanaf dat er een toestemming tot crematie is opgeladen
 - De gegevens van een overlijden kunnen specifiek voor één overlijden worden opgevraagd
     - Op dossiernummer 
