@@ -5,6 +5,18 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 19MB
+  jackson:
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
+    constructor-detector: use_properties_based
+    time-zone: Europe/Brussels
+    deserialization:
+      adjust-dates-to-context-time-zone: true
+    serialization:
+      write-dates-with-context-time-zone: true
 
 server:
   port: 8082
@@ -13,10 +25,11 @@ server:
       cookie:
         name: DEMO_SESSIONID
 dao:
+  project: ${PROJECT_NAME:dao}
   service:
     connection-url: http://localhost:8090
     frontend-base-url: http://localhost:8082
   gemeentes:
     security-method: client_secret
     token-uri: https://elys.api.test-athumi.eu/oauth2/token
-  project: ${PROJECT_NAME:"dao"}
+    project-name: ${dao.project}

@@ -6,16 +6,18 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Type;
 
 public class VerslagBeedigdArtsJSON implements Type {
 
-    private final String id;
-    private final String kboNummer;
-    private final String naam;
-    private final String voornaam;
-    private final Geslacht geslacht;
-    private final String rijksregisternummer;
-    private final InwonerschapJSON inwonerschap;
-    private final OverlijdenJSON overlijden;
-    private final GeboorteJSON geboorte;
-    private final OverlijdensToestandJSON medischeToestand;
+    private String id;
+    private String kboNummer;
+    private String naam;
+    private String voornaam;
+    private Geslacht geslacht;
+    private String rijksregisternummer;
+    private InwonerschapJSON inwonerschap;
+    private OverlijdenJSON overlijden;
+    private GeboorteJSON geboorte;
+    private OverlijdensToestandJSON medischeToestand;
+
+    public VerslagBeedigdArtsJSON() {}
 
     public VerslagBeedigdArtsJSON(
         String id,
@@ -84,5 +86,45 @@ public class VerslagBeedigdArtsJSON implements Type {
 
     public OverlijdensToestandJSON medischeToestand() {
         return medischeToestand;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setKboNummer(String kboNummer) {
+        this.kboNummer = kboNummer;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public void setVoornaam(String voornaam) {
+        this.voornaam = voornaam;
+    }
+
+    public void setGeslacht(Geslacht geslacht) {
+        this.geslacht = geslacht;
+    }
+
+    public void setRijksregisternummer(String rijksregisternummer) {
+        this.rijksregisternummer = rijksregisternummer;
+    }
+
+    public void setInwonerschap(InwonerschapJSON inwonerschap) {
+        this.inwonerschap = inwonerschap;
+    }
+
+    public void setOverlijden(OverlijdenJSON overlijden) {
+        this.overlijden = overlijden;
+    }
+
+    public void setGeboorte(GeboorteJSON geboorte) {
+        this.geboorte = geboorte;
+    }
+
+    public void setMedischeToestand(OverlijdensToestandJSON medischeToestand) {
+        this.medischeToestand = medischeToestand;
     }
 }
