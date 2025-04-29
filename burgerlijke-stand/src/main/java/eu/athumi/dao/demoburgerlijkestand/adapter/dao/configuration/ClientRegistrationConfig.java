@@ -33,7 +33,7 @@ public class ClientRegistrationConfig {
                         .issuerUri(clientConfigurationProperties.getIssuerUri())
                         .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                         .clientAuthenticationMethod(clientConfigurationProperties.getAuthenticationMethod())
-                        .scope("elys_lbbs")
+                        .scope(clientConfigurationProperties.getScope())
                         .build())
                 .collect(Collectors.toList());
         return new InMemoryClientRegistrationRepository(collect);

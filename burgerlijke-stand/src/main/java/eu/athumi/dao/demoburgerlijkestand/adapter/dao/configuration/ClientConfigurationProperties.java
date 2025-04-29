@@ -20,12 +20,14 @@ public class ClientConfigurationProperties {
     private String securityMethod;
     private String tokenUri;
     private String issuerUri;
+    private String projectName;
 
-    public ClientConfigurationProperties(String securityMethod, Map<String, GemeenteConfig> config, String tokenUri, String issuerUri) {
+    public ClientConfigurationProperties(String securityMethod, Map<String, GemeenteConfig> config, String tokenUri, String issuerUri, String projectName) {
         this.securityMethod = securityMethod;
         this.config = config;
         this.tokenUri = tokenUri;
         this.issuerUri = issuerUri;
+        this.projectName = projectName;
     }
 
     public String getSecurityMethod() {
@@ -34,6 +36,10 @@ public class ClientConfigurationProperties {
 
     public String getTokenUri() {
         return tokenUri;
+    }
+
+    public String getScope() {
+        return "%s_lbbs".formatted(projectName);
     }
 
     @NonNull
