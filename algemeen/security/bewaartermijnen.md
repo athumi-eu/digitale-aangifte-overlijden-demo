@@ -1,7 +1,7 @@
-# Bewaartermijnen in DAO
+# Bewaartermijnen in eLys
 
 We bieden een gegevensdelingsplatform aan, de bewaring van de gegevens is een andere finaliteit en blijft de verantwoordelijkheid van de entiteiten.
-Dossiers in het DAO platform zijn na de juridisch bepaalde bewaartermijn niet langer consulteerbaar in het platform.
+Dossiers in het eLys platform zijn na de juridisch bepaalde bewaartermijn niet langer consulteerbaar in het platform.
 * Laatste wilsbeschikking en overlijdensakte: 3 maanden
 * Andere aanvragen en documenten: 2 jaar
 * Auditlogs(organisatieniveau): 10 jaar

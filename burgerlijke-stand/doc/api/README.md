@@ -1,8 +1,8 @@
-# Gebruik van de API van het DAO-platform voor beheer van overlijdensdossiers voor lokale besturen
+# Gebruik van de API van het eLys platform voor beheer van overlijdensdossiers voor lokale besturen
 
 ## Inleiding
 
-Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om een overlijden te beheren.
+Dit document legt uit hoe je de API van het eLys platform kunt gebruiken om een overlijden te beheren.
 
 ## Gebruik van de api
 
@@ -32,7 +32,7 @@ het [security document](../../../algemeen/security/README.md).
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 
 - **Locatie**: `/swagger-ui/index.html`
-- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
+- [**Beta**](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand)
 
 ### Json-ld context
 
