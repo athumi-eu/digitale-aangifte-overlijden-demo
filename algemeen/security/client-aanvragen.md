@@ -38,20 +38,30 @@ Voorgaande info zou u moeten toelaten om de client aan te maken en de aanvraag t
 
 
 ## Stap 2: probeer een eerste keer connectie te maken met onze API
+Om onze rest api aan te spreken dient er een access token meegegeven te worden in de vorm van Bearer Authentication.
+Om deze token aan te vragen, die uiteraard aangeleverd vanuit het Vlaams Toegansbeheer, kan je de [documentatie van de Vlaamse Overheid](https://authenticatie.vlaanderen.be/docs/beveiligen-van-api/oauth-rest/) volgen.
 
-Volgende scopes moeten gebruikt worden in de aanvraag van de access token bij ACM/IDM:
+### Scopes
+Voor het correct gebruik van onze applicatie moet er tijdens het aanvragen van de access token ook de juiste scopes meegeleverd worden.
+Doordat er maar een beperkte set van API endpoints beschikbaar is, en deze per doelgroep geklusterd zijn, hebben we besloten om de scopes role based te maken.
+Dit heeft als voordeel dat het, zowel tijdens het aanvragen van de client of access token, duidelijk is welke scopes er voor de gevraagde doelgroep nodig zijn.  
 
-| Integrator voor    | Scope                  |
-|--------------------|------------------------|
-| Arts     | elys_arts               |
-| Lokaal bestuur van overlijden     | elys_lbbs               |
-| Begraafplaats      | elys_begraafplaats      |
-| Uitvaartondernemer | elys_uitvaartondernemer |
-| Crematorium        | elys_crematorium        |
-| Departement Zorg        | elys_depzorg        |
+| Scope                  | Beschrijving                                                                                                                                                                                                   |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| vo_info                | Deze scope zorgt ervoor dat het eLys platform de vo_info claims ontvangen tijdens de introspectie van het acces token. Dankzij deze claims zijn wij in staat om te differentiëren welke actor de actie uitvoert. |
+| elys_uitvaartondernemer | Deze scope dient gebruikt te worden voor een actor binnen de Uitvaart sector.                                                                                                                                  |
+| elys_crematorium        | Deze scope dient gebruikt te worden voor een crematorium.                                                                                                                                                      |
+| elys_depzorg            | Deze scope dient gebruikt te worden voor het Departement zorg.                                                                                                                                                 |
+| elys_lbbs               | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als dienst burgerlijke stand.                                                                                   |
+| elys_begraafplaats      | Deze scope dient gebruikt te worden voor een lokaal bestuur wanneer zij het platform benaderen als verantwoordelijke voor de begraafplaats.                                                                    |
+| elys_arts               | Deze scope dient gebruikt te worden voor een arts.                                                                                                                                                             |
 
+Tijdens het aanvragen van de access token moet altijd zowel `vo_info` als een van de andere scopes worden meegegeven. 
+Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken tussen de verschillende actoren, is er de verwachting dat er per actor (bvb een Lokaal bestuur) een client wordt aangevraagd.
 
 Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het eLys platform.
+
+## Ping
 
 We hebben volgende "ping" endpoints voorzien
 
