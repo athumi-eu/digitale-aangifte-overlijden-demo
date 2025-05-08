@@ -1,10 +1,8 @@
-# Digitale-aangifte-overlijden-demo
-**Let op:** 'DAO' is de tijdelijke projectcodenaam die tot nu toe is gebruikt. In de toekomst zal worden overgeschakeld naar 'eLys', de officiële naam van het platform. Zorg er daarom voor dat er geen hardcoded configuratie op deze projectcodenaam wordt toegepast.
-
+# eLys - Platform voor overlijdensadministratie - demo
 Met deze demoapp zouden wij graag demonstreren hoe het mogelijk is om met ons platform te integreren.
-Deze demo app kan gebruikt worden voor de verschillende integratoren die het systeem kent. 
+Deze demo app kan gebruikt worden voor de verschillende integratoren die het systeem kent, maar richt zich qua functionaliteit wel op het lokaal bestuur van overiljden. 
 
-Voor meer informatie rond de integratie als **Lokaal bestuur** kan je navigeren naar: [Startpunt burgerlijke stand](burgerlijke-stand/doc/README.md)
+Voor meer informatie rond de integratie als **Lokaal bestuur van overlijden** kan je navigeren naar: [Startpunt burgerlijke stand](burgerlijke-stand/doc/README.md)
 
 Voor meer informatie rond de integratie als **Arts** kan je navigeren naar: [Startpunt arts](vaststelling/doc/README.md)
 
@@ -18,14 +16,16 @@ Voor meer informatie rond de integratie als **Crematorium** kan je navigeren naa
 
 ## Omgevingen
 
-Het dao platform bestaat uit 2 toepassingen, namelijk een frontend voor de Artsen en uitvaart ondernemers, en een API waar de verschillende actoren mee kunnen integreren.
+Het eLys platform bestaat uit 2 toepassingen, namelijk een frontend voor de artsen en uitvaartondernemers, en een API waar de verschillende actoren mee kunnen integreren.
+Volgende omgevingen zijn beschikbaar:
 
-### Frontend:
 | Omgeving | Link                                                           | Omschrijving                                                                                                                                                                                                                                                                                            |
 |----------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| test     | https://dao.test-athumi.eu/ en https://dao.api.test-athumi.eu/ | Deze omgeving is geconnecteerd met een eigen oauth implementatie, en bevat nooit persoonsgegevens. Deze is bedoeld voor het develop team om tijdens het ontwikkel process te testen. Op deze omgeving is het mogelijk om als arts aan te melden via het endpoint  https://dao.beta-athumi.eu/login-arts |
-| beta | https://dao.beta-athumi.eu/ en https://dao.api.beta-athumi.eu/ | Deze omgeving is geconnecteerd met acm-idm maar bevat nooit persoonsgegevens. Deze is bedoeld voor acceptatie testen, en connectie met integraten. Op deze omgeving is het mogelijk om als arts aan te melden via het endpoint https://dao.beta-athumi.eu/login-arts .                                  |
-| Acceptatie | https://dao.beta-athumi.eu/ en https://dao.api.beta-athumi.eu/ | Deze omgeving is geconnecteerd met acm-idm en gaat naar de magda test omgeving. Wegens limitaties aan deze omgeving kan hier echte gegevens van het rijksregister beschikbaar zijn. Deze is vooral bedoeld voor end to end flows te testen                                                              |
-| Productie | https://dao.athumi.eu/ en https://dao.api.athumi.eu/ | De productie omgeving.                                                                                                                                                                                                                                                                                  |
+| test     | https://elys.test-athumi.eu/ en https://elys.api.test-athumi.eu/ | Deze omgeving is geconnecteerd met een eigen oauth implementatie, en bevat nooit persoonsgegevens. Deze is bedoeld voor het ontwikkel team om tijdens het ontwikkel process te testen. 
+Op deze omgeving is het mogelijk om als arts aan te melden via het endpoint https://elys.test-athumi.eu/login-arts. |
+| beta | https://elys.beta-athumi.eu/ en https://elys.api.beta-athumi.eu/ | Deze omgeving is geconnecteerd met acm-idm maar bevat nooit persoonsgegevens. Deze is bedoeld voor acceptatie testen en connectie met integraten. 
+Op deze omgeving is het mogelijk om als arts aan te melden via het endpoint https://elys.beta-athumi.eu/login-arts.                                  |
+| acceptatie | https://elys.acc-athumi.eu/ en https://elys.api.acc-athumi.eu/ | Deze omgeving is geconnecteerd met acm-idm en gaat naar de magda test omgeving. Wegens limitaties aan deze omgeving kunnen hier echte gegevens van het rijksregister beschikbaar zijn. Deze is vooral bedoeld om end to end flows te testen.                                                              |
+| productie | https://elys.athumi.eu/ en https://elys.api.athumi.eu/ | De productie omgeving.                                                                                                                                                                                                                                                                                  |
 
 ![screenshot](static/athumi.jpg)
