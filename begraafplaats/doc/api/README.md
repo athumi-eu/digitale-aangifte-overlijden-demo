@@ -1,9 +1,9 @@
-# Gebruik van de API van het DAO-platform voor het krijgen van toestemmingen voor een begraafplaats
+# Gebruik van de API van het eLys platform voor het krijgen van toestemmingen voor een begraafplaats
 
 ## Inleiding
 
-Dit document legt uit hoe je de API van het DAO-platform kunt gebruiken om toestemmingen te verkrijgen.
-Voor meer info omtrent de security kan je [hier meer lezen](../../../algemeen/security/README.md)
+Dit document legt uit hoe je de API van het eLys platform kunt gebruiken om toestemmingen te verkrijgen.
+Voor meer info omtrent de toegang kan je [hier meer lezen](../../../algemeen/security/README.md)
 
 ## Endpoints
 
@@ -24,5 +24,4 @@ Alle endpoints starten altijd met: `/begraafplaats/v1`
 
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 - **Locatie**: `/swagger-ui/index.html`
-- [**Test**](https://dao.api.test-athumi.eu/swagger-ui/index.html?urls.primaryName=Begraafplaats)
-- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Begraafplaats)
+- [**Beta**](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Begraafplaats)

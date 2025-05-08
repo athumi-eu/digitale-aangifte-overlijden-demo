@@ -18,7 +18,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 2. “Als uitvaartondernemer, kan ik een overlijdensdossier opzoeken dat nog niet toegekend is of wel aan mijn onderneming toegekend of door mijn onderneming behandeld is.”
 
-    [GET/uitvaart/v1/overlijdens](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/overlijdens-controller/getDossiersByRijksregisternummer_1_1)
+    [GET/uitvaart/v1/overlijdens](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/overlijdens-controller/getDossiersByRijksregisternummer_1_1)
 
     **Opmerking:** Dit kan of door het rijksregisternummer, of door het dossiernummer of door de combinatie van achternaam, niscode en datum overlijden mee te geven.
 
@@ -31,14 +31,14 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 3. “Als uitvaartondernemer kan ik van een overlijden de toelating tot transport opvragen, zodat ik aan de politie (of aan andere autoriteiten) kan aantonen dat ik het lichaam mag vervoeren bij een controle.”
 
-    [GET/uitvaart/v1/dossiers/{dossierNummer}/transport-view](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getTransportView)
+    [GET/uitvaart/v1/dossiers/{dossierNummer}/transport-view](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getTransportView)
 
     **Opmerking:** Dit is zowel mogelijk voor toegekende als niet-toegekende dossiers.
 
 
 4. "“Als uitvaartondernemer wil ik in het platform voor een overlijden dat ik ga afhandelen een dossier opstarten, zodat: ik alle informatie die ik nodig heb kan bekijken en downloaden; een toestemming tot begraven/crematie kan aanvragen; het lokaal bestuur weet welke uitvaartondernemer het overlijden gaat afhandelen; het dossier vanaf dan enkel voor mijn uitvaartonderneming zichtbaar is (status wordt ‘toegekend’).”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/start-op](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/start-op](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp)
 
     **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/overlijdens om het juiste dossier op te zoeken.
 
@@ -50,27 +50,27 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
     
-    [GET/uitvaart/v1/dossiers](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
+    [GET/uitvaart/v1/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
 
     **Opmerking:** Dit zal enkel dossiers terug geven in de status ‘toegekend’ (reeds opgestart door de uitvaartonderneming en nog niet afgesloten)
 
 
 7. “Als uitvaartondernemer kan ik aan de hand van het dossiernummer het detail van een overlijdensdossier raadplegen zodat ik zicht heb op de overlijdensdossiers en de status van het dossier (aanwezigheid verslag beëdigd arts, akten en toestemming).
 
-    [GET/uitvaart/v1/dossiers/{dossierNummer}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossierByDossierNummer)
+    [GET/uitvaart/v1/dossiers/{dossierNummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossierByDossierNummer)
 
 
 8. “Als uitvaartondernemer zie ik een melding wanneer door de ambtenaar burgerlijke stand van de gemeente van overlijden een wijziging is doorgevoerd op het dossier.”
 
     **Melding in lijst**
 
-    [GET/uitvaart/v1/dossiers](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
+    [GET/uitvaart/v1/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
     
       "heeftActies": true
 
     **Melding in detail dossier**
 
-    [GET/uitvaart/v1/dossiers/{dossierNummer}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossierByDossierNummer)
+    [GET/uitvaart/v1/dossiers/{dossierNummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossierByDossierNummer)
 
       "acties": ["string"]
 
@@ -78,12 +78,12 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 9. “Ik kan als uitvaartondernemer aangeven dat ik bovenstaande melding heb gezien, zodat deze verdwijnt voor alle gebruikers binnen de onderneming.”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/verwijder-recente-acties](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/verwijderRecenteActies)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/verwijder-recente-acties](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/verwijderRecenteActies)
 
 
 10. “Als uitvaartondernemer wil ik een dossier afsluiten, zodat: aan het lokaal bestuur wordt doorgegeven dat ik klaar ben met de uitvaartafhandeling; dit dossier niet meer in mijn lijst met dossiers staat.”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/behandeld](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/dossierBehandeld)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/behandeld](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/dossierBehandeld)
 
     **Opmerking:** Via parameter dossiernummer
 
@@ -91,7 +91,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 11. “Als uitvaartondernemer, kan ik een dossier heropenen indien ik bijvoorbeeld alsnog een wijziging wil doorvoeren aan de ingediende inlichtingenfiche uitvaart.”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/heropen](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/heropen)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/heropen](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/heropen)
 
     **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/overlijdens om het juiste dossier op te zoeken.
 
@@ -99,7 +99,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 12. “Als uitvaartondernemer, wil ik de nationale en internationale overlijdensakte die door de ambtenaar burgerlijke stand van de gemeente van overlijden zijn opgeladen in het platform, downloaden.”
 
-    [GET/uitvaart/v1/dossiers/{id}/documenten/{type}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/downloadDocument)
+    [GET/uitvaart/v1/dossiers/{id}/documenten/{type}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/downloadDocument)
 
     **Types:** NATIONALE_AKTE, INTERNATIONALE_AKTE
 
@@ -111,13 +111,13 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 14. “Als uitvaartondernemer, wil ik de aanvraag tot toestemming begraven / crematie inclusief bijhorende documenten (PDF, Word, JPEG, PNG) kunnen invullen via het platform, zodat de burgerlijke stand van de gemeente van overlijden deze toestemming kan opmaken aan de hand van de ingediende aanvraag.”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
 
     **Opmerking:** Bekijk het [schema](../diagrams/inlichtingenfiche.jpg) met de opbouw van de aanvraag toestemming/crematie of de Athumi GUI om te weten welke documenten wanneer verwacht worden: verzoek nabestaanden, toestemming eigenaar, verzoek nabestaanden as partner.
 
 15. “In het geval van een doodgeboorte >180d zwangerschap, wil ik op vraag van de ouders het verzoek tot opname van de naam en/of voornaam en/of het verzoek tot opname van de vader/meemoeder (inclusief het ondertekend verzoek in PDF, Word, JPEG, PNG) op de akte levenloos kind via het platform doorgeven aan de ambtenaar van de burgerlijke stand via de inlichtingenfiche.”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
 
     **Opmerking:** Bij opname vader/meemoeder is een ondertekend document verzoek opname als vader of meemoeder noodzakelijk.
 
@@ -127,14 +127,14 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 16. “Als uitvaartondernemer kan ik de gegevens van een reeds ingediende inlichtingenfiche uitvaart bekijken en indien nodig wijzigen, zodat ik foutieve aanvragen tot begraven / crematie of foutieve gegevens voor opname akte levenloos kind kan corrigeren. Het lokaal bestuur ontvangt hiervan een melding zodat de burgerlijke stand de aangepaste documenten indien nodig opnieuw kan opladen.”
 
-    [GET/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/getToestemming)
+    [GET/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/getToestemming)
 
-    [PUT/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/editInlichtingenficheUitvaart)
+    [PUT/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/editInlichtingenficheUitvaart)
 
 
 17. “Als uitvaartondernemer, wil ik het document toestemming tot begraven / crematie dat door de ambtenaar burgerlijke stand van de gemeente van overlijden is opgeladen in het platform, kunnen downloaden.”
 
-    [GET/uitvaart/v1/dossiers/{id}/documenten/{type}](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/downloadDocument)
+    [GET/uitvaart/v1/dossiers/{id}/documenten/{type}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/downloadDocument)
 
     **Type:** TOESTEMMING_BEGRAFENIS_OF_CREMATIE
 
@@ -143,18 +143,18 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 18. “Als uitvaartondernemer moet ik, in overleg met de nabestaanden, de socio-economische gegevens indienen, zodat deze via het lokaal bestuur aan het Departement Zorg kunnen bezorgd worden voor de opmaak van de overlijdensstatistieken. Indien ik geen zicht heb op de gegevens, vul ik de vragen in met ‘onbekend’.”
 
-    [PUT/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/saveSocioEconomischeGegevens)
+    [PUT/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/saveSocioEconomischeGegevens)
 
     “Ik kan de ingediende gegevens bekijken en indien nodig updaten.”
 
-    [GET/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens]( https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/getSocioEconomischeGegevens)
+    [GET/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens]( https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/getSocioEconomischeGegevens)
 
-    [PUT/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/saveSocioEconomischeGegevens)
+    [PUT/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/saveSocioEconomischeGegevens)
 
 ## Unhappy flow
 
 19. “Als uitvaartondernemer, kan ik een dossier annuleren, in het geval de nabestaanden  alsnog een andere uitvaartondernemer hebben aangesteld.”
 
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/annuleer](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp_1)
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/annuleer](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp_1)
 
     **Opmerking:** Gevolgen van deze actie: Het dossier is niet langer zichtbaar voor mijn uitvaartonderneming; er is geen terugbetaling voorzien; het dossier is beschikbaar voor een andere uitvaartondernemer om op te starten (en opnieuw te betalen); de inlichtingenfiche en toestemming worden verwijderd van het dossier; het lokaal bestuur ziet dat het dossier werd geannuleerd.
