@@ -61,7 +61,7 @@ Omdat we de vo_info gebruiken om op een veilige manier het onderscheid te maken 
 
 Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het eLys platform.
 
-## Ping
+### Ping
 
 We hebben volgende "ping" endpoints voorzien
 
