@@ -8,6 +8,11 @@
 <!--                <h3>Woonsituatie Overledene</h3>-->
 <!--            </div>-->
             <div th:if="${inlichtingenfiche?.informatieAkteLevenloosKind != null}" class="grid-column">
+                <h3>Kind</h3>
+                <div class="label">Voornaam</div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.voornaam ?: '/'}"></div>
+                <div class="label">naam</div>
+                <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.naam ?: '/'}"></div>
                 <h3>Vader of Meemoeder bij doodgeboorte</h3>
                 <div class="label">Rijksregisternummer</div>
                 <div class="bottom-spacing"  th:text="${inlichtingenfiche?.informatieAkteLevenloosKind?.vaderOfMeemoeder?.rijksregisternummer ?: '/'}"></div>
