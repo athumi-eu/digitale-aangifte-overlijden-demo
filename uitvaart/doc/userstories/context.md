@@ -10,7 +10,7 @@ Deze pagina bevat een aantal diagrammen die kunnen helpen om extra context te ge
 
 ## Betrokken partijen
 
-Dit context diagram toont een overzicht van de verschillende actoren en toepassingen die interageren met het DAO platform.
+Dit context diagram toont een overzicht van de verschillende actoren en toepassingen die interageren met het eLys platform.
 
 ![context diagram](../../../static/context-diagram.jpg)
 
