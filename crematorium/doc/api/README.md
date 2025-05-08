@@ -13,7 +13,7 @@ Alle endpoints starten altijd met: `/crematorium/v1`
 ### Swagger
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 - **Locatie**: `/swagger-ui/index.html`
-- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Crematorium)
+- [**Beta**](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Crematorium)
 
 ### Toestemmingen ophalen
 - **Endpoint**: `/toestemingen`

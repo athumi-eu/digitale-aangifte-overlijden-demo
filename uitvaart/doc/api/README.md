@@ -12,7 +12,7 @@ Alle endpoints starten altijd met: `/uitvaart/v1`
 ### Swagger
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
 - **Locatie**: `/swagger-ui/index.html`
-- [**Beta**](https://dao.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
+- [**Beta**](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
 
 ### Dossiers ophalen
 - **Endpoint**: `/dossiers`

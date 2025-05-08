@@ -1,8 +1,8 @@
 # Demo applicatie
-Doordat er geen UI voorzien werd voor de burgerlijke stand is er gekozen om een Demo applicatie te voorzien die een indicatie kan geven over de 
+Doordat er geen UI voorzien werd voor de burgerlijke stand is er gekozen om een demo applicatie te voorzien die een indicatie kan geven over de 
 nodige schermen binnen de toepassing burgerlijke stand. 
 
-Op beta staat deze app gedeployed onder: [https://dao.beta-athumi.eu/demo/dossiers?kbonummer=0207521503](https://dao.beta-athumi.eu/demo/dossiers?kbonummer=0207521503)
+Op beta staat deze app gedeployed onder: [https://elys.beta-athumi.eu/demo/dossiers?kbonummer=0207521503](https://elys.beta-athumi.eu/demo/dossiers?kbonummer=0207521503)
 
 Het kboNummer is een vast kboNummer dat mee geconfigureerd is op de testclient van deze toepassing. In bovenstaande URL is het kboNummer van Leuven gebruikt, dit kan aangepast worden naar het juiste kboNummer van de gemeente.
 

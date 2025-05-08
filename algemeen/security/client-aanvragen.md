@@ -2,70 +2,73 @@
 
 Voor meer informatie over het aanvragen van de client kan u gebruik maken van de documentatie van het [Beheerportaal Vlaanderen](https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/6282739963/Uw+OAuth-client+beheren+via+het+ACM-Beheerportaal).
 
-Met als referentie: `DAO (Digitale Aangifte Overlijden) API beta` of `DAO (Digitale Aangifte Overlijden) API`  
-
-Met als client name: `DAO [omgeving] <organisatie> client`  </br>
-hierbij is de omgeving een van de volgende waardes: beta/acc/PROD </br> 
-en organisatie: De organisatie waarvoor de client wordt aangemaakt.
-
 Voor een snelle start kan u gebruik maken van volgende stappen:
 
-## Stap 1: registratie DAO API Client
+## Stap 1: registratie eLys API Client
 
-Een eerste stap is een client aanmaken in ACM/IDM en hiervoor toegang tot onze DAO API te vragen.
+Een eerste stap is een client aanmaken in ACM/IDM en hiervoor toegang tot onze eLys API te vragen.
 
-Volgende scopes moeten aangevraagd worden:
-
-
-| Integrator         | Scope                  |
-|--------------------|------------------------|
-| Lokaal bestuur     | elys_lbbs               |
-| Begraafplaats      | elys_begraafplaats      |
-| Uitvaartondernemer | elys_uitvaartondernemer |
-| Crematorium        | elys_crematorium        |
-
-Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het DAO platform.
-
-Praktisch
-
-Ga naar het beheerportaal: https://beheerportaal-ti.vlaanderen.be
+Ga naar het beheerportaal: 
+* voor beta/acc: https://beheerportaal-ti.vlaanderen.be
+* voor prod: https://beheerportaal.vlaanderen.be
 
 De API waarvoor u toegang moet vragen heeft volgende kenmerken
 
 | Omgeving   | Referentie                                 |
 |------------|--------------------------------------------|
-| Beta & Acc | DAO (Digitale Aangifte Overlijden) API beta|
-| Productie  | DAO (Digitale Aangifte Overlijden) API     |
+| beta       | eLys (Digitale Aangifte Overlijden) API beta|
+| acceptatie | eLys (Digitale Aangifte Overlijden) API acc |
+| productie  | eLys (Digitale Aangifte Overlijden) API     |
 
 Er wordt verwacht dit te doen via
 * het  OAuth2 Client Credentials Grant (CCG) protocol
 * met authenticatie via een JWT
-* conventie client naam: **DAO [omgeving] \<organisatie> client**
+* conventie client naam: **eLys [omgeving] \<organisatie> client**
+    * omgeving: De omgeving is een van de volgende waardes: beta/acc/prod
+    * organisatie: De naam van de organisatie waarvoor de client wordt aangemaakt
 
 Relevante ACM/IDM gebruikersinformatie vindt u op de website van het beheerportaal van de Vlaamse overheid:
-* algemeen rond het beheer van API client met OAuth Client Credentials Grant
-  * [Module OAuth Client Credentials Grant: API-Client beheren - Gebruikersomgeving Applicatie- en platformdiensten - Confluence (atlassian.net)](https://vlaamseoverheid.atlassian.net/wiki/spaces/GAEP/pages/6377410189/Module+OAuth+Client+Credentials+Grant+API-Client+beheren)
+* algemeen rond het beheer van API client met OAuth Client Credentials Grant </br> 
+[Module OAuth Client Credentials Grant: API-Client beheren - Gebruikersomgeving Applicatie- en platformdiensten - Confluence (atlassian.net)](https://vlaamseoverheid.atlassian.net/wiki/spaces/GAEP/pages/6377410189/Module+OAuth+Client+Credentials+Grant+API-Client+beheren)
 
-* specifiek over creatie van nieuwe API clients
-  * [Nieuwe OAuth client aanmaken](https://vlaamseoverheid.atlassian.net/wiki/x/RY4ffAE)
+* specifiek over creatie van nieuwe API clients </br>
+[Nieuwe OAuth client aanmaken](https://vlaamseoverheid.atlassian.net/wiki/x/RY4ffAE)
 
 Voorgaande info zou u moeten toelaten om de client aan te maken en de aanvraag te sturen naar ons.
 
 
-## Stap 2: probeer een eerste keer connectie te maken met onze API via ACM/IDM T&I
+## Stap 2: probeer een eerste keer connectie te maken met onze API
 
-We hebben volgend "ping" endpoint voorzien
+Volgende scopes moeten gebruikt worden in de aanvraag van de access token bij ACM/IDM:
 
-https://dao.api.beta-athumi.eu/health/v1/ping
+| Integrator voor    | Scope                  |
+|--------------------|------------------------|
+| Arts     | elys_arts               |
+| Lokaal bestuur van overlijden     | elys_lbbs               |
+| Begraafplaats      | elys_begraafplaats      |
+| Uitvaartondernemer | elys_uitvaartondernemer |
+| Crematorium        | elys_crematorium        |
+| Departement Zorg        | elys_depzorg        |
 
-dat u kan gebruiken om te testen of de registratie van uw client correct is verlopen.
+
+Het is belangrijk en uw verantwoordelijkheid om correct om te gaan met gebruikersrollen en applicatie scopes in deze client. Gebruikers mogen enkel toegang krijgen tot de toepasselijke functionaliteit van het eLys platform.
+
+We hebben volgende "ping" endpoints voorzien
+
+| Omgeving   | Endpoint                                 |
+|------------|--------------------------------------------|
+| beta       | https://elys.api.beta-athumi.eu/health/v1/ping |
+| acceptatie | https://elys.api.acc-athumi.eu/health/v1/ping |
+| productie  | https://elys.api.athumi.eu/health/v1/ping     |
+
+die u kan gebruiken om te testen of de registratie van uw client correct is verlopen.
 
 Bij succesvolle aanmelding en ping call zal u als respons een JSON terug krijgen dat er ongeveer als volgt uitziet.
 
 ```json
 {
   "VoOrgcode": <<Kbonummer vanuit ACMIDM>>,
-  "scopes": "elys_lbbs",
+  "scopes": <<Gevraagde scopes>>,
   "token": {
     "sub": <<Subject id>>,
     "vo_orgcode": <<Zelfde als VoOrgcode>>,
