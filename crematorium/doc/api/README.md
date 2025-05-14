@@ -16,7 +16,7 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 - [**Beta**](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Crematorium)
 
 ### Toestemmingen ophalen
-- **Endpoint**: `/toestemingen`
+- **Endpoint**: `/toestemmingen`
 - **Beschrijving**: Dit endpoint geeft de metadata en de link voor de documenten. Er zijn verschillende mogelijkheden om te zoeken op dit endpoint:
   - Op basis van een dossiernummer met de query parameter dossiernummer
   - Op basis van een periode met wijzigingen met de parameters van=dateTime en tot=dateTime 
