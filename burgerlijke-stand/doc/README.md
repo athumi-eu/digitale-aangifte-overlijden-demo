@@ -16,7 +16,7 @@ Info over authenticeren en vereisten naar logging toe staan [hier](../../algemee
 Daarnaast zijn er ook vereisten naar [bewaartermijnen](../../algemeen/security/bewaartermijnen.md) toe.
 
 ## FAQ
-Een lijst van veelgestelde vragen kan [hier](FAQ.md)) teruggevonden worden.
+Een lijst van veelgestelde vragen kan [hier](FAQ.md) teruggevonden worden.
 
 ## Demo app
 Doordat er geen UI voorzien werd voor de burgerlijke stand is er gekozen om een demo applicatie te voorzien die een indicatie kan geven over de 
