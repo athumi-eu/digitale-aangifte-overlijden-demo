@@ -51,11 +51,11 @@ Een voorbeeld vanuit MAGDA:
 
 
 ### Logging vereisten voor de integratoren
-Aangezien integrators connecteren met de API van het eLys platform via een access token weet het platform niet welke gebruiker (dus welke persoon) acties uitvoert. 
+Aangezien integrators connecteren met de API van het eLys platform per client via een access token weet het platform niet welke gebruiker (dus welke persoon) acties uitvoert. 
 Er kan in het eLys platform enkel gelogd worden welke organisatie er een actie doet. 
 Het platform zal altijd loggen welke acties de client heeft uitgevoerd en dit telkens gecorreleerd op een of meerdere aangiftes. 
 Omdat het eLys platform omgaat met gevoelige data, moeten de clients die gebruik maken van de API zelf een correcte audit logging voorzien. 
-De verwachting is dat wanneer er gebruikers informatie gebruiken die afkomstig is vanuit het platform, of acties ondernemen met het platform, het mogelijk moet zijn om deze handelingen te koppelen met individuele gebruikers. 
+De verwachting is dat wanneer er gebruikers informatie gebruiken die afkomstig is vanuit het platform, of acties ondernemen met het platform, het mogelijk moet zijn om deze handelingen te koppelen met individuele gebruikers.
 
 Wanneer er een incident voorkomt kan het zijn dat er contact wordt opgenomen met beheerder van de client om deze informatie op te vragen.
 
@@ -63,7 +63,7 @@ Deze audit logs moeten bewaard worden gedurende 10 jaar, zoals ook beschreven in
 
 
 ## Testen van de api
-Om snel te controleren of alle acties correct zijn uitgevoerd is er een endpoint voorzien voor de security te testen:
+Om snel te controleren of alle acties correct zijn uitgevoerd is er een endpoint voorzien om de security te testen:
 - https://elys.api.beta-athumi.eu/health/v1/ping
 - https://elys.api.acc-athumi.eu/health/v1/ping
 - https://elys.api.athumi.eu/health/v1/ping
