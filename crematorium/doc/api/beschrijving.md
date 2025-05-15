@@ -2,6 +2,18 @@
 
 ## Opvragen gegevens
 
+### Voorgesteld gebruik
+
+Onderstaande diagram visualiseert hoe de voorziene API gebruikt kan worden.
+
+Hierbij worden volgende endpoints gebruikt:
+- `/crematorium/v1/toestemmingen`, enkel met dossiernummer (niet van-tot)
+- `/crematorium/v1/toestemmingen/{dossiernummer}/toestemming`
+
+Het `/crematorium/v1/toestemmingen` endpoint met van-tot parameters is in principe niet nodig in deze flow. Het kan echter als back-up dienen om speciale gevallen op te vangen.
+
+![voorgesteldGebruikAPI](../diagrams/voorgesteldGebruikAPI.svg)
+
 ### Architectuur
 
 - Scope: elys_crematorium
@@ -10,7 +22,7 @@
     - Op dossiernummer 
 - Er kan ook een lijst met gegevens van verschillende overlijdens worden opgevraagd
     - ‘Van’ tijdstip + optioneel 'tot' tijdstip als parameters voorzien
-    - Het tijdstip is het laatste wijzigingstijdstip van de toestemming
+    - Het tijdstip is het laatste (her)oplaadtijdstip van het **toestemmingsdocument**
     - Max 100 elementen + aanduiding of er nog meer overlijdens zijn die voldoen aan de opvraging (dus aantal > 100)
 
 
