@@ -33,6 +33,8 @@ Doordat er een client per bvb lokaal bestuur wordt gebruikt is het eLys platform
 Echter, de controle of de gebruiker van de toepassing gelinkt is aan het lokaal bestuur en of de rol van de gebruiker correct is voor het eLys platform te gebruiken is de verantwoordelijkheid van de integrator.
 Dit is een sterke verantwoordelijkheid die ook gepaard gaat met een verplichting tot een audit log.
 
+Hetzelfde geldt voor de integratoren voor de overige actoren.
+
 ### Headers
 Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezig zijn:
 
