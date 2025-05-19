@@ -10,9 +10,11 @@ Hierbij worden volgende endpoints gebruikt:
 - `/crematorium/v1/toestemmingen`, enkel met dossiernummer (niet van-tot)
 - `/crematorium/v1/toestemmingen/{dossiernummer}/toestemming`
 
-Het `/crematorium/v1/toestemmingen` endpoint met van-tot parameters is in principe niet nodig in deze flow. Het kan echter als back-up dienen om speciale gevallen op te vangen.
-
 ![voorgesteldGebruikAPI](../diagrams/voorgesteldGebruikAPI.svg)
+
+Naast deze flow is ook endpoint `/crematorium/v1/toestemmingen` met van-tot parameters voorzien.
+Deze kan, indien gewenst, gebruikt worden om een lijst op te halen met toestemmingen voor het crematorium die werden afgeleverd binnen de van-tot periode.
+Dit zou gebruikt kunnen worden om te valideren of voor elk van deze toestemmingen een reservatie werd ontvangen.
 
 ### Architectuur
 
