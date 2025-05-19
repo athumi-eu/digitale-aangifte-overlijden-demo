@@ -16,6 +16,8 @@ Naast deze flow is ook endpoint `/crematorium/v1/toestemmingen` met van-tot para
 Deze kan, indien gewenst, gebruikt worden om een lijst op te halen met toestemmingen voor het crematorium die werden afgeleverd binnen de van-tot periode.
 Dit zou gebruikt kunnen worden om te valideren of voor elk van deze toestemmingen een reservatie werd ontvangen.
 
+![voorgesteldGebruikAPIv2](../diagrams/voorgesteldGebruikAPIv2.svg)
+
 ### Architectuur
 
 - Scope: elys_crematorium
