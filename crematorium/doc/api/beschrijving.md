@@ -21,7 +21,7 @@ Dit zou gebruikt kunnen worden om te valideren of voor elk van deze toestemminge
 ### Architectuur
 
 - Scope: elys_crematorium
-- Crematoria kunnen voor een overlijden gegevens opvragen vanaf dat er een toestemming tot crematie is opgeladen
+- Crematoria kunnen voor een overlijden gegevens opvragen vanaf dat er een toestemming tot crematie is aangevraagd, dus wanneer een inlichtingenfiche is ingevuld.
 - De gegevens van een overlijden kunnen specifiek voor één overlijden worden opgevraagd
     - Op dossiernummer 
 - Er kan ook een lijst met gegevens van verschillende overlijdens worden opgevraagd
