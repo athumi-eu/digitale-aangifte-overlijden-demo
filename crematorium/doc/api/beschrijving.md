@@ -1,5 +1,15 @@
 # Functionaliteit API crematoria
 
+
+## Welke gegevens
+
+De volgende gegevens kunnen opgevraagd worden bij het eLys platform:
+
+- het toestemmingsdocument voor de begrafenis / crematie
+- gestructureerde informatie beschikbaar in het platform
+
+![gegevens](../diagrams/gegevens.png)
+
 ## Opvragen gegevens
 
 ### Voorgesteld gebruik
@@ -61,9 +71,3 @@ Dit zou gebruikt kunnen worden om te valideren of voor elk van deze toestemminge
 
 ![opvragenLijstOverlijdens_resultaat](../diagrams/opvragenLijstOverlijdens_resultaat.png)
 
-## Welke gegevens
-
-- het toestemmingsdocument voor de begrafenis / crematie
-- gestructureerde informatie beschikbaar in het platform
-
-![gegevens](../diagrams/gegevens.png)
