@@ -52,41 +52,56 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 ### Ophalen van het detail van een dossier
 
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}`
 - **Beschrijving**: Gebruik dit endpoint om het detail van een dossier op te vragen.
 
-### (down)loaden van een toestemming/(inter)nationale akte
+### Downloaden van een toestemming/(inter)nationale akte
 
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/documenten/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/aktes/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/documenten/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/toestemming`
 - **Beschrijving**: Gebruik dit endpoint om aktes, toestemmingen of andere documenten van een dossier te downloaden.
 
-### (up)loaden van een toestemming/(inter)nationale akte
+### Uploaden van een toestemming/(inter)nationale akte
 
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aktes/{type}`
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/toestemming`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/aktes/{type}`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/toestemming`
 - **Beschrijving**: Gebruik dit endpoint om aktes of een toestemming van een dossier te uploaden.
 - **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_toestemmingbegravencrematie.docx) beschikbaar. De layout van
   dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
 
 ### Aanvullen van een dossier
 
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/aanvullen`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/aanvullen`
 - **Beschrijving**: Gebruik dit endpoint om een dossier aan te vullen. Een aanvulling is niet altijd toegestaan. Bekijk
   de lijst met error codes voor meer uitleg.
 
 ### Afsluiten/heropen van een dossier
 
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/afsluiten`
-- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/heropen`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/afsluiten`
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/heropen`
 - **Beschrijving**: Gebruik dit endpoint om een dossier af te sluiten of te heropenen. Afsluiten of heropenen is niet altijd toegestaan. Bekijk
   de lijst met error codes voor meer uitleg.
+
+### Wijzig plaats van overlijden
+
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/wijzig-plaats-overlijden`
+- **Beschrijving**: Gebruik dit endpoint om het dossier door te geven aan een andere gemeente indien de plaats van overlijden niet correct bleek.
+
+### Verwijder een dossier
+
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/verwijderen`
+- **Beschrijving**: Gebruik dit endpoint om een foutief ingediende vaststelling te verwijderen. Dit is enkel nodig bij grote fouten, zoals een vaststelling voor een verkeerd persoon.
+
+### Ontkoppel een uitvaartondernemer van een dossier
+
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/ontkoppel`
+- **Beschrijving**: Gebruik dit endpoint om het dossier weg te halen bij de huidige uitvaartondernemer. Indien dit al voorkomt, is het normaalgezien de uitvaartondernemer zelf die dit doet. Dit endpoint is voorzien om het in uitzonderlijke gevallen door de ABS te laten doen.
 
 ### Ophalen van (een) verslag(en)
 
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts`
-- **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}`
+- **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{dossiernummer}`
 - **Beschrijving**: Gebruik dit endpoint om een lijst van verslagen of het detail van een individueel verslag te
   bekijken.
 
