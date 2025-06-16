@@ -1,4 +1,4 @@
-# Gebruik van de API van het eLys platform voor het krijgen van toestemmingen voor een begraafplaats
+# Gebruik van de API van het eLys platform voor het krijgen van toestemmingen voor een gemeente van begraven
 
 ## Inleiding
 
@@ -10,15 +10,15 @@ Voor meer info omtrent de toegang kan je [hier meer lezen](../../../algemeen/sec
 Alle endpoints starten altijd met: `/begraafplaats/v1`
 
 ### Toestemmingen ophalen
-- **Endpoint**: `/toestemingen`
+- **Endpoint**: `/toestemmingen`
 - **Beschrijving**: Dit endpoint geeft de metadata en de link voor de documenten. Er zijn verschillende mogelijkheden om te zoeken op dit endpoint:
   - Op basis van een dossiernummer met de query parameter dossiernummer
   - Op basis van het rijksregisternummer met de query parameter rijksregisternummer
   - Op basis van een periode met wijzigingen met de parameters van=dateTime en tot=dateTime 
 
-### Vaststelling ophalen
+### Toestemmingsdocument ophalen
 - **Endpoint**: `/toestemmingen/{dossiernummer}/toestemming`
-- **Beschrijving**: Hiermee kan er een toestemming gedownload worden 
+- **Beschrijving**: Hiermee kan er een toestemmingsdocument gedownload worden 
 
 ## Swagger
 
