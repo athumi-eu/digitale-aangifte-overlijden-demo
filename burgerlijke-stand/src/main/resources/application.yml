@@ -18,6 +18,22 @@ spring:
     serialization:
       write-dates-with-context-time-zone: true
 
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  tracing:
+    enabled: false
+
 server:
   port: 8082
   servlet:
