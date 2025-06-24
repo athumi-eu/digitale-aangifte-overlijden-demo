@@ -18,6 +18,9 @@ spring:
     serialization:
       write-dates-with-context-time-zone: true
 
+logging:
+  config: classpath:logging/logback-spring.xml
+
 management:
   info:
     env:

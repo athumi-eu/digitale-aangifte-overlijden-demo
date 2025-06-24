@@ -1,0 +1,10 @@
+<configuration debug="true">
+    <property resource="application.yml"/>
+    <include resource="logging/logback-defaults.xml"/>
+    <include resource="logging/logback-console-appender.xml"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

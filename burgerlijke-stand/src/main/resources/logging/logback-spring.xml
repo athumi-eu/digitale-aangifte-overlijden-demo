@@ -1,0 +1,89 @@
+<configuration debug="true">
+
+    <property resource="application.yml"/>
+    <springproperty name="deployment.environment" source="eu.athumi.logging.environment"/>
+
+    <include resource="logging/logback-defaults.xml"/>
+    <include resource="logging/logback-console-appender.xml"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <!-- TIMESTAMP field (UTC) -->
+                <timestamp>
+                    <fieldName>Timestamp</fieldName>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <!-- LOG_LEVEL field -->
+                <logLevel>
+                    <fieldName>SeverityText</fieldName>
+                </logLevel>
+                <logLevel>
+                    <fieldName>level</fieldName>
+                </logLevel>
+                <!-- MESSAGE field -->
+                <pattern>
+                    <pattern>
+                        {"Body":"%msg%n"}
+                    </pattern>
+                </pattern>
+                <!-- RESOURCE nested object -->
+                <nestedField>
+                    <fieldName>Resource</fieldName>
+                    <providers>
+                        <!-- NAMESPACE field -->
+                        <pattern>
+                            <pattern>
+                                {"service.name":"elys-demo"}
+                            </pattern>
+                        </pattern>
+                        <pattern>
+                            <pattern>
+                                {"service.namespace":"elys"}
+                            </pattern>
+                        </pattern>
+                        <pattern>
+                            <pattern>
+                                {"deployment.environment":"${deployment.environment}"}
+                            </pattern>
+                        </pattern>
+                    </providers>
+                </nestedField>
+                InstrumentationScope nested object
+                <nestedField>
+                    <fieldName>InstrumentationScope</fieldName>
+                    <providers>
+                        :44
+                        <loggerName>
+                            <fieldName>Name</fieldName>
+                        </loggerName>
+                        <pattern>
+                            <pattern>
+                                {"Version":"${build.version}"}
+                            </pattern>
+                        </pattern>
+                    </providers>
+                </nestedField>
+                <!-- ATTRIBUTES nested object -->
+                <nestedField>
+                    <fieldName>Attributes</fieldName>
+                    <providers>
+                        <pattern>
+                            <pattern>
+                                {"error.message":"%ex{short}"}
+                            </pattern>
+                        </pattern>
+                        <stackTrace>
+                            <fieldName>error.stack_trace</fieldName>
+                        </stackTrace>
+                    </providers>
+                </nestedField>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

@@ -1,3 +1,7 @@
+logging:
+  config: classpath:logging/logback-spring-dev.xml
+
+
 dao:
   service:
     connection-url: http://localhost:8090

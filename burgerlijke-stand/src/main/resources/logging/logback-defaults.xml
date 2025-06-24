@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Default logback configuration provided for import, based on Spring Boot defaults at https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback/defaults.xml
+-->
+
+<included>
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr([%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}]){faint} %clr([${LOG_LEVEL_PATTERN:-%5p}]) %clr([%15.15t]){faint} %clr([%-40.40logger{39}]){cyan} %clr([%X{correlationId} %X{tracingId} %X{requestId}]){yellow} %clr([%X{context} %X{contextDetail}]){faint} %clr(:){faint} %m${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}%n}"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <logger name="com.amazonaws.auth.profile.internal.BasicProfileConfigLoader" level="ERROR"/>
+</included>
