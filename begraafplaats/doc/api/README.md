@@ -20,6 +20,14 @@ Alle endpoints starten altijd met: `/begraafplaats/v1`
 - **Endpoint**: `/toestemmingen/{dossiernummer}/toestemming`
 - **Beschrijving**: Hiermee kan er een toestemmingsdocument gedownload worden 
 
+## Voorbeeld gebruik
+### Dienst burgerzaken is duidelijke gescheiden van dienst begraafplaatsen
+![begraafplaatsenGescheiden](../diagrams/begraafplaatsenGescheiden.png)
+
+### Dienst burgerzaken bereid 
+#### Gemeente overlijden zelfde als gemeente begraven
+#### Gemeente overlijden is verschillende van gemeente begraven
+
 ## Swagger
 
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
