@@ -10,7 +10,7 @@ Voor meer informatie rond de integratie als **Departement zorg** kan je navigere
 
 Voor meer informatie rond de integratie als **Uitvaartondernemer** kan je navigeren naar: [Startpunt uitvaartondernemer](uitvaart/doc/README.md)
 
-Voor meer informatie rond de integratie als **Begraafplaats** kan je navigeren naar: [Startpunt begraafplaats](begraafplaats/doc/README.md)
+Voor meer informatie rond de integratie als **Lokaal bestuur van begraven** kan je navigeren naar: [Startpunt begraafplaats](begraafplaats/doc/README.md)
 
 Voor meer informatie rond de integratie als **Crematorium** kan je navigeren naar: [Startpunt crematorium](crematorium/doc/README.md)
 
