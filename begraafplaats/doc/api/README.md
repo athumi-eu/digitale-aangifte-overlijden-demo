@@ -21,12 +21,16 @@ Alle endpoints starten altijd met: `/begraafplaats/v1`
 - **Beschrijving**: Hiermee kan er een toestemmingsdocument gedownload worden 
 
 ## Voorbeeld gebruik
-### Dienst burgerzaken is duidelijke gescheiden van dienst begraafplaatsen
+### Dienst burgerlijke stand is duidelijk gescheiden van dienst begraafplaatsen
 ![begraafplaatsenGescheiden](../diagrams/begraafplaatsenGescheiden.png)
 
-### Dienst burgerzaken bereid 
+### Dienst burgerlijke stand bereidt planning begraafplaatsen voor
 #### Gemeente overlijden zelfde als gemeente begraven
+Met manuele ingave van info lijkbezorging in toepassing begraafplaatsen
+![dienstenSamen_zelfdeGemeente](../diagrams/dienstenSamen_zelfdeGemeente.png)
+
 #### Gemeente overlijden is verschillende van gemeente begraven
+
 
 ## Swagger
 
