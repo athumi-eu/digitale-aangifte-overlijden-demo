@@ -1,0 +1,38 @@
+<div th:fragment="laatsteWilsbeschikking(id,laatsteBevragingRijksregister, laatsteWilsbeschikking)">
+
+    <h2>Laatste Wilsbeschikking</h2>
+    <div class="label">Datum bevraging bron</div>
+    <div class="bottom-spacing" th:text="${laatsteBevragingRijksregister}">-</div>
+    <section th:if="${laatsteWilsbeschikking}">
+        <div class="grid-container-3">
+            <section class="grid-column">
+                <h4>Metadata</h4>
+                <div class="label">Wilsbeschikking IT-Code</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.wilsbeschikkingCode}">-</div>
+                <div class="label">Datum van indiening</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.parsedDatumVanIndiening}">-</div>
+                <div class="label">Datum van verklaring</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.parsedDatumVanVerklaring}">-</div>
+                <div class="label">Plaats van registratie</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.plaatsRegistratie}">-</div>
+            </section>
+            <section class="grid-column">
+                <h4>Ritueel en wijze van lijkbezorging</h4>
+                <div class="label">Ritueel uitvaartplechtigheid</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.ritueel}">-</div>
+                <div class="label">Wijze van lijkbezorging</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.wijzeVanLijkbezorging}">-</div>
+                <div class="label">Begraafplaats</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.begraafplaats}">-</div>
+            </section>
+            <section class="grid-column">
+                <h4>Uitvaart verzekeringscontract</h4>
+                <div class="label">KBOnummer</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.contractOrganisatie}">-</div>
+                <div class="label">Dossiernummer</div>
+                <div class="bottom-spacing" th:text="${laatsteWilsbeschikking.contractNummer}">-</div>
+            </section>
+        </div>
+    </section>
+
+</div>

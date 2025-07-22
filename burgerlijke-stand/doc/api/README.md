@@ -131,6 +131,11 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{id}/statistische-gegevens/refresh`
 - **Beschrijving**: Gebruik dit endpoint om de verrijking vanuit het rijksregister opnieuw te starten.
 
+
+### Laatste wilsbeschikking
+- **Endpoint**: `/burgerlijke-stand/v1/laatste-wilsbeschikking/{id}`
+- **Beschrijving**: Gebruik dit endpoint om de laatste wilsbeschikking op te halen voor een dossier.
+
 ## Validatiefouten
 
 Als er validatiefouten optreden bij het versturen van een request, zal de API een HTTP 400-fout terugsturen.

@@ -5,6 +5,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientPr
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.laatsteWilsbeschikking.LaatsteWilsbeschikkingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
@@ -125,18 +126,20 @@ public class DossierDao {
         if (detail.isPresent()) {
             var dossier = detail.get();
             var verslag = ofNullable(dossier.verslagDetailURL()).map((URI verslagDetailURL) -> getVerslagDetail(verslagDetailURL, kbonummer)).map(VerslagParser::new).orElse(null);
+            var laatsteWilsbeschikking = ofNullable(dossier.laatsteWilsbeschikkingURI()).map((URI laatsteWilsbeschikkingURI) -> getLaatsteWilsbeschikking(laatsteWilsbeschikkingURI, kbonummer)).orElse(null);
             var statistischeGegevens = getStatistischeGegevens(kbonummer, dossier.id());
 
             model.addAttribute("ficheDocumenten", new FicheDocumentenParser(dossier));
+            model.addAttribute("dossier", dossier);
+            model.addAttribute("verslag", verslag);
+            model.addAttribute("kbonummer", kbonummer);
+            model.addAttribute("laatsteWilsbeschikking", laatsteWilsbeschikking);
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
-                model.addAttribute("dossier", dossier);
-                model.addAttribute("verslag", verslag);
                 model.addAttribute("statistischeGegevens", new StatistischeGegevensParserOuderDanEenJaar(statistischeGegevens));
                 model.addAttribute("parsedDetail", new OuderDanEenJaarParser(dossier));
+
                 return "detail-ouder-dan-1-jaar";
             } else {
-                model.addAttribute("dossier", dossier);
-                model.addAttribute("verslag", verslag);
                 model.addAttribute("statistischeGegevens", new StatistischeGegevensParserJongerDanEenJaar(statistischeGegevens));
                 model.addAttribute("parsedDetail", new JongerDanEenJaarParser(dossier));
                 model.addAttribute("zwangerschapsduur", new MedischAttestZwangerschapsduurParser(dossier));
@@ -145,6 +148,14 @@ public class DossierDao {
 
         }
         return "detail-does-not-exist";
+    }
+
+    private LaatsteWilsbeschikkingJSON getLaatsteWilsbeschikking(URI laatsteWilsbeschikking, String kbonummer) {
+        return securedWebClient.getRestClient(kbonummer)
+                .get()
+                .uri(laatsteWilsbeschikking)
+                .retrieve()
+                .body(LaatsteWilsbeschikkingJSON.class);
     }
 
     public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL, String kbonummer) {

@@ -10,10 +10,12 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verantwoordelijk.Loka
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.rijksregister.VerrijkingRijksregisterJSON;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDateTime;
 
 public record DossierBurgerlijkeStandJSON(
@@ -41,7 +43,9 @@ public record DossierBurgerlijkeStandJSON(
         UitvaartOndernemerJSON uitvaartOndernemer,
         UitvaartOndernemerJSON vorigeUitvaartOndernemer,
         InlichtingenficheJSON inlichtingenfiche,
-        List<DossierGebeurtenis> historiek
+        List<DossierGebeurtenis> historiek,
+        URI laatsteWilsbeschikkingURI,
+        LocalDateTime laatsteBevragingRijksregister
 ) implements Type {
     @Override
     public String type() {
@@ -49,27 +53,22 @@ public record DossierBurgerlijkeStandJSON(
     }
 
     public String parsedAfgeslotenOp() {
-        return parsedDateTime(afgeslotenOp);
+        return parseLocalDateTime(afgeslotenOp);
     }
 
     public String parsedHeropendOp() {
-        return parsedDateTime(heropendOp);
+        return parseLocalDateTime(heropendOp);
     }
 
     public String parsedVerwijderdOp() {
-        return parsedDateTime(verwijderdOp);
+        return parseLocalDateTime(verwijderdOp);
     }
 
     public String parsedIngediendOp() {
-        return parsedDateTime(ingediendOp);
+        return parseLocalDateTime(ingediendOp);
     }
 
-    private String parsedDateTime(LocalDateTime localDateTime) {
-        if (Objects.isNull(localDateTime)) {
-            return "/";
-        }
-        return parseLocalDateTime(localDateTime);
-    }
+   public String parsedLaatsteBevragingRijksregister() { return parseLocalDateTime(laatsteBevragingRijksregister);}
 
     public boolean hasStatus(String status) {
         return DossierStatus.valueOf(status).equals(this.dossierStatus);
