@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DemoBurgerlijkeStandApplication test" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="test, secret-dev" />
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <module name="burgerlijke-stand.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="eu.athumi.dao.demoburgerlijkestand.DemoBurgerlijkeStandApplication" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="eu.athumi.dao.demoburgerlijkestand.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
