@@ -63,6 +63,10 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 - **Beschrijving**: De socio economische gegevens kunnen opgehaald worden met de Get en aangepast worden met de Put.  
   De gegevens worden vooringevuld met de gegevens die we hebben vanuit de verschillende bronnen.
 
+### Laatste wilsbeschikking
+- **Endpoint**: `/laatste-wilsbeschikking/{id}`
+- **Beschrijving**: Gebruik dit endpoint om de laatste wilsbeschikking op te halen voor een dossier.
+
 
 ## Validatiefouten
 
