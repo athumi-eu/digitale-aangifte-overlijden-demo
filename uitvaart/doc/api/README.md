@@ -67,6 +67,13 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 - **Endpoint**: `/laatste-wilsbeschikking/{id}`
 - **Beschrijving**: Gebruik dit endpoint om de laatste wilsbeschikking op te halen voor een dossier.
 
+### Crematoria
+- **Endpoint**: `/metadata/v1/crematorium`
+- **Beschrijving**: Gebruik dit endpoint om een lijst van gekende crematoria op te halen.
+
+### Gemeentes van begraven
+- **Endpoint**: `/metadata/v1/gemeenten/hoofdgemeenten`
+- **Beschrijving**: Gebruik dit endpoint om de hoofdgemeenten op te halen, dit zijn ook gemeentes van begraven. 
 
 ## Validatiefouten
 
