@@ -17,11 +17,15 @@
 
 ## 0.26.0
 
+---
+
 ## 0.25.0
 
 ### Audit log
 
 Kleine verbeteringen omtrent het loggen van de acties van departement zorg.
+
+---
 
 ### Crematoria & Begraafplaats
 
@@ -29,12 +33,16 @@ Kleine verbeteringen omtrent het loggen van de acties van departement zorg.
 
 kboNummerUitvaartondernemer is nu een string in de plaats van een object dat een string bevat.
 
+---
+
 ### Burgelijke stand lokaal bestuur
 
 #### Swagger
 
 Bij het ophalen van een dossier stond dat VerslagBeeidigdArts als type kon meegestuurd worden als medisch verslag.  
 Dit was echter niet correct, en is nu verwijderd uit de swagger documentatie.
+
+---
 
 ### Uitvaart
 
@@ -48,6 +56,8 @@ Wanneer een gemeente met postcode geselecteerd wordt kan de postcode niet meer g
 De foutmelding bij geen connectie rijksregister is verduidelijkt, het niet vinden van een persoon geeft nu een andere
 foutmelding dan connectie problemen.
 
+---
+
 ### Arts
 
 #### Kleine bugfixes vaststelling
@@ -57,6 +67,8 @@ Wanneer een gemeente met postcode geselecteerd wordt kan de postcode niet meer g
 Naam en voornaam werden omgewisseld bij het doorsturen van een verslag beëdigd arts
 De foutmelding bij geen connectie rijksregister is verduidelijkt, het niet vinden van een persoon geeft nu een andere
 foutmelding dan connectie problemen.
+
+---
 
 ## 0.24.0
 
@@ -76,6 +88,8 @@ hiervoor
 De geboorte plek van de overledene en/of moeder kan onbepaald zijn, zowel uit het rijksregister als via de api/frontend.
 We gebruiken hiervoor de land niscode `999` conform met het rijksregister.
 
+---
+
 ### Burgerlijke stand lokaal bestuur
 
 #### Laatste wilsbeschikking
@@ -88,6 +102,8 @@ Op het dossier zijn er ook 2 velden toegevoegd:
   URI null.
 - `laatsteBevragingRijksregister` de laatste keer dat het rijksregister is bevraagd, hiermee halen we ook de laatste
   wilsbeschikking op.
+
+---
 
 ### Uitvaart
 
@@ -119,6 +135,8 @@ Integratoren kunnen dit ook opvragen via de endpoints:
 
 Het is vanaf nu mogelijk om op de inlichtingenfiche de naam van het kind toe te voegen.
 Wanneer dit toegevoegd wordt zal het dossier ook de naam van het kind bevatten.
+
+---
 
 ### Begraafplaatsen en crematoria
 
