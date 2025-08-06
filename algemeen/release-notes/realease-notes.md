@@ -17,6 +17,33 @@
 
 ## 0.26.0
 
+### Uitvaartondernemer:
+
+#### Opstarten van een dossier:
+
+Bij het opstarten van een dossier wordt er een betaal flow gestart alvorens het dossier gekoppeld
+wordt aan  de uitvaartondernemer. Hierbij wordt er een redirect link terug gegeven waar men de
+betaling kan uitvoeren. Dit is zowel wanneer het dossier gestart wordt via de GUI als via de API. Na het
+uitvoeren van de betaling wordt er verwacht dat er via onze API een melding gebeurt om het dossier
+verder te verwerken.
+
+---
+
+### Piloot fase:
+
+#### Meldingen:
+
+Er wordt een landingspagina voorzien die zowel kan dienen tijdens de initiële setup van de productie
+omgeving als wanneer er iets mis is met de applicatie om door te navigeren naar een scherm met een
+fout melding.
+
+Er wordt in de GUI een banner voorzien die initieel gebruikt wordt om aan te geven dat enkel Leuven
+en Lier aangesloten zijn. Maar naderhand kan gebruikt worden om communicatie uit te sturen naar de
+gebruikers, zoals verwachte downtime.
+
+Wanneer een vaststelling wordt aangemaakt voor een gemeente die niet in de piloot fase zit, wordt er
+een foutmelding getoond.
+
 ---
 
 ## 0.25.0
