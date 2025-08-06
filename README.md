@@ -1,6 +1,6 @@
 # eLys - Platform voor overlijdensadministratie - demo
 Met deze demoapp zouden wij graag demonstreren hoe het mogelijk is om met ons platform te integreren.
-Deze demo app kan gebruikt worden voor de verschillende integratoren die het systeem kent, maar richt zich qua functionaliteit wel op het lokaal bestuur van overiljden. 
+Deze demo app kan gebruikt worden voor de verschillende integratoren die het systeem kent, maar richt zich qua functionaliteit wel op het lokaal bestuur van overlijden. 
 
 Voor meer informatie rond de integratie als **Lokaal bestuur van overlijden** kan je navigeren naar: [Startpunt burgerlijke stand](burgerlijke-stand/doc/README.md)
 
@@ -13,6 +13,8 @@ Voor meer informatie rond de integratie als **Uitvaartondernemer** kan je navige
 Voor meer informatie rond de integratie als **Lokaal bestuur van begraven** kan je navigeren naar: [Startpunt begraafplaats](begraafplaats/doc/README.md)
 
 Voor meer informatie rond de integratie als **Crematorium** kan je navigeren naar: [Startpunt crematorium](crematorium/doc/README.md)
+
+Onze releasnotes kan je terugvinden onder: [Release notes](algemeen/release-notes/realease-notes.md)
 
 ## Omgevingen
 
