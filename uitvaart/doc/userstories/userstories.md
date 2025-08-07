@@ -106,7 +106,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 13. "“Als uitvaartondernemer wil ik voor een overleden persoon de aanwezigheid en inhoud van de laatste wilsbeschikking bekijken zodat ik hiermee rekening kan houden voor de aanvraag tot begraven/crematie.”
 
-    **API endpoint nog niet ontwikkeld**
+    [GET/uitvaart/v1/laatste-wilsbeschikking/{id}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart+sector#/Laatste%20wilsbeschikking%20Uitvaart/getLaatsteWilsbeschikking)
 
 
 14. “Als uitvaartondernemer, wil ik de aanvraag tot toestemming begraven / crematie inclusief bijhorende documenten (PDF, Word, JPEG, PNG) kunnen invullen via het platform, zodat de burgerlijke stand van de gemeente van overlijden deze toestemming kan opmaken aan de hand van de ingediende aanvraag.”
