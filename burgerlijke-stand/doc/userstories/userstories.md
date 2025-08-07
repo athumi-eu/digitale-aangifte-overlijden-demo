@@ -42,7 +42,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele ande
 
 6. "Als ABS wil ik weten of er een laatste wilsbeschikking aanwezig is voor de overleden persoon en indien wel, de inhoud ervan bekijken zodat de afgeleverde toestemming hiermee in overeenstemming is."
 
-    [GET /burgerlijke-stand/v1/dossiers/{dossiernummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/getDossier)
+    [GET /burgerlijke-stand/v1/laatste-wilsbeschikking/{dossiernummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst+burgerlijke+stand#/Laatste%20wilsbeschikking%20Burgerlijke%20Stand/getLaatsteWilsbeschikking)
 
 7. "Wanneer ik alles heb afgewerkt voor een dossier (overlijdensakten, toestemming, aanvulling gegevens) wil ik als ABS een dossier afsluiten, zodat ik een duidelijk overzicht behoud en achterliggend de socio-economische gegevens aan het Departement Zorg bezorgd worden."
 
@@ -54,7 +54,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele ande
 
 9. “Wanneer een dossier werd heropend, wil ik zien waarom dit het geval is: manuele actie, socio-economische gegevens werden ingevuld/gewijzigd, inlichtingenfiche uitvaart (aanvraag toestemming of verzoek opname akte levenloos kind) werd geüpdatet zodat ik kan evalueren welke actie van mij vereist wordt.”
 
-    [GET /burgerlijke-stand/v1/laatste-wilsbeschikking/{dossiernummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst+burgerlijke+stand#/Laatste%20wilsbeschikking%20Burgerlijke%20Stand/getLaatsteWilsbeschikking)
+   [GET /burgerlijke-stand/v1/dossiers/{dossiernummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/getDossier)
 
 ## Gegevens en documenten opladen
 
