@@ -15,7 +15,7 @@
 [prd-version]: https://img.shields.io/badge/dynamic/json?label=version&query=build.version&url=https://elys.api.athumi.eu/actuator/info&color=yellowgreen&style=for-the-badge&logo=amazonaws&logoColor=white
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
-## 0.26.0
+## 0.26.0 - verwacht op beta op 22/09/2025
 
 ### Uitvaartondernemer:
 
