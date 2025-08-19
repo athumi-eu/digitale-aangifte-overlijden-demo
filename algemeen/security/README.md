@@ -36,7 +36,7 @@ Dit is een sterke verantwoordelijkheid die ook gepaard gaat met een verplichting
 Hetzelfde geldt voor de integratoren voor de overige actoren.
 
 ### Headers
-Bij het sturen van een request wordt er verwacht dat er volgende headers aanwezig zijn:
+Bij het sturen van ELKE request wordt er verwacht dat er volgende headers aanwezig zijn:
 
 | Header           | Beschrijving                                                                                                                                                   |
 |------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
