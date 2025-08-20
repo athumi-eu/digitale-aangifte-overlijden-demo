@@ -39,7 +39,7 @@ Er is een kleine verbetering naar het typeren van de adres informatie bij plaats
 
 ---
 
-## 0.26.0 - Released op 22/08/2025
+## 0.26.0 - Released op 20/08/2025
 
 ### Uitvaartondernemer:
 
