@@ -15,7 +15,31 @@
 [prd-version]: https://img.shields.io/badge/dynamic/json?label=version&query=build.version&url=https://elys.api.athumi.eu/actuator/info&color=yellowgreen&style=for-the-badge&logo=amazonaws&logoColor=white
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
-## 0.26.0 - verwacht op beta op 22/08/2025
+## 0.27.0 - Verwacht op 05/09/2025
+### Uitvaartondernemer:
+> [!WARNING]  
+> #### Breaking change:
+> Het huidige endpoint voor het opstarten van een dossier wordt verwijderd in release 0.28.0, vanaf nu moet
+er ofwel gebruik worden gemaakt van het opstarten van een dossier met betaling via redirect flow,
+gereleased in 0.26.0 of via wallet betaling gereleased in de huidige release.​
+
+#### Opstarten van een dossier:
+
+Om een betaling te kunnen doen zonder een redirect flow waarvoor een ACM/IDM login flow noodzakelijk
+is, wordt een Wallet betaling mogelijk via een api call. Dit is een synchrone flow waarbij een al voorgeladen
+bedrag kan gebruikt worden voor het dossier op te starten. Ook wordt er connectie gemaakt met het
+externe systeem in de plaats van een zelfgemaakte mock interactie.​
+
+---
+
+### Burgelijke stand lokaal bestuur:
+#### Dossiers ophalen:
+
+Er is een kleine verbetering naar het typeren van de adres informatie bij plaats van overlijden. 
+
+---
+
+## 0.26.0 - Released op 22/08/2025
 
 ### Uitvaartondernemer:
 
