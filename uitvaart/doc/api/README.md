@@ -44,7 +44,7 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
   - behandeld: afsluiten van een dossier
   - heropen: een afgesloten dossier heropenen
   - annuleer: een opgestart dossier annuleren, hierbij wordt de uitvaart ondernemer van het dossier verwijderd alsook de inlichtingen fiche.
-    Wanneer het dossier opnieuw wordt opgestart wordt er ook verwacht dat er opnieuw een betaling is.
+    Wanneer het dossier opnieuw wordt opgestart wordt er ook verwacht dat er opnieuw een betaling is. Er wordt geen terugbetaling voorzien. 
 
 ### Recente acties verwijderen
 - **Endpoint**: `/dossiers/{dossierNummer}/verwijder-recente-acties`
