@@ -45,7 +45,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 5. “Als uitvaartondernemer moet ik na de opstart van een dossier een platformvergoeding betalen vooraleer ik verder kan gaan met mijn acties.”
 
-    **API endpoint nog niet ontwikkeld**
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/start-met-betaling](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Dossier%20Uitvaart/startMetBetaling)
 
 
 6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
