@@ -7,37 +7,94 @@
 | Production  | [![version][prd-version]][prd-actuator]   | 
 
 [beta-version]: https://img.shields.io/badge/dynamic/json?label=version&query=build.version&url=https://elys.api.beta-athumi.eu/actuator/info&color=yellowgreen&style=for-the-badge&logo=amazonaws&logoColor=white
+
 [beta-actuator]: https://elys.api.beta-athumi.eu/actuator/info
 
 [acc-version]: https://img.shields.io/badge/dynamic/json?label=version&query=build.version&url=https://elys.api.acc-athumi.eu/actuator/info&color=yellowgreen&style=for-the-badge&logo=amazonaws&logoColor=white
+
 [acc-actuator]: https://elys.api.acc-athumi.eu/actuator/info
 
 [prd-version]: https://img.shields.io/badge/dynamic/json?label=version&query=build.version&url=https://elys.api.athumi.eu/actuator/info&color=yellowgreen&style=for-the-badge&logo=amazonaws&logoColor=white
+
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
-## 0.27.0 - Verwacht op 05/09/2025
+## 0.28.0 - Released 17/09/2025
+
+### Arts:
+
+#### Vaststelling labels:
+
+Enkele labels zijn gewijzigd naar de correcte termen (woonzorgcentrum, zelfdoding).
+
+#### Tijdstip vaststelling:
+
+Datum van de medische vaststelling wordt default ingevuld met de huidige datum en er wordt een waarschuwing getoond bij
+ingave van een datum meer dan 3 dagen in het verleden.
+
+Tijdstip overlijden hoeft standaard niet ingevuld te worden, vermits dit meestal gelijk is aan het tijdstip van de
+vaststelling - via een toggle kan een afwijkend tijdstip ingevuld worden of kan aangegeven worden dat het tijdstip niet
+gekend is.
+
+#### Adres overlijden:
+
+Adres van overlijden moet altijd ingevuld worden bij optie ‘Thuis’ en wordt automatisch ingevuld met de plaats van
+overlijden - bij deze optie wordt ook extra info (i) getoond. Bij opties ‘ziekenhuis’ en ‘woonzorgcentrum’ kan een adres
+onthouden worden, zodat het later automatisch opnieuw ingevuld wordt.
+
+#### Overzicht na indienen:
+
+Gevoelige medische gegevens worden default verborgen maar kunnen via een toggle getoond worden.
+
+--- 
+
 ### Uitvaartondernemer:
-> [!WARNING]  
+
+> [!WARNING]
+> #### Breaking change:
+> Het huidige endpoint voor het opstarten van een dossier wordt verwijderd, vanaf nu moet er ofwel gebruik worden
+> gemaakt
+> van het opstarten van een dossier met betaling via redirect flow of via wallet betaling.
+
+#### Login:
+
+Het inlogscherm is verbeterd en een link met registratie instructies is toegevoegd.
+
+In het gebruikersmenu is een link toegevoegd naar de Athumi Account omgeving.
+
+#### Opstarten van een dossier:
+
+Voor betalingen wordt er connectie gemaakt met het externe systeem in de plaats van een zelfgemaakte mock interactie.
+
+#### Annuleren van een dossier:
+
+In het dialoogvenster is toegevoegd dat er geen terugbetaling mogelijk is.
+
+---
+
+## 0.27.0 - Released op 03/09/2025
+
+### Uitvaartondernemer:
+
+> [!WARNING]
 > #### Breaking change:
 > Het huidige endpoint voor het opstarten van een dossier wordt verwijderd in release 0.28.0, vanaf nu moet
-er ofwel gebruik worden gemaakt van het opstarten van een dossier met betaling via redirect flow,
-gereleased in 0.26.0 of via wallet betaling gereleased in de huidige release.​
+> er ofwel gebruik worden gemaakt van het opstarten van een dossier met betaling via redirect flow,
+> gereleased in 0.26.0 of via wallet betaling gereleased in de huidige release.
 
 #### Opstarten van een dossier:
 
 Om een betaling te kunnen doen zonder een redirect flow waarvoor een ACM/IDM login flow noodzakelijk
 is, wordt een Wallet betaling mogelijk via een api call. Dit is een synchrone flow waarbij een al voorgeladen
 bedrag kan gebruikt worden voor het dossier op te starten. Ook wordt er connectie gemaakt met het
-externe systeem in de plaats van een zelfgemaakte mock interactie.​
+externe systeem in de plaats van een zelfgemaakte mock interactie.
 
 ---
 
 ### Burgelijke stand lokaal bestuur:
+
 #### Dossiers ophalen:
 
-Er is een kleine verbetering naar het typeren van de adres informatie bij plaats van overlijden. 
-
----
+Er is een kleine verbetering naar het typeren van de adres informatie bij plaats van overlijden.---
 
 ## 0.26.0 - Released op 20/08/2025
 
@@ -46,7 +103,7 @@ Er is een kleine verbetering naar het typeren van de adres informatie bij plaats
 #### Opstarten van een dossier:
 
 Bij het opstarten van een dossier wordt er een betaal flow gestart alvorens het dossier gekoppeld
-wordt aan  de uitvaartondernemer. Hierbij wordt er een redirect link terug gegeven waar men de
+wordt aan de uitvaartondernemer. Hierbij wordt er een redirect link terug gegeven waar men de
 betaling kan uitvoeren. Dit is zowel wanneer het dossier gestart wordt via de GUI als via de API. Na het
 uitvoeren van de betaling wordt er verwacht dat er via onze API een melding gebeurt om het dossier
 verder te verwerken.
