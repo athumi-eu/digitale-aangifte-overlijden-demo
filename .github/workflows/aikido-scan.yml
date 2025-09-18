@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * MON-FRI"
+
+name: Aikido Scan
+jobs:
+  aikido-local-scan-repo:
+    runs-on: ubuntu-latest
+    container:
+      image: aikidosecurity/local-scanner:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: elys-repo
+      - name: Run scan
+        run: aikido-local-scanner scan elys-repo --apikey ${{ secrets.AIKIDO_TOKEN }} --repositoryname eLys-demo --branchname main
