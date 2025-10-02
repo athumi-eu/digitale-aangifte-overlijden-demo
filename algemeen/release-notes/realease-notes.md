@@ -18,6 +18,58 @@
 
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
+## 0.30.0 - Planned 16/10/2025
+### Arts:
+#### Persoonsgegevens:
+Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar). Ook kan “00/00/0000” ingevuld worden voor een onbekende identiteit.
+Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
+
+#### Bevestiging na indienen vaststelling:
+Het overzicht van de ingediende gegevens kan via een ‘afdrukken’ knop naar een (fysieke of PDF) printer verstuurd worden.
+
+#### Openen vaststelling vanuit EPD:
+Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het mogelijk om een aantal gegevens (zoals het rijksregisternummer van de overledene) mee te sturen zodat die al vooringevuld kunnen worden in eLys.​
+
+--- 
+
+### Uitvaartondernemer:
+
+> [!WARNING]
+> ####Breaking change - Inlichtingen fiche
+> Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
+> Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
+
+---
+
+### Burgerlijke stand lokaal bestuur:
+Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
+
+## 0.29.0 - Released 2/10/2025
+
+### Algemeen API
+
+> [!WARNING]
+> ####Breaking change
+> In de toekomst zal enkel TLS v1.3 ondersteund worden. 
+
+---
+
+### Arts:
+#### Bezwaren en risico’s:
+Waarschuwing bij niet-natuurlijk overlijden en niet aanduiden gerechtelijk-geneeskundig bezwaar (standaard zal dit aangeduid worden bij een niet-natuurlijk overlijden).
+Waarschuwingen bij niet respecteren van een aantal logicaregels in het aanduiden van bezwaren (bijvoorbeeld risico op ioniserende stralen -> verwacht ook verplichte onmiddellijke kisting)
+
+---
+
+### Uitvaartondernemer:
+#### Toelating transport:
+Uitbreiding van de toelating transport met een aangepaste waarschuwing in functie van de aangeduide bezwaren en risico’s in de vaststelling.
+
+#### Opstarten van een dossier:
+Extra controle op status van betalingen zodat dubbele betalingen ook in onverwachte scenario’s (bv. sluiten van de browser tijdens betalingsproces) vermeden worden.
+
+---
+
 ## 0.28.0 - Released 17/09/2025
 
 ### Arts:
