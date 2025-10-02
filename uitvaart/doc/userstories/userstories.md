@@ -36,34 +36,27 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
     **Opmerking:** Dit is zowel mogelijk voor toegekende als niet-toegekende dossiers.
 
 
-4. "“Als uitvaartondernemer wil ik in het platform voor een overlijden dat ik ga afhandelen een dossier opstarten, zodat: ik alle informatie die ik nodig heb kan bekijken en downloaden; een toestemming tot begraven/crematie kan aanvragen; het lokaal bestuur weet welke uitvaartondernemer het overlijden gaat afhandelen; het dossier vanaf dan enkel voor mijn uitvaartonderneming zichtbaar is (status wordt ‘toegekend’).”
-
-    [POST/uitvaart/v1/dossiers/{dossierNummer}/start-op](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp)
-
-    **Opmerking:** Gebruik eerst endpoint GET/uitvaart/v1/overlijdens om het juiste dossier op te zoeken.
-
-
-5. “Als uitvaartondernemer moet ik na de opstart van een dossier een platformvergoeding betalen vooraleer ik verder kan gaan met mijn acties.”
+4. “Als uitvaartondernemer moet ik na de opstart van een dossier een platformvergoeding betalen vooraleer ik verder kan gaan met mijn acties.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/start-met-betaling](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Dossier%20Uitvaart/startMetBetaling)
 
-6. “Als uitvaartondernemer kan ik een betaling via wallet doen om het dossier op te starten.”
+5. “Als uitvaartondernemer kan ik een betaling via wallet doen om het dossier op te starten.”
 
    [POST/uitvaart/v1/betaling/wallet](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Betaling/startWalletBetaling)
 
-7. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
+6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
     
     [GET/uitvaart/v1/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
 
     **Opmerking:** Dit zal enkel dossiers terug geven in de status ‘toegekend’ (reeds opgestart door de uitvaartonderneming en nog niet afgesloten)
 
 
-8. “Als uitvaartondernemer kan ik aan de hand van het dossiernummer het detail van een overlijdensdossier raadplegen zodat ik zicht heb op de overlijdensdossiers en de status van het dossier (aanwezigheid verslag beëdigd arts, akten en toestemming).
+7. “Als uitvaartondernemer kan ik aan de hand van het dossiernummer het detail van een overlijdensdossier raadplegen zodat ik zicht heb op de overlijdensdossiers en de status van het dossier (aanwezigheid verslag beëdigd arts, akten en toestemming).
 
     [GET/uitvaart/v1/dossiers/{dossierNummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossierByDossierNummer)
 
 
-9. “Als uitvaartondernemer zie ik een melding wanneer door de ambtenaar burgerlijke stand van de gemeente van overlijden een wijziging is doorgevoerd op het dossier.”
+8. “Als uitvaartondernemer zie ik een melding wanneer door de ambtenaar burgerlijke stand van de gemeente van overlijden een wijziging is doorgevoerd op het dossier.”
 
     **Melding in lijst**
 
@@ -79,12 +72,12 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Opmerking:** mogelijke acties: Een overlijdensakte werd opgeladen/gewijzigd; een toestemming werd opgeladen/gewijzigd; een rijksregisternummer van de overledene werd toegevoegd aan het dossier (indien niet ingevuld door de arts in de vaststelling); de bronbevraging is gebeurd voor socio-economische gegevens van de ouders (vader/meemoeder).
 
-10. “Ik kan als uitvaartondernemer aangeven dat ik bovenstaande melding heb gezien, zodat deze verdwijnt voor alle gebruikers binnen de onderneming.”
+9. “Ik kan als uitvaartondernemer aangeven dat ik bovenstaande melding heb gezien, zodat deze verdwijnt voor alle gebruikers binnen de onderneming.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/verwijder-recente-acties](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/verwijderRecenteActies)
 
 
-11. “Als uitvaartondernemer wil ik een dossier afsluiten, zodat: aan het lokaal bestuur wordt doorgegeven dat ik klaar ben met de uitvaartafhandeling; dit dossier niet meer in mijn lijst met dossiers staat.”
+10. “Als uitvaartondernemer wil ik een dossier afsluiten, zodat: aan het lokaal bestuur wordt doorgegeven dat ik klaar ben met de uitvaartafhandeling; dit dossier niet meer in mijn lijst met dossiers staat.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/behandeld](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/dossierBehandeld)
 
@@ -92,7 +85,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Opmerking:** Voorwaarden voor afsluiten dossier: overlijdensakte(n) aanwezig, inlichtingenfiche uitvaart ingediend, toestemming aanwezig, socio-economische gegevens ingediend
 
-12. “Als uitvaartondernemer, kan ik een dossier heropenen indien ik bijvoorbeeld alsnog een wijziging wil doorvoeren aan de ingediende inlichtingenfiche uitvaart.”
+11. “Als uitvaartondernemer, kan ik een dossier heropenen indien ik bijvoorbeeld alsnog een wijziging wil doorvoeren aan de ingediende inlichtingenfiche uitvaart.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/heropen](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/heropen)
 
@@ -100,25 +93,25 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 ## Gegevens en documenten ophalen en ingeven
 
-13. “Als uitvaartondernemer, wil ik de nationale en internationale overlijdensakte die door de ambtenaar burgerlijke stand van de gemeente van overlijden zijn opgeladen in het platform, downloaden.”
+12. “Als uitvaartondernemer, wil ik de nationale en internationale overlijdensakte die door de ambtenaar burgerlijke stand van de gemeente van overlijden zijn opgeladen in het platform, downloaden.”
 
     [GET/uitvaart/v1/dossiers/{id}/documenten/{type}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/downloadDocument)
 
     **Types:** NATIONALE_AKTE, INTERNATIONALE_AKTE
 
 
-14. "“Als uitvaartondernemer wil ik voor een overleden persoon de aanwezigheid en inhoud van de laatste wilsbeschikking bekijken zodat ik hiermee rekening kan houden voor de aanvraag tot begraven/crematie.”
+13. "“Als uitvaartondernemer wil ik voor een overleden persoon de aanwezigheid en inhoud van de laatste wilsbeschikking bekijken zodat ik hiermee rekening kan houden voor de aanvraag tot begraven/crematie.”
 
     [GET/uitvaart/v1/laatste-wilsbeschikking/{id}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart+sector#/Laatste%20wilsbeschikking%20Uitvaart/getLaatsteWilsbeschikking)
 
 
-15. “Als uitvaartondernemer, wil ik de aanvraag tot toestemming begraven / crematie inclusief bijhorende documenten (PDF, Word, JPEG, PNG) kunnen invullen via het platform, zodat de burgerlijke stand van de gemeente van overlijden deze toestemming kan opmaken aan de hand van de ingediende aanvraag.”
+14. “Als uitvaartondernemer, wil ik de aanvraag tot toestemming begraven / crematie inclusief bijhorende documenten (PDF, Word, JPEG, PNG) kunnen invullen via het platform, zodat de burgerlijke stand van de gemeente van overlijden deze toestemming kan opmaken aan de hand van de ingediende aanvraag.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
 
     **Opmerking:** Bekijk het [schema](../diagrams/inlichtingenfiche.jpg) met de opbouw van de aanvraag toestemming/crematie of de Athumi GUI om te weten welke documenten wanneer verwacht worden: verzoek nabestaanden, toestemming eigenaar, verzoek nabestaanden as partner.
 
-16. “In het geval van een doodgeboorte >180d zwangerschap, wil ik op vraag van de ouders het verzoek tot opname van de naam en/of voornaam en/of het verzoek tot opname van de vader/meemoeder (inclusief het ondertekend verzoek in PDF, Word, JPEG, PNG) op de akte levenloos kind via het platform doorgeven aan de ambtenaar van de burgerlijke stand via de inlichtingenfiche.”
+15. “In het geval van een doodgeboorte >180d zwangerschap, wil ik op vraag van de ouders het verzoek tot opname van de naam en/of voornaam en/of het verzoek tot opname van de vader/meemoeder (inclusief het ondertekend verzoek in PDF, Word, JPEG, PNG) op de akte levenloos kind via het platform doorgeven aan de ambtenaar van de burgerlijke stand via de inlichtingenfiche.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
 
@@ -128,14 +121,14 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Opmerking:** Alle data (metadata + documenten) van de inlichtingenfiche uitvaart (bovenstaande 2 user stories) worden als 1 geheel doorgestuurd zodat alles in 1 transactie kan uitgevoerd worden.
 
-17. “Als uitvaartondernemer kan ik de gegevens van een reeds ingediende inlichtingenfiche uitvaart bekijken en indien nodig wijzigen, zodat ik foutieve aanvragen tot begraven / crematie of foutieve gegevens voor opname akte levenloos kind kan corrigeren. Het lokaal bestuur ontvangt hiervan een melding zodat de burgerlijke stand de aangepaste documenten indien nodig opnieuw kan opladen.”
+16. “Als uitvaartondernemer kan ik de gegevens van een reeds ingediende inlichtingenfiche uitvaart bekijken en indien nodig wijzigen, zodat ik foutieve aanvragen tot begraven / crematie of foutieve gegevens voor opname akte levenloos kind kan corrigeren. Het lokaal bestuur ontvangt hiervan een melding zodat de burgerlijke stand de aangepaste documenten indien nodig opnieuw kan opladen.”
 
     [GET/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/getToestemming)
 
     [PUT/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/editInlichtingenficheUitvaart)
 
 
-18. “Als uitvaartondernemer, wil ik het document toestemming tot begraven / crematie dat door de ambtenaar burgerlijke stand van de gemeente van overlijden is opgeladen in het platform, kunnen downloaden.”
+17. “Als uitvaartondernemer, wil ik het document toestemming tot begraven / crematie dat door de ambtenaar burgerlijke stand van de gemeente van overlijden is opgeladen in het platform, kunnen downloaden.”
 
     [GET/uitvaart/v1/dossiers/{id}/documenten/{type}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/downloadDocument)
 
@@ -144,7 +137,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 ## Socio-economische gegevens
 
-19. “Als uitvaartondernemer moet ik, in overleg met de nabestaanden, de socio-economische gegevens indienen, zodat deze via het lokaal bestuur aan het Departement Zorg kunnen bezorgd worden voor de opmaak van de overlijdensstatistieken. Indien ik geen zicht heb op de gegevens, vul ik de vragen in met ‘onbekend’.”
+18. “Als uitvaartondernemer moet ik, in overleg met de nabestaanden, de socio-economische gegevens indienen, zodat deze via het lokaal bestuur aan het Departement Zorg kunnen bezorgd worden voor de opmaak van de overlijdensstatistieken. Indien ik geen zicht heb op de gegevens, vul ik de vragen in met ‘onbekend’.”
 
     [PUT/uitvaart/v1/dossiers/{dossierNummer}/socio-economische-gegevens](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/socio-economische-gegevens-controller/saveSocioEconomischeGegevens)
 
@@ -156,7 +149,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 ## Unhappy flow
 
-20. “Als uitvaartondernemer, kan ik een dossier annuleren, in het geval de nabestaanden  alsnog een andere uitvaartondernemer hebben aangesteld.”
+19. “Als uitvaartondernemer, kan ik een dossier annuleren, in het geval de nabestaanden  alsnog een andere uitvaartondernemer hebben aangesteld.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/annuleer](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/startDossierOp_1)
 

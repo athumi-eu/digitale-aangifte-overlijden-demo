@@ -40,11 +40,23 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 ### Dossier van status wisselen
 - **Endpoint**: `/dossiers/{dossierNummer}/{status}`
 - **Beschrijving**: Dit endpoint maakt het mogelijk het dossier in een andere status te krijgen, de statussen zijn:
-  - start-op: opstarten van een dossier
+  - start-met-betaling: opstarten van de betaling voor een dossier
   - behandeld: afsluiten van een dossier
   - heropen: een afgesloten dossier heropenen
   - annuleer: een opgestart dossier annuleren, hierbij wordt de uitvaart ondernemer van het dossier verwijderd alsook de inlichtingen fiche.
     Wanneer het dossier opnieuw wordt opgestart wordt er ook verwacht dat er opnieuw een betaling is. Er wordt geen terugbetaling voorzien. 
+
+
+### Wallet betaling uitvoeren
+- **Endpoint**: `/betaling/wallet`
+- **Beschrijving**: Dit endpoint maakt het mogelijk om een walletbetaling uit te voeren voor de opstart van een dossier.
+  Als uitvaartondernemer moet je, na het opstarten van een dossier, eerst een betaling uitvoeren vooraleer je verdere acties kan ondernemen in het dossier.
+
+
+### Betaling status controleren
+- **Endpoint**: `/betaling/{betalingId}/controleer-betaling`
+- **Beschrijving**: Met dit endpoint kan je de status van een betaling voor een specifiek dossier controleren. Status kan een van de volgende zijn: GESTART, SUCCESVOL, GEFAALD of DUBBELE_BETALING.
+
 
 ### Recente acties verwijderen
 - **Endpoint**: `/dossiers/{dossierNummer}/verwijder-recente-acties`
@@ -56,7 +68,6 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 - **Beschrijving**: De inlichtingen fiche kan als een multipart opgestuurd worden naar dit endpoint. 
   Bij een Post wordt er een creatie gedaan van een nieuwe inlichtingenfiche, bij een Put een update en bij een Get wordt de inlichtingen fiche doorgestuurd.
   Bij het updaten van een inlichtingen fiche wordt er verwacht dat de documenten die verwijderd werden meegegeven worden in een documentRemoveList. Documenten die niet meer kunnen voorkomen worden automatisch verwijderd.
-
 
 ### Socio economische gegevens opladen en verkrijgen
 - **Endpoint**: `/dossiers/{dossierNummer}/socio-economische-gegevens`
