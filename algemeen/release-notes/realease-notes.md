@@ -49,7 +49,7 @@ Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /
 ### Algemeen API
 
 > [!WARNING]
-> ####Breaking change
+> #### Breaking change
 > In de toekomst zal enkel TLS v1.3 ondersteund worden. 
 
 ---
