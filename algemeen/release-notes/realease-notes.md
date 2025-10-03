@@ -18,6 +18,14 @@
 
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
+## 0.XX.0 - Planned TBC
+### Algemeen API
+> [!WARNING]
+> #### Breaking change
+> In de toekomst zal enkel TLS v1.3 ondersteund worden. 
+
+---
+
 ## 0.30.0 - Planned 16/10/2025
 ### Arts:
 #### Persoonsgegevens:
@@ -45,15 +53,6 @@ Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het
 Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
 
 ## 0.29.0 - Released 2/10/2025
-
-### Algemeen API
-
-> [!WARNING]
-> #### Breaking change
-> In de toekomst zal enkel TLS v1.3 ondersteund worden. 
-
----
-
 ### Arts:
 #### Bezwaren en risico’s:
 Waarschuwing bij niet-natuurlijk overlijden en niet aanduiden gerechtelijk-geneeskundig bezwaar (standaard zal dit aangeduid worden bij een niet-natuurlijk overlijden).
