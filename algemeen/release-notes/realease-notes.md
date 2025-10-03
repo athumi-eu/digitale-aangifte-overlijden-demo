@@ -35,7 +35,7 @@ Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het
 ### Uitvaartondernemer:
 
 > [!WARNING]
-> ####Breaking change - Inlichtingen fiche
+> #### Breaking change - Inlichtingen fiche
 > Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
 > Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
 
