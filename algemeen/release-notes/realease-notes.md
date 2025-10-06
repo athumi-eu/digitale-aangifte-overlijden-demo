@@ -25,6 +25,10 @@
 > In de toekomst zal enkel TLS v1.3 ondersteund worden. 
 
 ---
+## 0.31.0 - Planned 30/10/2025
+### Burgerlijke stand lokaal bestuur:
+Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
+---
 
 ## 0.30.0 - Planned 16/10/2025
 ### Arts:
@@ -48,9 +52,6 @@ Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het
 > Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
 
 ---
-
-### Burgerlijke stand lokaal bestuur:
-Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
 
 ## 0.29.0 - Released 2/10/2025
 ### Arts:
