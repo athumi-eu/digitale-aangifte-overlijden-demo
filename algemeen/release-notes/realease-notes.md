@@ -28,6 +28,7 @@
 ## 0.31.0 - Planned 30/10/2025
 ### Burgerlijke stand lokaal bestuur:
 Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
+
 ---
 
 ## 0.30.0 - Planned 16/10/2025
