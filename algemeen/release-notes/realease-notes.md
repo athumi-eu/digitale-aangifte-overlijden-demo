@@ -54,6 +54,15 @@ Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het
 
 ---
 
+### Burgelijke stand lokaal bestuur:
+
+> [!WARNING]
+> #### Breaking change
+> Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
+> Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
+
+---
+
 ## 0.29.0 - Released 2/10/2025
 ### Arts:
 #### Bezwaren en risico’s:
