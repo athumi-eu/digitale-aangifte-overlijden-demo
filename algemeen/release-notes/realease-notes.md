@@ -18,6 +18,19 @@
 
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
+## 0.XX.0 - Planned TBC
+### Algemeen API
+> [!WARNING]
+> #### Breaking change
+> In de toekomst zal enkel TLS v1.3 ondersteund worden. 
+
+---
+## 0.31.0 - Planned 30/10/2025
+### Burgerlijke stand lokaal bestuur:
+Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
+
+---
+
 ## 0.30.0 - Planned 16/10/2025
 ### Arts:
 #### Persoonsgegevens:
@@ -35,25 +48,22 @@ Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het
 ### Uitvaartondernemer:
 
 > [!WARNING]
-> ####Breaking change - Inlichtingen fiche
+> #### Breaking change - Inlichtingen fiche
 > Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
 > Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
 
 ---
 
-### Burgerlijke stand lokaal bestuur:
-Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
-
-## 0.29.0 - Released 2/10/2025
-
-### Algemeen API
+### Burgelijke stand lokaal bestuur:
 
 > [!WARNING]
-> ####Breaking change
-> In de toekomst zal enkel TLS v1.3 ondersteund worden. 
+> #### Breaking change
+> Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
+> Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
 
 ---
 
+## 0.29.0 - Released 2/10/2025
 ### Arts:
 #### Bezwaren en risico’s:
 Waarschuwing bij niet-natuurlijk overlijden en niet aanduiden gerechtelijk-geneeskundig bezwaar (standaard zal dit aangeduid worden bij een niet-natuurlijk overlijden).
