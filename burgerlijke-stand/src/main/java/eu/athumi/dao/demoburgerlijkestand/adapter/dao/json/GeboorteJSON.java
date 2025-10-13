@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record GeboorteJSON(
-        LocalDate datum,
+        String datum,
         LocalTime uur,
         LocatieJSON plaats,
         GemeenteEnLand adres,

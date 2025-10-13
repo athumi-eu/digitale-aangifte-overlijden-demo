@@ -40,7 +40,7 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
         if (Objects.isNull(verslag.geboorte())) {
             return "";
         }
-        return TijdstipParser.parseLocalDateTime(verslag.geboorte().datum());
+        return verslag.geboorte().datum();
     }
 
     public String verblijfplaatsOverledene() {

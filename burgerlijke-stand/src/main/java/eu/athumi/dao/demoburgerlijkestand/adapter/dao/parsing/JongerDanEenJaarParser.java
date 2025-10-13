@@ -73,7 +73,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
     }
 
     public String geboorteDatumMoeder() {
-        return moederOpt().map(MoederDetailJSON::geboorte).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.GeboorteJSON::datum).map(g -> g.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))).orElse("/");
+        return moederOpt().map(MoederDetailJSON::geboorte).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.GeboorteJSON::datum).orElse("/");
     }
 
     public OverlijdenParser detailsOverlijden() {
