@@ -39,11 +39,11 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
     public TableRow geboorteDatum() {
         return new TableRow(
                 "Geboortedatum",
-                ofNullable(ouderRR).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
-                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-"),
+                ofNullable(ouderRR).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseDateString).orElse("-"),
+                ofNullable(moederVaststelling).map(MoederVaststellingJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseDateString).orElse("-"),
                 "-",
                 "-",
-                ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseLocalDate).orElse("-")
+                ofNullable(ouderDepartementZorg).map(OuderJSON::geboorte).map(GeboorteJSON::datum).map(TijdstipParser::parseDateString).orElse("-")
         );
     }
 

@@ -20,7 +20,7 @@ import java.time.LocalDate;
         }
 )
 public interface GeboorteJSON {
-    LocalDate datum();
+    String datum();
 
     GemeenteEnLand adres();
 }

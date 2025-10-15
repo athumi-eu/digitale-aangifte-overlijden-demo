@@ -10,12 +10,9 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verantwoordelijk.Loka
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.rijksregister.VerrijkingRijksregisterJSON;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
-import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDateTime;
 
 public record DossierBurgerlijkeStandJSON(
@@ -68,7 +65,9 @@ public record DossierBurgerlijkeStandJSON(
         return parseLocalDateTime(ingediendOp);
     }
 
-   public String parsedLaatsteBevragingRijksregister() { return parseLocalDateTime(laatsteBevragingRijksregister);}
+    public String parsedLaatsteBevragingRijksregister() {
+        return parseLocalDateTime(laatsteBevragingRijksregister);
+    }
 
     public boolean hasStatus(String status) {
         return DossierStatus.valueOf(status).equals(this.dossierStatus);

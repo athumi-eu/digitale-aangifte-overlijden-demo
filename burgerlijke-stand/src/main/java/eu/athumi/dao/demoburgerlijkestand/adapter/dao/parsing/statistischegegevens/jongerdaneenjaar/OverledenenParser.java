@@ -19,8 +19,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegeve
 
 import java.util.Optional;
 
-import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
-import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalTime;
+import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.*;
 import static java.util.Optional.ofNullable;
 
 public record OverledenenParser(
@@ -105,10 +104,10 @@ public record OverledenenParser(
         return new TableRow(
                 "Datum geboorte",
                 persoonRR().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseLocalDate).orElse("-"),
-                geboorteVaststelling().map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
+                geboorteVaststelling().map(geboorte -> parseDateString(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-")
+                ofNullable(geboorte()).map(geboorte -> parseDateString(geboorte.datum())).orElse("-")
         );
     }
 

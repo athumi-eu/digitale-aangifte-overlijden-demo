@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseDateString;
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDate;
 import static java.util.Optional.ofNullable;
 
@@ -119,10 +120,10 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         return new TableRow(
                 "Geboortedatum",
                 getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseLocalDate).orElse("-"),
-                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::geboorte).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-"),
+                getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::geboorte).map(geboorte -> parseDateString(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().geboorte()).map(geboorte -> parseLocalDate(geboorte.datum())).orElse("-")
+                ofNullable(getOverledeneVoorDepartementZorg().geboorte()).map(geboorte -> parseDateString(geboorte.datum())).orElse("-")
         );
     }
 

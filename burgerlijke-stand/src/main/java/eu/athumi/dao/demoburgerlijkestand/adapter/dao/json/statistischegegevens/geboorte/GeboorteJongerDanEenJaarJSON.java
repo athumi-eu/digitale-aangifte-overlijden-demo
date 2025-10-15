@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record GeboorteJongerDanEenJaarJSON(
-        LocalDate datum,
+        String datum,
         LocalTime tijdstip,
         PlaatsType plaats,
         String plaatsBeschrijving,
@@ -17,7 +17,7 @@ public record GeboorteJongerDanEenJaarJSON(
 ) implements GeboorteJSON, Plaats {
 
     @Override
-    public LocalDate datum() {
+    public String datum() {
         return datum;
     }
 

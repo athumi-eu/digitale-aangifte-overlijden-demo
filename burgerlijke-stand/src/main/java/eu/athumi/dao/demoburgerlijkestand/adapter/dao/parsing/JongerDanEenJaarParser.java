@@ -3,13 +3,12 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederDetailJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
-import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteOuderDanEenJaarJSON;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseDateString;
 
 public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
@@ -58,7 +57,10 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         var voornaam = Objects.isNull(dossier.moeder().persoonsGegevens().voornaam()) ? "" : dossier.moeder().persoonsGegevens().voornaam();
         return naam + " " + voornaam;
     }
-    private Optional<MoederDetailJSON> moederOpt(){ return Optional.ofNullable(dossier.moeder()).map(MoederJSON::persoonsGegevens); }
+
+    private Optional<MoederDetailJSON> moederOpt() {
+        return Optional.ofNullable(dossier.moeder()).map(MoederJSON::persoonsGegevens);
+    }
 
     public String geslachtMoeder() {
         return moederOpt().map(MoederDetailJSON::geslacht).map(Objects::toString).orElse("/");
@@ -73,7 +75,7 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
     }
 
     public String geboorteDatumMoeder() {
-        return moederOpt().map(MoederDetailJSON::geboorte).map(eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.GeboorteJSON::datum).orElse("/");
+        return moederOpt().map(MoederDetailJSON::geboorte).map(geboorte -> parseDateString(geboorte.datum())).orElse("/");
     }
 
     public OverlijdenParser detailsOverlijden() {
