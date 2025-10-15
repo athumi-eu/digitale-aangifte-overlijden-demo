@@ -6,12 +6,11 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public record OverledeneRijksregisterJSON(
         Geslacht geslacht,
-        LocalDate geboortedatum,
+        String geboortedatum,
         GemeenteEnLand geboorteAdres,
         GemeenteEnLandJSON verblijfsAdres,
         NationaliteitJSON nationaliteit,

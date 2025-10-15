@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public record HuwelijkOverledeneJSON(
         LocalDate datum,
-        LocalDate geboorteDatumOverlevendePartner
+        String geboorteDatumOverlevendePartner
 ) implements HuwelijkJSON {
 
     @Override

@@ -119,7 +119,7 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow geboorteDatum() {
         return new TableRow(
                 "Geboortedatum",
-                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseLocalDate).orElse("-"),
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseDateString).orElse("-"),
                 getOverledeneVoorVaststelling().map(OverledeneOuderDanEenJaarJSON::geboorte).map(geboorte -> parseDateString(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
@@ -174,11 +174,11 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
     public TableRow geboorteDatumPartner() {
         return new TableRow(
                 "Geboortedatum overlevende partner",
-                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::burgerlijkeStaten).map(t -> t.stream().map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseLocalDate).collect(Collectors.joining(","))).orElse("-"),
-                ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseLocalDate(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"),
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::burgerlijkeStaten).map(t -> t.stream().map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseDateString).collect(Collectors.joining(","))).orElse("-"),
+                ofNullable(getHuwelijkOverledeneVaststelling()).map(huwelijk -> parseDateString(huwelijk.geboorteDatumOverlevendePartner())).orElse("-"),
                 "-",
                 "-",
-                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(t -> t.stream().map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseLocalDate).collect(Collectors.joining(","))).orElse("-"));
+                ofNullable(getOverledeneVoorDepartementZorg().burgerlijkeStaten()).map(t -> t.stream().map(BurgerlijkeStaatJSON::geboortedatumPartner).map(TijdstipParser::parseDateString).collect(Collectors.joining(","))).orElse("-"));
 
     }
 

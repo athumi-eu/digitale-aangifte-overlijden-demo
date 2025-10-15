@@ -103,7 +103,7 @@ public record OverledenenParser(
     public TableRow geboorteDatum() {
         return new TableRow(
                 "Datum geboorte",
-                persoonRR().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseLocalDate).orElse("-"),
+                persoonRR().map(OverledeneRijksregisterJSON::geboortedatum).map(TijdstipParser::parseDateString).orElse("-"),
                 geboorteVaststelling().map(geboorte -> parseDateString(geboorte.datum())).orElse("-"),
                 "-",
                 "-",
