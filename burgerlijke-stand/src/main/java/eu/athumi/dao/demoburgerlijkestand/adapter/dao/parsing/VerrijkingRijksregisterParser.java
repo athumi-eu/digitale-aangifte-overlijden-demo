@@ -44,7 +44,7 @@ public class VerrijkingRijksregisterParser {
         return Optional.ofNullable(json)
                 .map(VerrijkingRijksregisterJSON::overledene)
                 .map(VerrijkingRijksregisterPersoonJSON::geboortedatum)
-                .map(TijdstipParser::parseLocalDate)
+                .map(TijdstipParser::parseDateString)
                 .orElse("-");
     }
 
@@ -73,7 +73,7 @@ public class VerrijkingRijksregisterParser {
         return Optional.ofNullable(json)
                 .map(VerrijkingRijksregisterJSON::moederOfOudsteOuder)
                 .map(VerrijkingRijksregisterPersoonJSON::geboortedatum)
-                .map(TijdstipParser::parseLocalDate)
+                .map(TijdstipParser::parseDateString)
                 .orElse("-");
     }
 
@@ -102,7 +102,7 @@ public class VerrijkingRijksregisterParser {
         return Optional.ofNullable(json)
                 .map(VerrijkingRijksregisterJSON::vaderOfJongsteOuder)
                 .map(VerrijkingRijksregisterPersoonJSON::geboortedatum)
-                .map(TijdstipParser::parseLocalDate)
+                .map(TijdstipParser::parseDateString)
                 .orElse("-");
     }
 }

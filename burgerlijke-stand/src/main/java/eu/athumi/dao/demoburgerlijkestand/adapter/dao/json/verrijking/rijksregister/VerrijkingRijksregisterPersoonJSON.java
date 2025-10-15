@@ -9,6 +9,6 @@ public record VerrijkingRijksregisterPersoonJSON(
         String naam,
         String voornaam,
         Geslacht geslacht,
-        LocalDate geboortedatum
+        String geboortedatum
 ) {
 }

@@ -10,5 +10,5 @@ public record AsWettelijkePartnerJSON(
     String naam,
     LocalDate datumOverlijden,
     String plaatsOverlijden,
-    LocalDate geboorteDatum
+    String geboorteDatum
 ){}
