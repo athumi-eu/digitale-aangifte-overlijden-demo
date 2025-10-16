@@ -77,7 +77,7 @@
                 <span th:text="${inlichtingenfiche?.asWettelijkePartner?.naam ?: ''}"></span>
             </div>
             <div class="label">Geboortedatum van partner</div>
-            <div class="bottom-spacing"  th:text="${#temporals.format(inlichtingenfiche?.asWettelijkePartner?.geboorteDatum, 'dd/MM/yyyy') ?: '/'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.asWettelijkePartner?.getGeboorteDatum}"></div>
             <div class="label">Plaats van overlijden van partner</div>
             <div class="bottom-spacing"  th:text="${inlichtingenfiche?.asWettelijkePartner?.plaatsOverlijden ?: '/'}"></div>
             <div class="label">Datum van overlijden van partner</div>
