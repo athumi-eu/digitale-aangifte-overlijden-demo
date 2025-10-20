@@ -4,7 +4,7 @@
 <div th:fragment="overledene-jonger-dan-1-jaar(dossier, parsedDetail)" class="grid-column">
     <h3>Overledene</h3>
     <div class="label">Overledene</div>
-    <div class="bottom-spacing"  th:text="${parsedDetail.naamOverledene()}"></div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.naamOverledeneUitVaststelling()}"></div>
     <div class="label">Rijksregisternummer</div>
     <div class="bottom-spacing"  th:text="${dossier.rijksregisternummer()}"></div>
     <div class="label">Geslacht</div>

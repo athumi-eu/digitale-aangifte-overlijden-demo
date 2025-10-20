@@ -58,6 +58,10 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return naam + " " + voornaam;
     }
 
+    public String naamOverledeneUitVaststelling(){
+        return dossier.vaststellingGegevens().naam() + ' ' +  dossier.vaststellingGegevens().voornaam();
+    }
+
     private Optional<MoederDetailJSON> moederOpt() {
         return Optional.ofNullable(dossier.moeder()).map(MoederJSON::persoonsGegevens);
     }
