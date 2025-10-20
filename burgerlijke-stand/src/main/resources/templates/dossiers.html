@@ -132,11 +132,7 @@
 
         <tr th:each="dossier : ${dossiers}">
             <td th:text="${dossier.id()}"></td>
-            <td th:text="${
-                (dossier.inlichtingenfiche()?.informatieAkteLevenloosKind?.voornaam ?: dossier.voornaam())
-                + ' ' +
-                (dossier.inlichtingenfiche()?.informatieAkteLevenloosKind?.naam ?: dossier.naam())
-            }">
+            <td th:text="${dossier.voornaam()} + ' ' + ${dossier.naam()}"></td>
             <td th:text="${dossier.rijksregisternummer()}"></td>
             <td th:text="${#temporals.format(dossier.overlijden().tijdstip().datum(), 'dd/MM/yyyy')}"></td>
             <td th:text="${dossier.dossierStatus()}"></td>
@@ -189,7 +185,7 @@
         if (!!achternaam) {
             params.set('achternaam', achternaam);
         } else params.delete('achternaam')
-        if (!!postcodes) {
+        if(!!postcodes) {
             params.set('postcodes', postcodes)
         } else params.delete('postcodes')
 
