@@ -21,6 +21,7 @@ public record DossierBurgerlijkeStandJSON(
         LokaalBestuurVanBehandeling lokaalBestuurVanBehandeling,
         URI verslagDetailURL,
         VaststellingType vaststellingType,
+        VaststellingGegevensJSON vaststellingGegevens,
         String naam,
         String voornaam,
         Geslacht geslacht,
