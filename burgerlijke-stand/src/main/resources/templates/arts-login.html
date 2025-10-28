@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="head">
+<head th:replace="~{fragments/head :: head}"><title></title></head>
+<body>
+<div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
+<div th:replace="~{fragments/title :: title(kbonummer=${kbonummer})}"></div>
+
+<div th:replace="~{fragments/navigation :: navigation(kbonummer=${kbonummer})}"></div>
+
+
+<div class="ml-3">
+    <h3>Aanmelden EPD</h3>
+    <div>
+        <div><label for="rrn">Rijksregisternummer overledene</label></div>
+        <div><input id="rrn" type="text" name="rrn"/></div>
+        <div><label for="dossierOverledene">Medisch dossiernummer overledene</label></div>
+        <div><input id="dossierOverledene" type="text" name="dossierOverledene"/></div>
+        <div><label for="dossierMoeder">Medisch dossiernummer moeder</label></div>
+        <div><input id="dossierMoeder" type="text" name="dossierMoeder"/></div>
+        <div><label for="emailArts">Email arts</label></div>
+        <div><input id="emailArts" type="text" name="emailArts"/></div>
+    </div>
+</div>
+
+<button type="submit" th:onclick="submitForm([[${@globalVariables.frontedUrl}]])">Meld aan</button>
+
+<script>
+    function submitForm(frontendUrl) {
+        const rrnOverledene = document.getElementById('rrn').value
+        const dossierOverledene = document.getElementById('dossierOverledene').value
+        const dossierMoeder = document.getElementById('dossierMoeder').value
+        const emailArts = document.getElementById('emailArts').value
+
+        fetch(frontendUrl + "/epd/login", {
+            body: JSON.stringify({
+                overledene: {
+                    rijksregisternummer: rrnOverledene
+                },
+                medischDossier: {
+                    nummerOverledene:dossierOverledene,
+                    nummerMoeder:dossierMoeder
+                },
+                arts: {
+                    email:emailArts
+                }
+
+            }),
+            method: "POST",
+            redirect: "follow",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
+            window.location.replace(response.url);
+        }).catch(error => console.log(error));
+    }
+</script>
+
+</body>
+</html>

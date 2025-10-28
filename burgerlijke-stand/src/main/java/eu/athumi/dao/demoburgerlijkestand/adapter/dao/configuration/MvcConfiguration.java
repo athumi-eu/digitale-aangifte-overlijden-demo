@@ -13,6 +13,9 @@ public class MvcConfiguration implements WebMvcConfigurer {
     @Value("${dao.service.frontend-base-url}")
     private String frontedBaseUrl;
 
+    @Value("${dao.service.frontend-url}")
+    private String frontedUrl;
+
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.mediaType("jsonld", new MediaType("application", "ld+json"));
@@ -21,9 +24,9 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     @Bean
     public GlobalVariables globalVariables() {
-        return new GlobalVariables(frontedBaseUrl);
+        return new GlobalVariables(frontedBaseUrl, frontedUrl);
     }
 
-    public record GlobalVariables(String frontedBaseUrl){}
+    public record GlobalVariables(String frontedBaseUrl, String frontedUrl) {}
 
 }

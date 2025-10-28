@@ -1,7 +1,8 @@
 dao:
   service:
     connection-url: https://${dao.project}.api.test-athumi.eu
-    frontend-base-url: https://${dao.project}.test-athumi.eu/demo
+    frontend-url: https://${dao.project}.test-athumi.eu
+    frontend-base-url: ${dao.service.frontend-url}/demo
   gemeentes:
     security-method: client_secret
     token-uri: https://${dao.project}.api.test-athumi.eu/oauth2/token

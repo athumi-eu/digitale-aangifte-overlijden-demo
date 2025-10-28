@@ -3,7 +3,8 @@
 <div th:fragment="navigation(kbonummer)" class="mlr-3 mtb-3">
     <span>
         <a th:href="@{dossiers(kbonummer=${kbonummer},status='NIEUW')}" class="mr-3">Overlijdendossiers</a>
-        <a th:href="@{verslagen(kbonummer=${kbonummer})}">Ongekoppelde verslagen beëdigd arts</a>
+        <a th:href="@{verslagen(kbonummer=${kbonummer})}" class="mr-3">Ongekoppelde verslagen beëdigd arts</a>
+        <a th:href="@{arts(kbonummer=${kbonummer})}">Aanmelden als arts via epd</a>
     </span>
 
     <hr class="solid">

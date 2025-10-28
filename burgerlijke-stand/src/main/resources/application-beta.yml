@@ -10,7 +10,8 @@ spring:
 dao:
   service:
     connection-url: https://${dao.project}.api.beta-athumi.eu
-    frontend-base-url: https://${dao.project}.beta-athumi.eu/demo
+    frontend-url: https://${dao.project}.beta-athumi.eu
+    frontend-base-url: ${dao.service.frontend-url}/demo
   gemeentes:
     security-method: private_key_jwt
     issuer-uri: https://authenticatie-ti.vlaanderen.be/op
