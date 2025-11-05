@@ -18,7 +18,7 @@
 
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
-## 0.XX.0 - Planned TBC
+## 0.XX.0 - Planned (alle omgevingen) 01/06/2026
 ### Algemeen API
 > [!WARNING]
 > #### Breaking change
