@@ -50,6 +50,22 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
   Status dossier, rijksregisternummer, datum overlijden of achternaam overledene.
   Er kan optioneel nog verder gefilterd worden op de exacte postcode/district van het overlijden.
 
+### Ophalen van gewijzigde dossiers
+
+- **Endpoint**: `/burgerlijke-stand/v1/dossiers/gewijzigd`
+- **Beschrijving**: Gebruik dit endpoint om een lijst van gewijzigde dossiers op te halen. Voor dit endpoint kunnen er filters meegegeven worden als query parameters.
+  - van: datum en tijd (verplicht)
+  - tot: datum en tijd (optioneel)
+
+  Er kan optioneel nog verder gefilterd worden op de exacte postcode/district van het overlijden.
+  Het resultaat bevat zowel de gewijzigde dossiers als dossier gebeurtenissen. Momenteel is enkel de dossier gebeurtenis "VERPLAATST_VAN_LOKAAL_BESTUUR" toegevoegd.
+  Dit is relevant, omdat een dossier dat verplaatst werd van het ene lokaal bestuur naar het andere niet meer zichtbaar is voor het eerste lokaal bestuur.
+  Let er wel op dat wanneer het dossier verplaatst is naar hetzelfde lokaal bestuur, zowel deze gebeurtenis alsook de dossierdetails zichtbaar zijn.
+  De datum van de gebeurtenis ligt dan voor of gelijk met de datum van de laatste wijziging van de dossier details, wanneer deze dus in volgorde worden opgenomen zou dit geen verschil mogen maken.
+  Uses cases voor dit scenario:
+  - Wijzigen van postcode binnen dezelfde gemeente, wanneer je dit endpoint dan bevraagt zonder postcode zie je zowel de details als de gebeurtenis, filteren met postcode geeft slechts een van beiden terug.
+  - Foutief wijzigen van gemeente, en deze wordt in een latere wijziging terug gezet: Beide zijn zichtbaar, echter omdat er voldoende tijd tussenzit zou het hier duidelijk moeten zijn dat het dossier terug beschikbaar werd.
+
 ### Ophalen van het detail van een dossier
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}`
