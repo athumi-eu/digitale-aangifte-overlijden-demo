@@ -13,6 +13,11 @@ Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele ande
     [GET /burgerlijke-stand/v1/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/getDossiers)
 
     **Status:** NIEUW
+2. "Ik wil als ambtenaar burgerlijke stand (ABS) snel op de hoogte zijn van alle nieuwe of gewijzigde dossiers vanaf een bepaalde datum, zodat ik hiervoor de overlijdensakten kan aanmaken en de data kan controleren."
+  
+    [GET /burgerlijke-stand/v1/dossiers/gewijzigd](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst+burgerlijke+stand#/Dossier%20Burgerlijke%20Stand/getGewijzigdeDossiers)
+
+   **van:**  (bv. 2025-11-10T09:38:05.467341+01:00)
 
 2. "Als ABS wil ik dat de overlijdensgegevens nodig voor de opmaak van de overlijdensakte vanuit het platform doorstromen naar mijn toepassing zodat ik efficiënt de schrapping uit het rijksregister/opmaak overlijdensakte kan doen."
 
