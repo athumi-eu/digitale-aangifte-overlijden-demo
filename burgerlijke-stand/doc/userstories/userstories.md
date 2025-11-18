@@ -99,7 +99,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele ande
 
 14. "Als ABS wil ik alle niet-gekoppelde verslagen voor overlijdens in mijn gemeenten kunnen consulteren en hier vlot in kunnen zoeken."
 
-    [GET /burgerlijke-stand/v1/verslagen-beedigd-arts](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/verslag-controller/getVerslagen)
+    [GET /burgerlijke-stand/v2/verslagen-beedigd-arts](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/verslag-controller/getVerslagen)
 
 15. "Als ABS wil ik de details bekijken van een niet-gekoppeld verslag."
 

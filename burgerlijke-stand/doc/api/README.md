@@ -43,7 +43,7 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 
 ### Ophalen van dossiers met filter - v1
 
-> Opmerking: Deze versie van het endpoint is vervangen door /burgerlijke-stand/v2/dossiers, dit endpoint blijft nog 1 maand beschikbaar.
+> Opmerking: Deze versie van het endpoint is vervangen door /burgerlijke-stand/v2/dossiers, dit endpoint blijft beperkt beschikbaar.
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers`
 - **Beschrijving**: Gebruik dit endpoint om een lijst van dossiers op te halen. Voor dit endpoint kunnen er een reeks
@@ -129,12 +129,24 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers/{dossiernummer}/ontkoppel`
 - **Beschrijving**: Gebruik dit endpoint om het dossier weg te halen bij de huidige uitvaartondernemer. Indien dit al voorkomt, is het normaalgezien de uitvaartondernemer zelf die dit doet. Dit endpoint is voorzien om het in uitzonderlijke gevallen door de ABS te laten doen.
 
-### Ophalen van (een) verslag(en)
+### Ophalen van verslagen - v1
+
+> Opmerking: Deze versie van het endpoint is vervangen door /burgerlijke-stand/v2/verslagen-beedigd-arts, dit endpoint blijft beperkt beschikbaar.
 
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts`
+- **Beschrijving**: Gebruik dit endpoint om een lijst van verslagen op te halen.
+
+### Ophalen van verslagen - v2
+
+- **Endpoint**: `/burgerlijke-stand/v2/verslagen-beedigd-arts`
+- **Beschrijving**: Gebruik dit endpoint om een gepagineerde lijst van ongekoppelde verslagen van de Beedigd Arts op te halen.
+  De respons bevat een lijst van verslagen, samen met de metadata van de paginatie.
+  Haal een specifieke pagina op door de pagina nummer als parameter mee te geven.
+
+### Ophalen van een verslag
+
 - **Endpoint**: `/burgerlijke-stand/v1/verslagen-beedigd-arts/{dossiernummer}`
-- **Beschrijving**: Gebruik dit endpoint om een lijst van verslagen of het detail van een individueel verslag te
-  bekijken.
+- **Beschrijving**: Gebruik dit endpoint om het detail van een individueel verslag te bekijken.
 
 ### (ont)koppelen van een verslag
 

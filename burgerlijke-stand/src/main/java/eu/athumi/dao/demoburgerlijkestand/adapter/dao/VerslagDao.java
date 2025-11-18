@@ -1,9 +1,12 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.PageableResultJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.VerslagBeedigdArtsJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.VerslagParser;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,21 +28,20 @@ public class VerslagDao {
 
     @GetMapping(value = "/verslagen")
     public String dossier(Model model, @RequestParam String kbonummer, @RequestParam(required = false) List<String> postcode) {
-        StringBuilder url = new StringBuilder(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts?kbonummer=" + kbonummer);
+        StringBuilder url = new StringBuilder(daoServiceUrl + "/burgerlijke-stand/v2/verslagen-beedigd-arts?kbonummer=" + kbonummer);
         if (postcode != null) {
             for (String code : postcode) {
                 url.append("&postcode=").append(code);
             }
         }
-        VerslagBeedigdArtsJSON[] response = webclientProvider.getRestClient(kbonummer)
+        PageableResultJSON<VerslagBeedigdArtsJSON> response = webclientProvider.getRestClient(kbonummer)
                 .get()
                 .uri(url.toString())
                 .retrieve()
-                .body(VerslagBeedigdArtsJSON[].class);
+                .body(new ParameterizedTypeReference<PageableResultJSON<VerslagBeedigdArtsJSON>>() {});
 
-        List<VerslagBeedigdArtsJSON> verslagen = new ArrayList<>();
         if (!Objects.isNull(response)) {
-            verslagen.addAll(Arrays.stream(response).toList());
+            List<VerslagBeedigdArtsJSON> verslagen = new ArrayList<>(response.getElementen());
             model.addAttribute("verslagen", verslagen.stream().map(VerslagParser::new).toList());
         }
         model.addAttribute("kbonummer", kbonummer);
