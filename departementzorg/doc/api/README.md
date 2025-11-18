@@ -11,7 +11,7 @@ Alle endpoints starten altijd met: `/datadeling/v1`
 
 ### Vaststellingen ophalen
 - **Endpoint**: `/vaststellingen`
-- **Beschrijving**: Gebruik dit endpoint om alle vaststelling op te halen. Het gebruik van de parameter van is verplicht.
+- **Beschrijving**: Gebruik dit endpoint om alle vaststelling op te halen binnen een periode. Het gebruik van de parameter 'van' is verplicht. Als er nog meer elementen beschikbaar zijn, wordt het veld nogElementen op true gezet.
 
 ### Vaststelling ophalen
 - **Endpoint**: `/vaststellingen/{id}`
