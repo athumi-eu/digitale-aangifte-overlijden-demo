@@ -41,11 +41,26 @@ Alle requests moeten voldoen aan het JSON-ld formaat met behulp van de volgende 
 - **Contextbestand**: `/context/AangifteOverlijden.jsonld`
 - **Contextbestand**: `/context/VerslagBeedigdArts.jsonld`
 
-### Ophalen van dossiers met filter
+### Ophalen van dossiers met filter - v1
+
+> Opmerking: Deze versie van het endpoint is vervangen door /burgerlijke-stand/v2/dossiers, dit endpoint blijft nog 1 maand beschikbaar.
 
 - **Endpoint**: `/burgerlijke-stand/v1/dossiers`
 - **Beschrijving**: Gebruik dit endpoint om een lijst van dossiers op te halen. Voor dit endpoint kunnen er een reeks
   query parameters meegegeven worden. Bij het niet meegeven van een status, of bij het opvragen van dossiers in status BEHANDELD, VERWIJDERD of ZWANGERSCHAP_MINDER_DAN_180D
+  moet bijkomend minstens 1 van de volgende parameters worden meegegeven :
+  Status dossier, rijksregisternummer, datum overlijden of achternaam overledene.
+  Er kan optioneel nog verder gefilterd worden op de exacte postcode/district van het overlijden.
+
+
+### Ophalen van dossiers met filter - v2
+
+- **Endpoint**: `/burgerlijke-stand/v2/dossiers`
+- **Beschrijving**: Gebruik dit endpoint om een gepagineerde lijst van dossiers op te halen. De respons bevat
+  een lijst van dossiers, samen de met metadata van de paginatie. Haal een specifieke pagina op door de pagina nummer als
+  parameter mee te geven. Voor dit endpoint kunnen er daarnaast ook een reeks filters meegegeven worden als query
+  parameters. Bij het niet meegeven van een status, of bij het opvragen van dossiers in status
+  BEHANDELD, VERWIJDERD of ZWANGERSCHAP_MINDER_DAN_180D
   moet bijkomend minstens 1 van de volgende parameters worden meegegeven :
   Status dossier, rijksregisternummer, datum overlijden of achternaam overledene.
   Er kan optioneel nog verder gefilterd worden op de exacte postcode/district van het overlijden.

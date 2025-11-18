@@ -3,6 +3,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.PageableResultJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.laatsteWilsbeschikking.LaatsteWilsbeschikkingJSON;
@@ -15,6 +16,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegeve
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +72,7 @@ public class DossierDao {
                                       @RequestParam(required = false) String postcodes,
                                       HttpEntity<Object> httpEntity) {
         var postcode = ofNullable(postcodes).map(p -> p.split(",")).map(List::of).orElse(List.of());
-        String url = daoServiceUrl + "/burgerlijke-stand/v1/dossiers?" + new DefaultUriBuilderFactory().builder().queryParam("kbonummer", kbonummer)
+        String url = daoServiceUrl + "/burgerlijke-stand/v2/dossiers?" + new DefaultUriBuilderFactory().builder().queryParam("kbonummer", kbonummer)
                 .queryParamIfPresent("status", ofNullable(status))
                 .queryParamIfPresent("dossiernummer", ofNullable(dossiernummer))
                 .queryParamIfPresent("rijksregisternummer", ofNullable(rijksregisternummer))
@@ -84,12 +86,12 @@ public class DossierDao {
                 .build().getQuery();
 
         try {
-            DossierBurgerlijkeStandJSON[] response = securedWebClient.getRestClient(kbonummer)
+            PageableResultJSON<DossierBurgerlijkeStandJSON> response = securedWebClient.getRestClient(kbonummer)
                     .get()
                     .uri(url)
                     .retrieve()
-                    .body(DossierBurgerlijkeStandJSON[].class);
-            model.addAttribute("dossiers", response);
+                    .body(new ParameterizedTypeReference<PageableResultJSON<DossierBurgerlijkeStandJSON>>() {});
+            model.addAttribute("dossiers", response.getElementen());
             model.addAttribute("kbonummer", kbonummer);
             session.setAttribute("kbonummer", kbonummer);
             return "dossiers";
@@ -115,7 +117,7 @@ public class DossierDao {
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
         Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient.getRestClient(kbonummer)
                         .get()
-                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id)
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v2/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id)
                         .retrieve()
                         .body(DossierBurgerlijkeStandJSON[].class))
                 .filter(dossier -> Objects.equals(dossier.id(), id))
