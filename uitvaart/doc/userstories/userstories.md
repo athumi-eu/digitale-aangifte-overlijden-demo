@@ -46,7 +46,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
 6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
     
-    [GET/uitvaart/v1/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
+    [GET/uitvaart/v2/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
 
     **Opmerking:** Dit zal enkel dossiers terug geven in de status ‘toegekend’ (reeds opgestart door de uitvaartonderneming en nog niet afgesloten)
 
@@ -60,7 +60,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Melding in lijst**
 
-    [GET/uitvaart/v1/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
+    [GET/uitvaart/v2/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
     
       "heeftActies": true
 

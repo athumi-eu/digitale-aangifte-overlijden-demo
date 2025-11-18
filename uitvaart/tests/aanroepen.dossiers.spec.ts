@@ -5,7 +5,7 @@ import * as process from "node:process";
 describe('ophalen van dossiers met queryparameters api', () => {
     test('Oproepen met kbonummer ', async () => {
         const axios = getAxios()
-        const response = await axios.get(`/uitvaart/v1/dossiers?kbonummer=${process.env.KBONUMMER}`)
+        const response = await axios.get(`/uitvaart/v2/dossiers?kbonummer=${process.env.KBONUMMER}`)
 
         console.log(response.data);
         expect(response.status).toEqual(200);
