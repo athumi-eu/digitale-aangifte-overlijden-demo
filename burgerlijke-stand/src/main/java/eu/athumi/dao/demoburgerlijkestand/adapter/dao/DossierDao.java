@@ -28,7 +28,6 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -90,7 +89,8 @@ public class DossierDao {
                     .get()
                     .uri(url)
                     .retrieve()
-                    .body(new ParameterizedTypeReference<PageableResultJSON<DossierBurgerlijkeStandJSON>>() {});
+                    .body(new ParameterizedTypeReference<PageableResultJSON<DossierBurgerlijkeStandJSON>>() {
+                    });
             model.addAttribute("dossiers", response.getElementen());
             model.addAttribute("kbonummer", kbonummer);
             session.setAttribute("kbonummer", kbonummer);
@@ -115,12 +115,15 @@ public class DossierDao {
 
     @GetMapping(value = "/dossier")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
-        Optional<DossierBurgerlijkeStandJSON> detail = Arrays.stream(securedWebClient.getRestClient(kbonummer)
-                        .get()
-                        .uri(daoServiceUrl + "/burgerlijke-stand/v2/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id)
-                        .retrieve()
-                        .body(DossierBurgerlijkeStandJSON[].class))
-                .filter(dossier -> Objects.equals(dossier.id(), id))
+        PageableResultJSON<DossierBurgerlijkeStandJSON> dossiers = securedWebClient.getRestClient(kbonummer)
+                .get()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v2/dossiers?kbonummer={kbonummer}&dossiernummer={id}", kbonummer, id)
+                .retrieve()
+                .body(new ParameterizedTypeReference<PageableResultJSON<DossierBurgerlijkeStandJSON>>() {
+                });
+
+        assert dossiers != null;
+        Optional<DossierBurgerlijkeStandJSON> detail = dossiers.getElementen().stream().filter(dossier -> Objects.equals(dossier.id(), id))
                 .findFirst();
 
         model.addAttribute("kbonummer", kbonummer);
