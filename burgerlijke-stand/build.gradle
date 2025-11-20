@@ -25,7 +25,7 @@ dependencies {
     implementation 'org.webjars.npm:htmx.org:2.0.2'
     implementation 'org.apache.commons:commons-lang3'
     implementation 'io.micrometer:micrometer-registry-prometheus'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.45'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.47'
 
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
