@@ -23,6 +23,7 @@
     "jsdom": "^24.1.0",
     "prettier": "^3.3.2",
     "typescript": "^5.5.2",
-    "vitest": "^4.0.12"
+    "vitest": "^4.0.12",
+    "js-yaml": "^4.1.1"
   }
 }
