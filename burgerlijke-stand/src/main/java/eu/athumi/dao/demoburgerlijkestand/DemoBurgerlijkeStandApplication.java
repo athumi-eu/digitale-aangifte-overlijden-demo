@@ -14,6 +14,7 @@ public class DemoBurgerlijkeStandApplication {
 
     public static void main(String[] args) {
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Brussels"));
+
         SpringApplication.run(DemoBurgerlijkeStandApplication.class, args);
     }
 
