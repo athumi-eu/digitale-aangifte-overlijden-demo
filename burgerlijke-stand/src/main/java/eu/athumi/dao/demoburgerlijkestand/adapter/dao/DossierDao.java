@@ -156,11 +156,18 @@ public class DossierDao {
     }
 
     private LaatsteWilsbeschikkingJSON getLaatsteWilsbeschikking(URI laatsteWilsbeschikking, String kbonummer) {
-        return securedWebClient.getRestClient(kbonummer)
-                .get()
-                .uri(laatsteWilsbeschikking)
-                .retrieve()
-                .body(LaatsteWilsbeschikkingJSON.class);
+        try {
+            return securedWebClient.getRestClient(kbonummer)
+                    .get()
+                    .uri(laatsteWilsbeschikking)
+                    .retrieve()
+                    .body(LaatsteWilsbeschikkingJSON.class);
+        } catch (HttpClientErrorException ex) {
+            if (ex.getStatusCode().value() == 410) {
+                return null;
+            }
+            throw ex;
+        }
     }
 
     public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL, String kbonummer) {
