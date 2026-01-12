@@ -7,7 +7,8 @@ public record UitvaartOndernemerJSON(String naam,
                                      LocalDateTime opgestartOp,
                                      LocalDateTime afgeslotenOp,
                                      LocalDateTime heropendOp,
-                                     LocalDateTime geannuleerdOp
+                                     LocalDateTime geannuleerdOp,
+                                     ContactPersoonJSON contactPersoon
                                      ){
 
 }
