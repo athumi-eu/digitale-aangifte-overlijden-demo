@@ -5,6 +5,14 @@
 <div th:fragment="afsluiten(id)">
     <div>
         <button th:onclick="afsluitenDossier([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Sluit af</button>
+
+    </div>
+    <div>
+        <label>
+            Reden van burgeraanvraag
+            <input id="reden-burgeraanvraag-input" type="text"/>
+        </label>
+        <button th:onclick="burgeraanvraagAanLoket([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">Burgeraanvraag aan loket</button>
     </div>
 
     <span id="error"></span>
@@ -13,6 +21,25 @@
         function afsluitenDossier(id, frontedBaseUrl) {
             fetch(frontedBaseUrl + '/dossier/' + id + '/afsluiten', {
                 method: "post"
+            }).then(async response => {
+                if (response.status === 400) {
+                    document.getElementById("error").style.display = "block";
+                    document.getElementById("error").innerText = await response.text();
+                } else {
+                    window.location.reload();
+                }
+
+            });
+        }
+
+        function burgeraanvraagAanLoket(id, frontedBaseUrl) {
+            const reden = document.getElementById("reden-burgeraanvraag-input")?.value;
+            fetch(frontedBaseUrl + '/dossier/' + id + '/afsluiten', {
+                method: "post",
+                body: JSON.stringify({
+                    redenAfsluiten: "BEHANDELD_DOOR_BURGERAANVRAAG_AAN_LOKET",
+                    redenBurgeraanvraag: reden,
+                })
             }).then(async response => {
                 if (response.status === 400) {
                     document.getElementById("error").style.display = "block";

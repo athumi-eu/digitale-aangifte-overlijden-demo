@@ -44,7 +44,9 @@ public record DossierBurgerlijkeStandJSON(
         List<DossierGebeurtenis> historiek,
         URI laatsteWilsbeschikkingURI,
         LocalDateTime laatsteBevragingRijksregister,
-        LocalDateTime laatsteWilsbeschikkingGearchiveerdOp
+        LocalDateTime laatsteWilsbeschikkingGearchiveerdOp,
+        String redenAfsluiting,
+        String redenBurgeraanvraag
 ) implements Type {
     @Override
     public String type() {
