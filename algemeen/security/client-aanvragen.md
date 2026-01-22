@@ -22,7 +22,7 @@ De API waarvoor u toegang moet vragen heeft volgende kenmerken
 
 Er wordt verwacht dit te doen via
 * het  OAuth2 Client Credentials Grant (CCG) protocol
-* met authenticatie via een Publieke JWT
+* met authenticatie via een **Publieke JWT**
 * conventie client naam: **eLys [omgeving] \<organisatie> client**
     * omgeving: De omgeving is een van de volgende waardes: beta/acc/prod
     * organisatie: De naam van de organisatie waarvoor de client wordt aangemaakt
