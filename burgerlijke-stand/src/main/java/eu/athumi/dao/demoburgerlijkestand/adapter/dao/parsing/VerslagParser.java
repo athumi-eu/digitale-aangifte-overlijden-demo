@@ -123,7 +123,12 @@ public record VerslagParser(VerslagBeedigdArtsJSON verslag) {
                 || Objects.isNull(verslag.medischeToestand().medischeVerslagen())) {
             return null;
         }
-        return verslag.medischeToestand().medischeVerslagen().stream().filter(mv -> Objects.equals(mv.type(), "MedischVerslagOverlijden")).findFirst().orElse(null);
+        return (MedischVerslagBeedigdArtsJSON) verslag
+                .medischeToestand()
+                .medischeVerslagen()
+                .stream()
+                .filter(mv -> mv instanceof MedischVerslagBeedigdArtsJSON)
+                .findFirst().orElse(null);
     }
 
 

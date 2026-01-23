@@ -51,13 +51,11 @@ public class VerslagDao {
 
     @GetMapping(value = "/verslag")
     public String dossierDetail(Model model, @RequestParam String id, @RequestParam String kbonummer) {
-        Optional<VerslagBeedigdArtsJSON> detail = Arrays.stream(webclientProvider.getRestClient(kbonummer)
+        Optional<VerslagBeedigdArtsJSON> detail = Optional.ofNullable(webclientProvider.getRestClient(kbonummer)
                         .get()
-                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts?kbonummer={kbonummer}", kbonummer)
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/verslagen-beedigd-arts/{id}", id)
                         .retrieve()
-                        .body(VerslagBeedigdArtsJSON[].class))
-                .filter(dossier -> Objects.equals(dossier.id(), id))
-                .findFirst();
+                        .body(VerslagBeedigdArtsJSON.class));
 
         model.addAttribute("kbonummer", kbonummer);
         model.addAttribute("id", id);

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="DemoBurgerlijkeStandApplication test" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <option name="ACTIVE_PROFILES" value="test, secret-dev" />
+    <option name="ACTIVE_PROFILES" value="test, secret-test" />
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
     <module name="burgerlijke-stand.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="eu.athumi.dao.demoburgerlijkestand.DemoBurgerlijkeStandApplication" />
