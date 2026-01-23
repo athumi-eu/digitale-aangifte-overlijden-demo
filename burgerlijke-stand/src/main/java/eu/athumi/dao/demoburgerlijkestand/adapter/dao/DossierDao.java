@@ -5,6 +5,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientPr
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.PageableResultJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.AfsluitenRequestJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.laatsteWilsbeschikking.LaatsteWilsbeschikkingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
@@ -156,11 +157,18 @@ public class DossierDao {
     }
 
     private LaatsteWilsbeschikkingJSON getLaatsteWilsbeschikking(URI laatsteWilsbeschikking, String kbonummer) {
-        return securedWebClient.getRestClient(kbonummer)
-                .get()
-                .uri(laatsteWilsbeschikking)
-                .retrieve()
-                .body(LaatsteWilsbeschikkingJSON.class);
+        try {
+            return securedWebClient.getRestClient(kbonummer)
+                    .get()
+                    .uri(laatsteWilsbeschikking)
+                    .retrieve()
+                    .body(LaatsteWilsbeschikkingJSON.class);
+        } catch (HttpClientErrorException ex) {
+            if (ex.getStatusCode().value() == 410) {
+                return null;
+            }
+            throw ex;
+        }
     }
 
     public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL, String kbonummer) {
@@ -188,13 +196,27 @@ public class DossierDao {
 
     @PostMapping(path = "/dossier/{id}/afsluiten")
     @ResponseBody
-    public ResponseEntity<String> afsluitenDossier(@PathVariable String id, HttpSession session) {
+    public ResponseEntity<String> afsluitenDossier(@PathVariable String id, @RequestBody(required = false) String afsluiten, HttpSession session) {
         try {
-            securedWebClient.getRestClient(session.getAttribute("kbonummer").toString())
-                    .post()
-                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
-                    .retrieve()
-                    .toBodilessEntity();
+            if (afsluiten == null) {
+                securedWebClient.getRestClient(session.getAttribute("kbonummer").toString())
+                        .post()
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
+                        .retrieve()
+                        .toBodilessEntity();
+            } else {
+                AfsluitenRequestJSON afsluitenRequest = objectMapper.readValue(
+                        afsluiten,
+                        AfsluitenRequestJSON.class
+                );
+                securedWebClient.getRestClient(session.getAttribute("kbonummer").toString())
+                        .post()
+                        .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{id}/afsluiten", id)
+                        .body(afsluitenRequest)
+                        .retrieve()
+                        .toBodilessEntity();
+
+            }
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(e.getMessage());
@@ -333,5 +355,5 @@ public class DossierDao {
     public static record Message(String boodschap) {
     }
 
-    ;
+
 }

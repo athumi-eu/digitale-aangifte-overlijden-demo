@@ -73,6 +73,15 @@
         <div class="bottom-spacing" th:text="${parsedDetail.uo().afgeslotenOp()}"></div>
         <div class="label">Dossier heropend door uitvaartondernemer op</div>
         <div class="bottom-spacing" th:text="${parsedDetail.uo().heropendOp()}"></div>
+        <details class="bottom-spacing">
+            <summary>Contactpersoon uitvaartondernemer</summary>
+            <div class="label">Naam</div>
+            <div class="" th:text="${parsedDetail.uo().contactPersoon()?.volledigeNaam()}"></div>
+            <div class="label">Email</div>
+            <div class="" th:text="${parsedDetail.uo().contactPersoon()?.email()}"></div>
+            <div class="label">Vestiging</div>
+            <div class="" th:text="${parsedDetail.uo().contactPersoon()?.vestigingNaam()}"></div>
+        </details>
         <div th:replace="~{fragments/ontkoppelUitvaartOndernemer.html :: ontkoppelUitvaartOndernemer(id=${dossier.id()})}"></div>
     </section>
 
@@ -90,6 +99,15 @@
         <div class="bottom-spacing" th:text="${parsedDetail.vuo().heropendOp()}"></div>
         <div class="label">Dossier geannuleerd op</div>
         <div class="bottom-spacing" th:text="${parsedDetail.vuo().geannuleerdOp()}"></div>
+        <details class="bottom-spacing">
+            <summary>Contactpersoon vorige uitvaartondernemer</summary>
+            <div class="label">Naam</div>
+            <div class="" th:text="${parsedDetail.vuo().contactPersoon()?.volledigeNaam()}"></div>
+            <div class="label">Email</div>
+            <div class="" th:text="${parsedDetail.vuo().contactPersoon()?.email()}"></div>
+            <div class="label">Vestiging</div>
+            <div class="" th:text="${parsedDetail.vuo().contactPersoon()?.vestigingNaam()}"></div>
+        </details>
     </section>
 </div>
 

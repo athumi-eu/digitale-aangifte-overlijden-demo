@@ -21,8 +21,12 @@ public class OverlijdenAfhandelingParser {
 
         Optional.ofNullable(overlijdenAfhandeling.datum())
                 .map(OverlijdenAfhandelingParser::datumAsString)
-                .ifPresent(sb::append);
+                .ifPresent(item -> sb.append(item).append(" | "));
 
+        Optional.ofNullable(overlijdenAfhandeling.gearchiveerdOp())
+                .map(OverlijdenAfhandelingParser::geArchiveerdOpAsString)
+                .ifPresent(sb::append);
+        
         return sb.toString();
     }
 
@@ -36,5 +40,9 @@ public class OverlijdenAfhandelingParser {
 
     private static String datumAsString(LocalDateTime date) {
         return date.format(DateTimeFormatter.ofPattern("'Aangemaakt op' dd/MM/yyyy 'om' HH:mm"));
+    }
+
+    private static String geArchiveerdOpAsString(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("'Gearchiveerd op' dd/MM/yyyy 'om' HH:mm"));
     }
 }

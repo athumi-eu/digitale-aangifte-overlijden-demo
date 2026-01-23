@@ -43,7 +43,10 @@ public record DossierBurgerlijkeStandJSON(
         InlichtingenficheJSON inlichtingenfiche,
         List<DossierGebeurtenis> historiek,
         URI laatsteWilsbeschikkingURI,
-        LocalDateTime laatsteBevragingRijksregister
+        LocalDateTime laatsteBevragingRijksregister,
+        LocalDateTime laatsteWilsbeschikkingGearchiveerdOp,
+        String redenAfsluiting,
+        String redenBurgeraanvraag
 ) implements Type {
     @Override
     public String type() {
@@ -68,6 +71,10 @@ public record DossierBurgerlijkeStandJSON(
 
     public String parsedLaatsteBevragingRijksregister() {
         return parseLocalDateTime(laatsteBevragingRijksregister);
+    }
+
+    public String parsedlaatsteWilsbeschikkingGearchiveerdOp() {
+        return parseLocalDateTime(laatsteWilsbeschikkingGearchiveerdOp);
     }
 
     public boolean hasStatus(String status) {

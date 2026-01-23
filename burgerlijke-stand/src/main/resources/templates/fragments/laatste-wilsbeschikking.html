@@ -1,8 +1,10 @@
-<div th:fragment="laatsteWilsbeschikking(id,laatsteBevragingRijksregister, laatsteWilsbeschikking)">
+<div th:fragment="laatsteWilsbeschikking(id,laatsteBevragingRijksregister, laatsteWilsbeschikking, laatsteWilsbeschikkingGearchiveerdOp)">
 
     <h2>Laatste Wilsbeschikking</h2>
     <div class="label">Datum bevraging bron</div>
     <div class="bottom-spacing" th:text="${laatsteBevragingRijksregister}">-</div>
+    <div th:if="laatsteWilsbeschikkingGearchiveerdOp" class="label">Gearchiveerd op</div>
+    <div th:if="laatsteWilsbeschikkingGearchiveerdOp" class="bottom-spacing" th:text="${laatsteWilsbeschikkingGearchiveerdOp}">-</div>
     <section th:if="${laatsteWilsbeschikking}">
         <div class="grid-container-3">
             <section class="grid-column">

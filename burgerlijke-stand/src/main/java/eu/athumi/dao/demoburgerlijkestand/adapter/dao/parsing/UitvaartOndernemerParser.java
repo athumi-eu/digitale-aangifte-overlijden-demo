@@ -20,6 +20,13 @@ public record UitvaartOndernemerParser(UitvaartOndernemerJSON json) {
         return json.kboNummer();
     }
 
+    public ContactPersoonParser contactPersoon() {
+        if (Objects.isNull(json) || Objects.isNull(json.contactPersoon())) {
+            return null;
+        }
+        return new ContactPersoonParser(json.contactPersoon());
+    }
+
     public String opgestartOp() {
         if (Objects.isNull(json) || Objects.isNull(json.opgestartOp())) {
             return "/";

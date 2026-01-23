@@ -125,4 +125,12 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return bijkomendMedischAttest.aardOverlijdenBijkomendMedischAttestType().toString();
     }
 
+    public String redenAfsluiting() {
+        return Objects.isNull(dossier.redenAfsluiting()) ? "" : dossier.redenAfsluiting();
+    }
+
+    public String redenBurgeraanvraag() {
+        return Objects.isNull(dossier.redenBurgeraanvraag()) ? "" : dossier.redenBurgeraanvraag();
+    }
+
 }
