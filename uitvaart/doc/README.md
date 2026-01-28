@@ -8,7 +8,7 @@ De [User stories](userstories/userstories.md) pagina beschrijft welke user stori
 ## API documentatie
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
 
-ALs voorbeeld staat [hier]([api/README.md](https://athumi.atlassian.net/wiki/external/YmI2NTQyMzNhMjM0NGQyZDhlZWIwNzdhY2FkMTU5OWI)) beschreven hoe de verschillende enum velden in de eLys GUI gebruikt worden.
+Als voorbeeld staat [hier]([api/README.md](https://athumi.atlassian.net/wiki/external/YmI2NTQyMzNhMjM0NGQyZDhlZWIwNzdhY2FkMTU5OWI)) beschreven hoe de verschillende enum velden in de eLys GUI gebruikt worden.
 
 ## Security
 Info over authenticeren en vereisten naar logging toe staan [hier](../../algemeen/security/README.md).
