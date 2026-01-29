@@ -26,4 +26,4 @@ Hieronder vindt u sequentie of state diagrammen terug die de belangrijkste proce
 
 ![dossier statussen uo](../../../static/statussen-dossier-uo.jpg)
 
-![dossier statussen lb](../../../static/statussen-dossier-lb.jpg)
+![dossier statussen lb](../../../static/statussen-dossier-lb.png)
