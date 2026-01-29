@@ -21,7 +21,8 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 ### Verklaring transport
 - **Endpoint**: `/dossiers/{dossierNummer}/transport-view`
 - **Beschrijving**: Gebruik dit endpoint om voor een specifiek dossier de verklaring transport op te halen. Wanneer het dossier nog niet opgestart is kan elke uitvaartonderneming hier aan. 
-  Wanneer het wel al opgestart is, is enkel de ondermeing die het dossier heeft opgestart gemachtigd om het dossier op te halen.
+  Wanneer het wel al opgestart is, is enkel de onderneming die het dossier heeft opgestart gemachtigd om het dossier op te halen.
+  Het downloadbare document via de link in de API is het officiële bewijs dat het transport (ondern voorwaarden) mag gebeuren.
 
 ### Wallet betaling uitvoeren
 - **Endpoint**: `/betaling/wallet`
@@ -90,6 +91,10 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 ### Gemeentes van begraven
 - **Endpoint**: `/metadata/v1/gemeenten/hoofdgemeenten`
 - **Beschrijving**: Gebruik dit endpoint om de hoofdgemeenten op te halen voor het invullen van de inlichtingenfiche. Dit zijn ook gemeentes van begraven. 
+
+### Beroepen
+- **Endpoint**: `/metadata/v1/beroepen`
+- **Beschrijving**: Gebruik dit endpoint om de beroepen op te halen voor het invullen van de inlichtingenfiche. 
 
 ## Validatiefouten
 

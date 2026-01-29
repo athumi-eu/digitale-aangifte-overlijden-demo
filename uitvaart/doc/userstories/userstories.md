@@ -37,6 +37,8 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Opmerking:** Dit is zowel mogelijk voor toegekende als niet-toegekende dossiers.
 
+    **Opmerking:** Het is belangrijk dat de gebruiker de link uit het endpoint kan downloaden. Dit is het officiële bewijs dat het transport (onder voorwaarden) mag gebeuren.
+
 
 4. “Als uitvaartondernemer moet ik na de opstart van een dossier een platformvergoeding betalen vooraleer ik verder kan gaan met mijn acties.”
 
