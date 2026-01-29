@@ -5,7 +5,7 @@ Achtergrondinformatie over het platform en de toepassing voor de uitvaartonderne
 
 De [User stories](userstories/userstories.md) pagina beschrijft welke user stories in de toepassing voorzien moeten worden, en welke eLys API's hiervoor gebruikt kunnen worden. 
 
-De [algemene voorwaarden](https://docs.athumi.eu/elys/help/gebruiksvoorwaarden-elys) van eLys dienen geïntereerd te worden in de toepassing van de integrator.
+De [algemene voorwaarden](https://docs.athumi.eu/elys/help/gebruiksvoorwaarden-elys) van eLys dienen geïntegreerd te worden in de toepassing van de integrator.
 
 ## API documentatie
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
