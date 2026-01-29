@@ -24,12 +24,14 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Opmerking:** Deze request zou slechts 1 antwoord mogen terug geven, behalve in het uitzonderlijke geval dat er 2 overlijdens zijn met dezelfde achternaam, niscode en datum overlijden.
 
-    **Opmerking:** Toegekende of behandelde dossiers aan/door een andere uitvaartonderneming zullen niet opgehaald worden.
+    **Opmerking:** Dossiers reeds toegekend aan een andere uitvaartonderneming zullen getoond worden met een aparte aanduiding.
+
+    **Opmerking:** Behandelde dossiers door een andere uitvaartonderneming zullen niet opgehaald worden.
 
     **Opmerking:** Deze endpoint geeft een gelimiteerde set aan gegevens terug. Gebruik endpoint GET/uitvaart/v1/dossiers/{dossierNummer} voor het ophalen van meer details.
 
 
-3. “Als uitvaartondernemer kan ik van een overlijden de toelating tot transport opvragen, zodat ik aan de politie (of aan andere autoriteiten) kan aantonen dat ik het lichaam mag vervoeren bij een controle.”
+3. “Als uitvaartondernemer kan ik van een overlijden de verklaring transport opvragen, zodat ik aan de politie (of aan andere autoriteiten) kan aantonen dat ik het lichaam mag vervoeren bij een controle.”
 
     [GET/uitvaart/v1/dossiers/{dossierNummer}/transport-view](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getTransportView)
 
@@ -40,11 +42,25 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/start-met-betaling](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Dossier%20Uitvaart/startMetBetaling)
 
+    [GET/uitvaart/v1/betaling/{betalingId}/controleer-betaling](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart+sector#/Betaling/controleerBetaling)
+
+    [POST/uitvaart/v1/betaling/wallet](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Betaling/startWalletBetaling)
+
 5. “Als uitvaartondernemer kan ik een betaling via wallet doen om het dossier op te starten.”
 
-   [POST/uitvaart/v1/betaling/wallet](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Betaling/startWalletBetaling)
+    **Via de Athumi Account web applicatie**
 
-6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
+    [POST/uitvaart/v1/dossiers/{dossierNummer}/start-met-betaling](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Dossier%20Uitvaart/startMetBetaling)
+
+    [GET/uitvaart/v1/betaling/{betalingId}/controleer-betaling](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart+sector#/Betaling/controleerBetaling)
+
+    **Via API**
+
+    [POST/uitvaart/v1/betaling/wallet](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Betaling/startWalletBetaling)
+
+    **Opmerking:** Lees [deze pagina]() voor meer info.
+
+6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'Mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
     
     [GET/uitvaart/v2/dossiers](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/getDossiersByRijksregisternummer_1_1_1)
 
@@ -70,7 +86,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
       "acties": ["string"]
 
-    **Opmerking:** mogelijke acties: Een overlijdensakte werd opgeladen/gewijzigd; een toestemming werd opgeladen/gewijzigd; een rijksregisternummer van de overledene werd toegevoegd aan het dossier (indien niet ingevuld door de arts in de vaststelling); de bronbevraging is gebeurd voor socio-economische gegevens van de ouders (vader/meemoeder).
+    **Opmerking:** mogelijke acties: Een overlijdensakte werd opgeladen/gewijzigd; een toestemming werd opgeladen/gewijzigd; een rijksregisternummer van de overledene werd toegevoegd aan het dossier (indien niet ingevuld door de arts in de vaststelling); de bronbevraging is gebeurd voor socio-economische gegevens van de ouders (vader/meemoeder); het verslag beëdigd arts werd gekoppeld.
 
 9. “Ik kan als uitvaartondernemer aangeven dat ik bovenstaande melding heb gezien, zodat deze verdwijnt voor alle gebruikers binnen de onderneming.”
 
@@ -80,8 +96,6 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 10. “Als uitvaartondernemer wil ik een dossier afsluiten, zodat: aan het lokaal bestuur wordt doorgegeven dat ik klaar ben met de uitvaartafhandeling; dit dossier niet meer in mijn lijst met dossiers staat.”
 
     [POST/uitvaart/v1/dossiers/{dossierNummer}/behandeld](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/dossier-uitvaart-controller/dossierBehandeld)
-
-    **Opmerking:** Via parameter dossiernummer
 
     **Opmerking:** Voorwaarden voor afsluiten dossier: overlijdensakte(n) aanwezig, inlichtingenfiche uitvaart ingediend, toestemming aanwezig, socio-economische gegevens ingediend
 
@@ -99,11 +113,13 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     **Types:** NATIONALE_AKTE, INTERNATIONALE_AKTE
 
+    **Opmerking:** Deze documenten worden na 90 dagen gearchiveerd, dan geeft het endpoint een 410 terug.
 
 13. "“Als uitvaartondernemer wil ik voor een overleden persoon de aanwezigheid en inhoud van de laatste wilsbeschikking bekijken zodat ik hiermee rekening kan houden voor de aanvraag tot begraven/crematie.”
 
     [GET/uitvaart/v1/laatste-wilsbeschikking/{id}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart+sector#/Laatste%20wilsbeschikking%20Uitvaart/getLaatsteWilsbeschikking)
 
+    **Opmerking:** De laatste wilsbeschikking wordt na 90 dagen gearchiveerd, dan geeft het endpoint een 410 terug.
 
 14. “Als uitvaartondernemer, wil ik de aanvraag tot toestemming begraven / crematie inclusief bijhorende documenten (PDF, Word, JPEG, PNG) kunnen invullen via het platform, zodat de burgerlijke stand van de gemeente van overlijden deze toestemming kan opmaken aan de hand van de ingediende aanvraag.”
 
@@ -116,8 +132,6 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
     [POST/uitvaart/v1/dossiers/{dossierNummer}/inlichtingenfiche](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/inlichtingenfiche-uitvaart-controller/createInlichtingenficheUitvaart)
 
     **Opmerking:** Bij opname vader/meemoeder is een ondertekend document verzoek opname als vader of meemoeder noodzakelijk.
-
-    **Opmerking:** Naam en voornaam kind nog te ontwikkelen
 
     **Opmerking:** Alle data (metadata + documenten) van de inlichtingenfiche uitvaart (bovenstaande 2 user stories) worden als 1 geheel doorgestuurd zodat alles in 1 transactie kan uitgevoerd worden.
 

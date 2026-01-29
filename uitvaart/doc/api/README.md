@@ -2,17 +2,39 @@
 
 ## Inleiding
 
-Dit document legt uit hoe je de API van het eLys platform kunt gebruiken om een dossier af te handelen in de context van de uitvaartondernemer.
+Dit document legt uit hoe je de API van het eLys platform kunt gebruiken om een dossier af te handelen in de context van de uitvaartondernemer. Ze worden hier (ongeveer) in volgorde van het te volgen proces vermeld.
 
 Voor meer info omtrent de security kan je [hier meer lezen](../../../algemeen/security/README.md)
 
 ## Endpoints
-Alle endpoints starten altijd met: `/uitvaart/v1`
+Alle endpoints starten altijd met: `/uitvaart/`
 
 ### Swagger
 De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te vinden op:
-- **Locatie**: `/swagger-ui/index.html`
 - [**Beta**](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector)
+
+### Overlijdens ophalen
+- **Endpoint**: `/overlijdens`
+- **Beschrijving**: Gebruik dit endpoint om alle nog niet geclaimde dossiers op te halen. Dit kan door te zoeken op basis van:
+  Rijksregisternummer, dossiernummer, of achternaam samen met niscode van gemeente van overlijden en datum van overlijden.
+
+### Verklaring transport
+- **Endpoint**: `/dossiers/{dossierNummer}/transport-view`
+- **Beschrijving**: Gebruik dit endpoint om voor een specifiek dossier de verklaring transport op te halen. Wanneer het dossier nog niet opgestart is kan elke uitvaartonderneming hier aan. 
+  Wanneer het wel al opgestart is, is enkel de ondermeing die het dossier heeft opgestart gemachtigd om het dossier op te halen.
+
+### Wallet betaling uitvoeren
+- **Endpoint**: `/betaling/wallet`
+- **Beschrijving**: Dit endpoint maakt het mogelijk om een walletbetaling uit te voeren voor de opstart van een dossier.
+  Als uitvaartondernemer moet je, na het opstarten van een dossier, eerst een betaling uitvoeren vooraleer je verdere acties kan ondernemen in het dossier.
+
+### Betaalsessie bij Athumi Account opstarten
+- **Endpoint**: `/dossiers/{dossierNummer}/start-met-betaling`
+- **Beschrijving**: Met dit endpoint wordt een betaalsessie gestart bij Athumi Account. De URL die teruggegeven wordt, dient gebruikt te worden om de betaling af te ronden in de Athumi Account web applicatie.
+
+### Betaling status controleren
+- **Endpoint**: `/betaling/{betalingId}/controleer-betaling`
+- **Beschrijving**: Met dit endpoint kan je de status van een betaling voor een specifiek dossier controleren. Status kan een van de volgende zijn: GESTART, SUCCESVOL, GEFAALD of DUBBELE_BETALING. Deze MOET uitgevoerd worden nadat een betaling werd afgerond via de Athumi Account web applicatie.
 
 ### Dossiers ophalen
 - **Endpoint**: `/dossiers`
@@ -20,71 +42,54 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
 
 ### Dossier ophalen
 - **Endpoint**: `/dossiers/{dossierNummer}`
-- **Beschrijving**: Gebruik dit endpoint om een specifiek dossier op te halen. Let op dit zijn enkel dossiers gekoppeld aan de client.
+- **Beschrijving**: Gebruik dit endpoint om een specifiek dossier op te halen. Let op dit zijn enkel dossiers gekoppeld aan de onderneming.
 
-### Overlijdens ophalen
-- **Endpoint**: `/overlijdens`
-- **Beschrijving**: Gebruik dit endpoint om alle nog niet geclaimde dossiers op te halen. Dit kan door te zoeken op basis van:
-  Rijksregisternummer, dossiernummer, of achternaam samen met niscode van gemeente van overlijden en datum van overlijden.
-
-### Toelating transport Dossier
-- **Endpoint**: `/dossiers/{dossierNummer}/transport-view`
-- **Beschrijving**: Gebruik dit endpoint om voor een specifiek dossier de toelating transport op te halen. Wanneer het dossier nog niet opgestart is kan elke uitvaartclient hier aan. 
-  Wanneer het wel al opgestart is, is enkel de client die het dossier heeft opgestart gemachtigd om het dossier op te halen.
-
-### Documenten van een Dossier bekijken
+### Documenten van een dossier bekijken
 - **Endpoint**: `/dossiers/{dossierNummer}/documenten/{type}`
 - **Beschrijving**: Dit endpoint maakt het mogelijk de documenten van een dossier te bekijken, mogelijke types: VERZOEK_NABESTAANDE, 
   TOESTEMMING_EIGENAAR, VERZOEK_NABESTAANDE_AS_PARTNER, VERZOEK_OPNAME_ALS_VADER_OF_MEEMOEDER, NATIONALE_AKTE, INTERNATIONALE_AKTE, TOESTEMMING_BEGRAFENIS_OF_CREMATIE
-
-### Dossier van status wisselen
-- **Endpoint**: `/dossiers/{dossierNummer}/{status}`
-- **Beschrijving**: Dit endpoint maakt het mogelijk het dossier in een andere status te krijgen, de statussen zijn:
-  - start-met-betaling: opstarten van de betaling voor een dossier
-  - behandeld: afsluiten van een dossier
-  - heropen: een afgesloten dossier heropenen
-  - annuleer: een opgestart dossier annuleren, hierbij wordt de uitvaart ondernemer van het dossier verwijderd alsook de inlichtingen fiche.
-    Wanneer het dossier opnieuw wordt opgestart wordt er ook verwacht dat er opnieuw een betaling is. Er wordt geen terugbetaling voorzien. 
-
-
-### Wallet betaling uitvoeren
-- **Endpoint**: `/betaling/wallet`
-- **Beschrijving**: Dit endpoint maakt het mogelijk om een walletbetaling uit te voeren voor de opstart van een dossier.
-  Als uitvaartondernemer moet je, na het opstarten van een dossier, eerst een betaling uitvoeren vooraleer je verdere acties kan ondernemen in het dossier.
-
-
-### Betaling status controleren
-- **Endpoint**: `/betaling/{betalingId}/controleer-betaling`
-- **Beschrijving**: Met dit endpoint kan je de status van een betaling voor een specifiek dossier controleren. Status kan een van de volgende zijn: GESTART, SUCCESVOL, GEFAALD of DUBBELE_BETALING.
-
 
 ### Recente acties verwijderen
 - **Endpoint**: `/dossiers/{dossierNummer}/verwijder-recente-acties`
 - **Beschrijving**: Op het dossier worden een aantal recente acties getoond zodat het voor de uitvaartondernemer eenvoudig is om dit dossier verder op te nemen.
  Deze acties kunnen, over de organisatie heen, verwijderd worden zodat het duidelijk is wanneer nieuwe gelijkaardige acties gebeurd zijn.
 
+### Laatste wilsbeschikking
+- **Endpoint**: `/laatste-wilsbeschikking/{id}`
+- **Beschrijving**: Gebruik dit endpoint om de laatste wilsbeschikking op te halen voor een dossier.
+
 ### Inlichtingen fiche opladen, updaten en verkrijgen
 - **Endpoint**: `/dossiers/{dossierNummer}/inlichtingenfiche`
 - **Beschrijving**: De inlichtingen fiche kan als een multipart opgestuurd worden naar dit endpoint. 
   Bij een Post wordt er een creatie gedaan van een nieuwe inlichtingenfiche, bij een Put een update en bij een Get wordt de inlichtingen fiche doorgestuurd.
   Bij het updaten van een inlichtingen fiche wordt er verwacht dat de documenten die verwijderd werden meegegeven worden in een documentRemoveList. Documenten die niet meer kunnen voorkomen worden automatisch verwijderd.
+  Bekijk het [schema](../diagrams/inlichtingenfiche.jpg) met de opbouw van de aanvraag toestemming/crematie of de Athumi GUI om te weten welke documenten wanneer verwacht worden: verzoek nabestaanden, toestemming eigenaar, verzoek nabestaanden as partner.
 
 ### Socio economische gegevens opladen en verkrijgen
 - **Endpoint**: `/dossiers/{dossierNummer}/socio-economische-gegevens`
 - **Beschrijving**: De socio economische gegevens kunnen opgehaald worden met de Get en aangepast worden met de Put.  
   De gegevens worden vooringevuld met de gegevens die we hebben vanuit de verschillende bronnen.
 
-### Laatste wilsbeschikking
-- **Endpoint**: `/laatste-wilsbeschikking/{id}`
-- **Beschrijving**: Gebruik dit endpoint om de laatste wilsbeschikking op te halen voor een dossier.
+### Dossier afsluiten
+- **Endpoint**: `/dossiers/{dossierNummer}/behandeld`
+- **Beschrijving**: Dit endpoint maakt het mogelijk het dossier af te sluiten
+
+### Dossier heropenen
+- **Endpoint**: `/dossiers/{dossierNummer}/heropen`
+- **Beschrijving**: Dit endpoint maakt het mogelijk het dossier te heropenen na afsluiten.
+
+### Dossier annuleren
+- **Endpoint**: `/dossiers/{dossierNummer}/annuleer`
+- **Beschrijving**: Dit endpoint maakt het mogelijk het dossier te annuleren. Dit zal het dossier opnieuw beschikbaar maken voor andere uitvaartondernemingen.
+    Wanneer het dossier opnieuw wordt opgestart wordt er ook verwacht dat er opnieuw een betaling is. Er wordt geen terugbetaling voorzien. 
 
 ### Crematoria
 - **Endpoint**: `/metadata/v1/crematorium`
-- **Beschrijving**: Gebruik dit endpoint om een lijst van gekende crematoria op te halen.
+- **Beschrijving**: Gebruik dit endpoint om een lijst van gekende crematoria op te halen voor het invullen van de inlichtingenfiche.
 
 ### Gemeentes van begraven
 - **Endpoint**: `/metadata/v1/gemeenten/hoofdgemeenten`
-- **Beschrijving**: Gebruik dit endpoint om de hoofdgemeenten op te halen, dit zijn ook gemeentes van begraven. 
+- **Beschrijving**: Gebruik dit endpoint om de hoofdgemeenten op te halen voor het invullen van de inlichtingenfiche. Dit zijn ook gemeentes van begraven. 
 
 ## Validatiefouten
 
@@ -95,3 +100,7 @@ Als er validatiefouten optreden bij het versturen van een request, zal de API ee
 Een lijst met error codes kan hier worden teruggevonden.
 
 [Error codes uitvaartondernemer](https://athumi.atlassian.net/wiki/external/ZDA4OTU0YTE2NzI1NDExMGExZjlhMzRjNTJlZjcxNmM)
+
+## Labels enums
+
+Als voorbeeld staat [hier](https://athumi.atlassian.net/wiki/external/YmI2NTQyMzNhMjM0NGQyZDhlZWIwNzdhY2FkMTU5OWI) beschreven hoe de verschillende enum velden in de eLys GUI gebruikt worden.
