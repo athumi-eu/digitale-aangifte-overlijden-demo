@@ -10,6 +10,8 @@ De [algemene voorwaarden](https://docs.athumi.eu/elys/help/gebruiksvoorwaarden-e
 ## API documentatie
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
 
+Meer info over het opzetten van de betaling vindt u [hier](https://athumi.atlassian.net/wiki/external/ODlkNWVjYzBmNzc2NDYwZmI2Y2M5ZDZmNDUzMDBhMzU).
+
 Als voorbeeld staat [hier](https://athumi.atlassian.net/wiki/external/YmI2NTQyMzNhMjM0NGQyZDhlZWIwNzdhY2FkMTU5OWI) beschreven hoe de verschillende enum velden in de eLys GUI gebruikt worden.
 
 ## Security

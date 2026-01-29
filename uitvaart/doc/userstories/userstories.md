@@ -58,7 +58,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden voor de uitvaar
 
     [POST/uitvaart/v1/betaling/wallet](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Uitvaart%20sector#/Betaling/startWalletBetaling)
 
-    **Opmerking:** Lees [deze pagina]() voor meer info.
+    **Opmerking:** Lees [deze pagina](https://athumi.atlassian.net/wiki/external/ODlkNWVjYzBmNzc2NDYwZmI2Y2M5ZDZmNDUzMDBhMzU) voor meer info.
 
 6. "Als uitvaartondernemer kan ik een eenvoudig overzicht van 'Mijn dossiers' raadplegen zodat: ik niet steeds opnieuw moet zoeken naar een dossier; ik kan zoeken en sorteren in mijn dossiers op bepaalde parameters.”
     
