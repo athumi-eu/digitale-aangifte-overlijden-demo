@@ -90,6 +90,17 @@ public class FileDao {
                 .toBodilessEntity();
     }
 
+    @DeleteMapping("/toestemming/delete")
+    @ResponseBody
+    public void deleteFile(@RequestParam String id, @SessionAttribute String kbonummer) {
+        securedWebClient
+                .getRestClient(kbonummer)
+                .delete()
+                .uri(daoServiceUrl + "/burgerlijke-stand/v1/dossiers/{dossierId}/toestemming", id)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
     @GetMapping(value = "/toestemming/download", produces = "application/pdf")
     @ResponseBody
     public byte[] downloadFile(@RequestParam String id, @SessionAttribute String kbonummer) {

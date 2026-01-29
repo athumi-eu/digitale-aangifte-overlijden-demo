@@ -37,7 +37,7 @@
 
     <div th:replace="~{fragments/statistischegegevens/statistische-gegevens-jonger-dan-1-jaar.html :: statistische-gegevens(id=${dossier.id()},statistischeGegevens=${statistischeGegevens})}"></div>
 
-    <div th:replace="~{fragments/file-upload :: file-upload(dossier=${dossier}, parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
+    <div th:replace="~{fragments/files :: files(dossier=${dossier}, parsedDetail=${parsedDetail.detailsOverlijden()})}"></div>
 </div>
 
 </body>

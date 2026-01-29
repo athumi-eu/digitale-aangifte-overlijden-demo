@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="file-upload(dossier, parsedDetail)">
+<div th:fragment="files(dossier, parsedDetail)">
     <h2>Documenten</h2>
     <section class="grid-column">
         <h3>Overlijdensaktes</h3>
@@ -48,6 +48,7 @@
                     <a th:href="@{toestemming/download(id=${dossier.id()})}" target="_blank">Download</a>
                 </div>
             </form>
+            <button th:onclick="verwijderToestemming([[${dossier.id()}]]);">Verwijder toestemming</button>
         </section>
         <script>
             async function getErrorMessage(response) {
@@ -81,6 +82,20 @@
                     form.querySelector("span").innerText = await getMessage(response, formData, fileFieldName);
                 });
             }
+
+
+            function verwijderToestemming(id) {
+                fetch(`/toestemming/delete?id=${id}`, {
+                    method: "DELETE"
+                }).then(async response => {
+                    if (!response.ok) {
+                        alert(await response.text());
+                    } else {
+                        window.location.reload();
+                    }
+                });
+            }
+
         </script>
     </section>
 </div>
