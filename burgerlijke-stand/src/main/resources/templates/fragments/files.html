@@ -48,7 +48,7 @@
                     <a th:href="@{toestemming/download(id=${dossier.id()})}" target="_blank">Download</a>
                 </div>
             </form>
-            <button th:onclick="verwijderToestemming([[${dossier.id()}]]);">Verwijder toestemming</button>
+            <button th:onclick="verwijderToestemming([[${dossier.id()}]], [[${@globalVariables.frontedBaseUrl}]]);">Verwijder toestemming</button>
         </section>
         <script>
             async function getErrorMessage(response) {
@@ -84,8 +84,8 @@
             }
 
 
-            function verwijderToestemming(id) {
-                fetch(`/toestemming/delete?id=${id}`, {
+            function verwijderToestemming(id,frontendBaseUrl) {
+                fetch(`${frontendBaseUrl}/toestemming/delete?id=${id}`, {
                     method: "DELETE"
                 }).then(async response => {
                     if (!response.ok) {
