@@ -10,11 +10,17 @@ Dit zijn de **minimale** user stories die voorzien moeten worden.
 
 1. "Vooraleer een overleden persoon te mogen cremeren, wil ik als crematorium de toestemming tot crematie en de bijhorende gestructureerde data nodig voor het crematieregister kunnen ophalen bij het eLys-platform. Dit doe ik op basis van het dossiernummer dat ik doorkrijg (buiten het platform) van de uitvaartondernemer. Op basis van de uit het platform opgehaalde informatie, kan ik valideren of de data van de overleden persoon, de uitvaartonderneming en de gekozen asbestemming overeenkomt met de informatie uit mijn systeem."
 
+    Om de basisgegevens over het dossier op te halen (al voor de aanvraag tot toestemming werd ingediend):
+
+    [GET /crematorium/v1/overlijden/{dossiernummer}](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Crematorium#/Overlijdens/getOverlijdenByDossiernummer)
+
+    Om de gegevens voor de toestemming op te halen (na aanvraag door uitvaartondernemer):
+
     [GET /crematorium/v1/toestemmingen](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Crematorium#/crematorium-toestemming-controller/byPeriode_1)
 
     Met gebruik van de dossiernummer parameter.
 
-    Indien enkel het document nodig is, kan volgend endpoint gebruikt worden:
+    Om het document zelf op te halen:
 
     [GET /crematorium/v1/toestemmingen/{dossiernummer}/toestemming](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Crematorium#/crematorium-toestemming-controller/downloadDocument)
 
