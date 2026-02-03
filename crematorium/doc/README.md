@@ -6,7 +6,7 @@ Achtergrondinformatie over het platform kan [hier](userstories/context.md) gevon
 De [User stories](userstories/userstories.md) pagina beschrijft welke user stories in de toepassing voorzien moeten worden, en welke eLys API's hiervoor gebruikt kunnen worden. 
 
 ## API documentatie
-Een beschrijving van de functionaliteit staat [hier](api/beschrijving.md).
+Een beschrijving van de functionaliteit staat [hier](https://athumi.atlassian.net/wiki/external/YmIxMTFhNjY5NGFhNGQzOGIxNmZmMjgwN2U3YTJjZmU).
 
 Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
 
