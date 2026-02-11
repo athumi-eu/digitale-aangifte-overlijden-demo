@@ -81,7 +81,7 @@ Dit zijn de **minimale** user stories die voorzien moeten worden. Eventuele ande
 
        [POST /burgerlijke-stand/v1/dossiers/{dossiernummer}/toestemming](https://elys.api.beta-athumi.eu/swagger-ui/index.html?urls.primaryName=Dienst%20burgerlijke%20stand#/dossier-burgerlijke-stand-controller/uploadToestemming)
 
-    **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_toestemmingbegravencrematie.docx) beschikbaar. De layout van dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
+    **Opmerking:** De inhoud van het toestemmingsdocument ligt vast en hiervan is een [sjabloon](../../../static/Sjabloon_Vlaanderen_toestemmingbegravencrematie.docx) beschikbaar. De layout van dit sjabloon mag per gemeente gewijzigd worden, maar de inhoud mag niet wijzigen.
 
 13. “Als ABS kan ik de toestemming bekijken die in het platform is opgeladen.”
 
