@@ -72,7 +72,11 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
     public TableRow oorspronkelijkeNationaliteit() {
         return new TableRow(
                 "Oorspronkelijke nationaliteit(en)",
-                "-",
+                ofNullable(ouderRR).map(OuderJSON::oorspronkelijkeNationaliteit).map(nationaliteiten ->
+                                nationaliteiten.stream()
+                                        .map(NationaliteitJSON::naam)
+                                        .collect(Collectors.joining(", ")))
+                        .orElse("-"),
                 "-",
                 "-",
                 "-",

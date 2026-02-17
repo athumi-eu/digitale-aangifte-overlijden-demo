@@ -1,7 +1,5 @@
 logging:
   config: classpath:logging/logback-spring-dev.xml
-
-
 dao:
   service:
     connection-url: http://localhost:8090
@@ -10,10 +8,3 @@ dao:
   gemeentes:
     security-method: client_secret
     token-uri: http://localhost:8090/oauth2/token
-    config:
-      leuven:
-        naam: Leuven
-        kbonummer: '0207521503'
-      oostende:
-        naam: Oostende
-        kbonummer: '0207436775'
