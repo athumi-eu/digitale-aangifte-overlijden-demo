@@ -19,7 +19,7 @@ public record LaatsteWilsbeschikkingJSON(
         Begraafplaats begraafplaats,
         Contract contract
 ) {
-    public record Contract(Organisatie organisatie, String nummer, LocalDate datum) {
+    public record Contract(Organisatie organisatie, String nummer, String datum) {
     }
 
     public record Organisatie(String kboNummer) {
@@ -42,7 +42,7 @@ public record LaatsteWilsbeschikkingJSON(
 
     public String parsedDatumVanContract() {
         return ofNullable(contract).map(item -> item.datum)
-                .map(TijdstipParser::parseLocalDate)
+                .map(TijdstipParser::parseDateString)
                 .orElse(null);
     }
 
