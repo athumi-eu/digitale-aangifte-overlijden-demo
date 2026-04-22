@@ -18,62 +18,8 @@
 
 [prd-actuator]: https://elys.api.athumi.eu/actuator/info
 
-## 0.XX.0 - Planned (alle omgevingen) 01/06/2026
-### Algemeen API
 > [!WARNING]
-> #### Breaking change
-> In de toekomst zal enkel TLS v1.3 ondersteund worden. 
-
----
-## 0.33.0 - Planned (beta) 26/11/2025
-### Burgerlijke stand lokaal bestuur:
-Gewijzigde dossiers kunnen gepagineerd opgehaald worden via een nieuw endpoint /burgerlijke-stand/v1/dossiers/gewijzigd.
-
----
-## 0.32.0 - Planned (beta) 12/11/2025
-### Arts:
-#### Spinner bij indienen vaststelling:
-Indienen vaststelling arts kan enkele seconden duren. We tonen een spinner bij het indienen van een vaststelling. Zolang de spinner getoond worden disablen we de actieknop, zodat er niet meerdere keren op geklikt kan worden.
-
----
-
-### Uitvaartondernemer:
-#### PDF export verklaring transport:
-Er wordt een nieuw uniform document ter beschikking gesteld, zowel in de GUI als in de API.
-
----
-## 0.31.0 - Released 30/10/2025
-### Arts:
-#### Openen vaststelling vanuit EPD:
-Bij openen van de web-app vanuit een elektronisch patiëntendossier (EPD) is het mogelijk om een aantal gegevens (zoals het rijksregisternummer van de overledene) mee te sturen zodat die al vooringevuld kunnen worden in eLys.​
-
----
-## 0.30.0 - Released 16/10/2025
-### Arts:
-#### Persoonsgegevens:
-Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar). Ook kan “00/00/0000” ingevuld worden voor een onbekende identiteit.
-Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
-
-#### Bevestiging na indienen vaststelling:
-Het overzicht van de ingediende gegevens kan via een ‘afdrukken’ knop naar een (fysieke of PDF) printer verstuurd worden.
-
---- 
-
-### Uitvaartondernemer:
-
-> [!WARNING]
-> #### Breaking change - Inlichtingen fiche
-> Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
-> Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
-
----
-
-### Burgelijke stand lokaal bestuur:
-
-> [!WARNING]
-> #### Breaking change
-> Geboortedatums kunnen onvolledig ingevuld worden (bv. enkel maand en/of jaar).
-> Onvolledige gegevens in het rijksregister worden ook in eLys onvolledig ingevuld en kunnen manueel gecorrigeerd worden.
+> Vanaf release 0.30.0 worden de release notes [hier](https://docs.athumi.eu/elys/help/feature-planning) gedocumenteerd.
 
 ---
 
