@@ -12,6 +12,8 @@ Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.
 
 Meer info over het opzetten van de betaling vindt u [hier](https://athumi.atlassian.net/wiki/external/ODlkNWVjYzBmNzc2NDYwZmI2Y2M5ZDZmNDUzMDBhMzU).
 
+Meer info over het integreren van de reservatie op de begraafplaats vindt u [hier](https://athumi.atlassian.net/wiki/external/OGM0NDU0ZmVlMmY0NGQ3YjhkODk2OGNmNWRiOWIzZDA)
+
 Als voorbeeld staat [hier](https://athumi.atlassian.net/wiki/external/YmI2NTQyMzNhMjM0NGQyZDhlZWIwNzdhY2FkMTU5OWI) beschreven hoe de verschillende enum velden in de eLys GUI gebruikt worden.
 
 ## Security

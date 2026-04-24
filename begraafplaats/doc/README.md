@@ -6,7 +6,9 @@ Achtergrondinformatie over het platform kan [hier](userstories/context.md) gevon
 ## API documentatie
 Een beschrijving van de functionaliteit staat [hier](https://docs.athumi.eu/elys/help/functionaliteiten-voor-de-gemeente-van-begraven).
 
-Uitleg over hoe de API's kunnen gebruikt kunnen worden, staat [hier](api/README.md).
+Uitleg over hoe de API's mbt de toestemming tot begraven kunnen gebruikt kunnen worden, staat [hier](api/README.md).
+
+Uitleg over hoe de API's mbt de reservatie op de begraafplaats kunnen gebruikt worden, staat [hier](https://athumi.atlassian.net/wiki/external/OGM0NDU0ZmVlMmY0NGQ3YjhkODk2OGNmNWRiOWIzZDA)
 
 ## Security
 Info over authenticeren en vereisten naar logging toe staan [hier](../../algemeen/security/README.md).
