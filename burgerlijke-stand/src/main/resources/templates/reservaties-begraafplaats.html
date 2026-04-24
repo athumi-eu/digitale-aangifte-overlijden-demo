@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="head">
+<head th:replace="~{fragments/head :: head}"><title></title></head>
+<body>
+<div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
+<div th:replace="~{fragments/title :: title(kbonummer=${kbonummer})}"></div>
+
+<div th:replace="~{fragments/navigation :: navigation(kbonummer=${kbonummer})}"></div>
+
+<div class="ml-3">
+    <h3>Zoeken</h3>
+</div>
+
+<div class="grid-container-4 ml-3">
+    <div class="grid-column">
+        <div>
+            <label for="dossiernummer">Dossiernummer</label>
+        </div>
+        <div><input id="dossiernummer" type="text" name="dossiernummer" class="min-breedte"/></div>
+        <br>
+        <div>
+            <label for="rrn">Rijksregisternummer</label>
+        </div>
+        <div><input id="rrn" type="text" name="rrn" class="min-breedte"/></div>
+        <br>
+        <div>
+            <label for="van">Periode van</label>
+        </div>
+        <div><input id="van" type="date" name="van" class="min-breedte"/></div>
+        <br>
+        <div>
+            <label for="tot">Periode tot</label>
+        </div>
+        <div><input id="tot" type="date" name="tot" class="min-breedte"/></div>
+    </div>
+</div>
+
+<div th:if="${fout}" class="error-border ml-3 mr-3 mtb-3" th:text="${fout}"></div>
+
+<button class="ml-3" th:onclick="filter([[${kbonummer}]]);">Filter</button>
+
+<div class="ml-3">
+    <h3>Reservaties begraafplaats</h3>
+</div>
+
+<div th:if="${not #lists.isEmpty(reservaties)}" class="grey-border ml-3 mr-3 outer">
+    <table>
+        <tr>
+            <th>Dossiernummer</th>
+            <th>Begraafplaats</th>
+            <th>Uitvaarttype</th>
+            <th>Status</th>
+            <th>Ingediend op</th>
+            <th></th>
+        </tr>
+        <tr th:each="reservatie : ${reservaties}">
+            <td th:text="${reservatie.caseNumber()}"></td>
+            <td th:text="${reservatie.cemeteryName()}"></td>
+            <td>
+                <span th:switch="${reservatie.choiceOfFuneral()}">
+                    <span th:case="'BURIAL'">Begraving</span>
+                    <span th:case="'CREMATION'">Crematie</span>
+                    <span th:case="*" th:text="${reservatie.choiceOfFuneral()}"></span>
+                </span>
+            </td>
+            <td>
+                <span th:switch="${reservatie.reservationStatus()}">
+                    <span th:case="'SUBMITTED'">Ingediend</span>
+                    <span th:case="'APPROVED'">Goedgekeurd</span>
+                    <span th:case="'NOT_APPROVED'">Niet goedgekeurd</span>
+                    <span th:case="'PENDING'">In behandeling</span>
+                    <span th:case="*" th:text="${reservatie.reservationStatus()}"></span>
+                </span>
+            </td>
+            <td th:text="${reservatie.submittedDate() != null ? #temporals.format(reservatie.submittedDate(), 'dd/MM/yyyy HH:mm') : ''}"></td>
+            <td>
+                <a th:href="@{reservatie-begraafplaats(dossiernummer=${reservatie.caseNumber()},kbonummer=${kbonummer})}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                        <path fill="currentColor"
+                              d="m17.545 15.467l-3.779-3.779a6.15 6.15 0 0 0 .898-3.21c0-3.417-2.961-6.377-6.378-6.377A6.185 6.185 0 0 0 2.1 8.287c0 3.416 2.961 6.377 6.377 6.377a6.15 6.15 0 0 0 3.115-.844l3.799 3.801a.953.953 0 0 0 1.346 0l.943-.943c.371-.371.236-.84-.135-1.211M4.004 8.287a4.28 4.28 0 0 1 4.282-4.283c2.366 0 4.474 2.107 4.474 4.474a4.284 4.284 0 0 1-4.283 4.283c-2.366-.001-4.473-2.109-4.473-4.474"/>
+                    </svg>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div th:if="${#lists.isEmpty(reservaties) and (param.rijksregisternummer != null or param.van != null or param.dossiernummer != null)}" class="ml-3">
+    Geen reservaties gevonden.
+</div>
+</body>
+
+<script>
+    function filter(kbonummer) {
+        const dossiernummer = document.getElementById('dossiernummer').value;
+        const rrn = document.getElementById('rrn').value;
+        const van = document.getElementById('van').value;
+        const tot = document.getElementById('tot').value;
+
+        var params = new URLSearchParams();
+        params.set('kbonummer', kbonummer);
+        if (!!dossiernummer) params.set('dossiernummer', dossiernummer);
+        if (!!rrn) params.set('rijksregisternummer', rrn);
+        if (!!van) params.set('van', van);
+        if (!!tot) params.set('tot', tot);
+
+        window.location.search = params.toString();
+    }
+
+    function prefill() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('dossiernummer')) document.getElementById('dossiernummer').value = params.get('dossiernummer');
+        if (params.get('rijksregisternummer')) document.getElementById('rrn').value = params.get('rijksregisternummer');
+        if (params.get('van')) document.getElementById('van').value = params.get('van');
+        if (params.get('tot')) document.getElementById('tot').value = params.get('tot');
+    }
+
+    prefill();
+</script>
+</html>

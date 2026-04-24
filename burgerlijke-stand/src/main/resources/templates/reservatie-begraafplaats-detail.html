@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="head">
+<head th:replace="~{fragments/head :: head}"><title></title></head>
+<body>
+<div th:replace="~{fragments/disclaimer :: disclaimer}"></div>
+<div th:replace="~{fragments/title :: title(kbonummer=${kbonummer})}"></div>
+
+<div th:replace="~{fragments/navigation :: navigation(kbonummer=${kbonummer})}"></div>
+
+<div class="ml-3 mr-3">
+    <p><a th:href="@{reservaties-begraafplaats(kbonummer=${kbonummer})}">&larr; Terug naar reservaties</a></p>
+
+    <h3>Reservatie begraafplaats — <span th:text="${dossiernummer}"></span></h3>
+
+    <div th:if="${fout}" class="error-border mtb-3" th:text="${fout}"></div>
+
+    <div th:if="${reservatie}" class="grey-border mtb-3 outer">
+        <h4>Document rustplaatsdetails</h4>
+        <form id="rustplaatsDetailsForm" enctype="multipart/form-data">
+            <input id="rustplaatsDetailsBestand" type="file" name="akte"/>
+            <button type="button" th:onclick="uploadRustplaatsDetails([[${dossiernummer}]])">Upload</button>
+            <span id="uploadStatus"></span>
+        </form>
+        <div class="mtb-3">
+            <span th:if="${reservatie.detailsFinalRestingPlaceUploadDate()}">
+                Uploaded op <strong th:text="${#temporals.format(reservatie.detailsFinalRestingPlaceUploadDate(), 'dd/MM/yyyy HH:mm')}"></strong>
+                &nbsp;|&nbsp;
+            </span>
+            <a th:if="${reservatie.detailsFinalRestingPlaceUrl()}" th:href="@{/reservatie-begraafplaats/{d}/rustplaats-details(d=${dossiernummer})}" target="_blank">Download</a>
+            <span th:if="${reservatie.detailsFinalRestingPlaceUrl()}">&nbsp;|&nbsp;</span>
+            <button th:onclick="verwijderRustplaatsDetails([[${dossiernummer}]])">Verwijder</button>
+        </div>
+        <span id="bestandFout" class="error-border" style="display:none;"></span>
+    </div>
+
+    <div th:if="${reservatie}" class="grey-border mtb-3 outer">
+        <h4>Beoordeling</h4>
+
+        <div>
+            <label>Status</label>
+            <div>
+                <input type="radio" id="statusGoedgekeurd" name="reservationStatus" value="APPROVED">
+                <label for="statusGoedgekeurd">Goedgekeurd</label>
+                <br>
+                <input type="radio" id="statusNietGoedgekeurd" name="reservationStatus" value="NOT_APPROVED">
+                <label for="statusNietGoedgekeurd">Niet goedgekeurd</label>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label for="reservationMessage">Bericht</label><br>
+            <textarea id="reservationMessage" rows="3" class="min-breedte"></textarea>
+        </div>
+        <br>
+        <div>
+            <label for="restingPlace">Rustplaats</label><br>
+            <input id="restingPlace" type="text" class="min-breedte"/>
+        </div>
+        <br>
+        <div>
+            <label for="cemeteryInstructionsURI">Instructies URI</label><br>
+            <input id="cemeteryInstructionsURI" type="text" class="min-breedte"/>
+        </div>
+        <br>
+        <span id="beoordelingFout" class="error-border" style="display:none;"></span>
+        <button th:onclick="beoordeel([[${dossiernummer}]])">Opslaan</button>
+    </div>
+
+    <div th:if="${reservatie}" class="grey-border mtb-3 outer">
+
+        <table>
+            <tr th:if="${reservatie.reservationStatus()}">
+                <th>Status</th>
+                <td>
+                    <span th:switch="${reservatie.reservationStatus()}">
+                        <span th:case="'SUBMITTED'">Ingediend</span>
+                        <span th:case="'APPROVED'">Goedgekeurd</span>
+                        <span th:case="'NOT_APPROVED'">Niet goedgekeurd</span>
+                        <span th:case="'PENDING'">In behandeling</span>
+                        <span th:case="*" th:text="${reservatie.reservationStatus()}"></span>
+                    </span>
+                </td>
+            </tr>
+            <tr th:if="${reservatie.cemeteryName()}">
+                <th>Begraafplaats</th>
+                <td th:text="${reservatie.cemeteryName()}"></td>
+            </tr>
+            <tr th:if="${reservatie.choiceOfFuneral()}">
+                <th>Uitvaarttype</th>
+                <td>
+                    <span th:switch="${reservatie.choiceOfFuneral()}">
+                        <span th:case="'BURIAL'">Begraving</span>
+                        <span th:case="'CREMATION'">Crematie</span>
+                        <span th:case="*" th:text="${reservatie.choiceOfFuneral()}"></span>
+                    </span>
+                </td>
+            </tr>
+            <tr th:if="${reservatie.ashDestination()}">
+                <th>Bestemming as</th>
+                <td th:text="${reservatie.ashDestination()}"></td>
+            </tr>
+            <tr th:if="${reservatie.submittedDate()}">
+                <th>Ingediend op</th>
+                <td th:text="${#temporals.format(reservatie.submittedDate(), 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            <tr th:if="${reservatie.changedDate()}">
+                <th>Gewijzigd op</th>
+                <td th:text="${#temporals.format(reservatie.changedDate(), 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            <tr th:if="${reservatie.feedbackDate()}">
+                <th>Feedback op</th>
+                <td th:text="${#temporals.format(reservatie.feedbackDate(), 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            <tr th:if="${reservatie.reservationMessage()}">
+                <th>Bericht</th>
+                <td th:text="${reservatie.reservationMessage()}"></td>
+            </tr>
+            <tr th:if="${reservatie.restingPlace()}">
+                <th>Rustplaats</th>
+                <td th:text="${reservatie.restingPlace()}"></td>
+            </tr>
+            <tr th:if="${reservatie.cemeteryInstructionsUrl()}">
+                <th>Instructies begraafplaats</th>
+                <td><a th:href="${reservatie.cemeteryInstructionsUrl()}" target="_blank" th:text="${reservatie.cemeteryInstructionsUrl()}"></a></td>
+            </tr>
+            <tr th:if="${reservatie.detailsFinalRestingPlaceUrl()}">
+                <th>Document rustplaats</th>
+                <td><a th:href="${reservatie.detailsFinalRestingPlaceUrl()}" target="_blank">Bekijken</a></td>
+            </tr>
+        </table>
+
+        <div th:if="${reservatie.formData()}" class="mtb-3">
+            <h4>Aanvraaggegevens</h4>
+            <table>
+                <tr th:if="${reservatie.formData().dateReservation()}">
+                    <th>Datum reservatie</th>
+                    <td th:text="${#temporals.format(reservatie.formData().dateReservation(), 'dd/MM/yyyy HH:mm')}"></td>
+                </tr>
+                <tr th:if="${reservatie.formData().remainsDelivery()}">
+                    <th>Aanlevering stoffelijk overschot</th>
+                    <td>
+                        <span th:switch="${reservatie.formData().remainsDelivery()}">
+                            <span th:case="'COFFIN'">Kist</span>
+                            <span th:case="'URN'">Urn</span>
+                            <span th:case="'SHROUD'">Lijkwade</span>
+                            <span th:case="*" th:text="${reservatie.formData().remainsDelivery()}"></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr th:if="${reservatie.formData().remainsDestination()}">
+                    <th>Bestemming stoffelijk overschot</th>
+                    <td>
+                        <span th:switch="${reservatie.formData().remainsDestination()}">
+                            <span th:case="'GROUND'">Begraving in de grond</span>
+                            <span th:case="'CRYPT'">Crypte</span>
+                            <span th:case="'NATURALBURIAL_REMAINS'">Natuurbegraving (stoffelijk overschot)</span>
+                            <span th:case="'NATURALBURIAL_URN'">Natuurbegraving (urn)</span>
+                            <span th:case="'URNGRAVE'">Urngraf</span>
+                            <span th:case="'SCATTERING_MEADOW'">Strooiweide</span>
+                            <span th:case="'SCATTERING_POND'">Strooivijver</span>
+                            <span th:case="'SCATTERING_NATURALBURIALGROUND'">Strooien op natuurbegraafplaats</span>
+                            <span th:case="'COLUMBARIUM'">Columbarium</span>
+                            <span th:case="'OTHER'" th:text="${reservatie.formData().remainsDestinationOtherText()} ?: 'Andere'"></span>
+                            <span th:case="*" th:text="${reservatie.formData().remainsDestination()}"></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr th:if="${reservatie.formData().concession()}">
+                    <th>Concessie</th>
+                    <td>
+                        <span th:switch="${reservatie.formData().concession()}">
+                            <span th:case="'WITHOUT_CONCESSION'">Zonder concessie</span>
+                            <span th:case="'NEW'">Nieuwe concessie</span>
+                            <span th:case="'EXISTING'">Bestaande concessie</span>
+                            <span th:case="'NA'">N.v.t.</span>
+                            <span th:case="*" th:text="${reservatie.formData().concession()}"></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr th:if="${reservatie.formData().existingConcessionDetails()}">
+                    <th>Details bestaande concessie</th>
+                    <td th:text="${reservatie.formData().existingConcessionDetails()}"></td>
+                </tr>
+                <tr th:if="${reservatie.formData().familyWillAttend() != null}">
+                    <th>Familie aanwezig</th>
+                    <td th:text="${reservatie.formData().familyWillAttend()} ? 'Ja' : 'Nee'"></td>
+                </tr>
+                <tr th:if="${reservatie.formData().remarks()}">
+                    <th>Opmerkingen</th>
+                    <td th:text="${reservatie.formData().remarks()}"></td>
+                </tr>
+            </table>
+
+            <div th:if="${reservatie.formData().coffinDimensions()}" class="mtb-3">
+                <h4>Afmetingen kist</h4>
+                <table>
+                    <tr th:if="${reservatie.formData().coffinDimensions().length()}">
+                        <th>Lengte (cm)</th>
+                        <td th:text="${reservatie.formData().coffinDimensions().length()}"></td>
+                    </tr>
+                    <tr th:if="${reservatie.formData().coffinDimensions().width()}">
+                        <th>Breedte (cm)</th>
+                        <td th:text="${reservatie.formData().coffinDimensions().width()}"></td>
+                    </tr>
+                    <tr th:if="${reservatie.formData().coffinDimensions().height()}">
+                        <th>Hoogte (cm)</th>
+                        <td th:text="${reservatie.formData().coffinDimensions().height()}"></td>
+                    </tr>
+                    <tr th:if="${reservatie.formData().coffinDimensions().weight()}">
+                        <th>Gewicht (kg)</th>
+                        <td th:text="${reservatie.formData().coffinDimensions().weight()}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${reservatie.formData().urnDimensions()}" class="mtb-3">
+                <h4>Afmetingen urn</h4>
+                <table>
+                    <tr th:if="${reservatie.formData().urnDimensions().diameter()}">
+                        <th>Diameter (cm)</th>
+                        <td th:text="${reservatie.formData().urnDimensions().diameter()}"></td>
+                    </tr>
+                    <tr th:if="${reservatie.formData().urnDimensions().height()}">
+                        <th>Hoogte (cm)</th>
+                        <td th:text="${reservatie.formData().urnDimensions().height()}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div th:if="${reservatie.funeralHome()}" class="mtb-3">
+            <h4>Uitvaartondernemer</h4>
+            <table>
+                <tr th:if="${reservatie.funeralHome().name()}">
+                    <th>Organisatie</th>
+                    <td th:text="${reservatie.funeralHome().name()}"></td>
+                </tr>
+                <tr th:if="${reservatie.funeralHome().cbe()}">
+                    <th>KBO-nummer</th>
+                    <td th:text="${reservatie.funeralHome().cbe()}"></td>
+                </tr>
+                <tr th:if="${reservatie.funeralHome().contact() != null and (reservatie.funeralHome().contact().firstName() != null or reservatie.funeralHome().contact().name() != null)}">
+                    <th>Contactpersoon</th>
+                    <td th:text="${reservatie.funeralHome().contact().firstName()} + ' ' + ${reservatie.funeralHome().contact().name()}"></td>
+                </tr>
+                <tr th:if="${reservatie.funeralHome().contact() != null and reservatie.funeralHome().contact().establishmentName() != null}">
+                    <th>Vestiging</th>
+                    <td th:text="${reservatie.funeralHome().contact().establishmentName()}"></td>
+                </tr>
+                <tr th:if="${reservatie.funeralHome().contact() != null and reservatie.funeralHome().contact().email() != null}">
+                    <th>E-mail</th>
+                    <td th:text="${reservatie.funeralHome().contact().email()}"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script>
+    function uploadRustplaatsDetails(dossiernummer) {
+        const form = document.getElementById('rustplaatsDetailsForm');
+        const formData = new FormData(form);
+        if (!formData.get('akte').size) {
+            return;
+        }
+        fetch('/reservatie-begraafplaats/' + dossiernummer + '/rustplaats-details', {
+            method: 'POST',
+            body: formData
+        }).then(async response => {
+            const status = document.getElementById('uploadStatus');
+            const fout = document.getElementById('bestandFout');
+            if (!response.ok) {
+                fout.innerText = await response.text();
+                fout.style.display = 'block';
+                status.innerText = '';
+            } else {
+                fout.style.display = 'none';
+                status.innerText = formData.get('akte').name + ' uploaded';
+                form.reset();
+            }
+        });
+    }
+
+    function verwijderRustplaatsDetails(dossiernummer) {
+        fetch('/reservatie-begraafplaats/' + dossiernummer + '/rustplaats-details', {
+            method: 'DELETE'
+        }).then(async response => {
+            const fout = document.getElementById('bestandFout');
+            if (!response.ok) {
+                fout.innerText = await response.text();
+                fout.style.display = 'block';
+            } else {
+                window.location.reload();
+            }
+        });
+    }
+
+    function beoordeel(dossiernummer) {
+        const statusGoedgekeurd = document.getElementById('statusGoedgekeurd').checked;
+        const statusNietGoedgekeurd = document.getElementById('statusNietGoedgekeurd').checked;
+
+        if (!statusGoedgekeurd && !statusNietGoedgekeurd) {
+            const fout = document.getElementById('beoordelingFout');
+            fout.innerText = 'Gelieve een status te selecteren.';
+            fout.style.display = 'block';
+            return;
+        }
+
+        const body = {
+            reservationStatus: statusGoedgekeurd ? 'APPROVED' : 'NOT_APPROVED',
+            reservationMessage: document.getElementById('reservationMessage').value || null,
+            restingPlace: document.getElementById('restingPlace').value || null,
+            cemeteryInstructionsURI: document.getElementById('cemeteryInstructionsURI').value || null
+        };
+
+        fetch('/reservatie-begraafplaats/' + dossiernummer + '/status', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        }).then(async response => {
+            if (!response.ok) {
+                const fout = document.getElementById('beoordelingFout');
+                fout.innerText = await response.text();
+                fout.style.display = 'block';
+            } else {
+                window.location.reload();
+            }
+        });
+    }
+</script>
+</html>

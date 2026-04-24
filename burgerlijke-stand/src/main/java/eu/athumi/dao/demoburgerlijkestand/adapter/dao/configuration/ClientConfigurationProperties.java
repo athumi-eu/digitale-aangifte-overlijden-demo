@@ -7,9 +7,7 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.validation.annotation.Validated;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Validated
 @ConfigurationProperties(prefix = "dao.gemeentes")
@@ -20,14 +18,12 @@ public class ClientConfigurationProperties {
     private String securityMethod;
     private String tokenUri;
     private String issuerUri;
-    private String projectName;
 
-    public ClientConfigurationProperties(String securityMethod, Map<String, GemeenteConfig> config, String tokenUri, String issuerUri, String projectName) {
+    public ClientConfigurationProperties(String securityMethod, Map<String, GemeenteConfig> config, String tokenUri, String issuerUri) {
         this.securityMethod = securityMethod;
         this.config = config;
         this.tokenUri = tokenUri;
         this.issuerUri = issuerUri;
-        this.projectName = projectName;
     }
 
     public String getSecurityMethod() {
@@ -36,10 +32,6 @@ public class ClientConfigurationProperties {
 
     public String getTokenUri() {
         return tokenUri;
-    }
-
-    public String getScope() {
-        return "%s_lbbs".formatted(projectName);
     }
 
     @NonNull
@@ -81,13 +73,15 @@ public class ClientConfigurationProperties {
         private final String kbonummer;
         private final String clientid;
         private final String clientsecret;
+        private final List<String> scopes;
         private JWK jwk;
 
-        public GemeenteConfig(String naam, String kbonummer, String clientid, String clientsecret) {
+        public GemeenteConfig(String naam, String kbonummer, String clientid, String clientsecret, List<String> scopes) {
             this.naam = naam;
             this.kbonummer = kbonummer;
             this.clientid = clientid;
             this.clientsecret = clientsecret;
+            this.scopes = scopes;
             try {
                 this.jwk = JWK.parse(clientsecret);
             }catch ( ParseException ignored) {
@@ -108,6 +102,14 @@ public class ClientConfigurationProperties {
 
         public String getClientsecret() {
             return clientsecret;
+        }
+
+        public List<String> getScopes() {
+            List<String> sco = Optional.ofNullable(scopes).orElse(Collections.emptyList());
+            if(sco.isEmpty()) {
+                return List.of("elys_lbbs");
+            }
+            return sco;
         }
 
         public JWK getJwk() {
