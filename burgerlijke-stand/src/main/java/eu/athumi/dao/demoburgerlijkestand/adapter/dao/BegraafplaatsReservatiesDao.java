@@ -22,9 +22,11 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Objects;
 
 import static java.time.ZonedDateTime.of;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
@@ -198,9 +200,7 @@ public class BegraafplaatsReservatiesDao {
                 .retrieve()
                 .toEntity(byte[].class);
         return ResponseEntity.ok()
-                .contentType(entity.getHeaders().getContentType() != null
-                        ? entity.getHeaders().getContentType()
-                        : MediaType.APPLICATION_OCTET_STREAM)
+                .contentType(requireNonNull(entity.getHeaders().getContentType()))
                 .body(entity.getBody());
     }
 

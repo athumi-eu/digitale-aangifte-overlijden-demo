@@ -26,7 +26,7 @@
                 Uploaded op <strong th:text="${#temporals.format(reservatie.detailsFinalRestingPlaceUploadDate(), 'dd/MM/yyyy HH:mm')}"></strong>
                 &nbsp;|&nbsp;
             </span>
-            <a th:if="${reservatie.detailsFinalRestingPlaceUrl()}" th:href="@{/reservatie-begraafplaats/{d}/rustplaats-details(d=${dossiernummer})}" target="_blank">Download</a>
+            <a th:if="${reservatie.detailsFinalRestingPlaceUrl()}" th:href="@{reservatie-begraafplaats/{d}/rustplaats-details(d=${dossiernummer})}" target="_blank">Download</a>
             <span th:if="${reservatie.detailsFinalRestingPlaceUrl()}">&nbsp;|&nbsp;</span>
             <button th:onclick="verwijderRustplaatsDetails([[${dossiernummer}]])">Verwijder</button>
         </div>
@@ -265,7 +265,7 @@
         if (!formData.get('akte').size) {
             return;
         }
-        fetch('/reservatie-begraafplaats/' + dossiernummer + '/rustplaats-details', {
+        fetch('reservatie-begraafplaats/' + dossiernummer + '/rustplaats-details', {
             method: 'POST',
             body: formData
         }).then(async response => {
@@ -284,7 +284,7 @@
     }
 
     function verwijderRustplaatsDetails(dossiernummer) {
-        fetch('/reservatie-begraafplaats/' + dossiernummer + '/rustplaats-details', {
+        fetch('reservatie-begraafplaats/' + dossiernummer + '/rustplaats-details', {
             method: 'DELETE'
         }).then(async response => {
             const fout = document.getElementById('bestandFout');
@@ -315,7 +315,7 @@
             cemeteryInstructionsURI: document.getElementById('cemeteryInstructionsURI').value || null
         };
 
-        fetch('/reservatie-begraafplaats/' + dossiernummer + '/status', {
+        fetch('reservatie-begraafplaats/' + dossiernummer + '/status', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
