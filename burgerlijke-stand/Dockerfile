@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.2_13-jre
+FROM eclipse-temurin:21.0.10_7-jre
 RUN addgroup --system javauser
 RUN useradd -ms /bin/bash -g javauser javauser
 USER javauser:javauser
