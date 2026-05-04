@@ -22,7 +22,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.Objects;
+import java.util.UUID;
 
 import static java.time.ZonedDateTime.of;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
@@ -105,7 +105,8 @@ public class BegraafplaatsReservatiesDao {
     public String reservatieDetail(
             Model model,
             @RequestParam String dossiernummer,
-            @RequestParam String kbonummer
+            @RequestParam String kbonummer,
+            UUID reservationId
     ) {
         model.addAttribute("kbonummer", kbonummer);
         model.addAttribute("dossiernummer", dossiernummer);
@@ -124,7 +125,10 @@ public class BegraafplaatsReservatiesDao {
                 if (rawResponse.trim().startsWith("[")) {
                     List<ReservatieBegraafplaatsLokaalBestuurJSON> list = objectMapper.readValue(rawResponse,
                             new TypeReference<>() {});
-                    reservatie = list.isEmpty() ? null : list.getFirst();
+                    reservatie = list.stream()
+                            .filter(r -> reservationId.equals(r.id()))
+                            .findFirst()
+                            .orElse(null);;
                 } else {
                     reservatie = objectMapper.readValue(rawResponse,
                             ReservatiesJSON.class).reservations().stream().findFirst().orElse(null);
