@@ -10,7 +10,7 @@
 <div class="ml-3 mr-3">
     <p><a th:href="@{reservaties-begraafplaats(kbonummer=${kbonummer})}">&larr; Terug naar reservaties</a></p>
 
-    <h3>Reservatie begraafplaats — <span th:text="${dossiernummer}"></span></h3>
+    <h3>Reservatie begraafplaats — <span th:text="${dossiernummer}"></span> - <span th:text="${reservatie.id()}"></span></h3>
 
     <div th:if="${fout}" class="error-border mtb-3" th:text="${fout}"></div>
 
@@ -23,10 +23,13 @@
         </form>
         <div class="mtb-3">
             <span th:if="${reservatie.detailsFinalRestingPlaceUploadDate()}">
-                Uploaded op <strong th:text="${#temporals.format(reservatie.detailsFinalRestingPlaceUploadDate(), 'dd/MM/yyyy HH:mm')}"></strong>
+                Uploaded op <strong
+                    th:text="${#temporals.format(reservatie.detailsFinalRestingPlaceUploadDate(), 'dd/MM/yyyy HH:mm')}"></strong>
                 &nbsp;|&nbsp;
             </span>
-            <a th:if="${reservatie.detailsFinalRestingPlaceUrl()}" th:href="@{reservatie-begraafplaats/{d}/rustplaats-details(d=${dossiernummer})}" target="_blank">Download</a>
+            <a th:if="${reservatie.detailsFinalRestingPlaceUrl()}"
+               th:href="@{reservatie-begraafplaats/{d}/rustplaats-details(d=${dossiernummer})}"
+               target="_blank">Download</a>
             <span th:if="${reservatie.detailsFinalRestingPlaceUrl()}">&nbsp;|&nbsp;</span>
             <button th:onclick="verwijderRustplaatsDetails([[${dossiernummer}]])">Verwijder</button>
         </div>
@@ -36,6 +39,11 @@
     <div th:if="${reservatie}" class="grey-border mtb-3 outer">
         <h4>Beoordeling</h4>
 
+        <div>
+            <label for="reservationId">Id reservatie</label><br>
+            <input id="reservationId" type="text" class="min-breedte" th:value="${reservatie.id()}"/>
+        </div>
+        <br>
         <div>
             <label>Status</label>
             <div>
@@ -121,7 +129,8 @@
             </tr>
             <tr th:if="${reservatie.cemeteryInstructionsUrl()}">
                 <th>Instructies begraafplaats</th>
-                <td><a th:href="${reservatie.cemeteryInstructionsUrl()}" target="_blank" th:text="${reservatie.cemeteryInstructionsUrl()}"></a></td>
+                <td><a th:href="${reservatie.cemeteryInstructionsUrl()}" target="_blank"
+                       th:text="${reservatie.cemeteryInstructionsUrl()}"></a></td>
             </tr>
             <tr th:if="${reservatie.detailsFinalRestingPlaceUrl()}">
                 <th>Document rustplaats</th>
@@ -160,7 +169,8 @@
                             <span th:case="'SCATTERING_POND'">Strooivijver</span>
                             <span th:case="'SCATTERING_NATURALBURIALGROUND'">Strooien op natuurbegraafplaats</span>
                             <span th:case="'COLUMBARIUM'">Columbarium</span>
-                            <span th:case="'OTHER'" th:text="${reservatie.formData().remainsDestinationOtherText()} ?: 'Andere'"></span>
+                            <span th:case="'OTHER'"
+                                  th:text="${reservatie.formData().remainsDestinationOtherText()} ?: 'Andere'"></span>
                             <span th:case="*" th:text="${reservatie.formData().remainsDestination()}"></span>
                         </span>
                     </td>
@@ -309,6 +319,7 @@
         }
 
         const body = {
+            id: document.getElementById('reservationId').value || null,
             reservationStatus: statusGoedgekeurd ? 'APPROVED' : 'NOT_APPROVED',
             reservationMessage: document.getElementById('reservationMessage').value || null,
             restingPlace: document.getElementById('restingPlace').value || null,
