@@ -65,7 +65,7 @@ De volledige documentatie van de API is beschikbaar via Swagger-UI. Deze is te v
   Bij een Post wordt er een creatie gedaan van een nieuwe inlichtingenfiche, bij een Put een update en bij een Get wordt de inlichtingen fiche doorgestuurd.
   Bij het updaten van een inlichtingen fiche wordt er verwacht dat de documenten die verwijderd werden meegegeven worden in een documentRemoveList. Documenten die niet meer kunnen voorkomen worden automatisch verwijderd.
   Bekijk het [schema](../diagrams/inlichtingenfiche.jpg) met de opbouw van de aanvraag toestemming/crematie of de Athumi GUI om te weten welke documenten wanneer verwacht worden: verzoek nabestaanden, toestemming eigenaar, verzoek nabestaanden as partner.
-  **Let op**: het wijzigen van de inlichtingenfiche heeft een impact op de [reservatie bij de begraafplaats](https://athumi.atlassian.net/wiki/external/OGM0NDU0ZmVlMmY0NGQ3YjhkODk2OGNmNWRiOWIzZDA), gelieve de uitvaartondernemer hier voor te waarschuwen.
+  </br>**Let op**: het wijzigen van de inlichtingenfiche heeft een impact op de [reservatie bij de begraafplaats](https://athumi.atlassian.net/wiki/external/OGM0NDU0ZmVlMmY0NGQ3YjhkODk2OGNmNWRiOWIzZDA), gelieve de uitvaartondernemer hier voor te waarschuwen.
 
 ### Socio economische gegevens opladen en verkrijgen
 - **Endpoint**: `/dossiers/{dossierNummer}/socio-economische-gegevens`
