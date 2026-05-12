@@ -171,12 +171,12 @@ public class BegraafplaatsReservatiesDao {
     @ResponseBody
     public ResponseEntity<String> uploadRustplaatsDetails(
             @PathVariable String dossiernummer,
-            @RequestParam MultipartFile akte,
+            @RequestParam MultipartFile document,
             @SessionAttribute String kbonummer
     ) {
         try {
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            body.add("akte", akte.getResource());
+            body.add("document", document.getResource());
             securedWebClient.getRestClient(kbonummer)
                     .post()
                     .uri(daoServiceUrl + "/begraafplaats/v1/reservations/{dossiernummer}/restingplacedetails", dossiernummer)
