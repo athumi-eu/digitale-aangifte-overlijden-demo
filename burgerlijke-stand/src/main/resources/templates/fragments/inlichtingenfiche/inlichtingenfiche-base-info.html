@@ -34,6 +34,9 @@
                 <div class="label">Buitenlands crematorium</div>
                 <div class="bottom-spacing"  th:text="${inlichtingenfiche?.crematie?.anderCrematorium ?: '/'}"></div>
             </div>
+
+            <div class="label">Verwerkingstermijn</div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.verwerkingstermijn.type ?: 'STANDAAARD'}"></div>
         </div>
         <!--        BESTEMMING AS -->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
