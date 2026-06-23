@@ -36,7 +36,7 @@
             </div>
 
             <div class="label">Verwerkingstermijn</div>
-            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.verwerkingstermijn.type ?: 'STANDAAARD'}"></div>
+            <div class="bottom-spacing"  th:text="${inlichtingenfiche?.verwerkingstermijn?.type ?: 'STANDAAARD'}"></div>
         </div>
         <!--        BESTEMMING AS -->
         <div class="grid-column" th:if="${inlichtingenfiche?.crematie() != null}">
