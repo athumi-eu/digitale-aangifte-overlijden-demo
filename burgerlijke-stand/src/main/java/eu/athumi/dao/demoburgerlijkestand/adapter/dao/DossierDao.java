@@ -1,6 +1,5 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.DossierBurgerlijkeStandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.PageableResultJSON;
@@ -26,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import tools.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.time.LocalDate;

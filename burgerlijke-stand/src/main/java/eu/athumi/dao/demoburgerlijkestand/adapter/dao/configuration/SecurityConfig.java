@@ -6,9 +6,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.oauth2.client.endpoint.DefaultClientCredentialsTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.NimbusJwtClientAuthenticationParametersConverter;
-import org.springframework.security.oauth2.client.endpoint.OAuth2ClientCredentialsGrantRequestEntityConverter;
+import org.springframework.security.oauth2.client.endpoint.RestClientClientCredentialsTokenResponseClient;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -34,15 +33,14 @@ public class SecurityConfig {
 
     @Bean
     @Profile("beta")
-    public DefaultClientCredentialsTokenResponseClient authManager() {
-        DefaultClientCredentialsTokenResponseClient client =
-                new DefaultClientCredentialsTokenResponseClient();
-        OAuth2ClientCredentialsGrantRequestEntityConverter converter =
-                new OAuth2ClientCredentialsGrantRequestEntityConverter();
-        converter.addParametersConverter(
-                new NimbusJwtClientAuthenticationParametersConverter<>(item -> clientConfigurationProperties.getKey(item.getClientName()))
+    public RestClientClientCredentialsTokenResponseClient authManager() {
+        RestClientClientCredentialsTokenResponseClient client =
+                new RestClientClientCredentialsTokenResponseClient();
+        client.addParametersConverter(
+                new NimbusJwtClientAuthenticationParametersConverter<>(
+                        item -> clientConfigurationProperties.getKey(item.getClientName())
+                )
         );
-        client.setRequestEntityConverter(converter);
         return client;
     }
 }

@@ -13,10 +13,6 @@ spring:
       is-getter: none
     constructor-detector: use_properties_based
     time-zone: Europe/Brussels
-    deserialization:
-      adjust-dates-to-context-time-zone: true
-    serialization:
-      write-dates-with-context-time-zone: true
 
 logging:
   config: classpath:logging/logback-spring.xml

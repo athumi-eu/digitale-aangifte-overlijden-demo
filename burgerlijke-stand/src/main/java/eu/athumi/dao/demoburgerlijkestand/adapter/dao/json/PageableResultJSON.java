@@ -7,19 +7,19 @@ public class PageableResultJSON<T> {
 
     private List<T> elementen;
 
-    private long totaalAantalElementen;
-    private long totaalAantalPaginas;
-    private long huidigePagina;
-    private long aantalElementenOpPagina;
+    private Long totaalAantalElementen;
+    private Long totaalAantalPaginas;
+    private Long huidigePagina;
+    private Long aantalElementenOpPagina;
 
     public PageableResultJSON() {}
 
     public PageableResultJSON(
             List<T> elementen,
-            long totaalAantalElementen,
-            long huidigePagina,
-            long aantalElementenOpPagina,
-            long aantalPaginas
+            Long totaalAantalElementen,
+            Long huidigePagina,
+            Long aantalElementenOpPagina,
+            Long aantalPaginas
     ) {
         this.elementen = elementen;
         this.totaalAantalElementen = totaalAantalElementen;
@@ -33,19 +33,19 @@ public class PageableResultJSON<T> {
         return elementen;
     }
 
-    public long getTotaalAantalElementen() {
+    public Long getTotaalAantalElementen() {
         return totaalAantalElementen;
     }
 
-    public long getAantalElementenOpPagina() {
+    public Long getAantalElementenOpPagina() {
         return aantalElementenOpPagina;
     }
 
-    public long getHuidigePagina() {
+    public Long getHuidigePagina() {
         return huidigePagina;
     }
 
-    public long getTotaalAantalPaginas() {
+    public Long getTotaalAantalPaginas() {
         return totaalAantalPaginas;
     }
 }

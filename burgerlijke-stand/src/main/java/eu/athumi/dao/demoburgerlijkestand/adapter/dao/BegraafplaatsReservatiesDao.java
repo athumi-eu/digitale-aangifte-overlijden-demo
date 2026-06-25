@@ -1,7 +1,5 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration.RestClientProvider;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.begraafplaats.ReservatieBegraafplaatsLokaalBestuurJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.begraafplaats.ReservatieFeedbackJSON;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

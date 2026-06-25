@@ -1,10 +1,10 @@
 package eu.athumi.dao.demoburgerlijkestand.adapter.dao.configuration;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -17,16 +17,12 @@ public class CustomLocalDateTimeSerializer extends StdSerializer<LocalDateTime> 
     }
 
     @Override
-    public void serialize(
-        LocalDateTime localDateTime,
-        JsonGenerator jsonGenerator,
-        SerializerProvider serializerProvider
-    ) throws IOException {
+    public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializationContext ctxt) throws JacksonException {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
         String value = Optional.ofNullable(localDateTime)
-            .map(item -> item.atZone(ZoneId.systemDefault()))
-            .map(formatter::format)
-            .orElse(null);
+                .map(item -> item.atZone(ZoneId.systemDefault()))
+                .map(formatter::format)
+                .orElse(null);
 
         jsonGenerator.writeString(value);
     }
