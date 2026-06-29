@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "respectGitignore": true,
+    "allow": [
+      "Read(~/.claude/**)",
+      "Grep(~/.claude/**)",
+      "Glob(~/.claude/**)",
+      "Read(./**)",
+      "Grep(./**)",
+      "Glob(./**)",
+      "LS(./**)",
+      "Edit(./**)",
+      "MultiEdit(./**)",
+      "Write(./**)",
+      "Task",
+      "Skill",
+      "SlashCommand",
+      "TodoWrite",
+      "ExitPlanMode",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(pwd)",
+      "Bash(which *)",
+      "Bash(echo *)",
+      "Bash(mkdir *)",
+      "Bash(touch *)",
+      "Bash(git status *)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git show *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(cd)",
+      "Bash(cd ..)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -f *)",
+      "Bash(sudo *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(aws *)",
+      "Bash(terraform *)",
+      "Bash(bun run deploy*)",
+      "Bash(ssh *)",
+      "Bash(chmod *)",
+      "Bash(chown *)",
+      "Bash(kill *)",
+      "Bash(pkill *)",
+      "Bash(eval *)",
+      "Bash(dd *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/application-secret-*.yml)"
+    ]
+  },
+  "defaultMode": "default",
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": false,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowedDomains": [
+        "*.npmjs.org",
+        "*.npmmirror.com",
+        "*.cloudflare.com",
+        "*.github.com",
+        "*.gradle.org",
+        "*.maven.org"
+      ]
+    }
+  },
+  "alwaysThinkingEnabled": false,
+  "defaultMode": "plan"
+}
