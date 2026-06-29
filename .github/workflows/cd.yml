@@ -29,6 +29,8 @@ jobs:
       - name: ACR login
         run: az acr login --name "${{ env.ACR_REGISTRY }}"
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-java@v4
         with:
           distribution: "adopt"
@@ -47,7 +49,3 @@ jobs:
           docker build --platform linux/amd64 -t dao-demo:${{ steps.versions.outputs.APP_VERSION }} -f Dockerfile .
           docker tag dao-demo:${{ steps.versions.outputs.APP_VERSION }} "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_ELYS_REPO_PROJECT }}/dao-demo:${{ steps.versions.outputs.APP_VERSION }}"
           docker push "${{ vars.AZURE_REPO_URL }}/${{ vars.AZURE_ELYS_REPO_PROJECT }}/dao-demo:${{ steps.versions.outputs.APP_VERSION }}"
-        env:
-          SPRING_PROFILES_ACTIVE: dev
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
