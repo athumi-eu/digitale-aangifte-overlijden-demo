@@ -1,9 +1,8 @@
 buildscript {
-    configurations.classpath {
-        resolutionStrategy.activateDependencyLocking()
+    dependencyLocking {
+        lockAllConfigurations()
     }
 }
-
 
 plugins {
     id 'java'
@@ -52,8 +51,5 @@ tasks.named('test') {
 }
 
 graalvmNative {
-    binaries.all {
-        resources.autodetect()
-    }
     toolchainDetection = false
 }
