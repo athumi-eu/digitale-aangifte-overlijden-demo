@@ -18,7 +18,7 @@ jobs:
     environment: athumi-acr
     env:
       ACR_REGISTRY: ${{ vars.ACR_REGISTRY }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Azure login
         uses: azure/login@v2
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "adopt"
-          java-version: "21"
+          java-version: "25"
           cache: "gradle"
       - name: Collect version
         id: versions
