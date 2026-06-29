@@ -56,7 +56,6 @@
       "Read(**/application-secret-*.yml)"
     ]
   },
-  "defaultMode": "default",
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
