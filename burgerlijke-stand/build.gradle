@@ -38,14 +38,13 @@ dependencies {
     implementation 'io.micrometer:micrometer-registry-prometheus'
     runtimeOnly 'org.springframework.boot:spring-boot-properties-migrator'
 
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'net.logstash.logback:logstash-logback-encoder:8.1'
-
 }
 
 tasks.named('test') {
