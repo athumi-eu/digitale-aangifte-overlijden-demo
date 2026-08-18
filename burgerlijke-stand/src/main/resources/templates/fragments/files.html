@@ -35,7 +35,7 @@
             </form>
         </section>
         <h3>Toestemming</h3>
-        <section class="grid-column">
+        <section class="grid-column" th:with="toestemming=${dossier.toestemmingParser()}">
             <form class="upload-file" method="post"
                   th:action="@{toestemming/upload(id=${dossier.id()})}" id="toestemmingForm"
                   enctype="multipart/form-data">
@@ -43,12 +43,43 @@
                 <input id="aanmaakDatumToestemming" type="datetime-local" name="aanmaakDatumToestemming"/>
                 <input id="toestemming" type="file" name="toestemming" onchange="uploadFile(this.form, 'toestemming')"/>
                 <span></span>
-                <div th:if="${parsedDetail.bewijzen('Toestemming')}">
-                    <span th:text="${parsedDetail.bewijzen('Toestemming')}"></span>
+            </form>
+            <div th:if="${toestemming.isAanwezig()}">
+                <div class="label">Status</div>
+                <div class="bottom-spacing" th:text="${toestemming.status()}"></div>
+
+                <div class="label">Aangemaakt op</div>
+                <div class="bottom-spacing" th:text="${toestemming.parsedAangemaaktOp()}"></div>
+
+                <div class="label">Opgeladen op</div>
+                <div class="bottom-spacing" th:text="${toestemming.parsedOpgeladenOp()}"></div>
+
+                <div class="label">Aflevering mogelijk vanaf</div>
+                <div class="bottom-spacing" th:text="${toestemming.parsedAfleverenMogelijkVanaf()}"></div>
+
+                <div class="label">Document</div>
+                <div class="bottom-spacing">
                     <a th:href="@{toestemming/download(id=${dossier.id()})}" target="_blank">Download</a>
                 </div>
-            </form>
-            <button th:onclick="verwijderToestemming([[${dossier.id()}]], [[${@globalVariables.frontedBaseUrl}]]);">Verwijder toestemming</button>
+
+                <th:block th:if="${toestemming.nieuweToestemmingAangeraden()}">
+                    <div class="label">Nieuwe toestemming aangeraden</div>
+                    <div class="bottom-spacing">Ja</div>
+                </th:block>
+
+                <th:block th:if="${toestemming.status() != null and toestemming.status().name() == 'VERWIJDERD'}">
+                    <div class="label">Verwijderd op</div>
+                    <div class="bottom-spacing" th:text="${toestemming.parsedVerwijderdOp()}"></div>
+
+                    <div class="label">Verwijderd door</div>
+                    <div class="bottom-spacing" th:text="${toestemming.verwijderdDoor()}"></div>
+                </th:block>
+            </div>
+            <span th:unless="${toestemming.isAanwezig()}">Geen toestemming aanwezig</span>
+            <button th:if="${toestemming.isAanwezig()}"
+                    th:onclick="verwijderToestemming([[${dossier.id()}]], [[${@globalVariables.frontedBaseUrl}]]);">
+                Verwijder toestemming
+            </button>
         </section>
         <script>
             async function getErrorMessage(response) {

@@ -6,12 +6,15 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.historiek.DossierGebe
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.inlichtingenfiche.InlichtingenficheJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.moeder.MoederJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.overlijden.OverlijdenJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.toestemming.UitvaartJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verantwoordelijk.LokaalBestuurVanBehandeling;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verrijking.rijksregister.VerrijkingRijksregisterJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.ToestemmingParser;
 
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import static eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.TijdstipParser.parseLocalDateTime;
 
@@ -46,7 +49,8 @@ public record DossierBurgerlijkeStandJSON(
         LocalDateTime laatsteBevragingRijksregister,
         LocalDateTime laatsteWilsbeschikkingGearchiveerdOp,
         String redenAfsluiting,
-        String redenBurgeraanvraag
+        String redenBurgeraanvraag,
+        UitvaartJSON uitvaartAfhandeling
 ) implements Type {
     @Override
     public String type() {
@@ -79,5 +83,9 @@ public record DossierBurgerlijkeStandJSON(
 
     public boolean hasStatus(String status) {
         return DossierStatus.valueOf(status).equals(this.dossierStatus);
+    }
+
+    public ToestemmingParser toestemmingParser() {
+        return new ToestemmingParser(Objects.isNull(uitvaartAfhandeling) ? null : uitvaartAfhandeling.toestemmingData());
     }
 }
