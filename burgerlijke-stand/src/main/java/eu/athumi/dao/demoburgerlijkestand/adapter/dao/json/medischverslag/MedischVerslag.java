@@ -28,7 +28,5 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.verslag.MedischVersla
 )
 public interface MedischVerslag {
     @JsonProperty("@type")
-    default String type() {
-        return "MedischVerslagOverlijden";
-    }
+    String type();
 }

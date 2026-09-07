@@ -6,25 +6,24 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.Medisc
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.medischverslag.VaststellingOverlijdenJSON;
 
 import java.util.List;
-import java.util.Objects;
 
 public class MedischVerslagParser {
 
     public static VaststellingOverlijdenJSON getVaststellingOverlijden(List<MedischVerslag> medischeVerslagen) {
-        return getAttestForType(medischeVerslagen, "MedischVerslagOverlijden", VaststellingOverlijdenJSON.class);
+        return getAttestForType(medischeVerslagen, VaststellingOverlijdenJSON.class);
     }
 
     public static BijkomendMedischAttestJSON getBijkomendMedischAttest(List<MedischVerslag> medischeVerslagen) {
-        return getAttestForType(medischeVerslagen, "BijkomendMedischAttest", BijkomendMedischAttestJSON.class);
+        return getAttestForType(medischeVerslagen, BijkomendMedischAttestJSON.class);
     }
 
     public static MedischAttestZwangerschapsduurJSON getMedischAttestZwangerschapsduur(List<MedischVerslag> medischeVerslagen) {
-        return getAttestForType(medischeVerslagen, "MedischAttestZwangerschapsduur", MedischAttestZwangerschapsduurJSON.class);
+        return getAttestForType(medischeVerslagen, MedischAttestZwangerschapsduurJSON.class);
     }
 
-    private static <T> T getAttestForType(List<MedischVerslag> medischeVerslagen, String identifier, Class<T> clazz) {
+    private static <T> T getAttestForType(List<MedischVerslag> medischeVerslagen, Class<T> clazz) {
         return medischeVerslagen.stream()
-                .filter(verslag -> Objects.equals(verslag.type(), identifier))
+                .filter(clazz::isInstance)
                 .findFirst()
                 .map(clazz::cast)
                 .orElse(null);

@@ -92,7 +92,8 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
     public List<String> bezwaren() {
         var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen());
-        if (Objects.isNull(medischVerslag.bezwaar())
+        if (Objects.isNull(medischVerslag)
+                || Objects.isNull(medischVerslag.bezwaar())
                 || medischVerslag.bezwaar().isEmpty()) {
             return List.of();
         }
@@ -101,7 +102,8 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
     public List<String> risicos() {
         var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen());
-        if (Objects.isNull(medischVerslag.risico())
+        if (Objects.isNull(medischVerslag)
+                || Objects.isNull(medischVerslag.risico())
                 || medischVerslag.risico().isEmpty()) {
             return List.of();
         }
@@ -110,7 +112,8 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
 
     public List<String> maatregelen() {
         var medischVerslag = MedischVerslagParser.getVaststellingOverlijden(dossier.medischeToestand().medischeVerslagen());
-        if (Objects.isNull(medischVerslag.maatregel())
+        if (Objects.isNull(medischVerslag)
+                || Objects.isNull(medischVerslag.maatregel())
                 || medischVerslag.maatregel().isEmpty()) {
             return List.of();
         }

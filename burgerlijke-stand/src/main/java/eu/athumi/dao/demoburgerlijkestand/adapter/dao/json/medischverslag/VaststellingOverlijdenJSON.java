@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record VaststellingOverlijdenJSON(
-    String type,
     List<BezwarenTypeDTO> bezwaar,
     List<RisicoTypeDTO> risico,
     List<MaatregelenTypeDTO> maatregel,
@@ -15,4 +14,9 @@ public record VaststellingOverlijdenJSON(
     ArtsJSON arts
 )
     implements MedischVerslag {
+
+    @Override
+    public String type() {
+        return "MedischVerslagOverlijden";
+    }
 }
