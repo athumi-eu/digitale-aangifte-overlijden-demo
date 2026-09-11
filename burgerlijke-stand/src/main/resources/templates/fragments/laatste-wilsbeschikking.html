@@ -40,20 +40,19 @@
     </section>
 
     <h3>Laatste wilsbeschikking van andere bron</h3>
-    <section th:if="${laatsteWilsbeschikkingAndereBron}">
-        <div class="label">Datum van verklaring</div>
-        <div class="bottom-spacing" th:text="${laatsteWilsbeschikkingAndereBron.parsedDateOfDeclaration}">-</div>
-        <button th:onclick="verwijderLaatsteWilsbeschikkingAndereBron([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">
-            Verwijder
-        </button>
-    </section>
-    <section th:unless="${laatsteWilsbeschikkingAndereBron}">
+    <section>
         <label>
             Datum van verklaring
-            <input id="andere-laatste-wilsbeschikking-datum" type="date"/>
+            <input id="andere-laatste-wilsbeschikking-datum" type="date"
+                   th:value="${laatsteWilsbeschikkingAndereBron?.dateOfDeclaration}"/>
         </label>
-        <button th:onclick="registreerLaatsteWilsbeschikkingAndereBron([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">
+        <button th:onclick="registreerLaatsteWilsbeschikkingAndereBron([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);"
+                th:text="${laatsteWilsbeschikkingAndereBron} ? 'Bijwerken' : 'Registreer'">
             Registreer
+        </button>
+        <button th:if="${laatsteWilsbeschikkingAndereBron}"
+                th:onclick="verwijderLaatsteWilsbeschikkingAndereBron([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">
+            Verwijder
         </button>
         <span id="andere-laatste-wilsbeschikking-error"></span>
     </section>
