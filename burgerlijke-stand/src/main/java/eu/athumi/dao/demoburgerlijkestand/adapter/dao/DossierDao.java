@@ -6,6 +6,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.PageableResultJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.VaststellingType;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.AfsluitenRequestJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.aanvulling.DossierAanvullingJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.laatsteWilsbeschikking.LaatsteWilsbeschikkingAndereBronJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.laatsteWilsbeschikking.LaatsteWilsbeschikkingJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.SEGLB;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
@@ -133,6 +134,7 @@ public class DossierDao {
             var dossier = detail.get();
             var verslag = ofNullable(dossier.verslagDetailURL()).map((URI verslagDetailURL) -> getVerslagDetail(verslagDetailURL, kbonummer)).map(VerslagParser::new).orElse(null);
             var laatsteWilsbeschikking = ofNullable(dossier.laatsteWilsbeschikkingURI()).map((URI laatsteWilsbeschikkingURI) -> getLaatsteWilsbeschikking(laatsteWilsbeschikkingURI, kbonummer)).orElse(null);
+            var laatsteWilsbeschikkingAndereBron = ofNullable(dossier.andereLaatsteWilsbeschikkingUri()).map((URI andereLaatsteWilsbeschikkingUri) -> getLaatsteWilsbeschikkingAndereBron(andereLaatsteWilsbeschikkingUri, kbonummer)).orElse(null);
             var statistischeGegevens = getStatistischeGegevens(kbonummer, dossier.id());
 
             model.addAttribute("ficheDocumenten", new FicheDocumentenParser(dossier));
@@ -140,6 +142,7 @@ public class DossierDao {
             model.addAttribute("verslag", verslag);
             model.addAttribute("kbonummer", kbonummer);
             model.addAttribute("laatsteWilsbeschikking", laatsteWilsbeschikking);
+            model.addAttribute("laatsteWilsbeschikkingAndereBron", laatsteWilsbeschikkingAndereBron);
             if (Objects.equals(VaststellingType.OVERLIJDEN_PERSOON_OUDER_DAN_1_JAAR, dossier.vaststellingType())) {
                 model.addAttribute("statistischeGegevens", new StatistischeGegevensParserOuderDanEenJaar(statistischeGegevens));
                 model.addAttribute("parsedDetail", new OuderDanEenJaarParser(dossier));
@@ -169,6 +172,52 @@ public class DossierDao {
             }
             throw ex;
         }
+    }
+
+    private LaatsteWilsbeschikkingAndereBronJSON getLaatsteWilsbeschikkingAndereBron(URI andereLaatsteWilsbeschikkingUri, String kbonummer) {
+        try {
+            return securedWebClient.getRestClient(kbonummer)
+                    .get()
+                    .uri(andereLaatsteWilsbeschikkingUri)
+                    .retrieve()
+                    .body(LaatsteWilsbeschikkingAndereBronJSON.class);
+        } catch (HttpClientErrorException ex) {
+            if (ex.getStatusCode().value() == 404) {
+                return null;
+            }
+            throw ex;
+        }
+    }
+
+    @PostMapping(path = "/dossier/{id}/andere-laatste-wilsbeschikking")
+    @ResponseBody
+    public ResponseEntity<String> registreerLaatsteWilsbeschikkingAndereBron(@PathVariable String id, @RequestBody LaatsteWilsbeschikkingAndereBronJSON laatsteWilsbeschikkingAndereBron, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .post()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/other-last-will/{id}", id)
+                    .body(laatsteWilsbeschikkingAndereBron)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    @DeleteMapping(path = "/dossier/{id}/andere-laatste-wilsbeschikking")
+    @ResponseBody
+    public ResponseEntity<String> verwijderLaatsteWilsbeschikkingAndereBron(@PathVariable String id, @SessionAttribute String kbonummer) {
+        try {
+            securedWebClient.getRestClient(kbonummer)
+                    .delete()
+                    .uri(daoServiceUrl + "/burgerlijke-stand/v1/other-last-will/{id}", id)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Ok");
     }
 
     public VerslagBeedigdArtsJSON getVerslagDetail(URI verslagDetailURL, String kbonummer) {

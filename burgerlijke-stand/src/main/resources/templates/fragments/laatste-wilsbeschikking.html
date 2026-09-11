@@ -1,4 +1,4 @@
-<div th:fragment="laatsteWilsbeschikking(id,laatsteBevragingRijksregister, laatsteWilsbeschikking, laatsteWilsbeschikkingGearchiveerdOp)">
+<div th:fragment="laatsteWilsbeschikking(id,laatsteBevragingRijksregister, laatsteWilsbeschikking, laatsteWilsbeschikkingGearchiveerdOp, laatsteWilsbeschikkingAndereBron)">
 
     <h2>Laatste Wilsbeschikking</h2>
     <div class="label">Datum bevraging bron</div>
@@ -38,5 +38,53 @@
             </section>
         </div>
     </section>
+
+    <h3>Laatste wilsbeschikking van andere bron</h3>
+    <section th:if="${laatsteWilsbeschikkingAndereBron}">
+        <div class="label">Datum van verklaring</div>
+        <div class="bottom-spacing" th:text="${laatsteWilsbeschikkingAndereBron.parsedDateOfDeclaration}">-</div>
+        <button th:onclick="verwijderLaatsteWilsbeschikkingAndereBron([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">
+            Verwijder
+        </button>
+    </section>
+    <section th:unless="${laatsteWilsbeschikkingAndereBron}">
+        <label>
+            Datum van verklaring
+            <input id="andere-laatste-wilsbeschikking-datum" type="date"/>
+        </label>
+        <button th:onclick="registreerLaatsteWilsbeschikkingAndereBron([[${id}]], [[${@globalVariables.frontedBaseUrl}]]);">
+            Registreer
+        </button>
+        <span id="andere-laatste-wilsbeschikking-error"></span>
+    </section>
+
+    <script>
+        function registreerLaatsteWilsbeschikkingAndereBron(id, frontendBaseUrl) {
+            const dateOfDeclaration = document.getElementById("andere-laatste-wilsbeschikking-datum")?.value;
+            fetch(frontendBaseUrl + '/dossier/' + id + '/andere-laatste-wilsbeschikking', {
+                method: "post",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({dateOfDeclaration: dateOfDeclaration})
+            }).then(async response => {
+                if (!response.ok) {
+                    document.getElementById("andere-laatste-wilsbeschikking-error").innerText = await response.text();
+                } else {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function verwijderLaatsteWilsbeschikkingAndereBron(id, frontendBaseUrl) {
+            fetch(frontendBaseUrl + '/dossier/' + id + '/andere-laatste-wilsbeschikking', {
+                method: "DELETE"
+            }).then(async response => {
+                if (!response.ok) {
+                    alert(await response.text());
+                } else {
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
 
 </div>

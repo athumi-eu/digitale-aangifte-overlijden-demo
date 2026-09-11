@@ -46,6 +46,7 @@ public record DossierBurgerlijkeStandJSON(
         InlichtingenficheJSON inlichtingenfiche,
         List<DossierGebeurtenis> historiek,
         URI laatsteWilsbeschikkingURI,
+        URI andereLaatsteWilsbeschikkingUri,
         LocalDateTime laatsteBevragingRijksregister,
         LocalDateTime laatsteWilsbeschikkingGearchiveerdOp,
         String redenAfsluiting,
