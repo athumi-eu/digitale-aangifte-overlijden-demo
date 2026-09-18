@@ -26,6 +26,7 @@ Er wordt verwacht dit te doen via
 * conventie client naam: **eLys [omgeving] \<organisatie> client**
     * omgeving: De omgeving is een van de volgende waardes: beta/acc/prod
     * organisatie: De naam van de organisatie waarvoor de client wordt aangemaakt
+    * **Belangrijk**: Voor software-integratoren wordt API-toegang aangevraagd op naam van een concrete uitvaartonderneming die klant is bij de integrator. Deze uitvaartonderneming moet gekend zijn bij eLys en de aangevraagde client zelf goedkeuren. 
 
 Relevante ACM/IDM gebruikersinformatie vindt u op de website van het beheerportaal van de Vlaamse overheid:
 * algemeen rond het beheer van API client met OAuth Client Credentials Grant </br> 
