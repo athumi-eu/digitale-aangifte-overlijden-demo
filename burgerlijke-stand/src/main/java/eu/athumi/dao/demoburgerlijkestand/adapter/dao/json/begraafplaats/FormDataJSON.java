@@ -12,5 +12,7 @@ public record FormDataJSON(
         String remarks,
         CoffinDimensionsJSON coffinDimensions,
         UrnDimensionsJSON urnDimensions,
-        Boolean familyWillAttend
+        Boolean familyWillAttend,
+        Integer restingPlaceDuration,
+        MemorialPlaqueJSON memorialPlaque
 ) {}

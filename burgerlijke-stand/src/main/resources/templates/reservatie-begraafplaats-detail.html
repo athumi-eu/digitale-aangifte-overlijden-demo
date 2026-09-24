@@ -195,6 +195,10 @@
                     <th>Familie aanwezig</th>
                     <td th:text="${reservatie.formData().familyWillAttend()} ? 'Ja' : 'Nee'"></td>
                 </tr>
+                <tr th:if="${reservatie.formData().restingPlaceDuration() != null}">
+                    <th>Duur rustplaats (jaren)</th>
+                    <td th:text="${reservatie.formData().restingPlaceDuration()}"></td>
+                </tr>
                 <tr th:if="${reservatie.formData().remarks()}">
                     <th>Opmerkingen</th>
                     <td th:text="${reservatie.formData().remarks()}"></td>
@@ -233,6 +237,28 @@
                     <tr th:if="${reservatie.formData().urnDimensions().height()}">
                         <th>Hoogte (cm)</th>
                         <td th:text="${reservatie.formData().urnDimensions().height()}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${reservatie.formData().memorialPlaque()}" class="mtb-3">
+                <h4>Gedenkplaat</h4>
+                <table>
+                    <tr th:if="${reservatie.formData().memorialPlaque().needed()}">
+                        <th>Gewenst</th>
+                        <td>
+                            <span th:switch="${reservatie.formData().memorialPlaque().needed()}">
+                                <span th:case="'PROVIDED_BY_MUNICIPALITY'">Voorzien door gemeente</span>
+                                <span th:case="'PROVIDED_BY_FUNERAL_DIRECTOR'">Voorzien door uitvaartondernemer</span>
+                                <span th:case="'NOT_WANTED'">Niet gewenst</span>
+                                <span th:case="'NA'">N.v.t.</span>
+                                <span th:case="*" th:text="${reservatie.formData().memorialPlaque().needed()}"></span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr th:if="${reservatie.formData().memorialPlaque().explanation()}">
+                        <th>Toelichting</th>
+                        <td th:text="${reservatie.formData().memorialPlaque().explanation()}"></td>
                     </tr>
                 </table>
             </div>
