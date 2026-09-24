@@ -21,6 +21,11 @@ Info over authenticeren en vereisten naar logging toe staan [hier](../../algemee
 
 Daarnaast zijn er ook vereisten naar [bewaartermijnen](../../algemeen/security/bewaartermijnen.md) toe.
 
+## Ontwikkelingen en acceptatietesten
+Om toegang te krijgen tot de productieomgeving dienen acceptatietesten succesvol doorlopen te worden.
+
+[Deze pagina](https://athumi.atlassian.net/wiki/external/M2Y2Zjg5NzBkZjdhNGYxY2JlNTJjZDM3OTc5ZTQxMDE) beschrijft hoe u uw ontwikkelingen kan testen op de betaomgeving van eLys en welke acceptatietesten daarna doorlopen moeten worden.
+
 ## Voorbeelden
 Om een indicatie te geven van de verschillende mogelijkheden als integrator voor de uitvaartondernemers  
 zijn er onder **src/tests/x.spec.ts** calls geschreven met voorbeelden van de toepassing.
