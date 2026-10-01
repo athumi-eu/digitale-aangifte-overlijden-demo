@@ -249,7 +249,7 @@
                         <td>
                             <span th:switch="${reservatie.formData().memorialPlaque().needed()}">
                                 <span th:case="'PROVIDED_BY_MUNICIPALITY'">Voorzien door gemeente</span>
-                                <span th:case="'PROVIDED_BY_FUNERAL_DIRECTOR'">Voorzien door uitvaartondernemer</span>
+                                <span th:case="'PROVIDED_BY_FUNERAL_HOME'">Voorzien door uitvaartondernemer</span>
                                 <span th:case="'NOT_WANTED'">Niet gewenst</span>
                                 <span th:case="'NA'">N.v.t.</span>
                                 <span th:case="*" th:text="${reservatie.formData().memorialPlaque().needed()}"></span>
