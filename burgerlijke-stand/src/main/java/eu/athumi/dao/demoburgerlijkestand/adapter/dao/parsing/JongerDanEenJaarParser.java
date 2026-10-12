@@ -47,6 +47,18 @@ public record JongerDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return PlaatsParser.parseAdres(dossier.moeder().persoonsGegevens().inwonerschap().verblijfplaats().adres());
     }
 
+    public String nietVerblijfshouder() {
+        if (Objects.isNull(dossier.moeder())
+                || Objects.isNull(dossier.moeder().persoonsGegevens())
+                || Objects.isNull(dossier.moeder().persoonsGegevens().inwonerschap())
+                || Objects.isNull(dossier.moeder().persoonsGegevens().inwonerschap().verblijfplaats())
+                || Objects.isNull(dossier.moeder().persoonsGegevens().inwonerschap().nietVerblijfshouder())) {
+            return null;
+        }
+
+        return dossier.moeder().persoonsGegevens().inwonerschap().nietVerblijfshouder() ? "Ja" : "Nee";
+    }
+
     public String naamMoeder() {
         if (Objects.isNull(dossier.moeder())
                 || Objects.isNull(dossier.moeder().persoonsGegevens())) {

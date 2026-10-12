@@ -149,6 +149,17 @@ public record StatistischeGegevensParserOuderDanEenJaar(StatistischeGegevensJSON
         );
     }
 
+    public TableRow nietVerblijfshouder() {
+        return new TableRow(
+                "Niet verblijfshouder",
+                getOverledeneVoorRijksregister().map(OverledeneRijksregisterJSON::verblijfsAdres).map(GemeenteEnLandJSON::nietVerblijfshouder).map(item -> item? "Ja" : "Nee").orElse("-"),
+                "-",
+                "-",
+                "-",
+                ofNullable(getOverledeneVoorDepartementZorg().verblijfplaats()).map(GemeenteEnLandJSON::nietVerblijfshouder).map(item -> item? "Ja" : "Nee").orElse("-")
+        );
+    }
+
     public TableRow burgerlijkeStaat() {
         return new TableRow(
                 "Burgerlijke staat",

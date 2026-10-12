@@ -4,6 +4,7 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.Geslacht;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
@@ -84,6 +85,29 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
                                 nationaliteiten.stream()
                                         .map(NationaliteitJSON::naam)
                                         .collect(Collectors.joining(", ")))
+                        .orElse("-")
+        );
+    }
+
+    public TableRow nietVerblijfshouder() {
+        return  new TableRow(
+                "Niet verblijfshouder",
+                ofNullable(ouderRR)
+                        .filter(MoederOfOudsteOuderJSON.class::isInstance)
+                        .map(MoederOfOudsteOuderJSON.class::cast)
+                        .map(MoederOfOudsteOuderJSON::verblijfplaats)
+                        .map(GemeenteEnLandJSON::nietVerblijfshouder)
+                        .map(item -> item ? "Ja" : "Neen")
+                        .orElse("-"),
+                "-",
+            "-",
+                "-",
+                ofNullable(ouderDepartementZorg)
+                        .filter(MoederOfOudsteOuderJSON.class::isInstance)
+                        .map(MoederOfOudsteOuderJSON.class::cast)
+                        .map(MoederOfOudsteOuderJSON::verblijfplaats)
+                        .map(GemeenteEnLandJSON::nietVerblijfshouder)
+                        .map(item -> item ? "Ja" : "Neen")
                         .orElse("-")
         );
     }

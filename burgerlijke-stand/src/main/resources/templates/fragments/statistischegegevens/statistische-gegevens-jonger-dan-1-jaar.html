@@ -70,6 +70,7 @@
         <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().oorspronkelijkeNationaliteit()})}"></tr>
         <div th:if="${statistischeGegevens.ouder1().isExtended()}">
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().verblijfplaats()})}"></tr>
+            <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().nietVerblijfshouder()})}"></tr>
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().burgerlijkeStaat()})}"></tr>
             <tr th:replace="~{this :: tableRow(tableRow=${statistischeGegevens.ouder1().datumHuidigHuwelijk()})}"></tr>
         </div>

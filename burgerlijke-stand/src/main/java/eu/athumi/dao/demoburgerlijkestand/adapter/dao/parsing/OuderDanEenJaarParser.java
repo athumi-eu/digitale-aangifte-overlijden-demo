@@ -43,6 +43,16 @@ public record OuderDanEenJaarParser(DossierBurgerlijkeStandJSON dossier) {
         return PlaatsParser.parseAdres(dossier.inwonerschap().verblijfplaats().adres());
     }
 
+
+    public String nietVerblijfshouder() {
+        if (Objects.isNull(dossier.inwonerschap())
+                || Objects.isNull(dossier.inwonerschap().nietVerblijfshouder())){
+            return null;
+        }
+
+        return dossier.inwonerschap().nietVerblijfshouder() ? "Ja" : "Nee";
+    }
+
     public String naamPartner() {
         if (Objects.isNull(dossier.huwelijk())
                 || Objects.isNull(dossier.huwelijk().persoonsGegevens())) {

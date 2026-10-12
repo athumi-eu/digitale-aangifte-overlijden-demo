@@ -11,6 +11,8 @@
     <div class="bottom-spacing" th:text="${dossier.geslacht()}"/>
     <div class="label">Verblijfplaats</div>
     <div class="bottom-spacing" th:text="${parsedDetail.verblijfplaatsOverledene ?: '/'}"/>
+    <div class="label">Niet verblijfshouder</div>
+    <div class="bottom-spacing" th:text="${parsedDetail.nietVerblijfshouder ?: '/'}"/>
     <div class="label">Echtgeno(o)t(te) of weduw(e)(naar) van</div>
     <div class="bottom-spacing" th:text="${parsedDetail.naamPartner()}"/>
 </div>

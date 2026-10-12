@@ -11,6 +11,8 @@
     <div class="bottom-spacing"  th:text="${parsedDetail.rijksregisterMoeder()}"></div>
     <div class="label">Verblijfplaats</div>
     <div class="bottom-spacing"  th:text="${parsedDetail.verblijfplaatsMoeder ?: '/'}"></div>
+    <div class="label">Niet verblijfshouder</div>
+    <div class="bottom-spacing"  th:text="${parsedDetail.nietVerblijfshouder ?: '/'}"></div>
     <div class="label">Geboorteplaats</div>
     <div class="bottom-spacing"  th:text="${parsedDetail.geboorteAdresMoeder()}"></div>
     <div class="label">Geboortedatum</div>
