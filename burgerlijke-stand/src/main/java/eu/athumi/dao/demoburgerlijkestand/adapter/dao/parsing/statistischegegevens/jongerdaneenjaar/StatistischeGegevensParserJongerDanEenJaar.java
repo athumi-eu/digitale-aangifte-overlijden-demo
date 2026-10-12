@@ -3,6 +3,7 @@ package eu.athumi.dao.demoburgerlijkestand.adapter.dao.parsing.statistischegegev
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.socioeconomische.*;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.PersoonsgegevensDepartementZorgJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.StatistischeGegevensJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.lokaalbestuur.PersoonsgegevensLokaalBestuurJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OudersJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.OverledeneJongerDanEenJaarJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.rijksregister.PersoonsgegevensRijksregisterJSON;
@@ -26,6 +27,10 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
         return statistischeGegevens().persoonsgegevens().departementZorg();
     }
 
+    private PersoonsgegevensLokaalBestuurJSON getPersoonsGegevensVoorLokaalBestuur() {
+        return statistischeGegevens().persoonsgegevens().lokaalBestuur();
+    }
+
     private PersoonsgegevensRijksregisterJSON getPersoonsGegevensVoorRR() {
         return statistischeGegevens().persoonsgegevens().rijksregister();
     }
@@ -35,7 +40,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     }
 
     private Optional<PersoonsgegevensVaststellingJSON> getPersoonsGegevensVoorVaststelling() {
-        return Optional.ofNullable(statistischeGegevens().persoonsgegevens().vaststelling());
+        return ofNullable(statistischeGegevens().persoonsgegevens().vaststelling());
     }
 
     private Optional<OverledeneJongerDanEenJaarJSON> getOverledeneVoorVaststelling() {
@@ -46,6 +51,10 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
 
     private OudersJSON getOudersVoorDepartementZorg() {
         return getPersoonsGegevensVoorDepartementZorg().ouders();
+    }
+
+    private PersoonsgegevensLokaalBestuurJSON.OudersLokaalBestuurJson getOudersVoorLokaalBestuur() {
+        return ofNullable(getPersoonsGegevensVoorLokaalBestuur()).map(PersoonsgegevensLokaalBestuurJSON::ouders).orElse(null);
     }
 
     private OudersJSON getOudersVoorRR() {
@@ -61,11 +70,11 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     }
 
     public OuderParser ouder1() {
-        return new OuderParser(getOudersVoorDepartementZorg().moederOfOudsteOuder(), getMoederVoorVaststelling(), getOudersVoorRR().moederOfOudsteOuder());
+        return new OuderParser(getOudersVoorDepartementZorg().moederOfOudsteOuder(), getMoederVoorVaststelling(), getOudersVoorRR().moederOfOudsteOuder(), ofNullable(getOudersVoorLokaalBestuur()).map(PersoonsgegevensLokaalBestuurJSON.OudersLokaalBestuurJson::moederOfOudsteOuder).orElse(null));
     }
 
     public OuderParser ouder2() {
-        return new OuderParser(getOudersVoorDepartementZorg().vaderOfJongsteOuder(), null, getOudersVoorRR().vaderOfJongsteOuder());
+        return new OuderParser(getOudersVoorDepartementZorg().vaderOfJongsteOuder(), null, getOudersVoorRR().vaderOfJongsteOuder(), null);
     }
 
     public TableRow rrnOverledene() {
@@ -102,7 +111,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
     }
 
     private Optional<SEG> seg() {
-        return Optional.ofNullable(statistischeGegevens).map(StatistischeGegevensJSON::socioeconomischegegevens);
+        return ofNullable(statistischeGegevens).map(StatistischeGegevensJSON::socioeconomischegegevens);
     }
 
     private String parseOpleiding(Opleiding seg) {
@@ -110,8 +119,8 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.opleidingAndere() != null && !seg.opleidingAndere().isBlank()) {
                 return seg.opleidingAndere();
             } else {
-                var extraInfo = Optional.ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
-                var type = Optional.ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("");
+                var extraInfo = ofNullable(seg.onderwijsType()).map(OnderwijsType::getLabel).orElse("");
+                var type = ofNullable(seg.type()).map(OpleidingType::getLabel).orElse("");
                 var joinedInfo =  type + " " + extraInfo;
                 return joinedInfo.isBlank() ? DASH : joinedInfo;
             }
@@ -146,7 +155,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.beroepstoestandAndere() != null && !seg.beroepstoestandAndere().isBlank()) {
                 return seg.beroepstoestandAndere();
             } else {
-                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
+                return  ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -179,7 +188,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.socialeStaatAndere() != null && !seg.socialeStaatAndere().isBlank()) {
                 return seg.socialeStaatAndere();
             } else {
-                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
+                return  ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;
@@ -257,7 +266,7 @@ public record StatistischeGegevensParserJongerDanEenJaar(StatistischeGegevensJSO
             if (seg.gezinstoestandAndere() != null && !seg.gezinstoestandAndere().isBlank()) {
                 return seg.gezinstoestandAndere();
             } else {
-                return  Optional.ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
+                return  ofNullable(seg.type()).map(String::valueOf).orElse(DASH);
             }
         }
         return DASH;

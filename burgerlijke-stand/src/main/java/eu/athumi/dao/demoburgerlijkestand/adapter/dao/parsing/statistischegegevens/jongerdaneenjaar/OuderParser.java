@@ -5,6 +5,8 @@ import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.plaats.GemeenteEnLand
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.NationaliteitJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.geboorte.GeboorteJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.locatie.GemeenteEnLandJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.lokaalbestuur.PersoonsgegevensLokaalBestuurJSON;
+import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.lokaalbestuur.PersoonsgegevensLokaalBestuurJSON.MoederOfOudsteOuderLokaalbestuurJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.MoederOfOudsteOuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.ouder.OuderJSON;
 import eu.athumi.dao.demoburgerlijkestand.adapter.dao.json.statistischegegevens.overledene.BurgerlijkeStaatJSON;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 import static java.util.Optional.ofNullable;
 
 public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON moederVaststelling,
-                          OuderJSON ouderRR) {
+                          OuderJSON ouderRR, MoederOfOudsteOuderLokaalbestuurJSON lokaalBestuur) {
 
     public boolean isExtended() {
         return ouderDepartementZorg instanceof MoederOfOudsteOuderJSON;
@@ -101,7 +103,11 @@ public record OuderParser(OuderJSON ouderDepartementZorg, MoederVaststellingJSON
                         .orElse("-"),
                 "-",
             "-",
-                "-",
+                ofNullable(lokaalBestuur)
+                        .map(MoederOfOudsteOuderLokaalbestuurJSON::verblijfplaats)
+                        .map(PersoonsgegevensLokaalBestuurJSON.NietVerblijfshouderJson::nietVerblijfshouder)
+                        .map(item -> item ? "Ja" : "nee")
+                        .orElse("-"),
                 ofNullable(ouderDepartementZorg)
                         .filter(MoederOfOudsteOuderJSON.class::isInstance)
                         .map(MoederOfOudsteOuderJSON.class::cast)
