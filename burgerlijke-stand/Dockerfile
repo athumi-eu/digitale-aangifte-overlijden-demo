@@ -1,5 +1,11 @@
-FROM eclipse-temurin:25.0.4_7-jre
+FROM eclipse-temurin:25.0.4.1_1-jdk
+
 USER root
+# This should be temporary untill a new version with the correct cert exist
+# run keytool -list -cacerts -storepass changeit | grep -iE "emsign|aaa"
+# This should not contain emsign root ca g3
+RUN keytool -delete -cacerts -storepass changeit \
+    -alias "cn_emsign_ecc_root_ca__g3,o_emudhra_technologies_limited,ou_emsign_pki,c_in [jdk]"
 RUN apt-get update && \
 # This should be temporary untill a new version with the correct cert exist \
 # check  curl https://dv-g3b-emudhra.we-have-a-problem.com/ to ensure the problem is gone before deleting
