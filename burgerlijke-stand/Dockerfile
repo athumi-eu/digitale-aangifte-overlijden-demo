@@ -1,4 +1,4 @@
-FROM eclipse-temurin:25.0.4.1_1-jdk
+FROM eclipse-temurin:25.0.5_8-jdk
 
 USER root
 # This should be temporary untill a new version with the correct cert exist
